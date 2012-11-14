@@ -25,8 +25,20 @@ class User(db.Document):
     status = db.IntField(default=STATUS_ACTIVE)
     posts = db.ListField(db.ReferenceField('Post', dbref=True))
 
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return unicode(self.id)
+
     def __unicode__(self):
-        return self.title
+        return self.username
 
     meta = {
         #'allow_inheritance': True,
@@ -42,6 +54,7 @@ class Post(db.Document):
     body = db.StringField(required=True)
     visible = db.BooleanField(default=POST_VISIBLE)
     author = db.ReferenceField(User, dbref=True, reverse_delete_rule=db.CASCADE)
+    #tags
     comments = db.ListField(db.EmbeddedDocumentField('Comment'))
 
     def get_absolute_url(self):
