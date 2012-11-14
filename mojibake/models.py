@@ -18,12 +18,21 @@ COMMENT_APPROVED = 1
 
 
 class User(db.Document):
-    username = db.StringField(max_length=50, required=True)
+    username = db.StringField(max_length=50, required=True, unique=True)
     email = db.StringField(max_length=255, required=True)
     password = db.StringField(required=True)
     role = db.IntField(default=ROLE_USER)
     status = db.IntField(default=STATUS_ACTIVE)
-    posts = db.ReferenceField('Post')
+    posts = db.ListField(db.ReferenceField('Post', dbref=True))
+
+    def __unicode__(self):
+        return self.title
+
+    meta = {
+        #'allow_inheritance': True,
+        'indexes': ['username'],
+        'ordering': ['username']
+    }
 
 
 class Post(db.Document):
@@ -32,7 +41,7 @@ class Post(db.Document):
     slug = db.StringField(max_length=255, required=True)
     body = db.StringField(required=True)
     visible = db.BooleanField(default=POST_VISIBLE)
-    author = db.ReferenceField('User')
+    author = db.ReferenceField(User, dbref=True, reverse_delete_rule=db.CASCADE)
     comments = db.ListField(db.EmbeddedDocumentField('Comment'))
 
     def get_absolute_url(self):
@@ -42,9 +51,10 @@ class Post(db.Document):
         return self.title
 
     meta = {
-        'allow_inheritance': True,
+        #'allow_inheritance': True,
         'indexes': ['-created_at', 'slug'],
-        'ordering': ['-created_at']
+        'ordering': ['-created_at'],
+        'cascade': True
     }
 
 

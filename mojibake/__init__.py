@@ -7,4 +7,4 @@ app.config['SECRET_KEY'] = 'SecretKeyGoesHere'
 
 db = MongoEngine(app)
 
-from app import views
+from mojibake import views

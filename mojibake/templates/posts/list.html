@@ -1,0 +1,7 @@
+    {% for post in posts %}
+      <h2><a>{{ post.title }}</a></h2>
+      <p>
+        {{ post.author.username }} | {{ post.created_at.strftime('%H:%M %Y-%m-%d') }}
+      </p>
+      <p>{{ post.body|truncate(100) }}</p>
+    {% endfor %}
