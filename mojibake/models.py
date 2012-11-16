@@ -23,6 +23,7 @@ class User(db.Document):
     password = db.StringField(required=True)
     role = db.IntField(default=ROLE_USER)
     status = db.IntField(default=STATUS_ACTIVE)
+    last_seen = db.DateTimeField()
     posts = db.ListField(db.ReferenceField('Post', dbref=True))
 
     def is_authenticated(self):

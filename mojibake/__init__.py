@@ -26,4 +26,6 @@ lm = LoginManager()
 lm.setup_app(app)
 lm.login_view = 'login'
 
+REGISTRATION = 0  # closed
+
 from mojibake import views
