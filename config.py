@@ -9,3 +9,5 @@ CSRF_ENABLED = True
 SECRET_KEY = 'SecretKeyGoesHere'
 
 MONGODB_DB = 'mojibake'
+
+POSTS_PER_PAGE = 2  # 5

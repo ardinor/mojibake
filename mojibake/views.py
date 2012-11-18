@@ -1,42 +1,120 @@
-from flask import render_template, g, redirect, url_for, session, flash, request
-from flask.ext.login import login_required, login_user, logout_user, current_user
+from flask import render_template, g, redirect, url_for, \
+    flash, request
+#from flask import session
+from flask.ext.login import login_required, login_user, \
+    logout_user, current_user
 from passlib.hash import pbkdf2_sha256
 from datetime import datetime
 
-from mojibake import app, db, lm
-from models import User, Post
-from forms import LoginForm, CreateForm
+from mojibake import app, lm  # db,
+from models import User, Post, Comment, Tag
+from forms import LoginForm, CreateUserForm, PostForm, \
+    CommentForm
+from config import POSTS_PER_PAGE
 
 
 @app.route('/')
 @app.route('/index')
 @app.route('/index/<int:page>')
 def index(page=1):
-    posts = Post.objects.all()
-    return render_template('posts/list.html', posts=posts)
+    #displays posts even if they are not visible at the moment...
+    posts = Post.objects.paginate(page=page, per_page=POSTS_PER_PAGE)
+    return render_template('posts/list.html',
+        pagination=posts)
 
 
-@app.route('/post/<slug>')
+@app.route('/post/<slug>', methods=['GET', 'POST'])
 def get_post(slug):
-    pass
+    post = Post.objects.get_or_404(slug=slug)
+    form = CommentForm()
+    if form.validate_on_submit():
+        comment = Comment(body=form.body.data,
+            author=form.author.data,
+            email=form.email.data,
+            )
+        post.comments.append(comment)
+        post.save()
+        flash('Comment posted and awaiting administrator approval.')
+        return redirect(url_for('post', slug=slug))
+    return render_template('post/detail.html',
+        post=post)
 
 
-@app.route('/post/<slug>/edit')
+@app.route('/post/<slug>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_post(slug):
-    pass
+    post = Post.objects.get_or_404(slug=slug)
+    form = PostForm()
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.slug = form.slug.data
+        post.body = form.body.data
+        post.visible = form.visible.data
+        post.tags = form.tags.data
+        post.save()
+        flash('Post updated!')
+        return redirect(url_for('post', slug=slug))
+    else:
+        form.title = post.title
+        form.slug = post.slug
+        form.body = post.body
+        form.visible = post.visible
+        form.tags = post.tags
+    return render_template('post/edit.html',
+        form=form)
+
+
+@app.route('/post/new', methods=['GET', 'POST'])
+@login_required
+def new_post():
+    form = PostForm()
+    user = g.user
+    if form.validate_on_submit():
+        post = Post(title=form.title.data,
+            slug=form.slug.data,
+            body=form.body.data,
+            visible=form.visible.data,
+            author=user,
+            tags=form.tags.data)  # tags not right I think
+        post.save()
+        user.posts.append(post)
+        flash('Post created!')
+        return redirect(url_for('post', slug=post.slug))
+    return render_template('post/edit.hml',
+        form=form)
+
+
+@app.route('/tags')
+def tags():
+    tags = Tag.objects.all()
+    return render_template('post/tags.html',
+        tags=tags)
 
 
 @app.route('/profile')
-@app.route('/profile/<user>')
-def profile(user=None):
-    pass
+@app.route('/profile/<username>')
+def profile(username=None):
+    if username is None:
+        users = User.objects.all()
+        return render_template('users/userlist.html',
+            users=users)
+    else:
+        user = User.objects.get_or_404(username=username)
+        return render_template('users/user.html',
+            user=user)
 
 
 @app.route('/panel')
+@app.route('/panel/<int:page>')
 @login_required
-def panel():
-    pass
+def panel(page=1):
+    user = g.user
+    #does this work?
+    posts = User.objects.paginate_field('posts', user.id,
+        page, per_page=POSTS_PER_PAGE)
+    return render_template('users/panel.html',
+        user=user,
+        posts=posts)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -59,7 +137,7 @@ def login():
         else:
             flash('Invalid login. Please try again.')
             redirect(url_for('login'))
-    return render_template('login.html',
+    return render_template('users/login.html',
         title='Sign In',
         form=form)
 
@@ -73,20 +151,21 @@ def logout():
 @app.route('/create', methods=['GET', 'POST'])
 def create():
     if app.config['REGISTRATION'] == app.config['REGISTRATION_OPEN']:
-        form = CreateForm()
+        form = CreateUserForm()
         if form.validate_on_submit():
             new_user = User(username=form.username.data,
                 email=form.email.data,
                 password=pbkdf2_sha256.encrypt(form.password.data))
             new_user.save()
+            return redirect(url_for('panel'))
         else:
             flash('Invalid details. Please try again.')
             redirect(url_for('create'))
-        return render_template('create.html',
+        return render_template('users/create.html',
             title='Create account',
             form=form)
     else:
-        return render_template('closed.html',
+        return render_template('users/closed.html',
             title='Registration closed.')
 
 

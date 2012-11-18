@@ -10,11 +10,11 @@ STATUS_ACTIVE = 0
 STATUS_INACTIVE = 1
 STATUS_BANNED = 2
 
-POST_VISIBLE = 0
-POST_INVISIBLE = 1
+POST_VISIBLE = True
+POST_INVISIBLE = False
 
-COMMENT_AWAITING = 0
-COMMENT_APPROVED = 1
+COMMENT_AWAITING = False
+COMMENT_APPROVED = True
 
 
 class User(db.Document):
@@ -55,7 +55,8 @@ class Post(db.Document):
     body = db.StringField(required=True)
     visible = db.BooleanField(default=POST_VISIBLE)
     author = db.ReferenceField(User, dbref=True, reverse_delete_rule=db.CASCADE)
-    #tags
+    #edited at?
+    tags = db.ListField(db.EmbeddedDocumentField('Tag'))
     comments = db.ListField(db.EmbeddedDocumentField('Comment'))
 
     def get_absolute_url(self):
@@ -76,5 +77,13 @@ class Comment(db.EmbeddedDocument):
     created_at = db.DateTimeField(default=datetime.datetime.utcnow, required=True)
     body = db.StringField(verbose_name='Comment', required=True)
     author = db.StringField(verbose_name='Name', max_length=50, required=True)
-    email = db.StringField(verbose_name='E-mail', required=True)
+    email = db.StringField(verbose_name='E-mail', max_length=255, required=True)
     approved = db.BooleanField(default=COMMENT_AWAITING)
+
+
+class Tag(db.EmbeddedDocument):
+    #maybe change this to a Document not EmbeddedDocument?
+    tag = db.StringField()
+
+    def __unicode__(self):
+        return self.tag
