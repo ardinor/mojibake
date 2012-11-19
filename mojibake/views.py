@@ -7,7 +7,7 @@ from passlib.hash import pbkdf2_sha256
 from datetime import datetime
 
 from mojibake import app, lm  # db,
-from models import User, Post, Comment, Tag
+from models import User, Post, Comment
 from forms import LoginForm, CreateUserForm, PostForm, \
     CommentForm
 from config import POSTS_PER_PAGE
@@ -36,8 +36,9 @@ def get_post(slug):
         post.save()
         flash('Comment posted and awaiting administrator approval.')
         return redirect(url_for('post', slug=slug))
-    return render_template('post/detail.html',
-        post=post)
+    return render_template('posts/detail.html',
+        post=post,
+        title=post.title)
 
 
 @app.route('/post/<slug>/edit', methods=['GET', 'POST'])
@@ -60,7 +61,7 @@ def edit_post(slug):
         form.body = post.body
         form.visible = post.visible
         form.tags = post.tags
-    return render_template('post/edit.html',
+    return render_template('posts/edit.html',
         form=form)
 
 
@@ -80,14 +81,14 @@ def new_post():
         user.posts.append(post)
         flash('Post created!')
         return redirect(url_for('post', slug=post.slug))
-    return render_template('post/edit.hml',
+    return render_template('posts/edit.hml',
         form=form)
 
 
 @app.route('/tags')
 def tags():
-    tags = Tag.objects.all()
-    return render_template('post/tags.html',
+    tags = Post.objects.distinct('tags')
+    return render_template('posts/tags.html',
         tags=tags)
 
 

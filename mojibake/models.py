@@ -56,7 +56,8 @@ class Post(db.Document):
     visible = db.BooleanField(default=POST_VISIBLE)
     author = db.ReferenceField(User, dbref=True, reverse_delete_rule=db.CASCADE)
     #edited at?
-    tags = db.ListField(db.EmbeddedDocumentField('Tag'))
+    #tags = db.ListField(db.EmbeddedDocumentField('Tag'))
+    tags = db.ListField(db.StringField())
     comments = db.ListField(db.EmbeddedDocumentField('Comment'))
 
     def get_absolute_url(self):
@@ -80,10 +81,11 @@ class Comment(db.EmbeddedDocument):
     email = db.StringField(verbose_name='E-mail', max_length=255, required=True)
     approved = db.BooleanField(default=COMMENT_AWAITING)
 
-
-class Tag(db.EmbeddedDocument):
+#class Tag(db.Document):
     #maybe change this to a Document not EmbeddedDocument?
-    tag = db.StringField()
+#    tag = db.StringField()
+#    posts = db.ListField(db.ReferenceField(Post, dbref=True))
+    #tag = db.ReferenceField(User, dbref=True, reverse_delete_rule=db.CASCADE)
 
-    def __unicode__(self):
-        return self.tag
+#    def __unicode__(self):
+#        return self.tag

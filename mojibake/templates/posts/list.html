@@ -5,7 +5,7 @@
 {% block content %}
 
   {% for post in pagination.items %}
-    <h2><a>{{ post.title }}</a></h2>
+    <h2><a href="{{ url_for('get_post', slug = post.slug) }}">{{ post.title }}</a></h2>
     <p>
       {{ post.author.username }} | {{ post.created_at.strftime('%H:%M %Y-%m-%d') }}
     </p>

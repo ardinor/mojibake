@@ -1,0 +1,12 @@
+{% extends "header.html" %}
+
+{% block content %}
+<h3>{{post.title}}</h3>
+<p>Posted by: <a href="{{ url_for('profile', username = post.author.username) }}">{{post.author.username}}</a> at <em>{{post.created_at}}</em></p>
+<p>Tags: {{post.tags}}</p>
+{% if g.user.is_authenticated() %}
+    <!-- insert edit link -->
+{% endif %}
+<p>{{post.body}}</p>
+<!-- insert comment.html -->
+{% endblock %}
