@@ -11,6 +11,7 @@ from models import User, Post, Comment
 from forms import LoginForm, CreateUserForm, PostForm, \
     CommentForm
 from config import POSTS_PER_PAGE
+from config import REGISTRATION, REGISTRATION_OPEN, REGISTRATION_CLOSED
 
 
 @app.route('/')
@@ -115,7 +116,7 @@ def panel(page=1):
         page, per_page=POSTS_PER_PAGE)
     return render_template('users/panel.html',
         user=user,
-        posts=posts)
+        pagination=posts)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -130,7 +131,7 @@ def login():
                 remember_me = False
                 if form.remember_me.data:
                     remember_me = True
-                login_user(logging_in_user, remember_me=remember_me)
+                login_user(logging_in_user, remember=remember_me)
                 return redirect(request.args.get('next') or url_for('panel'))
             else:
                 flash('Invalid login. Please try again.')
@@ -151,7 +152,7 @@ def logout():
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():
-    if app.config['REGISTRATION'] == app.config['REGISTRATION_OPEN']:
+    if REGISTRATION == REGISTRATION_OPEN:
         form = CreateUserForm()
         if form.validate_on_submit():
             new_user = User(username=form.username.data,
@@ -191,4 +192,7 @@ def before_request():
 
 @lm.user_loader
 def load_user(id):
-    return User.query.get(int(id))
+    #return User.objects.get(id)
+    #the above returned MultipleObjectsReturned: 2 items returned, instead of 1
+    #the below right or messy?
+    return User.objects(id=id)[0]
