@@ -19,7 +19,7 @@ from config import REGISTRATION, REGISTRATION_OPEN, REGISTRATION_CLOSED
 @app.route('/index/<int:page>')
 def index(page=1):
     #displays posts even if they are not visible at the moment...
-    posts = Post.objects.paginate(page=page, per_page=POSTS_PER_PAGE)
+    posts = Post.objects(visible=True).paginate(page=page, per_page=POSTS_PER_PAGE)
     return render_template('posts/list.html',
         pagination=posts)
 
@@ -39,6 +39,7 @@ def get_post(slug):
         return redirect(url_for('post', slug=slug))
     return render_template('posts/detail.html',
         post=post,
+        slug=slug,
         title=post.title)
 
 
@@ -55,7 +56,7 @@ def edit_post(slug):
         post.tags = form.tags.data
         post.save()
         flash('Post updated!')
-        return redirect(url_for('post', slug=slug))
+        return redirect(url_for('get_post', slug=slug))
     else:
         form.title = post.title
         form.slug = post.slug
@@ -63,7 +64,8 @@ def edit_post(slug):
         form.visible = post.visible
         form.tags = post.tags
     return render_template('posts/edit.html',
-        form=form)
+        form=form,
+        title='Edit Post')
 
 
 @app.route('/post/new', methods=['GET', 'POST'])
@@ -72,25 +74,37 @@ def new_post():
     form = PostForm()
     user = g.user
     if form.validate_on_submit():
+        tags_list = []
+        for i in form.tags.data.split(','):
+            tags_list.append(i.strip())
         post = Post(title=form.title.data,
             slug=form.slug.data,
             body=form.body.data,
             visible=form.visible.data,
-            author=user,
-            tags=form.tags.data)  # tags not right I think
+            author=User.objects(id=user.id)[0],
+            tags=tags_list)  # tags not right I think
         post.save()
         user.posts.append(post)
         flash('Post created!')
-        return redirect(url_for('post', slug=post.slug))
-    return render_template('posts/edit.hml',
-        form=form)
+        return redirect(url_for('get_post', slug=post.slug))
+    return render_template('posts/edit.html',
+        form=form,
+        title='New Post')
 
 
 @app.route('/tags')
-def tags():
-    tags = Post.objects.distinct('tags')
-    return render_template('posts/tags.html',
-        tags=tags)
+@app.route('/tags/<tag>')
+def tags(tag=None):
+    if tag is None:
+        tags = Post.objects.distinct('tags')
+        return render_template('posts/tags.html',
+            tags=tags)
+    else:
+        posts = Post.objects(tag in 'tags')
+        return render_template('posts/tag_list.html',
+            posts=posts,
+            tag=tag,
+            title=tag)
 
 
 @app.route('/profile')
@@ -111,9 +125,9 @@ def profile(username=None):
 @login_required
 def panel(page=1):
     user = g.user
-    #does this work?
-    posts = User.objects.paginate_field('posts', user.id,
-        page, per_page=POSTS_PER_PAGE)
+    #can't just use user as it is type <class 'werkzeug.local.LocalProxy'>
+    #better way of doing this?
+    posts = Post.objects(author=User.objects(id=user.id)[0]).paginate(page=page, per_page=POSTS_PER_PAGE)
     return render_template('users/panel.html',
         user=user,
         pagination=posts)

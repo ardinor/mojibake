@@ -1,0 +1,36 @@
+{% extends "header.html" %}
+
+{% block content %}
+{% if post == 'New Post' %}
+<h1>New Post</h1>
+{% else %}
+<h1>Edit Post</h1>
+{% endif %}
+<form action="" method="post" name="edit">
+    {{form.hidden_tag()}}
+    <p>
+        <p>Title:</p>
+        <p>{{form.title}}</p>
+        {% for error in form.errors.title %}
+        <p><span style="color: red;">[{{error}}]</span></p>
+        {% endfor %}
+        <p>Slug (url)</p>
+        <p>{{form.slug}}</p>
+        {% for error in form.errors.slug %}
+        <p><span style="color: red;">[{{error}}]</span></p>
+        {% endfor %}
+        <p>Body</p>
+        <p>{{form.body}}</p>
+        {% for error in form.errors.body %}
+        <p><span style="color: red;">[{{error}}]</span></p>
+        {% endfor %}
+        <p>Tags</p>
+        <p>{{form.tags}}</p>
+        {% for error in form.errors.tags %}
+        <p><span style="color: red;">[{{error}}]</span></p>
+        {% endfor %}
+    </p>
+    <p>{{form.visible}} Visible</p>
+    <p><input type="submit" value="Submit"></p>
+</form>
+{% endblock %}
