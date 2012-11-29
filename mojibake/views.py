@@ -139,8 +139,9 @@ def login():
         return redirect(url_for('panel'))
     form = LoginForm()
     if form.validate_on_submit():
-        logging_in_user = User.objects(username=form.username.data)[0]
+        logging_in_user = User.objects(username=form.username.data)
         if logging_in_user:
+            logging_in_user = logging_in_user[0]
             if pbkdf2_sha256.verify(form.password.data, logging_in_user.password):
                 remember_me = False
                 if form.remember_me.data:

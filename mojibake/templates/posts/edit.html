@@ -1,10 +1,10 @@
 {% extends "header.html" %}
 
 {% block content %}
-{% if post == 'New Post' %}
-<h1>New Post</h1>
+{% if title == 'New Post' %}
+<h2>New Post</h1>
 {% else %}
-<h1>Edit Post</h1>
+<h2>Edit Post</h1>
 {% endif %}
 <form action="" method="post" name="edit">
     {{form.hidden_tag()}}
@@ -12,22 +12,30 @@
         <p>Title:</p>
         <p>{{form.title}}</p>
         {% for error in form.errors.title %}
-        <p><span style="color: red;">[{{error}}]</span></p>
+        <div class="alert alert-error">
+            <p>[{{error}}]</p>
+        </div>
         {% endfor %}
         <p>Slug (url)</p>
         <p>{{form.slug}}</p>
         {% for error in form.errors.slug %}
-        <p><span style="color: red;">[{{error}}]</span></p>
+        <div class="alert alert-error">
+            <p>[{{error}}]</p>
+        </div>
         {% endfor %}
         <p>Body</p>
         <p>{{form.body}}</p>
         {% for error in form.errors.body %}
-        <p><span style="color: red;">[{{error}}]</span></p>
+        <div class="alert alert-error">
+            <p>[{{error}}]</p>
+        </div>
         {% endfor %}
         <p>Tags</p>
         <p>{{form.tags}}</p>
         {% for error in form.errors.tags %}
-        <p><span style="color: red;">[{{error}}]</span></p>
+        <div class="alert alert-error">
+            <p>[{{error}}]</p>
+        </div>
         {% endfor %}
     </p>
     <p>{{form.visible}} Visible</p>

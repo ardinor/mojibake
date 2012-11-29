@@ -1,8 +1,10 @@
 {% extends "header.html" %}
 
 {% block content %}
-<h1>{{ tag }}</h1>
-{% for post in posts %}
-    <p><a href="{{ url_for('get_post', slug=post.slug) }}">{{ post.title }}</a></p>
-{% endfor %}
+<div class="span9 offset3">
+    <h1>{{ tag }}</h1>
+    {% for post in posts %}
+        <p><a href="{{ url_for('get_post', slug=post.slug) }}">{{ post.title }}</a></p>
+    {% endfor %}
+</div>
 {% endblock %}

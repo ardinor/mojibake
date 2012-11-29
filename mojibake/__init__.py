@@ -15,10 +15,11 @@
 from flask import Flask
 from flask.ext.mongoengine import MongoEngine
 from flask.ext.login import LoginManager
+from flask.ext.assets import Environment, Bundle
 
 app = Flask(__name__)
-app.config['MONGODB_DB'] = 'mojibake'
-app.config['SECRET_KEY'] = 'SecretKeyGoesHere'
+app.config.from_object('config')
+
 
 db = MongoEngine(app)
 
@@ -26,6 +27,12 @@ lm = LoginManager()
 lm.setup_app(app)
 lm.login_view = 'login'
 
-REGISTRATION = 0  # closed
+assets = Environment(app)
+
+css = Bundle('css/bootstrap.css')
+assets.register('css_all', css)
+
+js = Bundle('js/bootstrap-scrollspy.js')
+assets.register('js_all', js)
 
 from mojibake import views

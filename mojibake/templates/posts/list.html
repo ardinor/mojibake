@@ -3,13 +3,16 @@
 {% extends "header.html" %}
 
 {% block content %}
-
   {% for post in pagination.items %}
-    <h2><a href="{{ url_for('get_post', slug = post.slug) }}">{{ post.title }}</a></h2>
-    <p>
-      {{ post.author.username }} | {{ post.created_at.strftime('%H:%M %Y-%m-%d') }}
-    </p>
-    <p>{{ post.body|truncate(100) }}</p>
+  <div class="row-fluid">
+    <div class="span6 offset3">
+      <h2><a href="{{ url_for('get_post', slug = post.slug) }}">{{ post.title }}</a></h2>
+      <p>
+        {{ post.author.username }} | {{ post.created_at.strftime('%H:%M %Y-%m-%d') }}
+      </p>
+      <p>{{ post.body|truncate(100) }}</p>
+    </div>
+  </div>
   {% endfor %}
 
 {{ render_pagination(pagination=pagination, endpoint='index') }}
