@@ -38,8 +38,11 @@ class User(db.Document):
     def get_id(self):
         return unicode(self.id)
 
-    def __unicode__(self):
-        return self.username
+    #def __unicode__(self):
+    #    return self.username
+
+    def __repr__(self):
+        return '<User %r>' % (self.username)
 
     meta = {
         #'allow_inheritance': True,
@@ -63,11 +66,21 @@ class Post(db.Document):
     def get_absolute_url(self):
         return url_for('post', kwargs={'slug': self.slug})
 
-    def __unicode__(self):
-        return self.title
+    def get_visible_comments(self):
+        visible_comments = []
+        for i in self.comments:
+            if i.approved == True:
+                visible_comments.append(i)
+        return visible_comments
+
+    #def __unicode__(self):
+    #    return self.title
+
+    def __repr__(self):
+        return '<Post %r>' % (self.title)
 
     meta = {
-        #'allow_inheritance': True,
+        'allow_inheritance': True,
         'indexes': ['-created_at', 'slug'],
         'ordering': ['-created_at'],
         'cascade': True
@@ -80,6 +93,9 @@ class Comment(db.EmbeddedDocument):
     author = db.StringField(verbose_name='Name', max_length=50, required=True)
     email = db.StringField(verbose_name='E-mail', max_length=255, required=True)
     approved = db.BooleanField(default=COMMENT_AWAITING)
+
+    def __repr__(self):
+        return '<Comment %r>' % (self.author)
 
 #class Tag(db.Document):
     #maybe change this to a Document not EmbeddedDocument?

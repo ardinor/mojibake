@@ -36,10 +36,11 @@ def get_post(slug):
         post.comments.append(comment)
         post.save()
         flash('Comment posted and awaiting administrator approval.')
-        return redirect(url_for('post', slug=slug))
+        return redirect(url_for('get_post', slug=slug))
     return render_template('posts/detail.html',
         post=post,
         slug=slug,
+        form=form,
         title=post.title)
 
 
