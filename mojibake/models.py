@@ -73,6 +73,13 @@ class Post(db.Document):
                 visible_comments.append(i)
         return visible_comments
 
+    def get_comments_awaiting(self):
+        awaiting_comments = []
+        for i in self.comments:
+            if i.approved == False:
+                awaiting_comments.append(i)
+        return awaiting_comments
+
     #def __unicode__(self):
     #    return self.title
 

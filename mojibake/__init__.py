@@ -29,7 +29,7 @@ lm.login_view = 'login'
 
 assets = Environment(app)
 
-css = Bundle('css/bootstrap.css')
+css = Bundle('css/bootstrap.css', 'css/bootstrap-responsive.css')
 assets.register('css_all', css)
 
 js = Bundle('js/bootstrap-scrollspy.js')

@@ -4,13 +4,30 @@
 
 {% block content %}
 
-  {% for post in pagination.items %}
-    <h2><a href="{{ url_for('get_post', slug = post.slug) }}">{{ post.title }}</a></h2>
-    <p>
-      {{ post.author.username }} | {{ post.created_at.strftime('%H:%M %Y-%m-%d') }}
-    </p>
-    <p>{{ post.body|truncate(100) }}</p>
-  {% endfor %}
+    <div class="row-fluid">
+        <div class="span6 offset3">
+        {% if comments %}
+            <h3>Comments awaiting approval</h3>
+            {% for comment in comments %}
+            <p>{{comment.author }} says: {{ comment.body }}</p>
+            {% endfor %}
+        {% endif %}
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span6 offset3">
 
-{{ render_pagination(pagination=pagination, endpoint='panel') }}
+            <h3>Your posts</h3>
+            {% for post in pagination.items %}
+            <h4><a href="{{ url_for('get_post', slug = post.slug) }}">{{ post.title }}</a></h4>
+            <p>
+              {{ post.author.username }} | {{ post.created_at.strftime('%H:%M %Y-%m-%d') }}
+            </p>
+            <p>{{ post.body|truncate(100) }}</p>
+            {% endfor %}
+            {{ render_pagination(pagination=pagination, endpoint='panel') }}
+        </div>
+    </div>
+
+
 {% endblock %}

@@ -9,6 +9,7 @@
     {% endif %}
     <meta name="description" content="">
     <meta name="author" content="https://github.com/ardinor">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -58,6 +59,9 @@
               {% if g.user.is_authenticated() %}
               <li class="">
                 <a href="{{ url_for('profile', username = g.user.username) }}">Your Profile</a>
+              </li>
+              <li class="">
+                <a href="{{ url_for('panel') }}">User Panel</a>
               </li>
               <li class="">
                 <a href="{{ url_for('new_post') }}">New Post</a>

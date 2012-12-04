@@ -48,7 +48,7 @@ def get_post(slug):
 @login_required
 def edit_post(slug):
     post = Post.objects.get_or_404(slug=slug)
-    form = PostForm()
+    form = PostForm(obj=post)
     if form.validate_on_submit():
         post.title = form.title.data
         post.slug = form.slug.data
@@ -58,12 +58,6 @@ def edit_post(slug):
         post.save()
         flash('Post updated!')
         return redirect(url_for('get_post', slug=slug))
-    else:
-        form.title = post.title
-        form.slug = post.slug
-        form.body = post.body
-        form.visible = post.visible
-        form.tags = post.tags
     return render_template('posts/edit.html',
         form=form,
         title='Edit Post')
@@ -128,10 +122,15 @@ def panel(page=1):
     user = g.user
     #can't just use user as it is type <class 'werkzeug.local.LocalProxy'>
     #better way of doing this?
-    posts = Post.objects(author=User.objects(id=user.id)[0]).paginate(page=page, per_page=POSTS_PER_PAGE)
+    awaiting_comments = []
+    author = User.objects(id=user.id)[0]
+    for i in Post.objects(author=author):
+        awaiting_comments = awaiting_comments + i.get_comments_awaiting()
+    posts = Post.objects(author=author).paginate(page=page, per_page=POSTS_PER_PAGE)
     return render_template('users/panel.html',
         user=user,
-        pagination=posts)
+        pagination=posts,
+        comments=awaiting_comments)
 
 
 @app.route('/login', methods=['GET', 'POST'])
