@@ -8,6 +8,7 @@ from datetime import datetime
 
 from mojibake import app, lm  # db,
 from models import User, Post, Comment
+from models import POST_VISIBLE, ROLE_ADMIN
 from forms import LoginForm, CreateUserForm, PostForm, \
     CommentForm
 from config import POSTS_PER_PAGE
@@ -50,17 +51,35 @@ def edit_post(slug):
     post = Post.objects.get_or_404(slug=slug)
     form = PostForm(obj=post)
     if form.validate_on_submit():
+        tags_list = []
+        for i in form.tags.data.split(','):
+            tags_list.append(i.strip())
         post.title = form.title.data
         post.slug = form.slug.data
         post.body = form.body.data
         post.visible = form.visible.data
-        post.tags = form.tags.data
+        post.tags = tags_list
         post.save()
         flash('Post updated!')
         return redirect(url_for('get_post', slug=slug))
     return render_template('posts/edit.html',
         form=form,
         title='Edit Post')
+
+
+@app.route('/post/<slug>/delete', methods=['GET'])
+@login_required
+def delete_post(slug):
+    post = Post.objects.get_or_404(slug=slug)
+    user = g.user
+    #check if it's the users post or if the user has admin?
+    if User.objects(id=user.id)[0] == post.author or User.objects(id=user.id)[0].role == ROLE_ADMIN:
+        post.delete()
+        flash('Post deleted!')
+        return redirect(url_for('index'))
+    else:
+        flash('You do not have permission to delete this post.')
+        return redirect(url_for('get_post', slug=slug))
 
 
 @app.route('/post/new', methods=['GET', 'POST'])
@@ -91,11 +110,11 @@ def new_post():
 @app.route('/tags/<tag>')
 def tags(tag=None):
     if tag is None:
-        tags = Post.objects.distinct('tags')
+        tags = Post.objects(visible=True).distinct('tags')
         return render_template('posts/tags.html',
             tags=tags)
     else:
-        posts = Post.objects(tag in 'tags')
+        posts = Post.objects(tags=tag, visible=POST_VISIBLE)
         return render_template('posts/tag_list.html',
             posts=posts,
             tag=tag,
