@@ -3,17 +3,16 @@
 {% block content %}
 <div class="row-fluid">
     <div class="span6 offset3">
-        <!--<h2>Sign In</h2>-->
+        <h4 style="text-align:center; margin-top: 25px; margin-bottom: 40px">Login</h4>
         <form class="form-horizontal" action="" method="post" name="login">
             {{form.hidden_tag()}}
-
             {% if form.errors.username %}
             <div class="control-group error">
                 <label class="control-label" for="username">Username</label>
                 <div class="controls">
                     {{form.username(size=80)}}
                     {% for error in form.errors.username %}
-                    <span class="help-inline error">[{{error}}]</span>
+                    <span class="help-inline error">{{error}}</span>
                     {% endfor %}
                 </div>
             </div>
@@ -32,7 +31,7 @@
                 <div class="controls">
                     {{form.password(size=80)}}
                     {% for error in form.errors.password %}
-                    <span class="help-inline error">[{{error}}]</span>
+                    <span class="help-inline error">{{error}}</span>
                     {% endfor %}
                 </div>
             </div>

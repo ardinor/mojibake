@@ -11,7 +11,7 @@ from models import User, Post, Comment
 from forms import LoginForm, CreateUserForm, PostForm, \
     CommentForm
 from config import POSTS_PER_PAGE
-from config import REGISTRATION, REGISTRATION_OPEN, REGISTRATION_CLOSED
+from config import REGISTRATION, REGISTRATION_OPEN
 
 
 @app.route('/')
@@ -175,9 +175,9 @@ def create():
                 password=pbkdf2_sha256.encrypt(form.password.data))
             new_user.save()
             return redirect(url_for('panel'))
-        else:
-            flash('Invalid details. Please try again.')
-            redirect(url_for('create'))
+            #else:
+            #    flash('Invalid details. Please try again.')
+            #    redirect(url_for('create'))
         return render_template('users/create.html',
             title='Create account',
             form=form)
