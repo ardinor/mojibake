@@ -80,6 +80,12 @@ class Post(db.Document):
                 awaiting_comments.append(i)
         return awaiting_comments
 
+    @db.queryset_manager
+    def visible_posts(self, queryset):
+        return queryset.filter(visible=POST_VISIBLE)
+
+    #Post.objects.filter(comments__approved=False)  # returns all posts with comments awaiting approval
+
     #def __unicode__(self):
     #    return self.title
 

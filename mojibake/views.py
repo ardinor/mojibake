@@ -21,8 +21,10 @@ from config import REGISTRATION, REGISTRATION_OPEN
 def index(page=1):
     #displays posts even if they are not visible at the moment...
     posts = Post.objects(visible=True).paginate(page=page, per_page=POSTS_PER_PAGE)
+    recent = Post.objects(visible=True).order_by('-created_at')[:5]
     return render_template('posts/list.html',
-        pagination=posts)
+        pagination=posts,
+        recent=recent)
 
 
 @app.route('/post/<slug>', methods=['GET', 'POST'])
@@ -36,7 +38,7 @@ def get_post(slug):
             )
         post.comments.append(comment)
         post.save()
-        flash('Comment posted and awaiting administrator approval.')
+        flash('Comment posted and awaiting administrator approval.', 'success')
         return redirect(url_for('get_post', slug=slug))
     return render_template('posts/detail.html',
         post=post,
@@ -60,7 +62,7 @@ def edit_post(slug):
         post.visible = form.visible.data
         post.tags = tags_list
         post.save()
-        flash('Post updated!')
+        flash('Post updated!', 'success')
         return redirect(url_for('get_post', slug=slug))
     return render_template('posts/edit.html',
         form=form,
@@ -75,10 +77,10 @@ def delete_post(slug):
     #check if it's the users post or if the user has admin?
     if User.objects(id=user.id)[0] == post.author or User.objects(id=user.id)[0].role == ROLE_ADMIN:
         post.delete()
-        flash('Post deleted!')
+        flash('Post deleted!', 'success')
         return redirect(url_for('index'))
     else:
-        flash('You do not have permission to delete this post.')
+        flash('You do not have permission to delete this post.', 'error')
         return redirect(url_for('get_post', slug=slug))
 
 
@@ -99,7 +101,7 @@ def new_post():
             tags=tags_list)  # tags not right I think
         post.save()
         user.posts.append(post)
-        flash('Post created!')
+        flash('Post created!', 'success')
         return redirect(url_for('get_post', slug=post.slug))
     return render_template('posts/edit.html',
         form=form,
@@ -143,7 +145,8 @@ def panel(page=1):
     #better way of doing this?
     awaiting_comments = []
     author = User.objects(id=user.id)[0]
-    for i in Post.objects(author=author):
+    #Post.objects
+    for i in Post.objects(author=author).filter(comments__approved=False):
         awaiting_comments = awaiting_comments + i.get_comments_awaiting()
     posts = Post.objects(author=author).paginate(page=page, per_page=POSTS_PER_PAGE)
     return render_template('users/panel.html',
@@ -168,10 +171,10 @@ def login():
                 login_user(logging_in_user, remember=remember_me)
                 return redirect(request.args.get('next') or url_for('panel'))
             else:
-                flash('Invalid login. Please try again.')
+                flash('Invalid login. Please try again.', 'error')
                 redirect(url_for('login'))
         else:
-            flash('Invalid login. Please try again.')
+            flash('Invalid login. Please try again.', 'error')
             redirect(url_for('login'))
     return render_template('users/login.html',
         title='Sign In',
