@@ -29,10 +29,10 @@ lm.login_view = 'login'
 
 assets = Environment(app)
 
-css = Bundle('css/bootstrap.css', 'css/bootstrap-responsive.css')
+css = Bundle('vendor/css/bootstrap.min.css', 'vendor/css/bootstrap-responsive.css', 'vendor/css/jquery.pnotify.default.css')
 assets.register('css_all', css)
 
-js = Bundle('js/bootstrap-scrollspy.js')
+js = Bundle('vendor/js/bootstrap-scrollspy.js', 'vendor/js/jquery-1.9.0.js', 'vendor/js/jquery.pnotify.min.js', 'vendor/js/bootstrap.min.js', 'js/mojibake.js')
 assets.register('js_all', js)
 
 from mojibake import views

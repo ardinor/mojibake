@@ -21,16 +21,18 @@
     <!-- <script src="../static/js/bootstrap-scrollspy.js"></script> -->
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
     {% endassets %}
+    <script type=text/javascript>
+      $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
     <style type="text/css">
       body {
         padding-top: 60px;
         padding-bottom: 40px;
       }
     </style>
-
   </head>
   <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
           <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -44,9 +46,12 @@
             <p class="navbar-text pull-right">
                 <a href="/logout">Logout</a>
             </p>
-              {% else %}
+            {% else %}
             <p class="navbar-text pull-right">
-                <a href="/login">Login</a>
+                <noscript>
+                  <a href="/login">Login</a>
+                </noscript>
+                <a id="divLogin" href="/loginmodal" data-toggle="modal" style="display: none">Login</a>
             </p>
             {% endif %}
             <ul class="nav">

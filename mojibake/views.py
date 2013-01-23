@@ -1,5 +1,5 @@
 from flask import render_template, g, redirect, url_for, \
-    flash, request
+    flash, request, jsonify
 #from flask import session
 from flask.ext.login import login_required, login_user, \
     logout_user, current_user
@@ -143,11 +143,15 @@ def panel(page=1):
     user = g.user
     #can't just use user as it is type <class 'werkzeug.local.LocalProxy'>
     #better way of doing this?
-    awaiting_comments = []
+    awaiting_comments = {}
+    post_awaiting_comments = []
+    #paginate comments? what if there's 50 comments?
     author = User.objects(id=user.id)[0]
     #Post.objects
     for i in Post.objects(author=author).filter(comments__approved=False):
-        awaiting_comments = awaiting_comments + i.get_comments_awaiting()
+        post_awaiting_comments = post_awaiting_comments + i.get_comments_awaiting()
+        awaiting_comments[i] = post_awaiting_comments
+        post_awaiting_comments = []
     posts = Post.objects(author=author).paginate(page=page, per_page=POSTS_PER_PAGE)
     return render_template('users/panel.html',
         user=user,
@@ -155,8 +159,22 @@ def panel(page=1):
         comments=awaiting_comments)
 
 
+@app.route('/panel/comment/approve')
+def approve_comment():
+    rqst_comment = request.args.get('comment')
+    with open('C:/Git/testpast.txt', 'w') as f:
+        f.write(rqst_comment.encode('utf-8'))
+    return jsonify(comment=rqst_comment)
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    # if request.args.get('username') is not None:
+    #     username = request.args.get('username').strip()
+    #     password = request.args.get('password').strip()
+    #     form = LoginForm(username=username, password=password, remember_me=False)
+    #     if form.validate_on_submit():
+    #         return jsonify(response='success')
     if g.user is not None and g.user.is_authenticated():
         return redirect(url_for('panel'))
     form = LoginForm()
@@ -178,6 +196,13 @@ def login():
             redirect(url_for('login'))
     return render_template('users/login.html',
         title='Sign In',
+        form=form)
+
+
+@app.route('/loginmodal')
+def login_modal():
+    form = LoginForm()
+    return render_template('users/loginmodal.html',
         form=form)
 
 
