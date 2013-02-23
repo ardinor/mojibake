@@ -14,7 +14,8 @@ class CreateUserForm(Form):
     username = TextField('Username', validators=[Required(), Length(max=50)])
     email = EmailField('E-mail', validators=[Required(), Length(max=255)])
     password = PasswordField('Password', validators=[Required()])
-    password_verify = PasswordField('Password Again', validators=[Required(), EqualTo('password', message='Passwords must match')])
+    password_verify = PasswordField('Password Again',
+        validators=[Required(), EqualTo('password', message='Passwords must match')])
 
 
 class PostForm(Form):

@@ -147,7 +147,6 @@ def panel(page=1):
     post_awaiting_comments = []
     #paginate comments? what if there's 50 comments?
     author = User.objects(id=user.id)[0]
-    #Post.objects
     for i in Post.objects(author=author).filter(comments__approved=False):
         post_awaiting_comments = post_awaiting_comments + i.get_comments_awaiting()
         awaiting_comments[i] = post_awaiting_comments
