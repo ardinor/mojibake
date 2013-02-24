@@ -11,3 +11,9 @@ body {
     padding-top: 60px;
     padding-bottom: 40px;
 }
+
+#post_body {
+    width: 600px;
+    height: 120px;
+    color: black;
+}

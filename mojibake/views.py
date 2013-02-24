@@ -134,7 +134,8 @@ def profile(username=None):
     else:
         user = User.objects.get_or_404(username=username)
         return render_template('users/user.html',
-            user=user)
+            user=user,
+            roles=USER_ROLES)
 
 
 @app.route('/panel')
@@ -174,8 +175,6 @@ def approve_comment():
                 result = True
     else:
         result = False
-    #with open('C:/Git/testpast.txt', 'w') as f:
-    #    f.write(comment.encode('utf-8'))
     return jsonify(result=result)
 
 

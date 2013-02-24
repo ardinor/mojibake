@@ -21,7 +21,8 @@ class CreateUserForm(Form):
 class PostForm(Form):
     title = TextField('Title', validators=[Required(), Length(max=255)])
     slug = TextField('Slug', validators=[Required(), Length(max=255)])
-    body = TextAreaField('Body', validators=[Required()])
+    body = TextAreaField('Body', validators=[Required()],
+        id='post_body')
     visible = BooleanField('Visible')
     tags = TextField('Tags')
 

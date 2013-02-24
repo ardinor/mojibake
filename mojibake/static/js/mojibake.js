@@ -16,7 +16,8 @@ $(function() {
                 gparent.hide("fast");
             };
     };
-    $(".btn-success").click(function() {
+    //$(".btn-success").click(function() {
+    $("#approve").click(function() {
         var parent = $(this).parents("#comment-row");
         var gparent = parent.parent();
         var comm_text = parent.find("#comment").text();
