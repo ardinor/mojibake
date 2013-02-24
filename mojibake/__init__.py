@@ -31,7 +31,8 @@ assets = Environment(app)
 
 css = Bundle('vendor/css/bootstrap.min.css',
     'vendor/css/bootstrap-responsive.css',
-    'vendor/css/jquery.pnotify.default.css')
+    'vendor/css/jquery.pnotify.default.css',
+    'css/mojibake.css')
 assets.register('css_all', css)
 
 js = Bundle('vendor/js/bootstrap-scrollspy.js',

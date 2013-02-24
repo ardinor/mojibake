@@ -1,0 +1,15 @@
+{% extends "header.html" %}
+
+{% block content %}
+  {% for user in users %}
+  <div class="row-fluid">
+    <div class="span6 offset3">
+      <h2><a href="{{ url_for('profile', username = user.username) }}">{{ user.username }}</a></h2>
+      <p>
+        {{ user.role }} | {{ user.last_seen.strftime('%H:%M %Y-%m-%d') }}
+      </p>
+    </div>
+  </div>
+  {% endfor %}
+
+{% endblock %}

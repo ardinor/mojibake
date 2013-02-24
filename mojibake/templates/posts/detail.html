@@ -20,6 +20,7 @@
 
         {% endif %}
         <p>{{post.body}}</p>
+        <div id="comment_block">
         <h4>Comments</h4>
         <form action="" method="post" name="edit">
             {{form.hidden_tag()}}
@@ -51,6 +52,7 @@
                 {% include 'posts/comment.html' %}
             {% endfor %}
         {% endif %}
+        </div>
     </div>
 </div>
 {% endblock %}
