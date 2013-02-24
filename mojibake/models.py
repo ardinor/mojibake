@@ -16,6 +16,10 @@ POST_INVISIBLE = False
 COMMENT_AWAITING = False
 COMMENT_APPROVED = True
 
+USER_ROLES = {ROLE_USER: 'User',
+              ROLE_STAFF: 'Staff',
+              ROLE_ADMIN: 'Admin'}
+
 
 class User(db.Document):
     username = db.StringField(max_length=50, required=True, unique=True)
@@ -62,6 +66,7 @@ class Post(db.Document):
     #tags = db.ListField(db.EmbeddedDocumentField('Tag'))
     tags = db.ListField(db.StringField())
     comments = db.ListField(db.EmbeddedDocumentField('Comment'))
+    #comments = db.ListField(db.ReferenceField('Comment', dbref=True))
 
     def get_absolute_url(self):
         return url_for('post', kwargs={'slug': self.slug})
@@ -106,9 +111,17 @@ class Comment(db.EmbeddedDocument):
     author = db.StringField(verbose_name='Name', max_length=50, required=True)
     email = db.StringField(verbose_name='E-mail', max_length=255, required=True)
     approved = db.BooleanField(default=COMMENT_AWAITING)
+    #post = db.ReferenceField(Post, dbref=True, reverse_delete_rule=db.CASCADE)
 
     def __repr__(self):
         return '<Comment %r>' % (self.author)
+
+    #def return_post_author(self):
+    #    return self.post.author
+
+    #@db.queryset_manager
+    #def search_by_author(self, queryset, post):
+    #    return queryset.filter(post=post)
 
 #class Tag(db.Document):
     #maybe change this to a Document not EmbeddedDocument?

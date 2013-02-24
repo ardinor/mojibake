@@ -20,8 +20,11 @@ $(function() {
         var parent = $(this).parents("#comment-row");
         var gparent = parent.parent();
         var comm_text = parent.find("#comment").text();
+        var author = parent.find("#comment").attr("author");
+        var body = parent.find("#comment").attr("body");
         var jqxhr = $.getJSON($SCRIPT_ROOT + '/panel/comment/approve', {
-            comment: comm_text
+            author: author,
+            body: body
         },
         function(data) {
             $.pnotify({

@@ -8,7 +8,7 @@ from datetime import datetime
 
 from mojibake import app, lm  # db,
 from models import User, Post, Comment
-from models import POST_VISIBLE, ROLE_ADMIN
+from models import POST_VISIBLE, ROLE_ADMIN, USER_ROLES
 from forms import LoginForm, CreateUserForm, PostForm, \
     CommentForm
 from config import POSTS_PER_PAGE
@@ -129,7 +129,8 @@ def profile(username=None):
     if username is None:
         users = User.objects.all()
         return render_template('users/userlist.html',
-            users=users)
+            users=users,
+            roles=USER_ROLES)
     else:
         user = User.objects.get_or_404(username=username)
         return render_template('users/user.html',
@@ -152,6 +153,7 @@ def panel(page=1):
         awaiting_comments[i] = post_awaiting_comments
         post_awaiting_comments = []
     posts = Post.objects(author=author).paginate(page=page, per_page=POSTS_PER_PAGE)
+    #comments = Comments.objects(post=author)
     return render_template('users/panel.html',
         user=user,
         pagination=posts,
@@ -160,10 +162,21 @@ def panel(page=1):
 
 @app.route('/panel/comment/approve')
 def approve_comment():
-    rqst_comment = request.args.get('comment')
-    with open('C:/Git/testpast.txt', 'w') as f:
-        f.write(rqst_comment.encode('utf-8'))
-    return jsonify(comment=rqst_comment)
+    rqst_author = request.args.get('author')
+    rqst_body = request.args.get('body')
+    #comment = '{}{}'.format(rqst_author, rqst_body)
+    post = Post.objects.filter(comments__author=rqst_author, comments__body=rqst_body)[0]
+    if post:
+        for i in post.comments:
+            if i.author == rqst_author and i.body == rqst_body:
+                i.approved = True
+                post.save()
+                result = True
+    else:
+        result = False
+    #with open('C:/Git/testpast.txt', 'w') as f:
+    #    f.write(comment.encode('utf-8'))
+    return jsonify(result=result)
 
 
 @app.route('/login', methods=['GET', 'POST'])
