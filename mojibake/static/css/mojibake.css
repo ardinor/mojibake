@@ -17,3 +17,9 @@ body {
     height: 120px;
     color: black;
 }
+
+#comment_body {
+    width: 600px;
+    height: 120px;
+    color: black;
+}

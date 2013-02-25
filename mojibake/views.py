@@ -165,7 +165,6 @@ def panel(page=1):
 def approve_comment():
     rqst_author = request.args.get('author')
     rqst_body = request.args.get('body')
-    #comment = '{}{}'.format(rqst_author, rqst_body)
     post = Post.objects.filter(comments__author=rqst_author, comments__body=rqst_body)[0]
     if post:
         for i in post.comments:

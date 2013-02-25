@@ -34,7 +34,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="#">Mojibake</a>
+          <a class="brand" href="{{ url_for('index') }}">Mojibake</a>
           <div class="nav-collapse collapse">
             {% if g.user.is_authenticated() %}
             <p class="navbar-text pull-right">
@@ -50,10 +50,10 @@
             {% endif %}
             <ul class="nav">
               <li class="">
-                <a href="/index">Home</a>
+                <a href="{{ url_for('index') }}">Home</a>
               </li>
               <li class="">
-                <a href="/tags">Categories</a>
+                <a href="{{ url_for('tags') }}">Categories</a>
               </li>
               {% if g.user.is_authenticated() %}
               <li class="">
@@ -74,23 +74,32 @@
     <div class="container-fluid">
         {% with messages = get_flashed_messages(category_filter=['success']) %}
         {% if messages %}
-        <div class="alert alert-success" style="text-align:center;">
-            {% for message in messages %}
-              {{ message }}
-            {% endfor %}
+        <div class="row-fluid">
+          <div class="span6 offset3">
+            <div class="alert alert-success" style="text-align:center;">
+                {% for message in messages %}
+                  {{ message }}
+                {% endfor %}
+            </div>
+          </div>
         </div>
         {% endif %}
         {% endwith %}
         {% with messages = get_flashed_messages(category_filter=['error']) %}
         {% if messages %}
-        <div class="alert alert-error" style="text-align:center;">
-            {% for message in messages %}
-              {{ message }}
-            {% endfor %}
+        <div class="row-fluid">
+          <div class="span6 offset3">
+            <div class="alert alert-error" style="text-align:center;">
+                {% for message in messages %}
+                  {{ message }}
+                {% endfor %}
+            </div>
+          </div>
         </div>
         {% endif %}
         {% endwith %}
         {% block content %}{% endblock %}
+        {% include "footer.html" %}
     </div>
   </body>
 </html>

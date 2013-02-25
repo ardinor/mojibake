@@ -30,4 +30,5 @@ class PostForm(Form):
 class CommentForm(Form):
     author = TextField('Author', validators=[Required(), Length(max=50)])
     email = EmailField('E-mail', validators=[Required(), Length(max=255)])
-    body = TextAreaField('Comment', validators=[Required()])
+    body = TextAreaField('Comment', validators=[Required()],
+        id="comment_body")

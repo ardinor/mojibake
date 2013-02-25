@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="row-fluid">
-    <div class="span9 offset3">
+    <div class="span6 offset3">
         {% if title == 'New Post' %}
         <h3>New Post</h3>
         {% else %}
@@ -41,7 +41,7 @@
                 {% endfor %}
             </p>
             <p>{{form.visible}} Visible</p>
-            <p><input type="submit" value="Submit"></p>
+            <p><input class="btn btn-primary" type="submit" value="Submit"></p>
         </form>
     </div>
 </div>
