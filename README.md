@@ -27,7 +27,7 @@ CREDITS
 
 [jQuery](http://jquery.com/)
 
-["Pines Notify](http://pinesframework.org/pnotify/)
+[Pines Notify](http://pinesframework.org/pnotify/)
 
 [wysihtml5](https://github.com/xing/wysihtml5)
 

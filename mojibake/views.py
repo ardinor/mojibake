@@ -6,9 +6,10 @@ from flask.ext.login import login_required, login_user, \
 from passlib.hash import pbkdf2_sha256
 from datetime import datetime
 
+
 from mojibake import app, lm  # db,
 from models import User, Post, Comment
-from models import POST_VISIBLE, ROLE_ADMIN, USER_ROLES
+from models import POST_VISIBLE, ROLE_ADMIN, USER_ROLES, COMMENT_APPROVED
 from forms import LoginForm, CreateUserForm, PostForm, \
     CommentForm
 from config import POSTS_PER_PAGE
@@ -30,15 +31,25 @@ def index(page=1):
 @app.route('/post/<slug>', methods=['GET', 'POST'])
 def get_post(slug):
     post = Post.objects.get_or_404(slug=slug)
+    # if the user is logged in, fill in the username for them? link to their profile?
     form = CommentForm()
     if form.validate_on_submit():
-        comment = Comment(body=form.body.data,
-            author=form.author.data,
-            email=form.email.data,
-            )
+        if g.user is not None and g.user.is_authenticated:
+            comment = Comment(body=form.body.data,
+                author=form.author.data,
+                email=form.email.data,
+                approved=COMMENT_APPROVED,
+                )
+            flash('Comment posted!', 'success')
+        else:
+            comment = Comment(body=form.body.data,
+                author=form.author.data,
+                email=form.email.data,
+                )
+            flash('Comment posted and awaiting administrator approval.', 'success')
         post.comments.append(comment)
         post.save()
-        flash('Comment posted and awaiting administrator approval.', 'success')
+        #flash('Comment posted and awaiting administrator approval.', 'success')
         return redirect(url_for('get_post', slug=slug))
     return render_template('posts/detail.html',
         post=post,
@@ -162,6 +173,21 @@ def panel(page=1):
 
 
 @app.route('/panel/comment/approve')
+def approve_comment():
+    rqst_author = request.args.get('author')
+    rqst_body = request.args.get('body')
+    post = Post.objects.filter(comments__author=rqst_author, comments__body=rqst_body)[0]
+    if post:
+        for i in post.comments:
+            if i.author == rqst_author and i.body == rqst_body:
+                i.approved = True
+                post.save()
+                result = True
+    else:
+        result = False
+    return jsonify(result=result)
+
+@app.route('/panel/comment/delete')
 def approve_comment():
     rqst_author = request.args.get('author')
     rqst_body = request.args.get('body')

@@ -41,4 +41,27 @@ $(function() {
         window.setTimeout(function() {hideChildren(gparent)}, 300);
         });
     });
+    $("#delete").click(function() {
+        var parent = $(this).parents("#comment-row");
+        var gparent = parent.parent();
+        var comm_text = parent.find("#comment").text();
+        var author = parent.find("#comment").attr("author");
+        var body = parent.find("#comment").attr("body");
+        var jqxhr = $.getJSON($SCRIPT_ROOT + '/panel/comment/approve', {
+            author: author,
+            body: body
+        },
+        function(data) {
+            $.pnotify({
+                text: 'Comment approved',
+                delay: 700,
+                type: 'success',
+                animation: 'show',
+                history: false
+            });
+        parent.hide("fast");
+        window.setTimeout(function() {hideChildren(gparent)}, 300);
+        });
+    });
+
 });
