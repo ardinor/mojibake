@@ -32,4 +32,3 @@ CREDITS
 [wysihtml5](https://github.com/xing/wysihtml5)
 
 [Bootstrap-wysihtml5](https://github.com/jhollingworth/bootstrap-wysihtml5)
-
