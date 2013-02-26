@@ -23,8 +23,8 @@ REQUIREMENTS
 
 CREDITS
 -------------------------
-"Bootstrap":http://twitter.github.com/bootstrap/
-"jQuery":http://jquery.com/
-"Pines Notify":http://pinesframework.org/pnotify/
-"wysihtml5":https://github.com/xing/wysihtml5
-"Bootstrap-wysihtml5":https://github.com/jhollingworth/bootstrap-wysihtml5
+[Bootstrap](http://twitter.github.com/bootstrap/)
+[jQuery](http://jquery.com/)
+["Pines Notify](http://pinesframework.org/pnotify/)
+[wysihtml5](https://github.com/xing/wysihtml5)
+[Bootstrap-wysihtml5](https://github.com/jhollingworth/bootstrap-wysihtml5)
