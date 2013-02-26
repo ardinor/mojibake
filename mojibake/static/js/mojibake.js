@@ -1,5 +1,7 @@
 $(function() {
     $("#divLogin").css("display", "block");
+    $("#post_body").wysihtml5();
+    //$('#post_body').val(); to get the html
     $('[data-toggle="modal"]').click(function(e) {
         e.preventDefault();
         var url = $(this).attr('href');
