@@ -17,9 +17,8 @@
         <h3>{{post.title}}</h3>
         {% if g.user.is_authenticated() %}
         <p><a href="{{ url_for('edit_post', slug=slug) }}">Edit post</a> | <a href="{{ url_for('delete_post', slug=slug) }}">Delete Post</a></p>
-
         {% endif %}
-        <p>{{post.body}}</p>
+        <p>{{post.body|safe}}</p>
         <div id="comment_block">
         <h4>Comments</h4>
         <form action="" method="post" name="edit">
