@@ -29,6 +29,10 @@ CREDITS
 
 [Pines Notify](http://pinesframework.org/pnotify/)
 
+[Slate Bootstrap theme](http://bootswatch.com/slate/)
+
 [wysihtml5](https://github.com/xing/wysihtml5)
 
 [Bootstrap-wysihtml5](https://github.com/jhollingworth/bootstrap-wysihtml5)
+
+[Bootstrap-tags](https://github.com/maxwells/bootstrap-tags)

@@ -1,6 +1,9 @@
 $(function() {
     $("#divLogin").css("display", "block");
     $("#post_body").wysihtml5();
+    $("#tags_list").tags({
+
+        })
     //$('#post_body').val(); to get the html
     $('[data-toggle="modal"]').click(function(e) {
         e.preventDefault();
