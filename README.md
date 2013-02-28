@@ -35,4 +35,4 @@ CREDITS
 
 [Bootstrap-wysihtml5](https://github.com/jhollingworth/bootstrap-wysihtml5)
 
-[Bootstrap-tags](https://github.com/maxwells/bootstrap-tags)
+[JQuery Tags Input](http://xoxco.com/projects/code/tagsinput/)

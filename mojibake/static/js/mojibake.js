@@ -1,6 +1,7 @@
 $(function() {
     $("#divLogin").css("display", "block");
     $("#post_body").wysihtml5();
+    $('#tags').tagsInput();
     $("#tags_list").tags({
 
         })

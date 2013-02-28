@@ -32,7 +32,7 @@ def index(page=1):
 def get_post(slug):
     post = Post.objects.get_or_404(slug=slug)
     # if the user is logged in, fill in the username for them? link to their profile?
-    
+
     user = None
     form = None
     if g.user is not None and g.user.is_authenticated:
@@ -75,15 +75,19 @@ def get_post(slug):
 def edit_post(slug):
     post = Post.objects.get_or_404(slug=slug)
     form = PostForm(obj=post)
+    form.tags.data = ','.join(form.tags.data)
     if form.validate_on_submit():
-        tags_list = []
-        for i in form.tags.data.split(','):
-            tags_list.append(i.strip())
+        #Nasty hack for some reason it tag library puts a comma after
+        #every character?
+        tags = form.tags.data.replace(',,,', '|')
+        tags = tags.replace(',', '')
+        tags = tags.replace('|', ',')
+        tags = tags.split(',')
         post.title = form.title.data
         post.slug = form.slug.data
         post.body = form.body.data
         post.visible = form.visible.data
-        post.tags = tags_list
+        post.tags = tags
         post.save()
         flash('Post updated!', 'success')
         return redirect(url_for('get_post', slug=slug))

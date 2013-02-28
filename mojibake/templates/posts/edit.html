@@ -33,7 +33,7 @@
                 </div>
                 {% endfor %}
                 <p>Tags</p>
-                <p>{{form.tags}}</p>                
+                <p>{{form.tags}}</p>
                 {% for error in form.errors.tags %}
                 <div class="alert alert-error">
                     <p>[{{error}}]</p>
@@ -41,9 +41,8 @@
                 {% endfor %}
             </p>
             <p>{{form.visible}} Visible</p>
-            <p><input class="btn btn-primary" type="submit" value="Submit"></p>                   
+            <p><input class="btn btn-primary" type="submit" value="Submit"></p>
         </form>
-        <div id="tags_list" class="tag-list"><div class="tags"></div></div>
     </div>
 </div>
 {% endblock %}

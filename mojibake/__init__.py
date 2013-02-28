@@ -33,8 +33,8 @@ css = Bundle('vendor/css/bootstrap.min.css',
     'vendor/css/bootstrap-responsive.css',
     'vendor/css/jquery.pnotify.default.css',
     'vendor/css/bootstrap-wysihtml5-0.0.2.css',
-    'vendor/css/bootstrap-tags.css',
-    'css/mojibake.css')    
+    'vendor/css/jquery.tagsinput.css',
+    'css/mojibake.css')
 assets.register('css_all', css)
 
 js = Bundle('vendor/js/bootstrap-scrollspy.js',
@@ -43,7 +43,7 @@ js = Bundle('vendor/js/bootstrap-scrollspy.js',
     'vendor/js/bootstrap.min.js',
     'vendor/js/wysihtml5-0.3.0_rc2.min.js',
     'vendor/js/bootstrap-wysihtml5-0.0.2.min.js',
-    'vendor/js/bootstrap-tags.js',
+    'vendor/js/jquery.tagsinput.min.js',
     'js/mojibake.js')
 assets.register('js_all', js)
 
