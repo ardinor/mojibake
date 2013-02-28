@@ -21,8 +21,21 @@
         <p>{{post.body|safe}}</p>
         <div id="comment_block">
         <h4>Comments</h4>
+        {% if user %}
         <form action="" method="post" name="edit">
             {{form.hidden_tag()}}
+            <p>{{form.body}}</p>
+            {% for error in form.errors.body %}
+            <div class="alert alert-error">
+                <p>{{error}}</p>
+            </div>
+            {% endfor %}
+            <p><input class="btn btn-primary" type="submit" value="Submit"></p>
+        </form>    
+        {% else %}
+        <form action="" method="post" name="edit">        
+            {{form.hidden_tag()}}
+
             <p>Author:</p>
             <p>{{form.author}}</p>
             {% for error in form.errors.author %}
@@ -46,6 +59,7 @@
             {% endfor %}
             <p><input class="btn btn-primary" type="submit" value="Submit"></p>
         </form>
+        {% endif %}
         {% if post.get_visible_comments() %}
             {% for comment in post.get_visible_comments() %}
                 {% include 'posts/comment.html' %}

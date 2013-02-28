@@ -1,4 +1,6 @@
 import datetime
+import uuid
+
 from flask import url_for
 from mojibake import db
 
@@ -19,6 +21,16 @@ COMMENT_APPROVED = True
 USER_ROLES = {ROLE_USER: 'User',
               ROLE_STAFF: 'Staff',
               ROLE_ADMIN: 'Admin'}
+              
+              
+def return_id():
+
+    """
+    Generate a UUID and return it as a string
+    """
+    
+    _id = uuid.uuid4()
+    return str(_id)
 
 
 class User(db.Document):
@@ -106,15 +118,18 @@ class Post(db.Document):
 
 
 class Comment(db.EmbeddedDocument):
+    _id = db.StringField(default=return_id)
     created_at = db.DateTimeField(default=datetime.datetime.utcnow, required=True)
     body = db.StringField(verbose_name='Comment', required=True)
-    author = db.StringField(verbose_name='Name', max_length=50, required=True)
-    email = db.StringField(verbose_name='E-mail', max_length=255, required=True)
+    author = db.StringField(verbose_name='Name', max_length=50)
+    user = db.ReferenceField(User, dbref=True)
+    email = db.StringField(verbose_name='E-mail', max_length=255)
     approved = db.BooleanField(default=COMMENT_AWAITING)
     #post = db.ReferenceField(Post, dbref=True, reverse_delete_rule=db.CASCADE)
 
     def __repr__(self):
         return '<Comment %r>' % (self.author)
+        
 
     #def return_post_author(self):
     #    return self.post.author

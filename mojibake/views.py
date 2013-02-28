@@ -11,7 +11,7 @@ from mojibake import app, lm  # db,
 from models import User, Post, Comment
 from models import POST_VISIBLE, ROLE_ADMIN, USER_ROLES, COMMENT_APPROVED
 from forms import LoginForm, CreateUserForm, PostForm, \
-    CommentForm
+    CommentForm, UserCommentForm
 from config import POSTS_PER_PAGE
 from config import REGISTRATION, REGISTRATION_OPEN
 
@@ -32,12 +32,23 @@ def index(page=1):
 def get_post(slug):
     post = Post.objects.get_or_404(slug=slug)
     # if the user is logged in, fill in the username for them? link to their profile?
-    form = CommentForm()
+    
+    user = None
+    form = None
+    if g.user is not None and g.user.is_authenticated:
+        try:
+            user_id = g.user.id
+            user = User.objects(id=user_id)[0]
+            form = UserCommentForm()
+        except AttributeError:
+            pass
+    if form is None:
+        form = CommentForm()
     if form.validate_on_submit():
-        if g.user is not None and g.user.is_authenticated:
+        if user:
+            #and User.objects(id=g.user.id)[0]:
             comment = Comment(body=form.body.data,
-                author=form.author.data,
-                email=form.email.data,
+                user=user,
                 approved=COMMENT_APPROVED,
                 )
             flash('Comment posted!', 'success')
@@ -55,6 +66,7 @@ def get_post(slug):
         post=post,
         slug=slug,
         form=form,
+        user=user,
         title=post.title)
 
 

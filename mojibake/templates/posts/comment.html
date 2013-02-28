@@ -1,4 +1,9 @@
 <div class="row-fluid">
+        {% if comment.user %}
+        <h4><a href="{{ url_for('profile', username = comment.user.username) }}">{{ comment.user.username }}</a> - <em>{{comment.created_at.strftime('%H:%M %Y-%m-%d')}}</em></h4>
+        <p>{{comment.body}}</p>        
+        {% else %}
         <h4>{{comment.author}} - <em>{{comment.created_at.strftime('%H:%M %Y-%m-%d')}}</em></h4>
         <p>{{comment.body}}</p>
+        {% endif %}
 </div>
