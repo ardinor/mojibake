@@ -2,9 +2,9 @@ $(function() {
     $("#divLogin").css("display", "block");
     $("#post_body").wysihtml5();
     $('#tags').tagsInput();
-    $("#tags_list").tags({
-
-        })
+    //$("#tags_list").tags({
+    //
+    //    })
     //$('#post_body').val(); to get the html
     $('[data-toggle="modal"]').click(function(e) {
         e.preventDefault();
@@ -26,12 +26,12 @@ $(function() {
     $("#approve").click(function() {
         var parent = $(this).parents("#comment-row");
         var gparent = parent.parent();
-        var comm_text = parent.find("#comment").text();
-        var author = parent.find("#comment").attr("author");
-        var body = parent.find("#comment").attr("body");
+        //var comm_text = parent.find("#comment").text();
+        //var author = parent.find("#comment").attr("author");
+        //var body = parent.find("#comment").attr("body");
+        var ref = parent.find("#comment").attr("ref");
         var jqxhr = $.getJSON($SCRIPT_ROOT + '/panel/comment/approve', {
-            author: author,
-            body: body
+            ref: ref
         },
         function(data) {
             $.pnotify({
@@ -48,16 +48,16 @@ $(function() {
     $("#delete").click(function() {
         var parent = $(this).parents("#comment-row");
         var gparent = parent.parent();
-        var comm_text = parent.find("#comment").text();
-        var author = parent.find("#comment").attr("author");
-        var body = parent.find("#comment").attr("body");
-        var jqxhr = $.getJSON($SCRIPT_ROOT + '/panel/comment/approve', {
-            author: author,
-            body: body
+        //var comm_text = parent.find("#comment").text();
+        //var author = parent.find("#comment").attr("author");
+        //var body = parent.find("#comment").attr("body");
+        var ref = parent.find("#comment").attr("ref");
+        var jqxhr = $.getJSON($SCRIPT_ROOT + '/panel/comment/delete', {
+            ref: ref
         },
         function(data) {
             $.pnotify({
-                text: 'Comment approved',
+                text: 'Comment deleted',
                 delay: 700,
                 type: 'success',
                 animation: 'show',

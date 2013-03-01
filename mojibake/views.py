@@ -190,12 +190,11 @@ def panel(page=1):
 
 @app.route('/panel/comment/approve')
 def approve_comment():
-    rqst_author = request.args.get('author')
-    rqst_body = request.args.get('body')
-    post = Post.objects.filter(comments__author=rqst_author, comments__body=rqst_body)[0]
+    rqst_ref = request.args.get('ref')
+    post = Post.objects.filter(comments___id=rqst_ref)[0]
     if post:
         for i in post.comments:
-            if i.author == rqst_author and i.body == rqst_body:
+            if i._id == rqst_ref:
                 i.approved = True
                 post.save()
                 result = True
@@ -204,14 +203,13 @@ def approve_comment():
     return jsonify(result=result)
 
 @app.route('/panel/comment/delete')
-def approve_comment():
-    rqst_author = request.args.get('author')
-    rqst_body = request.args.get('body')
-    post = Post.objects.filter(comments__author=rqst_author, comments__body=rqst_body)[0]
+def delete_comment():
+    rqst_ref = request.args.get('ref')
+    post = Post.objects.filter(comments___id=rqst_ref)[0]
     if post:
         for i in post.comments:
-            if i.author == rqst_author and i.body == rqst_body:
-                i.approved = True
+            if i._id == rqst_ref:
+                post.comments.remove(i)
                 post.save()
                 result = True
     else:
