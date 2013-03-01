@@ -44,6 +44,7 @@ js = Bundle('vendor/js/bootstrap-scrollspy.js',
     'vendor/js/wysihtml5-0.3.0_rc2.min.js',
     'vendor/js/bootstrap-wysihtml5-0.0.2.min.js',
     'vendor/js/jquery.tagsinput.min.js',
+    'vendor/js/moment.min.js',
     'js/mojibake.js')
 assets.register('js_all', js)
 

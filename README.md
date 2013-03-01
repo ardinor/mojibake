@@ -8,6 +8,8 @@ Written in Flask using MongoDB
 REQUIREMENTS
 -------------------------
 
+Python
+
 * Flask==0.9
 * Flask-Assets==0.8
 * Flask-Login==0.1.3
@@ -21,18 +23,18 @@ REQUIREMENTS
 * passlib==1.6.1
 * pymongo==2.3
 
-CREDITS
--------------------------
-[Bootstrap](http://twitter.github.com/bootstrap/)
+External Libraries
 
-[jQuery](http://jquery.com/)
+* [Bootstrap](http://twitter.github.com/bootstrap/)
 
-[Pines Notify](http://pinesframework.org/pnotify/)
+* [jQuery](http://jquery.com/)
 
-[Slate Bootstrap theme](http://bootswatch.com/slate/)
+* [Pines Notify](http://pinesframework.org/pnotify/)
 
-[wysihtml5](https://github.com/xing/wysihtml5)
+* [Slate Bootstrap theme](http://bootswatch.com/slate/)
 
-[Bootstrap-wysihtml5](https://github.com/jhollingworth/bootstrap-wysihtml5)
+* [wysihtml5](https://github.com/xing/wysihtml5)
 
-[JQuery Tags Input](http://xoxco.com/projects/code/tagsinput/)
+* [Bootstrap-wysihtml5](https://github.com/jhollingworth/bootstrap-wysihtml5)
+
+* [JQuery Tags Input](http://xoxco.com/projects/code/tagsinput/)
