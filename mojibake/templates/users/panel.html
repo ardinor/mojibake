@@ -19,7 +19,7 @@
                 {% for comment in values %}
                 <div id="comment-row" class="row-fluid">
                     <div class="span4 offset2">
-                        <span id="comment" ref="{{ comment._id }}" author="{{ comment.author }}" body="{{ comment.body }}">{{ comment.created_at.strftime('%H:%M %Y-%m-%d') }} - <strong>{{ comment.author }}</strong> says: {{ comment.body }}</span>
+                        <span id="comment" ref="{{ comment._id }}" author="{{ comment.author }}" body="{{ comment.body }}">{{moment_js(comment.created_at).format('LLLL')}} - <a href="{{ comment.email }}"><strong>{{ comment.author }}</strong></a> said: {{ comment.body }}</span>
                     </div>
                     <div class="span2">
                         <button class="btn btn-success btn-small" id="approve" type="button">Approve</button><button class="btn btn-danger btn-small" id="delete">Delete</button>
@@ -41,7 +41,7 @@
         <div class="span6 offset2">
             <h4><a href="{{ url_for('get_post', slug = post.slug) }}">{{ post.title }}</a></h4>
             <p>
-              {{ post.author.username }} | {{ post.created_at.strftime('%H:%M %Y-%m-%d') }}
+              {{ post.author.username }} | {{moment_js(post.created_at).format('LLLL')}}
             </p>
             <p>{{ post.body|truncate(300)|safe }}</p>
         </div>

@@ -6,7 +6,7 @@
     <div class="span6 offset3">
       <h2><a href="{{ url_for('profile', username = user.username) }}">{{ user.username }}</a></h2>
       <p>
-        {{ roles[user.role] }}{% if user.last_seen %} | Last seen: {{ user.last_seen.strftime('%H:%M %Y-%m-%d') }}{% endif %}
+        {{ roles[user.role] }}{% if user.last_seen %} | Last seen: {{moment_js(user.last_seen).fromNow()}} {% endif %}
       </p>
     </div>
   </div>

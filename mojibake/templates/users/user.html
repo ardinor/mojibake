@@ -5,7 +5,7 @@
     <div class="span6 offset3">
       <h2>{{ user.username }}</h2>
       <p>
-        {{ roles[user.role] }} | Last seen: {{ user.last_seen.strftime('%H:%M %Y-%m-%d') }}
+        {{ roles[user.role] }} | Last seen: {{moment_js(user.last_seen).fromNow()}}
       </p>
     </div>
   </div>

@@ -5,7 +5,7 @@ from flask.ext.login import login_required, login_user, \
     logout_user, current_user
 from passlib.hash import pbkdf2_sha256
 from datetime import datetime
-
+import time
 
 from mojibake import app, lm  # db,
 from models import User, Post, Comment
@@ -20,12 +20,15 @@ from config import REGISTRATION, REGISTRATION_OPEN
 @app.route('/index')
 @app.route('/index/<int:page>')
 def index(page=1):
+    start = time.clock()
     #displays posts even if they are not visible at the moment...
     posts = Post.objects(visible=True).paginate(page=page, per_page=POSTS_PER_PAGE)
     recent = Post.objects(visible=True).order_by('-created_at')[:5]
     return render_template('posts/list.html',
         pagination=posts,
-        recent=recent)
+        recent=recent,
+        taken=time.clock,
+        start=start)
 
 
 @app.route('/post/<slug>', methods=['GET', 'POST'])
