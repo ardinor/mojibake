@@ -9,18 +9,26 @@
     {% endif %}
     <meta name="description" content="">
     <meta name="author" content="https://github.com/ardinor">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    {% assets "css_all" %}
     <!-- <link href="../static/css/bootstrap.css" rel="stylesheet"> -->
+    <!-- <script src="../static/js/bootstrap-scrollspy.js"></script> -->
+    {% assets "css_all" %}
     <link rel="stylesheet" href="{{ ASSET_URL }}" type="text/css">
     {% endassets %}
     {% assets "js_all" %}
-    <!-- <script src="../static/js/bootstrap-scrollspy.js"></script> -->
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
     {% endassets %}
+    {% if g.user.is_authenticated() %}
+    {% assets "user_js" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+    {% assets "user_css" %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}" type="text/css">
+    {% endassets %}
+    {% endif %}
     <script type=text/javascript>
       $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
     </script>

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 
 REGISTRATION_OPEN = 1
 REGISTRATION_CLOSED = 0
