@@ -3,17 +3,19 @@ from flask import render_template, g, redirect, url_for, \
 #from flask import session
 from flask.ext.login import login_required, login_user, \
     logout_user, current_user
+from flask.ext.babel import gettext
 from passlib.hash import pbkdf2_sha256
 from datetime import datetime
 import time
 
-from mojibake import app, lm  # db,
+from mojibake import app, lm, babel  # db,
 from models import User, Post, Comment
 from models import POST_VISIBLE, ROLE_ADMIN, USER_ROLES, COMMENT_APPROVED
 from forms import LoginForm, CreateUserForm, PostForm, \
     CommentForm, UserCommentForm
 from config import POSTS_PER_PAGE
 from config import REGISTRATION, REGISTRATION_OPEN
+from config import LANGUAGES
 
 
 @app.route('/')
@@ -54,13 +56,13 @@ def get_post(slug):
                 user=user,
                 approved=COMMENT_APPROVED,
                 )
-            flash('Comment posted!', 'success')
+            flash(gettext('Comment posted!'), 'success')
         else:
             comment = Comment(body=form.body.data,
                 author=form.author.data,
                 email=form.email.data,
                 )
-            flash('Comment posted and awaiting administrator approval.', 'success')
+            flash(gettext('Comment posted and awaiting administrator approval.'), 'success')
         post.comments.append(comment)
         post.save()
         #flash('Comment posted and awaiting administrator approval.', 'success')
@@ -92,7 +94,7 @@ def edit_post(slug):
         post.visible = form.visible.data
         post.tags = tags
         post.save()
-        flash('Post updated!', 'success')
+        flash(gettext('Post updated!'), 'success')
         return redirect(url_for('get_post', slug=slug))
     return render_template('posts/edit.html',
         form=form,
@@ -107,10 +109,10 @@ def delete_post(slug):
     #check if it's the users post or if the user has admin?
     if User.objects(id=user.id)[0] == post.author or User.objects(id=user.id)[0].role == ROLE_ADMIN:
         post.delete()
-        flash('Post deleted!', 'success')
+        flash(gettext('Post deleted!'), 'success')
         return redirect(url_for('index'))
     else:
-        flash('You do not have permission to delete this post.', 'error')
+        flash(gettext('You do not have permission to delete this post.'), 'error')
         return redirect(url_for('get_post', slug=slug))
 
 
@@ -131,11 +133,11 @@ def new_post():
             tags=tags_list)  # tags not right I think
         post.save()
         user.posts.append(post)
-        flash('Post created!', 'success')
+        flash(gettext('Post created!'), 'success')
         return redirect(url_for('get_post', slug=post.slug))
     return render_template('posts/edit.html',
         form=form,
-        title='New Post')
+        title=gettext('New Post'))
 
 
 @app.route('/tags')
@@ -205,6 +207,7 @@ def approve_comment():
         result = False
     return jsonify(result=result)
 
+
 @app.route('/panel/comment/delete')
 def delete_comment():
     rqst_ref = request.args.get('ref')
@@ -242,13 +245,13 @@ def login():
                 login_user(logging_in_user, remember=remember_me)
                 return redirect(request.args.get('next') or url_for('panel'))
             else:
-                flash('Invalid login. Please try again.', 'error')
+                flash(gettext('Invalid login. Please try again.'), 'error')
                 redirect(url_for('login'))
         else:
-            flash('Invalid login. Please try again.', 'error')
+            flash(gettext('Invalid login. Please try again.'), 'error')
             redirect(url_for('login'))
     return render_template('users/login.html',
-        title='Sign In',
+        title=gettext('Sign In'),
         form=form)
 
 
@@ -279,12 +282,11 @@ def create():
             #    flash('Invalid details. Please try again.')
             #    redirect(url_for('create'))
         return render_template('users/create.html',
-            title='Create account',
+            title=gettext('Create account'),
             form=form)
     else:
         return render_template('users/closed.html',
-            title='Registration closed.')
-
+            title=gettext('Registration closed.'))
 
 
 @app.errorhandler(404)
@@ -311,3 +313,11 @@ def load_user(id):
     #the above returned MultipleObjectsReturned: 2 items returned, instead of 1
     #the below right or messy?
     return User.objects(id=id)[0]
+
+
+@babel.localeselector
+def get_locale():
+    user = getattr(g, 'user', None)
+    if user is not None:
+        return user.locale
+    return request.accept_languages.best_match(LANGUAGES.keys())

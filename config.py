@@ -12,3 +12,8 @@ SECRET_KEY = 'SecretKeyGoesHere'
 MONGODB_DB = 'mojibake'
 
 POSTS_PER_PAGE = 2  # 5
+
+LANGUAGES = {
+    'en': 'English',
+    'ja': '日本語'
+}

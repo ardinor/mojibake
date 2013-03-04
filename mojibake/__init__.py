@@ -16,6 +16,7 @@ from flask import Flask
 from flask.ext.mongoengine import MongoEngine
 from flask.ext.login import LoginManager
 from flask.ext.assets import Environment, Bundle
+from flask.ext.babel import Babel
 
 from moment_js import moment_js
 
@@ -30,6 +31,8 @@ lm.setup_app(app)
 lm.login_view = 'login'
 
 app.jinja_env.globals['moment_js'] = moment_js
+
+babel = Babel(app)
 
 assets = Environment(app)
 

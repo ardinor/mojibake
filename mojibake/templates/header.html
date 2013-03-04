@@ -46,32 +46,32 @@
           <div class="nav-collapse collapse">
             {% if g.user.is_authenticated() %}
             <p class="navbar-text pull-right">
-                <a href="/logout">Logout</a>
+                <a href="/logout">{{ _('Logout') }}</a>
             </p>
             {% else %}
             <p class="navbar-text pull-right">
                 <noscript>
-                  <a href="/login">Login</a>
+                  <a href="/login">{{ _('Login') }}</a>
                 </noscript>
-                <a id="divLogin" href="/loginmodal" data-toggle="modal" style="display: none">Login</a>
+                <a id="divLogin" href="/loginmodal" data-toggle="modal" style="display: none">{{ _('Login') }}</a>
             </p>
             {% endif %}
             <ul class="nav">
               <li class="">
-                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('index') }}">{{ _('Home') }}</a>
               </li>
               <li class="">
-                <a href="{{ url_for('tags') }}">Categories</a>
+                <a href="{{ url_for('tags') }}">{{ _('Categories') }}</a>
               </li>
               {% if g.user.is_authenticated() %}
               <li class="">
-                <a href="{{ url_for('profile', username = g.user.username) }}">Your Profile</a>
+                <a href="{{ url_for('profile', username = g.user.username) }}">{{ _('Your Profile') }}</a>
               </li>
               <li class="">
-                <a href="{{ url_for('panel') }}">User Panel</a>
+                <a href="{{ url_for('panel') }}">{{ _('User Panel') }}</a>
               </li>
               <li class="">
-                <a href="{{ url_for('new_post') }}">New Post</a>
+                <a href="{{ url_for('new_post') }}">{{ _('New Post') }}</a>
               </li>
               {% endif %}
             </ul>
