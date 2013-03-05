@@ -3,12 +3,12 @@
 {% block content %}
 <div class="row-fluid">
     <div class="span6 offset3">
-        <h4 style="text-align:center; margin-top: 25px; margin-bottom: 40px">Login</h4>
+        <h4 style="text-align:center; margin-top: 25px; margin-bottom: 40px">{{ _('Login') }}</h4>
         <form class="form-horizontal" action="" method="post" name="login">
             {{form.hidden_tag()}}
             {% if form.errors.username %}
             <div class="control-group error">
-                <label class="control-label" for="username">Username</label>
+                <label class="control-label" for="username">{{ _('Username') }}</label>
                 <div class="controls">
                     {{form.username(size=80)}}
                     {% for error in form.errors.username %}
@@ -18,16 +18,15 @@
             </div>
             {% else %}
             <div class="control-group">
-                <label class="control-label" for="username">Username</label>
+                <label class="control-label" for="username">{{ _('Username') }}</label>
                 <div class="controls">
                     {{form.username(size=80)}}
                 </div>
             </div>
             {% endif %}
-
             {% if form.errors.password %}
             <div class="control-group error">
-                <label class="control-label" for="password">Password</label>
+                <label class="control-label" for="password">{{ _('Password') }}</label>
                 <div class="controls">
                     {{form.password(size=80)}}
                     {% for error in form.errors.password %}
@@ -37,20 +36,19 @@
             </div>
             {% else %}
             <div class="control-group">
-                <label class="control-label" for="password">Password</label>
+                <label class="control-label" for="password">{{ _('Password') }}</label>
                 <div class="controls">
                     {{form.password(size=80)}}
                 </div>
             </div>
             {% endif %}
-
             <div class="control-group">
                 <div class="controls">
                     <label class="checkbox">
-                        {{form.remember_me}} Remember Me
+                        {{form.remember_me}} {{ _('Remember Me') }}
                     </label>
                     <!--<input type="submit" class="btn" value="Sign In">-->
-                    <button type="submit" class="btn btn-primary"> Sign In</button>
+                    <button type="submit" class="btn btn-primary">{{ _('Login') }}</button>
                 </div>
             </div>
         </form>

@@ -6,7 +6,7 @@
     {% if comments %}
     <div class="row-fluid">
         <div class="span6 offset3">
-            <h3>Comments awaiting approval</h3>
+            <h3>{{ _('Comments awaiting approval') }}</h3>
         </div>
         <div id="comments">
             {% for key, values in comments.items() recursive %}

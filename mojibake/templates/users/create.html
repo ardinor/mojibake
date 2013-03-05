@@ -3,13 +3,13 @@
 {% block content %}
 <div class="row-fluid">
     <div class="span6 offset3">
-        <h4 style="text-align:center; margin-top: 25px; margin-bottom: 40px">Create an account</h4>
+        <h4 style="text-align:center; margin-top: 25px; margin-bottom: 40px">{{ _('Create an account') }}</h4>
         <form class="form-horizontal" action="" method="post" name="create">
 
             {{form.hidden_tag()}}
             {% if form.errors.username %}
             <div class="control-group error">
-                <label class="control-label" for="username">Username</label>
+                <label class="control-label" for="username">{{ _('Username') }}</label>
                 <div class="controls">
                     {{form.username(size=80)}}
                     {% for error in form.errors.username %}
@@ -19,7 +19,7 @@
             </div>
             {% else %}
             <div class="control-group">
-                <label class="control-label" for="username">Username</label>
+                <label class="control-label" for="username">{{ _('Username') }}</label>
                 <div class="controls">
                     {{form.username(size=80)}}
                 </div>
@@ -27,7 +27,7 @@
             {% endif %}
             {% if form.errors.email %}
             <div class="control-group error">
-                <label class="control-label" for="email">Email</label>
+                <label class="control-label" for="email">{{ _('Email') }}</label>
                 <div class="controls">
                     {{form.email(size=80)}}
                     {% for error in form.errors.email %}
@@ -37,7 +37,7 @@
             </div>
             {% else %}
             <div class="control-group">
-                <label class="control-label" for="email">Email</label>
+                <label class="control-label" for="email">{{ _('Email') }}</label>
                 <div class="controls">
                     {{form.email(size=80)}}
                 </div>
@@ -45,7 +45,7 @@
             {% endif %}
             {% if form.errors.password %}
             <div class="control-group error">
-                <label class="control-label" for="password">Password</label>
+                <label class="control-label" for="password">{{ _('Password') }}</label>
                 <div class="controls">
                     {{form.password(size=80)}}
                     {% for error in form.errors.password %}
@@ -55,7 +55,7 @@
             </div>
             {% else %}
             <div class="control-group">
-                <label class="control-label" for="password">Password</label>
+                <label class="control-label" for="password">{{ _('Password') }}</label>
                 <div class="controls">
                     {{form.password(size=80)}}
                 </div>
@@ -63,7 +63,7 @@
             {% endif %}
             {% if form.errors.password_verify %}
             <div class="control-group error">
-                <label class="control-label" for="password_verify">Password again</label>
+                <label class="control-label" for="password_verify">{{ _('Password again') }}</label>
                 <div class="controls">
                     {{form.password_verify(size=80)}}
                     {% for error in form.errors.password_verify %}
@@ -73,7 +73,7 @@
             </div>
             {% else %}
             <div class="control-group">
-                <label class="control-label" for="password_verify">Password again</label>
+                <label class="control-label" for="password_verify">{{ _('Password again') }}</label>
                 <div class="controls">
                     {{form.password_verify(size=80)}}
                 </div>
@@ -81,7 +81,7 @@
             {% endif %}
             <div class="control-group">
                 <div class="controls">
-                    <button type="submit" class="btn btn-primary"> Sign In</button>
+                    <button type="submit" class="btn btn-primary">{{ _('Create') }}</button>
                 </div>
             </div>
         </form>

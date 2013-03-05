@@ -2,7 +2,7 @@
 
 <a class="close" data-dismiss="modal">&times;</a>
 
-<h3>Login</h3>
+<h3>{{ _('Login') }}</h3>
 
 </div>
 
@@ -12,7 +12,7 @@
     {{form.hidden_tag()}}
     {% if form.errors.username %}
     <div class="control-group error">
-        <label class="control-label" for="username">Username</label>
+        <label class="control-label" for="username">{{ _('Username') }}</label>
         <div class="controls">
             {{form.username(size=80)}}
             {% for error in form.errors.username %}
@@ -22,7 +22,7 @@
     </div>
     {% else %}
     <div class="control-group">
-        <label class="control-label" for="username">Username</label>
+        <label class="control-label" for="username">{{ _('Username') }}</label>
         <div class="controls">
             {{form.username(size=80)}}
         </div>
@@ -30,7 +30,7 @@
     {% endif %}
     {% if form.errors.password %}
     <div class="control-group error">
-        <label class="control-label" for="password">Password</label>
+        <label class="control-label" for="password">{{ _('Password') }}</label>
         <div class="controls">
             {{form.password(size=80)}}
             {% for error in form.errors.password %}
@@ -40,7 +40,7 @@
     </div>
     {% else %}
     <div class="control-group">
-        <label class="control-label" for="password">Password</label>
+        <label class="control-label" for="password">{{ _('Password') }}</label>
         <div class="controls">
             {{form.password(size=80)}}
         </div>
@@ -49,7 +49,7 @@
     <div class="control-group">
         <div class="controls">
             <label class="checkbox">
-                {{form.remember_me}} Remember Me
+                {{form.remember_me}} {{ _('Remember Me') }}
             </label>
         </div>
     </div>
@@ -58,7 +58,7 @@
 </div>
 
 <div class="modal-footer">
-<a class="btn btn-warning pull-left" href="password">Password reset</a>
-<a class="btn btn-success" onclick="$('.modal-body > form').submit();">Login</a>
-<a class="btn" data-dismiss="modal">Close</a>
+<a class="btn btn-warning pull-left" href="password">{{ _('Password reset') }}</a>
+<a class="btn btn-success" onclick="$('.modal-body > form').submit();">{{ _('Login') }}</a>
+<a class="btn" data-dismiss="modal">{{ _('Close') }}</a>
 </div>

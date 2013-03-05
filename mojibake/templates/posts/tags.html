@@ -3,7 +3,7 @@
 {% block content %}
 <div class="row-fluid">
     <div class="span9 offset3">
-        <h1>Categories</h1>
+        <h1>{{ _('Categories') }}</h1>
         {% for tag in tags %}
             <p><a href="{{ url_for('tags', tag=tag) }}">{{ tag }}</a></p>
         {% endfor %}

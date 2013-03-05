@@ -317,7 +317,7 @@ def load_user(id):
 
 @babel.localeselector
 def get_locale():
-    user = getattr(g, 'user', None)
-    if user is not None:
-        return user.locale
+    #user = getattr(g, 'user', None)
+    #if user is not None:
+    #    return user.locale
     return request.accept_languages.best_match(LANGUAGES.keys())
