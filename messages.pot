@@ -1,0 +1,179 @@
+# Translations template for PROJECT.
+# Copyright (C) 2013 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2013-03-06 11:30+1000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 0.9.6\n"
+
+#: mojibake/views.py:60
+msgid "Comment posted!"
+msgstr ""
+
+#: mojibake/views.py:66
+msgid "Comment posted and awaiting administrator approval."
+msgstr ""
+
+#: mojibake/views.py:98
+msgid "Post updated!"
+msgstr ""
+
+#: mojibake/views.py:113
+msgid "Post deleted!"
+msgstr ""
+
+#: mojibake/views.py:116
+msgid "You do not have permission to delete this post."
+msgstr ""
+
+#: mojibake/views.py:137
+msgid "Post created!"
+msgstr ""
+
+#: mojibake/views.py:141 mojibake/templates/posts/edit.html:7
+msgid "New Post"
+msgstr ""
+
+#: mojibake/views.py:249 mojibake/views.py:252
+msgid "Invalid login. Please try again."
+msgstr ""
+
+#: mojibake/views.py:255
+msgid "Sign In"
+msgstr ""
+
+#: mojibake/views.py:286
+msgid "Create account"
+msgstr ""
+
+#: mojibake/views.py:290
+msgid "Registration closed."
+msgstr ""
+
+#: mojibake/templates/404.html:7
+msgid "Page not found"
+msgstr ""
+
+#: mojibake/templates/posts/detail.html:8 mojibake/templates/posts/edit.html:35
+#: mojibake/templates/posts/tags.html:6
+msgid "Categories"
+msgstr ""
+
+#: mojibake/templates/posts/detail.html:19 mojibake/templates/posts/edit.html:9
+msgid "Edit Post"
+msgstr ""
+
+#: mojibake/templates/posts/detail.html:19
+msgid "Delete Post"
+msgstr ""
+
+#: mojibake/templates/posts/detail.html:23
+msgid "Comments"
+msgstr ""
+
+#: mojibake/templates/posts/edit.html:14
+msgid "Title: "
+msgstr ""
+
+#: mojibake/templates/posts/edit.html:21
+msgid "Slug (url)"
+msgstr ""
+
+#: mojibake/templates/posts/edit.html:28
+msgid "Body"
+msgstr ""
+
+#: mojibake/templates/posts/edit.html:43
+msgid "Visible"
+msgstr ""
+
+#: mojibake/templates/users/create.html:6
+msgid "Create an account"
+msgstr ""
+
+#: mojibake/templates/users/create.html:12
+#: mojibake/templates/users/create.html:22
+#: mojibake/templates/users/login.html:11
+#: mojibake/templates/users/login.html:21
+#: mojibake/templates/users/loginmodal.html:15
+#: mojibake/templates/users/loginmodal.html:25
+msgid "Username"
+msgstr ""
+
+#: mojibake/templates/users/create.html:30
+#: mojibake/templates/users/create.html:40
+msgid "Email"
+msgstr ""
+
+#: mojibake/templates/users/create.html:48
+#: mojibake/templates/users/create.html:58
+#: mojibake/templates/users/login.html:29
+#: mojibake/templates/users/login.html:39
+#: mojibake/templates/users/loginmodal.html:33
+#: mojibake/templates/users/loginmodal.html:43
+msgid "Password"
+msgstr ""
+
+#: mojibake/templates/users/create.html:66
+#: mojibake/templates/users/create.html:76
+msgid "Password again"
+msgstr ""
+
+#: mojibake/templates/users/create.html:84
+msgid "Create"
+msgstr ""
+
+#: mojibake/templates/users/login.html:6 mojibake/templates/users/login.html:51
+#: mojibake/templates/users/loginmodal.html:5
+#: mojibake/templates/users/loginmodal.html:62
+msgid "Login"
+msgstr ""
+
+#: mojibake/templates/users/login.html:48
+#: mojibake/templates/users/loginmodal.html:52
+msgid "Remember Me"
+msgstr ""
+
+#: mojibake/templates/users/loginmodal.html:61
+msgid "Password reset"
+msgstr ""
+
+#: mojibake/templates/users/loginmodal.html:63
+msgid "Close"
+msgstr ""
+
+#: mojibake/templates/users/panel.html:9
+msgid "Comments awaiting approval"
+msgstr ""
+
+#: mojibake/templates/users/panel.html:23
+#, python-format
+msgid ""
+"<a href=\"mailto:%(email)s\"><strong>%(author)s</strong></a> said: "
+"%(body)s\n"
+"                            "
+msgstr ""
+
+#: mojibake/templates/users/panel.html:29
+msgid "Approve"
+msgstr ""
+
+#: mojibake/templates/users/panel.html:29
+msgid "Delete"
+msgstr ""
+
+#: mojibake/templates/users/panel.html:40
+msgid "Your posts"
+msgstr ""
+

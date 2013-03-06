@@ -20,7 +20,7 @@
                 <div id="comment-row" class="row-fluid">
                     <div class="span4 offset2">
                         <span id="comment" ref="{{ comment._id }}" author="{{ comment.author }}" body="{{ comment.body }}">
-                            {{moment_js(comment.created_at).format('LLLL')}} - {{ _(' <a href="mailto:{email}"><strong>{author}</strong></a> said: {body}'.format(email=comment.email, author=comment.author, body=comment.body))}}
+                            {{moment_js(comment.created_at).format('LLLL')}} - {% trans email=comment.email, author=comment.author, body=comment.body %}<a href="mailto:{{ email }}"><strong>{{ author }}</strong></a> said: {{ body }}{% endtrans %}
                         </span>
                     </div>
                     <div class="span2">
