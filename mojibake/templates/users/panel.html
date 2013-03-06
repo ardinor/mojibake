@@ -13,16 +13,18 @@
             <div>
                 <div class="row-fluid">
                     <div class="span4 offset2">
-                        <h4>Comments on <a href="{{ url_for('get_post', slug =  key.slug) }}">{{ key.title }}</a></h4>
+                        <h4>{{ _('Comments on {title}'.format(title='<a href="{post_url}">{title}</a>'.format(post_url=(url_for('get_post', slug =  key.slug)), title=key.title))) }}</h4>
                     </div>
                 </div>
                 {% for comment in values %}
                 <div id="comment-row" class="row-fluid">
                     <div class="span4 offset2">
-                        <span id="comment" ref="{{ comment._id }}" author="{{ comment.author }}" body="{{ comment.body }}">{{moment_js(comment.created_at).format('LLLL')}} - <a href="{{ comment.email }}"><strong>{{ comment.author }}</strong></a> said: {{ comment.body }}</span>
+                        <span id="comment" ref="{{ comment._id }}" author="{{ comment.author }}" body="{{ comment.body }}">
+                            {{moment_js(comment.created_at).format('LLLL')}} - {{ _(' <a href="mailto:{email}"><strong>{author}</strong></a> said: {body}'.format(email=comment.email, author=comment.author, body=comment.body))}}
+                        </span>
                     </div>
                     <div class="span2">
-                        <button class="btn btn-success btn-small" id="approve" type="button">Approve</button><button class="btn btn-danger btn-small" id="delete">Delete</button>
+                        <button class="btn btn-success btn-small" id="approve" type="button">{{ _('Approve') }}</button><button class="btn btn-danger btn-small" id="delete">{{ _('Delete') }}</button>
                     </div>
                 </div>
                 {% endfor %}
@@ -33,7 +35,7 @@
     {% endif %}
     <div class="row-fluid">
         <div class="span4 offset4">
-            <h3>Your posts</h3>
+            <h3>{{ _('Your posts') }}</h3>
         </div>
     </div>
     {% for post in pagination.items %}

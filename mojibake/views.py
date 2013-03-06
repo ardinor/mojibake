@@ -6,6 +6,7 @@ from flask.ext.login import login_required, login_user, \
 from flask.ext.babel import gettext
 from passlib.hash import pbkdf2_sha256
 from datetime import datetime
+from cgi import escape
 import time
 
 from mojibake import app, lm, babel  # db,
@@ -52,27 +53,27 @@ def get_post(slug):
     if form.validate_on_submit():
         if user:
             #and User.objects(id=g.user.id)[0]:
-            comment = Comment(body=form.body.data,
-                user=user,
-                approved=COMMENT_APPROVED,
-                )
+            comment = Comment(body=escape(form.body.data),
+                              user=user,
+                              approved=COMMENT_APPROVED,
+                              )
             flash(gettext('Comment posted!'), 'success')
         else:
-            comment = Comment(body=form.body.data,
-                author=form.author.data,
-                email=form.email.data,
-                )
+            comment = Comment(body=escape(form.body.data),
+                              author=escape(form.author.data),
+                              email=escape(form.email.data),
+                              )
             flash(gettext('Comment posted and awaiting administrator approval.'), 'success')
         post.comments.append(comment)
         post.save()
         #flash('Comment posted and awaiting administrator approval.', 'success')
         return redirect(url_for('get_post', slug=slug))
     return render_template('posts/detail.html',
-        post=post,
-        slug=slug,
-        form=form,
-        user=user,
-        title=post.title)
+                           post=post,
+                           slug=slug,
+                           form=form,
+                           user=user,
+                           title=post.title)
 
 
 @app.route('/post/<slug>/edit', methods=['GET', 'POST'])
