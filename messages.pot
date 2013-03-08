@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-03-06 11:30+1000\n"
+"POT-Creation-Date: 2013-03-08 11:40+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,6 +63,13 @@ msgstr ""
 
 #: mojibake/templates/404.html:7
 msgid "Page not found"
+msgstr ""
+
+#: mojibake/templates/footer.html:9
+#, python-format
+msgid ""
+"Site powered by <a href=\"http://flask.pocoo.org/\">%(flask)s</a> and <a "
+"href=\"https://github.com/ardinor/mojibake\">%(mojibake)s</a>"
 msgstr ""
 
 #: mojibake/templates/posts/detail.html:8 mojibake/templates/posts/edit.html:35
@@ -157,23 +164,27 @@ msgstr ""
 msgid "Comments awaiting approval"
 msgstr ""
 
+#: mojibake/templates/users/panel.html:16
+#, python-format
+msgid "Comments on <a href=\"%(post_url)s\">title</a>"
+msgstr ""
+
 #: mojibake/templates/users/panel.html:23
 #, python-format
 msgid ""
 "<a href=\"mailto:%(email)s\"><strong>%(author)s</strong></a> said: "
-"%(body)s\n"
-"                            "
+"%(body)s"
 msgstr ""
 
-#: mojibake/templates/users/panel.html:29
+#: mojibake/templates/users/panel.html:27
 msgid "Approve"
 msgstr ""
 
-#: mojibake/templates/users/panel.html:29
+#: mojibake/templates/users/panel.html:27
 msgid "Delete"
 msgstr ""
 
-#: mojibake/templates/users/panel.html:40
+#: mojibake/templates/users/panel.html:38
 msgid "Your posts"
 msgstr ""
 
