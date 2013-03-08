@@ -6,7 +6,7 @@
     </div>
     <div class="row-fluid">
         <div class="span6 offset3">
-        <p>{{ _('Site powered by {flask} and {mojibake}.'.format(flask = '<a href="http://flask.pocoo.org/">Flask</a>', mojibake = '<a href="https://github.com/ardinor/mojibake">Mojibake</a>')) }} {% if taken %}<span class="pull-right">{{ taken()-start }}s</span>{% endif %}</p>
+        <p>{% trans flask='Flask', mojibake='MØjibДĸe' %}Site powered by <a href="http://flask.pocoo.org/">{{ flask }}</a> and <a href="https://github.com/ardinor/mojibake">{{ mojibake }}</a>{% endtrans %} {% if taken %}<span class="pull-right">{{ taken()-start }}s</span>{% endif %}</p>
         </div>
     </div>
 </div>

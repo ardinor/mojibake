@@ -13,7 +13,7 @@
             <div>
                 <div class="row-fluid">
                     <div class="span4 offset2">
-                        <h4>{{ _('Comments on {title}'.format(title='<a href="{post_url}">{title}</a>'.format(post_url=(url_for('get_post', slug =  key.slug)), title=key.title))) }}</h4>
+                        <h4>{% trans post_url=(url_for('get_post', slug =  key.slug)), title=key.title  %}Comments on <a href="{{ post_url }}">title</a>{% endtrans %}</h4>
                     </div>
                 </div>
                 {% for comment in values %}
