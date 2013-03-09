@@ -21,14 +21,14 @@ COMMENT_APPROVED = True
 USER_ROLES = {ROLE_USER: 'User',
               ROLE_STAFF: 'Staff',
               ROLE_ADMIN: 'Admin'}
-              
-              
+
+
 def return_id():
 
     """
     Generate a UUID and return it as a string
     """
-    
+
     _id = uuid.uuid4()
     return str(_id)
 
@@ -129,7 +129,7 @@ class Comment(db.EmbeddedDocument):
 
     def __repr__(self):
         return '<Comment %r>' % (self.author)
-        
+
 
     #def return_post_author(self):
     #    return self.post.author

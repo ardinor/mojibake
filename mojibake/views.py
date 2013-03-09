@@ -7,6 +7,8 @@ from flask.ext.babel import gettext
 from passlib.hash import pbkdf2_sha256
 from datetime import datetime
 from cgi import escape
+from urlparse import urljoin
+from werkzeug.contrib.atom import AtomFeed
 import time
 
 from mojibake import app, lm, babel  # db,
@@ -17,6 +19,10 @@ from forms import LoginForm, CreateUserForm, PostForm, \
 from config import POSTS_PER_PAGE
 from config import REGISTRATION, REGISTRATION_OPEN
 from config import LANGUAGES
+
+
+def make_external(url):
+    return urljoin(request.url_root, url)
 
 
 @app.route('/')
@@ -288,6 +294,24 @@ def create():
     else:
         return render_template('users/closed.html',
             title=gettext('Registration closed.'))
+
+
+#Atom feed
+#Based on this snippet http://flask.pocoo.org/snippets/10/
+@app.route('/recent.atom')
+def recent_feed():
+    feed = AtomFeed('Recent Articles',
+                    feed_url=request.url,
+                    url=request.url_root)
+    recent_posts = Post.objects(visible=True).order_by('-created_at')[:15]
+    for post in recent_posts:
+        feed.add(post.title, unicode(post.body),
+                 content_type='html',
+                 author=post.author.username,
+                 url=make_external(post.slug),
+                 updated=post.created_at,
+                 published=post.created_at)
+    return feed.get_response()
 
 
 @app.errorhandler(404)
