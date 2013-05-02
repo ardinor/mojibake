@@ -4,6 +4,9 @@
 The early stages of a blog engine!
 Written in Flask using MongoDB
 
+TO DO:
+- Search
+
 
 REQUIREMENTS
 -------------------------

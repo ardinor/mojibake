@@ -20,6 +20,8 @@ from flask.ext.babel import Babel
 
 from moment_js import moment_js
 
+from config import VERSION
+
 app = Flask(__name__)
 app.config.from_object('config')
 
@@ -64,5 +66,15 @@ user_css = Bundle('vendor/css/jquery.pnotify.default.css',
     'vendor/css/bootstrap-wysihtml5-0.0.2.css',
     'vendor/css/jquery.tagsinput.css')
 assets.register('user_css', user_css)
+
+if not app.debug:
+    import logging
+    from logging.handlers import RotatingFileHandler
+    file_handler = RotatingFileHandler('tmp/mojibake.log', 'a', 1 * 1024 * 1024, 10)
+    file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
+    app.logger.setLevel(logging.INFO)
+    file_handler.setLevel(logging.INFO)
+    app.logger.addHandler(file_handler)
+    app.logger.info('Mojibake started - Version {}'.format(VERSION))
 
 from mojibake import views

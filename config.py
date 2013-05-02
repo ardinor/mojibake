@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+VERSION = 1.0
+
 REGISTRATION_OPEN = 1
 REGISTRATION_CLOSED = 0
 

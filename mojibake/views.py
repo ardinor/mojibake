@@ -43,7 +43,6 @@ def index(page=1):
 @app.route('/post/<slug>', methods=['GET', 'POST'])
 def get_post(slug):
     post = Post.objects.get_or_404(slug=slug)
-    # if the user is logged in, fill in the username for them? link to their profile?
 
     user = None
     form = None
