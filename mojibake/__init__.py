@@ -20,7 +20,7 @@ from flask.ext.babel import Babel
 
 from moment_js import moment_js
 
-from config import VERSION
+from config import VERSION, DEBUG
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -67,7 +67,7 @@ user_css = Bundle('vendor/css/jquery.pnotify.default.css',
     'vendor/css/jquery.tagsinput.css')
 assets.register('user_css', user_css)
 
-if not app.debug:
+if not DEBUG:
     import logging
     from logging.handlers import RotatingFileHandler
     file_handler = RotatingFileHandler('tmp/mojibake.log', 'a', 1 * 1024 * 1024, 10)

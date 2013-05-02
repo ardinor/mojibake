@@ -6,6 +6,9 @@ Written in Flask using MongoDB
 
 TO DO:
 - Search
+- Unit testing
+- Option to change language
+- Photo galleries
 
 
 REQUIREMENTS
