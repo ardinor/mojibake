@@ -9,6 +9,7 @@ TO DO:
 - Unit testing
 - Option to change language
 - Photo galleries
+- Comments approved/deleted don't remove the title 'comments on <name>'
 
 
 REQUIREMENTS

@@ -326,6 +326,8 @@ def internal_error(error):
 @app.before_request
 def before_request():
     g.user = current_user
+    if getattr(g, 'user.locale', None) is None:
+        g.user.locale = request.accept_languages.best_match(LANGUAGES.keys())
     if g.user.is_authenticated():
         g.user.last_seen = datetime.utcnow()
         g.user.save()
@@ -344,4 +346,5 @@ def get_locale():
     user = getattr(g, 'user', None)
     if user is not None and getattr(g, 'user.locale', None):
         return user.locale
+    #user.locale = request.accept_languages.best_match(LANGUAGES.keys())
     return request.accept_languages.best_match(LANGUAGES.keys())

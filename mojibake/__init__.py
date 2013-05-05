@@ -19,6 +19,7 @@ from flask.ext.assets import Environment, Bundle
 from flask.ext.babel import Babel
 
 from moment_js import moment_js
+from available_languages import available_languages
 
 from config import VERSION, DEBUG
 
@@ -33,6 +34,7 @@ lm.setup_app(app)
 lm.login_view = 'login'
 
 app.jinja_env.globals['moment_js'] = moment_js
+app.jinja_env.globals['available_languages'] = available_languages
 
 babel = Babel(app)
 

@@ -57,6 +57,9 @@
                 <a id="divLogin" href="/loginmodal" data-toggle="modal" style="display: none">{{ _('Login') }}</a>
             </p>
             {% endif %}
+            <p class="navbar-text pull-right">
+                <a href="">{{ available_languages(g.user.locale)[0] }}</a>
+            </p>
             <ul class="nav">
               <li class="">
                 <a href="{{ url_for('index') }}">{{ _('Home') }}</a>
