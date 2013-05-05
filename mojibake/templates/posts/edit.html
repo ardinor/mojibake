@@ -1,4 +1,9 @@
 {% extends "header.html" %}
+{% if title == 'New Post' %}
+{% set active_page = "/post/new" %}
+{% else %}
+{% set active_page = "/post/{{form.slug}}/edit" %}
+{% endif %}
 
 {% block content %}
 <div class="row-fluid">

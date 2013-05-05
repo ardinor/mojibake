@@ -229,6 +229,14 @@ def delete_comment():
     return jsonify(result=result)
 
 
+@app.route('/language/<language>')
+def change_language(language):
+    for key, value in LANGUAGES.iteritems():
+        if value == language:
+            g.user.locale = key
+            return redirect(request.args.get('next') or url_for('index'))
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     # if request.args.get('username') is not None:
@@ -343,8 +351,8 @@ def load_user(id):
 
 @babel.localeselector
 def get_locale():
-    user = getattr(g, 'user', None)
-    if user is not None and getattr(g, 'user.locale', None):
-        return user.locale
+    #user = getattr(g, 'user', None)
+    #if user is not None:  # and getattr(g, 'user.locale', None):
+    #    return user.locale
     #user.locale = request.accept_languages.best_match(LANGUAGES.keys())
     return request.accept_languages.best_match(LANGUAGES.keys())

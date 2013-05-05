@@ -33,6 +33,7 @@
       $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
     </script>
     <link href="{{ url_for('recent_feed') }}" rel="alternate" title="Recent Posts" type="application/atom+xml">
+    {% set active_page = active_page|default('index') -%}
   </head>
   <body>
     <div class="navbar navbar-fixed-top">
@@ -58,7 +59,7 @@
             </p>
             {% endif %}
             <p class="navbar-text pull-right">
-                <a href="">{{ available_languages(g.user.locale)[0] }}</a>
+                <a href="/language/{{ available_languages(g.user.locale)[0] }}?next={{ active_page }}">{{ available_languages(g.user.locale)[0] }}</a>
             </p>
             <ul class="nav">
               <li class="">
