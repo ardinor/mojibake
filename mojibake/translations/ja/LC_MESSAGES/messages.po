@@ -7,58 +7,57 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: temnoyume@gmail.com\n"
-"POT-Creation-Date: 2013-03-08 11:40+1000\n"
+"POT-Creation-Date: 2013-05-20 21:37+0900\n"
 "PO-Revision-Date: 2013-03-08 11:50+1000\n"
 "Last-Translator: ardinor <temnoyume@gmail.com>\n"
 "Language-Team: ja <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
-"X-Generator: Poedit 1.5.5\n"
 
-#: mojibake/views.py:60
+#: mojibake/views.py:65
 msgid "Comment posted!"
 msgstr "コメントを投稿しました！"
 
-#: mojibake/views.py:66
+#: mojibake/views.py:71
 msgid "Comment posted and awaiting administrator approval."
 msgstr "投稿したコメントはブログの管理者の確認を待っています。"
 
-#: mojibake/views.py:98
+#: mojibake/views.py:103
 msgid "Post updated!"
 msgstr "記事更新しました！"
 
-#: mojibake/views.py:113
+#: mojibake/views.py:118
 msgid "Post deleted!"
 msgstr "記事削除しました！"
 
-#: mojibake/views.py:116
+#: mojibake/views.py:121
 msgid "You do not have permission to delete this post."
 msgstr "この記事を削除許可を持っていません。"
 
-#: mojibake/views.py:137
+#: mojibake/views.py:142
 msgid "Post created!"
 msgstr "記事を投稿しました！"
 
-#: mojibake/views.py:141 mojibake/templates/posts/edit.html:7
+#: mojibake/views.py:146 mojibake/templates/posts/edit.html:12
 msgid "New Post"
 msgstr "記事投稿"
 
-#: mojibake/views.py:249 mojibake/views.py:252
+#: mojibake/views.py:262 mojibake/views.py:265
 msgid "Invalid login. Please try again."
 msgstr "ユーザ名またはパスワードが違います。"
 
-#: mojibake/views.py:255
+#: mojibake/views.py:268
 msgid "Sign In"
 msgstr "ログイン"
 
-#: mojibake/views.py:286
+#: mojibake/views.py:299
 msgid "Create account"
 msgstr "新規登録"
 
-#: mojibake/views.py:290
+#: mojibake/views.py:303
 msgid "Registration closed."
 msgstr "登録は終えられました。"
 
@@ -66,46 +65,54 @@ msgstr "登録は終えられました。"
 msgid "Page not found"
 msgstr "指定したページは存在しません。"
 
+#: mojibake/templates/500.html:7
+msgid "There was an unexpected internal error."
+msgstr ""
+
+#: mojibake/templates/500.html:8
+msgid "The administrator has been notified."
+msgstr ""
+
 #: mojibake/templates/footer.html:9
 #, python-format
 msgid ""
 "Site powered by <a href=\"http://flask.pocoo.org/\">%(flask)s</a> and <a "
 "href=\"https://github.com/ardinor/mojibake\">%(mojibake)s</a>"
 msgstr ""
-"このサイトは<a href=\"http://flask.pocoo.org/\">%(flask)s</a>と<a href="
-"\"https://github.com/ardinor/mojibake\">%(mojibake)s</a>を利用しています。"
+"このサイトは<a href=\"http://flask.pocoo.org/\">%(flask)s</a>と<a "
+"href=\"https://github.com/ardinor/mojibake\">%(mojibake)s</a>を利用しています。"
 
-#: mojibake/templates/posts/detail.html:8
-#: mojibake/templates/posts/edit.html:35 mojibake/templates/posts/tags.html:6
+#: mojibake/templates/posts/detail.html:9 mojibake/templates/posts/edit.html:40
+#: mojibake/templates/posts/tags.html:6
 msgid "Categories"
 msgstr "カテゴリー"
 
-#: mojibake/templates/posts/detail.html:19
-#: mojibake/templates/posts/edit.html:9
+#: mojibake/templates/posts/detail.html:20
+#: mojibake/templates/posts/edit.html:14
 msgid "Edit Post"
 msgstr "記事編集"
 
-#: mojibake/templates/posts/detail.html:19
+#: mojibake/templates/posts/detail.html:20
 msgid "Delete Post"
 msgstr "記事削除"
 
-#: mojibake/templates/posts/detail.html:23
+#: mojibake/templates/posts/detail.html:24
 msgid "Comments"
 msgstr "コメント"
 
-#: mojibake/templates/posts/edit.html:14
+#: mojibake/templates/posts/edit.html:19
 msgid "Title: "
 msgstr "題名："
 
-#: mojibake/templates/posts/edit.html:21
+#: mojibake/templates/posts/edit.html:26
 msgid "Slug (url)"
 msgstr "ユーアールエル　（URL)"
 
-#: mojibake/templates/posts/edit.html:28
+#: mojibake/templates/posts/edit.html:33
 msgid "Body"
 msgstr "本文"
 
-#: mojibake/templates/posts/edit.html:43
+#: mojibake/templates/posts/edit.html:48
 msgid "Visible"
 msgstr "出版する"
 
@@ -145,8 +152,7 @@ msgstr "パスワード（確認）"
 msgid "Create"
 msgstr "新規登録"
 
-#: mojibake/templates/users/login.html:6
-#: mojibake/templates/users/login.html:51
+#: mojibake/templates/users/login.html:6 mojibake/templates/users/login.html:51
 #: mojibake/templates/users/loginmodal.html:5
 #: mojibake/templates/users/loginmodal.html:62
 msgid "Login"
@@ -177,10 +183,11 @@ msgstr "<a href=\"%(post_url)s\">title</a>のコメント"
 #: mojibake/templates/users/panel.html:23
 #, python-format
 msgid ""
-"<a href=\"mailto:%(email)s\"><strong>%(author)s</strong></a> said: %(body)s"
+"<a href=\"mailto:%(email)s\"><strong>%(author)s</strong></a> said: "
+"%(body)s"
 msgstr ""
-"<a href=\"mailto:%(email)s\"><strong>%(author)s</strong></a> が"
-"『 %(body)s 』 と言っていました。"
+"<a href=\"mailto:%(email)s\"><strong>%(author)s</strong></a> が『 %(body)s "
+"』 と言っていました。"
 
 #: mojibake/templates/users/panel.html:27
 msgid "Approve"
@@ -193,3 +200,4 @@ msgstr "削除する"
 #: mojibake/templates/users/panel.html:38
 msgid "Your posts"
 msgstr "あなたの掲示"
+

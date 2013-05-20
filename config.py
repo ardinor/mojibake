@@ -19,5 +19,5 @@ POSTS_PER_PAGE = 2  # 5
 
 LANGUAGES = {
     'en': 'English',
-    'ja': '日本語'
+    'ja': u'日本語'
 }

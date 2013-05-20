@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-03-08 11:40+1000\n"
+"POT-Creation-Date: 2013-05-20 21:37+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,52 +17,60 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: mojibake/views.py:60
+#: mojibake/views.py:65
 msgid "Comment posted!"
 msgstr ""
 
-#: mojibake/views.py:66
+#: mojibake/views.py:71
 msgid "Comment posted and awaiting administrator approval."
 msgstr ""
 
-#: mojibake/views.py:98
+#: mojibake/views.py:103
 msgid "Post updated!"
 msgstr ""
 
-#: mojibake/views.py:113
+#: mojibake/views.py:118
 msgid "Post deleted!"
 msgstr ""
 
-#: mojibake/views.py:116
+#: mojibake/views.py:121
 msgid "You do not have permission to delete this post."
 msgstr ""
 
-#: mojibake/views.py:137
+#: mojibake/views.py:142
 msgid "Post created!"
 msgstr ""
 
-#: mojibake/views.py:141 mojibake/templates/posts/edit.html:7
+#: mojibake/views.py:146 mojibake/templates/posts/edit.html:12
 msgid "New Post"
 msgstr ""
 
-#: mojibake/views.py:249 mojibake/views.py:252
+#: mojibake/views.py:262 mojibake/views.py:265
 msgid "Invalid login. Please try again."
 msgstr ""
 
-#: mojibake/views.py:255
+#: mojibake/views.py:268
 msgid "Sign In"
 msgstr ""
 
-#: mojibake/views.py:286
+#: mojibake/views.py:299
 msgid "Create account"
 msgstr ""
 
-#: mojibake/views.py:290
+#: mojibake/views.py:303
 msgid "Registration closed."
 msgstr ""
 
 #: mojibake/templates/404.html:7
 msgid "Page not found"
+msgstr ""
+
+#: mojibake/templates/500.html:7
+msgid "There was an unexpected internal error."
+msgstr ""
+
+#: mojibake/templates/500.html:8
+msgid "The administrator has been notified."
 msgstr ""
 
 #: mojibake/templates/footer.html:9
@@ -72,36 +80,37 @@ msgid ""
 "href=\"https://github.com/ardinor/mojibake\">%(mojibake)s</a>"
 msgstr ""
 
-#: mojibake/templates/posts/detail.html:8 mojibake/templates/posts/edit.html:35
+#: mojibake/templates/posts/detail.html:9 mojibake/templates/posts/edit.html:40
 #: mojibake/templates/posts/tags.html:6
 msgid "Categories"
 msgstr ""
 
-#: mojibake/templates/posts/detail.html:19 mojibake/templates/posts/edit.html:9
+#: mojibake/templates/posts/detail.html:20
+#: mojibake/templates/posts/edit.html:14
 msgid "Edit Post"
 msgstr ""
 
-#: mojibake/templates/posts/detail.html:19
+#: mojibake/templates/posts/detail.html:20
 msgid "Delete Post"
 msgstr ""
 
-#: mojibake/templates/posts/detail.html:23
+#: mojibake/templates/posts/detail.html:24
 msgid "Comments"
 msgstr ""
 
-#: mojibake/templates/posts/edit.html:14
+#: mojibake/templates/posts/edit.html:19
 msgid "Title: "
 msgstr ""
 
-#: mojibake/templates/posts/edit.html:21
+#: mojibake/templates/posts/edit.html:26
 msgid "Slug (url)"
 msgstr ""
 
-#: mojibake/templates/posts/edit.html:28
+#: mojibake/templates/posts/edit.html:33
 msgid "Body"
 msgstr ""
 
-#: mojibake/templates/posts/edit.html:43
+#: mojibake/templates/posts/edit.html:48
 msgid "Visible"
 msgstr ""
 

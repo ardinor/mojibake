@@ -1,6 +1,6 @@
 from flask import render_template, g, redirect, url_for, \
     flash, request, jsonify
-#from flask import session
+from flask import session
 from flask.ext.login import login_required, login_user, \
     logout_user, current_user
 from flask.ext.babel import gettext
@@ -231,10 +231,16 @@ def delete_comment():
 
 @app.route('/language/<language>')
 def change_language(language):
-    for key, value in LANGUAGES.iteritems():
-        if value == language:
-            g.user.locale = key
-            return redirect(request.args.get('next') or url_for('index'))
+    session['language'] = language
+    return redirect(request.args.get('next') or url_for('index'))
+    # for key, value in LANGUAGES.iteritems():
+    #     if key == language:
+    #         #g.user.locale = key
+    #         #user = getattr(g, 'user', None)
+    #         #user.locale = key
+    #         session['language'] = key
+    #         #print user.locale
+    #         return redirect(request.args.get('next') or url_for('index'))
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -265,15 +271,15 @@ def login():
             flash(gettext('Invalid login. Please try again.'), 'error')
             redirect(url_for('login'))
     return render_template('users/login.html',
-        title=gettext('Sign In'),
-        form=form)
+                           title=gettext('Sign In'),
+                           form=form)
 
 
 @app.route('/loginmodal')
 def login_modal():
     form = LoginForm()
     return render_template('users/loginmodal.html',
-        form=form)
+                           form=form)
 
 
 @app.route('/logout')
@@ -334,8 +340,11 @@ def internal_error(error):
 @app.before_request
 def before_request():
     g.user = current_user
-    if getattr(g, 'user.locale', None) is None:
-        g.user.locale = request.accept_languages.best_match(LANGUAGES.keys())
+    #if getattr(g.user, 'locale', None) is None:
+    if 'language' not in session:
+        print 'set language'
+        session['language'] = request.accept_languages.best_match(LANGUAGES.keys())
+        #g.user.locale = request.accept_languages.best_match(LANGUAGES.keys())
     if g.user.is_authenticated():
         g.user.last_seen = datetime.utcnow()
         g.user.save()
@@ -351,8 +360,11 @@ def load_user(id):
 
 @babel.localeselector
 def get_locale():
+    return session['language']
+    #return g.user.locale
+    #return 'ja'
     #user = getattr(g, 'user', None)
     #if user is not None:  # and getattr(g, 'user.locale', None):
     #    return user.locale
     #user.locale = request.accept_languages.best_match(LANGUAGES.keys())
-    return request.accept_languages.best_match(LANGUAGES.keys())
+    #return request.accept_languages.best_match(LANGUAGES.keys())

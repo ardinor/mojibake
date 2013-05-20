@@ -59,7 +59,7 @@
             </p>
             {% endif %}
             <p class="navbar-text pull-right">
-                <a href="/language/{{ available_languages(g.user.locale)[0] }}?next={{ active_page }}">{{ available_languages(g.user.locale)[0] }}</a>
+                <a href="/language/{{ available_languages(session['language'])[0] }}?next={{ active_page }}">{{ available_languages(session['language'])[1] }}</a>
             </p>
             <ul class="nav">
               <li class="">
