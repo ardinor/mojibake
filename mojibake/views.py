@@ -34,10 +34,10 @@ def index(page=1):
     posts = Post.objects(visible=True).paginate(page=page, per_page=POSTS_PER_PAGE)
     recent = Post.objects(visible=True).order_by('-created_at')[:5]
     return render_template('posts/list.html',
-        pagination=posts,
-        recent=recent,
-        taken=time.clock,
-        start=start)
+                           pagination=posts,
+                           recent=recent,
+                           taken=time.clock,
+                           start=start)
 
 
 @app.route('/post/<slug>', methods=['GET', 'POST'])
@@ -103,8 +103,8 @@ def edit_post(slug):
         flash(gettext('Post updated!'), 'success')
         return redirect(url_for('get_post', slug=slug))
     return render_template('posts/edit.html',
-        form=form,
-        title='Edit Post')
+                           form=form,
+                           title='Edit Post')
 
 
 @app.route('/post/<slug>/delete', methods=['GET'])
@@ -132,18 +132,18 @@ def new_post():
         for i in form.tags.data.split(','):
             tags_list.append(i.strip())
         post = Post(title=form.title.data,
-            slug=form.slug.data,
-            body=form.body.data,
-            visible=form.visible.data,
-            author=User.objects(id=user.id)[0],
-            tags=tags_list)  # tags not right I think
+                    slug=form.slug.data,
+                    body=form.body.data,
+                    visible=form.visible.data,
+                    author=User.objects(id=user.id)[0],
+                    tags=tags_list)  # tags not right I think
         post.save()
         user.posts.append(post)
         flash(gettext('Post created!'), 'success')
         return redirect(url_for('get_post', slug=post.slug))
     return render_template('posts/edit.html',
-        form=form,
-        title=gettext('New Post'))
+                           form=form,
+                           title=gettext('New Post'))
 
 
 @app.route('/tags')
@@ -152,13 +152,13 @@ def tags(tag=None):
     if tag is None:
         tags = Post.objects(visible=True).distinct('tags')
         return render_template('posts/tags.html',
-            tags=tags)
+                               tags=tags)
     else:
         posts = Post.objects(tags=tag, visible=POST_VISIBLE)
         return render_template('posts/tag_list.html',
-            posts=posts,
-            tag=tag,
-            title=tag)
+                               posts=posts,
+                               tag=tag,
+                               title=tag)
 
 
 @app.route('/profile')
@@ -167,13 +167,13 @@ def profile(username=None):
     if username is None:
         users = User.objects.all()
         return render_template('users/userlist.html',
-            users=users,
-            roles=USER_ROLES)
+                               users=users,
+                               roles=USER_ROLES)
     else:
         user = User.objects.get_or_404(username=username)
         return render_template('users/user.html',
-            user=user,
-            roles=USER_ROLES)
+                               user=user,
+                               roles=USER_ROLES)
 
 
 @app.route('/panel')
@@ -194,9 +194,9 @@ def panel(page=1):
     posts = Post.objects(author=author).paginate(page=page, per_page=POSTS_PER_PAGE)
     #comments = Comments.objects(post=author)
     return render_template('users/panel.html',
-        user=user,
-        pagination=posts,
-        comments=awaiting_comments)
+                           user=user,
+                           pagination=posts,
+                           comments=awaiting_comments)
 
 
 @app.route('/panel/comment/approve')
@@ -232,15 +232,10 @@ def delete_comment():
 @app.route('/language/<language>')
 def change_language(language):
     session['language'] = language
+    if g.user.is_authenticated():
+        g.user.locale = language
+        g.user.save()
     return redirect(request.args.get('next') or url_for('index'))
-    # for key, value in LANGUAGES.iteritems():
-    #     if key == language:
-    #         #g.user.locale = key
-    #         #user = getattr(g, 'user', None)
-    #         #user.locale = key
-    #         session['language'] = key
-    #         #print user.locale
-    #         return redirect(request.args.get('next') or url_for('index'))
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -294,19 +289,19 @@ def create():
         form = CreateUserForm()
         if form.validate_on_submit():
             new_user = User(username=form.username.data,
-                email=form.email.data,
-                password=pbkdf2_sha256.encrypt(form.password.data))
+                            email=form.email.data,
+                            password=pbkdf2_sha256.encrypt(form.password.data))
             new_user.save()
             return redirect(url_for('panel'))
             #else:
             #    flash('Invalid details. Please try again.')
             #    redirect(url_for('create'))
         return render_template('users/create.html',
-            title=gettext('Create account'),
-            form=form)
+                               title=gettext('Create account'),
+                               form=form)
     else:
         return render_template('users/closed.html',
-            title=gettext('Registration closed.'))
+                               title=gettext('Registration closed.'))
 
 
 #Atom feed
@@ -340,14 +335,12 @@ def internal_error(error):
 @app.before_request
 def before_request():
     g.user = current_user
-    #if getattr(g.user, 'locale', None) is None:
-    if 'language' not in session:
-        print 'set language'
-        session['language'] = request.accept_languages.best_match(LANGUAGES.keys())
-        #g.user.locale = request.accept_languages.best_match(LANGUAGES.keys())
     if g.user.is_authenticated():
+        session['language'] = g.user.locale
         g.user.last_seen = datetime.utcnow()
         g.user.save()
+    if 'language' not in session:
+        session['language'] = request.accept_languages.best_match(LANGUAGES.keys())
 
 
 @lm.user_loader
@@ -361,10 +354,3 @@ def load_user(id):
 @babel.localeselector
 def get_locale():
     return session['language']
-    #return g.user.locale
-    #return 'ja'
-    #user = getattr(g, 'user', None)
-    #if user is not None:  # and getattr(g, 'user.locale', None):
-    #    return user.locale
-    #user.locale = request.accept_languages.best_match(LANGUAGES.keys())
-    #return request.accept_languages.best_match(LANGUAGES.keys())

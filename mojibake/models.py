@@ -41,6 +41,7 @@ class User(db.Document):
     status = db.IntField(default=STATUS_ACTIVE)
     last_seen = db.DateTimeField()
     posts = db.ListField(db.ReferenceField('Post', dbref=True))
+    locale = db.StringField(max_length=5)
 
     def is_authenticated(self):
         return True
