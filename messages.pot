@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-05-20 21:37+0900\n"
+"POT-Creation-Date: 2013-05-21 22:34+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,19 +45,19 @@ msgstr ""
 msgid "New Post"
 msgstr ""
 
-#: mojibake/views.py:262 mojibake/views.py:265
+#: mojibake/views.py:268 mojibake/views.py:271
 msgid "Invalid login. Please try again."
 msgstr ""
 
-#: mojibake/views.py:268
+#: mojibake/views.py:274
 msgid "Sign In"
 msgstr ""
 
-#: mojibake/views.py:299
+#: mojibake/views.py:305
 msgid "Create account"
 msgstr ""
 
-#: mojibake/views.py:303
+#: mojibake/views.py:309
 msgid "Registration closed."
 msgstr ""
 
@@ -71,6 +71,22 @@ msgstr ""
 
 #: mojibake/templates/500.html:8
 msgid "The administrator has been notified."
+msgstr ""
+
+#: mojibake/templates/_macros.html:21
+msgid "User Panel"
+msgstr ""
+
+#: mojibake/templates/_macros.html:22
+msgid "Your Profile"
+msgstr ""
+
+#: mojibake/templates/_macros.html:23
+msgid "Home"
+msgstr ""
+
+#: mojibake/templates/_macros.html:24
+msgid "Logout"
 msgstr ""
 
 #: mojibake/templates/footer.html:9

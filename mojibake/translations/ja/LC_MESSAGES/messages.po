@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: temnoyume@gmail.com\n"
-"POT-Creation-Date: 2013-05-20 21:37+0900\n"
+"POT-Creation-Date: 2013-05-21 22:34+0900\n"
 "PO-Revision-Date: 2013-03-08 11:50+1000\n"
 "Last-Translator: ardinor <temnoyume@gmail.com>\n"
 "Language-Team: ja <LL@li.org>\n"
@@ -45,19 +45,19 @@ msgstr "記事を投稿しました！"
 msgid "New Post"
 msgstr "記事投稿"
 
-#: mojibake/views.py:262 mojibake/views.py:265
+#: mojibake/views.py:268 mojibake/views.py:271
 msgid "Invalid login. Please try again."
 msgstr "ユーザ名またはパスワードが違います。"
 
-#: mojibake/views.py:268
+#: mojibake/views.py:274
 msgid "Sign In"
 msgstr "ログイン"
 
-#: mojibake/views.py:299
+#: mojibake/views.py:305
 msgid "Create account"
 msgstr "新規登録"
 
-#: mojibake/views.py:303
+#: mojibake/views.py:309
 msgid "Registration closed."
 msgstr "登録は終えられました。"
 
@@ -72,6 +72,22 @@ msgstr ""
 #: mojibake/templates/500.html:8
 msgid "The administrator has been notified."
 msgstr ""
+
+#: mojibake/templates/_macros.html:21
+msgid "User Panel"
+msgstr "ユーザパネル"
+
+#: mojibake/templates/_macros.html:22
+msgid "Your Profile"
+msgstr "プロフィール"
+
+#: mojibake/templates/_macros.html:23
+msgid "Home"
+msgstr "ホーム"
+
+#: mojibake/templates/_macros.html:24
+msgid "Logout"
+msgstr "ログアウト"
 
 #: mojibake/templates/footer.html:9
 #, python-format

@@ -35,6 +35,8 @@ lm.login_view = 'login'
 
 app.jinja_env.globals['moment_js'] = moment_js
 app.jinja_env.globals['available_languages'] = available_languages
+app.jinja_env.globals
+
 
 babel = Babel(app)
 

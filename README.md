@@ -7,9 +7,10 @@ Written in Flask using MongoDB
 TO DO:
 - Search
 - Unit testing
-- Option to change language
+- If a user is logged in and they change language, save it
 - Photo galleries
-- Comments approved/deleted don't remove the title 'comments on <name>'
+- Code highlighting
+- Comments approved/deleted don't remove the title 'comments on <name>' in the Admin page
 
 
 REQUIREMENTS
