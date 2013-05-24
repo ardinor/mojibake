@@ -41,33 +41,36 @@ babel = Babel(app)
 assets = Environment(app)
 
 css = Bundle('vendor/css/bootstrap.min.css',
-    'vendor/css/bootstrap-responsive.css',
-    #'vendor/css/jquery.pnotify.default.css',
-    #'vendor/css/bootstrap-wysihtml5-0.0.2.css',
-    #'vendor/css/jquery.tagsinput.css',
-    'css/mojibake.css')
+             'vendor/css/bootstrap-responsive.css',
+             #'vendor/css/jquery.pnotify.default.css',
+             #'vendor/css/bootstrap-wysihtml5-0.0.2.css',
+             #'vendor/css/jquery.tagsinput.css',
+             'css/mojibake.css')
 assets.register('css_all', css)
 
 js = Bundle('vendor/js/bootstrap-scrollspy.js',
-    'vendor/js/jquery-1.9.0.js',
-    'vendor/js/bootstrap.min.js',
-    'vendor/js/moment.min.js',
-    'js/mojibake.js')
+            'vendor/js/jquery-1.9.0.js',
+            'vendor/js/bootstrap.min.js',
+            'vendor/js/moment.min.js',
+            'js/mojibake.js')
 assets.register('js_all', js)
 
 #The below js is only needed by logged in users, as such
 #there's no need to load it for people just visiting
 user_js = Bundle('vendor/js/wysihtml5-0.3.0_rc2.min.js',
-    'vendor/js/bootstrap-wysihtml5-0.0.2.min.js',
-    'vendor/js/jquery.tagsinput.min.js',
-    'vendor/js/jquery.pnotify.min.js',
-    'js/mojibake_user.js')
+                 'vendor/js/bootstrap-wysihtml5-0.0.2.min.js',
+                 'vendor/js/jquery.tagsinput.min.js',
+                 'vendor/js/jquery.pnotify.min.js',
+                 'js/mojibake_user.js')
 assets.register('user_js', user_js)
 
 user_css = Bundle('vendor/css/jquery.pnotify.default.css',
-    'vendor/css/bootstrap-wysihtml5-0.0.2.css',
-    'vendor/css/jquery.tagsinput.css')
+                  'vendor/css/bootstrap-wysihtml5-0.0.2.css',
+                  'vendor/css/jquery.tagsinput.css')
 assets.register('user_css', user_css)
+
+atom_icon = Bundle('img/feed.png')
+assets.register('atom_icon', atom_icon)
 
 if not DEBUG:
     import logging

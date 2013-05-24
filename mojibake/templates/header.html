@@ -46,6 +46,11 @@
           </button>
           <a class="brand" href="{{ url_for('index') }}">MØjibДĸe</a>
           <div class="nav-collapse collapse">
+            <p class="navbar-text pull-right">
+                {% assets "atom_icon" %}
+                <a href="/recent.atom"><img src="{{ ASSET_URL }}" alt="Atom Feed"/></a>
+                {% endassets %}
+            </p>
             {% if g.user.is_authenticated() %}
             <p class="navbar-text pull-right">
                 <a href="/logout">{{ _('Logout') }}</a>
