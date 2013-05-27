@@ -240,12 +240,6 @@ def change_language(language):
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    # if request.args.get('username') is not None:
-    #     username = request.args.get('username').strip()
-    #     password = request.args.get('password').strip()
-    #     form = LoginForm(username=username, password=password, remember_me=False)
-    #     if form.validate_on_submit():
-    #         return jsonify(response='success')
     if g.user is not None and g.user.is_authenticated():
         return redirect(url_for('panel'))
     form = LoginForm()

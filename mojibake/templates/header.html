@@ -29,8 +29,16 @@
     <link rel="stylesheet" href="{{ ASSET_URL }}" type="text/css">
     {% endassets %}
     {% endif %}
+    {% if session['language'] == 'ja' %}
+    {% assets "ja_js" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+    {% endif %}
     <script type=text/javascript>
       $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+      {% if session['language'] == 'ja' %}
+      moment.lang('ja');
+      {% endif %}
     </script>
     <link href="{{ url_for('recent_feed') }}" rel="alternate" title="Recent Posts" type="application/atom+xml">
     {% set active_page = active_page|default('index') -%}

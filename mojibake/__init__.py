@@ -51,7 +51,7 @@ assets.register('css_all', css)
 js = Bundle('vendor/js/bootstrap-scrollspy.js',
             'vendor/js/jquery-1.9.0.js',
             'vendor/js/bootstrap.min.js',
-            'vendor/js/moment.min.js',
+            'vendor/js/moment/moment.min.js',
             'js/mojibake.js')
 assets.register('js_all', js)
 
@@ -63,6 +63,9 @@ user_js = Bundle('vendor/js/wysihtml5-0.3.0_rc2.min.js',
                  'vendor/js/jquery.pnotify.min.js',
                  'js/mojibake_user.js')
 assets.register('user_js', user_js)
+
+ja_js = Bundle('vendor/js/moment/lang/ja.js')
+assets.register('ja_js', ja_js)
 
 user_css = Bundle('vendor/css/jquery.pnotify.default.css',
                   'vendor/css/bootstrap-wysihtml5-0.0.2.css',
