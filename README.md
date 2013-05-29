@@ -8,7 +8,7 @@ TO DO:
 - Search
 - Unit testing
 - Photo galleries
-- Code highlighting
+- Code highlighting - DONE
 - Comments approved/deleted don't remove the title 'comments on <name>' in the Admin page
 
 
@@ -29,9 +29,5 @@ External Libraries
 * [Pines Notify](http://pinesframework.org/pnotify/)
 
 * [Slate Bootstrap theme](http://bootswatch.com/slate/)
-
-* [wysihtml5](https://github.com/xing/wysihtml5)
-
-* [Bootstrap-wysihtml5](https://github.com/jhollingworth/bootstrap-wysihtml5)
 
 * [JQuery Tags Input](http://xoxco.com/projects/code/tagsinput/)
