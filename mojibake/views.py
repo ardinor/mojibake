@@ -98,7 +98,7 @@ def edit_post(slug):
         post.title = form.title.data
         post.slug = form.slug.data
         post.body = form.body.data
-        post.body_html = markdown.markdown(post.body)
+        post.body_html = markdown.markdown(post.body, extensions=['codehilite'])
         post.visible = form.visible.data
         post.tags = tags
         post.save()
@@ -136,6 +136,7 @@ def new_post():
         post = Post(title=form.title.data,
                     slug=form.slug.data,
                     body=form.body.data,
+                    body_html=markdown.markdown(form.body.data, extensions=['codehilite']),
                     visible=form.visible.data,
                     author=User.objects(id=user.id)[0],
                     tags=tags_list)  # tags not right I think

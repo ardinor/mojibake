@@ -98,24 +98,21 @@
       </div>
     </div>
     <div class="container-fluid">
-        {% with messages = get_flashed_messages(category_filter=['success']) %}
-        {% if messages %}
-        <div class="row-fluid">
-          <div class="span6 offset3">
-            <div class="alert alert-success" style="text-align:center;">
-                {% for message in messages %}
-                  {{ message }}
-                {% endfor %}
-            </div>
-          </div>
-        </div>
-        {% endif %}
-        {% endwith %}
+
         <div class="row-fluid">
           <div class="span2">
             {% block leftbar %}{% endblock %}
           </div>
           <div class="span6">
+            {% with messages = get_flashed_messages(category_filter=['success']) %}
+            {% if messages %}
+                <div class="alert alert-success" style="text-align:center;">
+                    {% for message in messages %}
+                      {{ message }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% endwith %}
             {% with messages = get_flashed_messages(category_filter=['error']) %}
             {% if messages %}
                 <div class="alert alert-error" style="text-align:center;">

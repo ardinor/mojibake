@@ -45,7 +45,8 @@ css = Bundle('vendor/css/bootstrap.min.css',
              #'vendor/css/jquery.pnotify.default.css',
              #'vendor/css/bootstrap-wysihtml5-0.0.2.css',
              #'vendor/css/jquery.tagsinput.css',
-             'css/mojibake.css')
+             'css/mojibake.css',
+             'css/zenburn.css')
 assets.register('css_all', css)
 
 js = Bundle('vendor/js/bootstrap-scrollspy.js',

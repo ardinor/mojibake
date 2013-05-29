@@ -49,9 +49,7 @@
         </div>
     </div>
     {% endfor %}
-    <div class="row-fluid">
-        <div class="span6 offset3">
-            {{ render_pagination(pagination=pagination, endpoint='panel') }}
-        </div>
-    </div>
+
+    {{ render_pagination(pagination=pagination, endpoint='panel') }}
+
 {% endblock %}
