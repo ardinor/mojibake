@@ -6,48 +6,44 @@
 {% endif %}
 
 {% block content %}
-<div class="row-fluid">
-    <div class="span6 offset3">
-        {% if title == 'New Post' %}
-        <h3>{{ _('New Post') }}</h3>
-        {% else %}
-        <h3>{{ _('Edit Post') }}</h3>
-        {% endif %}
-        <form action="" method="post" name="edit">
-            {{form.hidden_tag()}}
-            <p>
-                <p>{{ _('Title: ') }}</p>
-                <p>{{form.title}}</p>
-                {% for error in form.errors.title %}
-                <div class="alert alert-error">
-                    <p>[{{error}}]</p>
-                </div>
-                {% endfor %}
-                <p>{{ _('Slug (url)') }}</p>
-                <p>{{form.slug}}</p>
-                {% for error in form.errors.slug %}
-                <div class="alert alert-error">
-                    <p>[{{error}}]</p>
-                </div>
-                {% endfor %}
-                <p>{{ _('Body') }}</p>
-                <p>{{form.body}}</p>
-                {% for error in form.errors.body %}
-                <div class="alert alert-error">
-                    <p>[{{error}}]</p>
-                </div>
-                {% endfor %}
-                <p>{{ _('Categories') }}</p>
-                <p>{{form.tags}}</p>
-                {% for error in form.errors.tags %}
-                <div class="alert alert-error">
-                    <p>[{{error}}]</p>
-                </div>
-                {% endfor %}
-            </p>
-            <p>{{form.visible}} {{ _('Visible') }}</p>
-            <p><input class="btn btn-primary" type="submit" value="Submit"></p>
-        </form>
-    </div>
-</div>
+{% if title == 'New Post' %}
+<h3>{{ _('New Post') }}</h3>
+{% else %}
+<h3>{{ _('Edit Post') }}</h3>
+{% endif %}
+<form action="" method="post" name="edit">
+    {{form.hidden_tag()}}
+    <p>
+        <p>{{ _('Title: ') }}</p>
+        <p>{{form.title}}</p>
+        {% for error in form.errors.title %}
+        <div class="alert alert-error">
+            <p>[{{error}}]</p>
+        </div>
+        {% endfor %}
+        <p>{{ _('Slug (url)') }}</p>
+        <p>{{form.slug}}</p>
+        {% for error in form.errors.slug %}
+        <div class="alert alert-error">
+            <p>[{{error}}]</p>
+        </div>
+        {% endfor %}
+        <p>{{ _('Body') }}</p>
+        <p>{{form.body}}</p>
+        {% for error in form.errors.body %}
+        <div class="alert alert-error">
+            <p>[{{error}}]</p>
+        </div>
+        {% endfor %}
+        <p>{{ _('Categories') }}</p>
+        <p>{{form.tags}}</p>
+        {% for error in form.errors.tags %}
+        <div class="alert alert-error">
+            <p>[{{error}}]</p>
+        </div>
+        {% endfor %}
+    </p>
+    <p>{{form.visible}} {{ _('Visible') }}</p>
+    <p><input class="btn btn-primary" type="submit" value="Submit"></p>
+</form>
 {% endblock %}

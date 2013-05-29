@@ -73,6 +73,7 @@ class Post(db.Document):
     title = db.StringField(max_length=255, required=True)
     slug = db.StringField(max_length=255, required=True)
     body = db.StringField(required=True)
+    body_html = db.StringField()
     visible = db.BooleanField(default=POST_VISIBLE)
     author = db.ReferenceField(User, dbref=True, reverse_delete_rule=db.CASCADE)
     #edited at?

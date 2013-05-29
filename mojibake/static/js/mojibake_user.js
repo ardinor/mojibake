@@ -1,5 +1,5 @@
 $(function() {
-    $("#post_body").wysihtml5();
+    //$("#post_body").wysihtml5();
     $('#tags').tagsInput();
     //$("#tags_list").tags({
     //

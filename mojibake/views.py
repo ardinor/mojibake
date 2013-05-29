@@ -10,6 +10,7 @@ from cgi import escape
 from urlparse import urljoin
 from werkzeug.contrib.atom import AtomFeed
 import time
+import markdown
 
 from mojibake import app, lm, babel  # db,
 from models import User, Post, Comment
@@ -97,6 +98,7 @@ def edit_post(slug):
         post.title = form.title.data
         post.slug = form.slug.data
         post.body = form.body.data
+        post.body_html = markdown.markdown(post.body)
         post.visible = form.visible.data
         post.tags = tags
         post.save()
