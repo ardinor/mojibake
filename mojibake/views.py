@@ -4,6 +4,7 @@ from flask import session
 from flask.ext.login import login_required, login_user, \
     logout_user, current_user
 from flask.ext.babel import gettext
+from flask.ext.uploads import UploadNotAllowed
 from passlib.hash import pbkdf2_sha256
 from datetime import datetime
 from cgi import escape
@@ -12,7 +13,7 @@ from werkzeug.contrib.atom import AtomFeed
 import time
 import markdown
 
-from mojibake import app, lm, babel  # db,
+from mojibake import app, lm, babel, photos  # db,
 from models import User, Post, Comment
 from models import POST_VISIBLE, ROLE_ADMIN, USER_ROLES, COMMENT_APPROVED
 from forms import LoginForm, CreateUserForm, PostForm, \
@@ -317,6 +318,25 @@ def recent_feed():
                  updated=post.created_at,
                  published=post.created_at)
     return feed.get_response()
+
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload():
+    if request.method == 'POST' and 'img' in request.files:
+        try:
+            uploaded_files = request.files.getlist("img")
+            for i in uploaded_files:
+                #folder is the slug of the post
+                #change the name of the img? name=""
+                #If it ends with a dot, the file's extension will be appended to the end
+                filename = photos.save(i, folder='g')
+                url = photos.url(filename)
+                #append filename to post.images list
+            flash("Photo saved.")
+        except UploadNotAllowed:
+            flash("Upload not allowed")
+        return redirect(url_for('index'))
+    return render_template('posts/upload.html')
 
 
 @app.errorhandler(404)

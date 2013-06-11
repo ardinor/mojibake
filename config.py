@@ -24,3 +24,7 @@ LANGUAGES = {
 
 #Set this better
 UPLOADED_PHOTOS_DEST = 'C:/git/mojibake/mojibake/static/img/upload'
+#UPLOADED_FILES_URL = need to set up the url
+
+UPLOAD_FOLDER = 'C:/git/mojibake/mojibake/static/img/upload'
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif', '.svg'])
