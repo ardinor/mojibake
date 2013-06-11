@@ -10,6 +10,7 @@ TO DO:
 - Photo galleries
 - Code highlighting - DONE
 - Comments approved/deleted don't remove the title 'comments on <name>' in the Admin page
+- Truncating the posts makes the code numbering go funny?
 
 
 REQUIREMENTS

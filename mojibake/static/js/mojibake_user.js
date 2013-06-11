@@ -50,5 +50,4 @@ $(function() {
         window.setTimeout(function() {hideChildren(gparent)}, 300);
         });
     });
-
 });

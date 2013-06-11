@@ -35,6 +35,12 @@
             <p>[{{error}}]</p>
         </div>
         {% endfor %}
+        <input id="realfile" type="file" multiple="" style="display:none"/>
+        <p>{{ _('Upload Pictures') }}
+        <div >
+            <input id="picture-cover" class="input" type="text">
+            <a class="button" onclick="$('input[id=realfile]').click();">Browse</a>
+        </div>
         <p>{{ _('Categories') }}</p>
         <p>{{form.tags}}</p>
         {% for error in form.errors.tags %}

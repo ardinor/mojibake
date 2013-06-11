@@ -17,6 +17,8 @@ from flask.ext.mongoengine import MongoEngine
 from flask.ext.login import LoginManager
 from flask.ext.assets import Environment, Bundle
 from flask.ext.babel import Babel
+from flask.ext.uploads import configure_uploads, IMAGES, \
+                              UploadSet, patch_request_class
 
 from moment_js import moment_js
 from available_languages import available_languages
@@ -75,6 +77,10 @@ assets.register('user_css', user_css)
 
 atom_icon = Bundle('img/feed.png')
 assets.register('atom_icon', atom_icon)
+
+photos = UploadSet('photos', IMAGES)
+configure_uploads(app, photos)
+patch_request_class(app, 8 * 1024 * 1024)
 
 if not DEBUG:
     import logging

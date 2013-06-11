@@ -80,6 +80,7 @@ class Post(db.Document):
     #tags = db.ListField(db.EmbeddedDocumentField('Tag'))
     tags = db.ListField(db.StringField())
     comments = db.ListField(db.EmbeddedDocumentField('Comment'))
+    images = db.ListField(db.StringField())
     #comments = db.ListField(db.ReferenceField('Comment', dbref=True))
 
     def get_absolute_url(self):
@@ -88,14 +89,14 @@ class Post(db.Document):
     def get_visible_comments(self):
         visible_comments = []
         for i in self.comments:
-            if i.approved == True:
+            if i.approved is True:
                 visible_comments.append(i)
         return visible_comments
 
     def get_comments_awaiting(self):
         awaiting_comments = []
         for i in self.comments:
-            if i.approved == False:
+            if i.approved is False:
                 awaiting_comments.append(i)
         return awaiting_comments
 

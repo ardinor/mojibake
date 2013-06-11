@@ -40,13 +40,9 @@
     </div>
     {% for post in pagination.items %}
     <div class="row-fluid">
-        <div class="span6">
-            <h4><a href="{{ url_for('get_post', slug = post.slug) }}">{{ post.title }}</a></h4>
-            <p>
-              {{ post.author.username }} | {{moment_js(post.created_at).format('LLLL')}}
-            </p>
-            <p>{{ post.body|truncate(300)|safe }}</p>
-        </div>
+        <h4><a href="{{ url_for('get_post', slug = post.slug) }}">{{ post.title }}</a></h4>
+        <p>Created: {{moment_js(post.created_at).format('LLLL')}}</p>
+        <p>Comments: </p>
     </div>
     {% endfor %}
 

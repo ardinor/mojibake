@@ -21,3 +21,6 @@ LANGUAGES = {
     'en': 'English',
     'ja': u'日本語'
 }
+
+#Set this better
+UPLOADED_PHOTOS_DEST = 'C:/git/mojibake/mojibake/static/img/upload'
