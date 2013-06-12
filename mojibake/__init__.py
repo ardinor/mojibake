@@ -18,7 +18,7 @@ from flask.ext.login import LoginManager
 from flask.ext.assets import Environment, Bundle
 from flask.ext.babel import Babel
 from flask.ext.uploads import configure_uploads, IMAGES, \
-                              UploadSet, patch_request_class
+    UploadSet, patch_request_class
 
 from moment_js import moment_js
 from available_languages import available_languages
@@ -27,7 +27,6 @@ from config import VERSION, DEBUG
 
 app = Flask(__name__)
 app.config.from_object('config')
-
 
 db = MongoEngine(app)
 
