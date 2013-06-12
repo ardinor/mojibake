@@ -32,7 +32,7 @@
         <p>{{error}}</p>
     </div>
     {% endfor %}
-    <p><input class="btn btn-primary" type="submit" value="Submit"></p>
+    <p><input class="btn btn-primary" type="submit" value="{{ _('Submit') }}"></p>
 </form>
 {% else %}
 <form action="" method="post" name="edit">
@@ -59,7 +59,7 @@
         <p>{{error}}</p>
     </div>
     {% endfor %}
-    <p><input class="btn btn-primary" type="submit" value="Submit"></p>
+    <p><input class="btn btn-primary" type="submit" value="{{ _('Submit') }}"></p>
 </form>
 {% endif %}
 {% if post.get_visible_comments() %}

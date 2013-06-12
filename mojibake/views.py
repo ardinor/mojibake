@@ -7,23 +7,22 @@ from flask.ext.babel import gettext
 from flask.ext.uploads import UploadNotAllowed
 from passlib.hash import pbkdf2_sha256
 from datetime import datetime
-from cgi import escape
 from urlparse import urljoin
 from werkzeug.contrib.atom import AtomFeed
 import time
-import markdown
 
 from mojibake import app, lm, babel, photos  # db,
-from models import User, Post, Comment
-from models import POST_VISIBLE, ROLE_ADMIN, USER_ROLES, COMMENT_APPROVED
-from forms import LoginForm, CreateUserForm, PostForm, \
-    CommentForm, UserCommentForm
+from models import User, Post
+from models import POST_VISIBLE, USER_ROLES
+from forms import LoginForm, CreateUserForm
 from config import POSTS_PER_PAGE
 from config import REGISTRATION, REGISTRATION_OPEN
 from config import LANGUAGES
 from posts import posts
+from admin import admin
 
 app.register_blueprint(posts)
+app.register_blueprint(admin)
 
 
 def make_external(url):
@@ -43,9 +42,6 @@ def index(page=1):
                            recent=recent,
                            taken=time.clock,
                            start=start)
-
-
-
 
 
 @app.route('/tags')
@@ -76,59 +72,6 @@ def profile(username=None):
         return render_template('users/user.html',
                                user=user,
                                roles=USER_ROLES)
-
-
-@app.route('/panel')
-@app.route('/panel/<int:page>')
-@login_required
-def panel(page=1):
-    user = g.user
-    #can't just use user as it is type <class 'werkzeug.local.LocalProxy'>
-    #better way of doing this?
-    awaiting_comments = {}
-    post_awaiting_comments = []
-    #paginate comments? what if there's 50 comments?
-    author = User.objects(id=user.id)[0]
-    for i in Post.objects(author=author).filter(comments__approved=False):
-        post_awaiting_comments = post_awaiting_comments + i.get_comments_awaiting()
-        awaiting_comments[i] = post_awaiting_comments
-        post_awaiting_comments = []
-    posts = Post.objects(author=author).paginate(page=page, per_page=POSTS_PER_PAGE)
-    #comments = Comments.objects(post=author)
-    return render_template('users/panel.html',
-                           user=user,
-                           pagination=posts,
-                           comments=awaiting_comments)
-
-
-@app.route('/panel/comment/approve')
-def approve_comment():
-    rqst_ref = request.args.get('ref')
-    post = Post.objects.filter(comments___id=rqst_ref)[0]
-    if post:
-        for i in post.comments:
-            if i._id == rqst_ref:
-                i.approved = True
-                post.save()
-                result = True
-    else:
-        result = False
-    return jsonify(result=result)
-
-
-@app.route('/panel/comment/delete')
-def delete_comment():
-    rqst_ref = request.args.get('ref')
-    post = Post.objects.filter(comments___id=rqst_ref)[0]
-    if post:
-        for i in post.comments:
-            if i._id == rqst_ref:
-                post.comments.remove(i)
-                post.save()
-                result = True
-    else:
-        result = False
-    return jsonify(result=result)
 
 
 @app.route('/language/<language>')
@@ -238,12 +181,12 @@ def upload():
 
 
 @app.errorhandler(404)
-def internal_error(error):
+def internal_error400(error):
     return render_template('404.html'), 404
 
 
 @app.errorhandler(500)
-def internal_error(error):
+def internal_error500(error):
     return render_template('500.html'), 500
 
 

@@ -83,10 +83,10 @@
               </li>
               {% if g.user.is_authenticated() %}
               <li class="">
-                <a href="{{ url_for('profile', username = g.user.username) }}">{{ _('Your Profile') }}</a>
+                <a href="{{ url_for('admin.admin_panel', username = g.user.username) }}">{{ _('Your Profile') }}</a>
               </li>
               <li class="">
-                <a href="{{ url_for('panel') }}">{{ _('User Panel') }}</a>
+                <a href="{{ url_for('admin.admin_panel') }}">{{ _('User Panel') }}</a>
               </li>
               <li class="">
                 <a href="{{ url_for('posts.new_post') }}">{{ _('New Post') }}</a>
