@@ -10,7 +10,7 @@ from models import User, Post, Comment
 from forms import PostForm, CommentForm, UserCommentForm
 from models import ROLE_ADMIN, COMMENT_APPROVED
 
-posts = Blueprint('posts', __name__, template_folder='templates')
+posts = Blueprint('posts', __name__, template_folder='templates/posts')
 
 
 @posts.route('/post/<slug>', methods=['GET', 'POST'])
@@ -46,7 +46,7 @@ def get_post(slug):
         post.save()
         #flash('Comment posted and awaiting administrator approval.', 'success')
         return redirect(url_for('get_post', slug=slug))
-    return render_template('posts/detail.html',
+    return render_template('detail.html',
                            post=post,
                            slug=slug,
                            form=form,
@@ -76,7 +76,7 @@ def edit_post(slug):
         post.save()
         flash(gettext('Post updated!'), 'success')
         return redirect(url_for('get_post', slug=slug))
-    return render_template('posts/edit.html',
+    return render_template('edit.html',
                            form=form,
                            title='Edit Post')
 
@@ -116,6 +116,6 @@ def new_post():
         user.posts.append(post)
         flash(gettext('Post created!'), 'success')
         return redirect(url_for('get_post', slug=post.slug))
-    return render_template('posts/edit.html',
+    return render_template('edit.html',
                            form=form,
                            title=gettext('New Post'))
