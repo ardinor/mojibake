@@ -25,7 +25,7 @@ $(function() {
                 history: false
             });
         parent.hide("fast");
-        window.setTimeout(function() {hideChildren(gparent)}, 300);
+        window.setTimeout(function() {hideChildren(gparent);}, 300);
         });
     });
     $("#delete").click(function() {
@@ -47,7 +47,7 @@ $(function() {
                 history: false
             });
         parent.hide("fast");
-        window.setTimeout(function() {hideChildren(gparent)}, 300);
+        window.setTimeout(function() {hideChildren(gparent);}, 300);
         });
     });
 });
