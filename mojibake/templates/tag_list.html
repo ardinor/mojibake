@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Defestri - {{ tag.name }}{% endblock %}
+
+{% block content %}
+<section class="tags">
+    <div class="container">
+
+        <header>
+            <h2>Posts tagged '{{ tag.name}}'</h2>
+        </header>
+
+{% for i in tag.posts %}
+<p>
+    <h3><a href="{{ url_for('page', path='/{}'.format(i.path)) }}">{{ i.title }}</a></h3>Posted on: {{moment_js(i.date).format('LLLL')}}
+</p>
+{% endfor %}
+
+    </div>
+</section>
+{% endblock %}

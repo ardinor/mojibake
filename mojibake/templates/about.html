@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Defestri - About{% endblock %}
+
+{% block content %}
+<section id="about">
+    <div class="container">
+
+        <header>
+            <h2>About</h2>
+        </header>
+
+        <p>One day, same day, something will be here. But not today.</p>
+
+        <p>My contact details are over <a href="{{ url_for('contact') }}">here</a> and my Github is located <a href="https://github.com/ardinor">here</a>.</p>
+
+        <h3>This site</h3>
+        <p>Built using <a href="https://github.com/ardinor/mojibake-flat">MØjibДĸe-Flat</a> and <a href="http://flask.pocoo.org">Flask</a>. HTML5 template from the folks at <a href="http://html5up.net/prologue/">html5up.net</a></p>
+
+    </div>
+</section>
+{% endblock %}

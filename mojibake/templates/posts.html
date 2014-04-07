@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% from '_macros.html' import render_pagination, render_post %}
+
+{% block title %}Defestri - Posts{% endblock %}
+
+{% block content %}
+{% for page in pages %}
+
+    {{ render_post(page) }}
+
+    {% if pages[-1] != page %}
+        <div class="post-divider"></div>
+    {% endif %}
+
+{% endfor %}
+
+{% if pagination_item.has_next or pagination_item.has_prev %}
+{{ render_pagination(pagination=pagination_item, endpoint='posts') }}
+{% endif %}
+
+{% endblock %}

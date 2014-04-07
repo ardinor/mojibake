@@ -1,19 +1,17 @@
 # -*- coding: utf-8 -*-
+import os
+
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 VERSION = 1.0
 
 DEBUG = True
 
-REGISTRATION_OPEN = 1
-REGISTRATION_CLOSED = 0
-
-REGISTRATION = REGISTRATION_OPEN
-
 CSRF_ENABLED = True
 
 SECRET_KEY = 'SecretKeyGoesHere'
 
-MONGODB_DB = 'mojibake'
+
 
 POSTS_PER_PAGE = 2  # 5
 

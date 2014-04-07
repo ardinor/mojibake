@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% from '_macros.html' import render_post %}
+
+{% block title %}Defestri{% endblock %}
+
+{% block content %}
+{% for post in posts.items %}
+
+    {{ render_post(post)}}
+
+    {% if posts.items[-1] != post %}
+        <div class="post-divider"></div>
+    {% endif %}
+
+{% endfor %}
+
+{% if posts.has_next %}
+<nav class="pagination">
+    <a class="button" href="{{ url_for('posts', page=2) }}">Show more &raquo;</a>
+</nav>
+{% endif %}
+
+{% endblock %}

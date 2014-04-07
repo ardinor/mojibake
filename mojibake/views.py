@@ -1,214 +1,206 @@
-from flask import render_template, g, redirect, url_for, \
-    flash, request, jsonify
-from flask import session
-from flask.ext.login import login_required, login_user, \
-    logout_user, current_user
-from flask.ext.babel import gettext
-from flask.ext.uploads import UploadNotAllowed
-from passlib.hash import pbkdf2_sha256
-from datetime import datetime
+# -*- coding: utf-8 -*-
+
 from urlparse import urljoin
+from flask import render_template, abort, request, make_response, url_for
+from flask_flatpages import pygments_style_defs
 from werkzeug.contrib.atom import AtomFeed
-import time
+import datetime
 
-from mojibake import app, lm, babel, photos  # db,
-from models import User, Post
-from models import POST_VISIBLE, USER_ROLES
-from forms import LoginForm, CreateUserForm
-from config import POSTS_PER_PAGE
-from config import REGISTRATION, REGISTRATION_OPEN
-from config import LANGUAGES
-from posts import posts
-from admin import admin
-
-app.register_blueprint(posts)
-app.register_blueprint(admin)
-
+from app import app, pages, freezer, db
+from models import Post, Tag, Category
+from settings import POSTS_PER_PAGE
 
 def make_external(url):
     return urljoin(request.url_root, url)
 
-
 @app.route('/')
-@app.route('/index')
-@app.route('/index/<int:page>')
-def index(page=1):
-    start = time.clock()
-    #displays posts even if they are not visible at the moment...
-    posts = Post.objects(visible=True).paginate(page=page, per_page=POSTS_PER_PAGE)
-    recent = Post.objects(visible=True).order_by('-created_at')[:5]
-    return render_template('posts/list.html',
-                           pagination=posts,
-                           recent=recent,
-                           taken=time.clock,
-                           start=start)
+def home():
 
+    posts = Post.query.order_by(Post.date.desc()).paginate(int(page), POSTS_PER_PAGE, False)
 
-@app.route('/tags')
-@app.route('/tags/<tag>')
-def tags(tag=None):
-    if tag is None:
-        tags = Post.objects(visible=True).distinct('tags')
-        return render_template('posts/tags.html',
-                               tags=tags)
+    if len(sorted_posts) > POSTS_PER_PAGE:
+        show_more = True
     else:
-        posts = Post.objects(tags=tag, visible=POST_VISIBLE)
-        return render_template('posts/tag_list.html',
-                               posts=posts,
-                               tag=tag,
-                               title=tag)
+        show_more = False
+    return render_template('index.html', posts=posts)
 
 
-@app.route('/profile')
-@app.route('/profile/<username>')
-def profile(username=None):
-    if username is None:
-        users = User.objects.all()
-        return render_template('users/userlist.html',
-                               users=users,
-                               roles=USER_ROLES)
+@app.route('/about/')
+def about():
+    return render_template('about.html')
+
+@app.route('/contact/')
+def contact():
+    return render_template('contact.html')
+
+@app.route('/archive/')
+def archive():
+    posts = Post.query.all()
+    years = list(set([post.date.year for post in posts]))
+
+    return render_template('archive.html', years=years)
+
+@app.route('/archive/<year>/')
+def archive_year(year):
+    year_posts = Post.query.filter("strftime('%Y', date) = :year"). \
+            params(year=year).order_by('-date').all()
+
+    if year_posts:
+        return render_template('archive_year.html', year=year,
+            posts=year_posts)
     else:
-        user = User.objects.get_or_404(username=username)
-        return render_template('users/user.html',
-                               user=user,
-                               roles=USER_ROLES)
+        abort(404)
 
+@app.route('/tags/')
+def tags():
+    tags = Tag.query.order_by('name').all()
 
-@app.route('/language/<language>')
-def change_language(language):
-    session['language'] = language
-    if g.user.is_authenticated():
-        g.user.locale = language
-        g.user.save()
-    return redirect(request.args.get('next') or url_for('index'))
+    return render_template('tags.html', tags=tags)
 
+@app.route('/bans/')
+def bans():
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if g.user is not None and g.user.is_authenticated():
-        return redirect(url_for('panel'))
-    form = LoginForm()
-    if form.validate_on_submit():
-        logging_in_user = User.objects(username=form.username.data)
-        if logging_in_user:
-            logging_in_user = logging_in_user[0]
-            if pbkdf2_sha256.verify(form.password.data, logging_in_user.password):
-                remember_me = False
-                if form.remember_me.data:
-                    remember_me = True
-                login_user(logging_in_user, remember=remember_me)
-                return redirect(request.args.get('next') or url_for('panel'))
-            else:
-                flash(gettext('Invalid login. Please try again.'), 'error')
-                redirect(url_for('login'))
-        else:
-            flash(gettext('Invalid login. Please try again.'), 'error')
-            redirect(url_for('login'))
-    return render_template('users/login.html',
-                           title=gettext('Sign In'),
-                           form=form)
+    #just fill it with filler information, this template is made elsewhere
 
+    breakin_attempts = {datetime.datetime(2013, 12, 2, 20, 31, 46): ('95.183.198.46', 'nagios'),
+                        datetime.datetime(2013, 12, 5, 20, 56, 46): ('95.183.198.46', 'postgres'),
+                        datetime.datetime(2013, 12, 8, 21, 04, 46): ('95.183.198.46', 'igor'),
+                        datetime.datetime(2013, 12, 12, 22, 31, 46): ('211.141.113.237', 'ftpuser'),
+                        datetime.datetime(2013, 12, 25, 22, 48, 46): ('195.60.215.30', 'oracle')
+                        }
 
-@app.route('/loginmodal')
-def login_modal():
-    form = LoginForm()
-    return render_template('users/loginmodal.html',
-                           form=form)
+    bans = {datetime.datetime(2013, 12, 9, 21, 05, 46): '95.183.198.46',
+            datetime.datetime(2013, 12, 2, 21, 10, 46): '211.141.113.237',
+            datetime.datetime(2013, 12, 12, 22, 50, 46): '195.60.215.30'}
 
+    ips = {'95.183.198.46': {'country':u'日本', 'region': u'大坂'},
+           '211.141.113.237': {'country':'Test', 'region': 'Test Region'},
+           '195.60.215.30': {'country':'Test', 'region': 'Test Region'}}
 
-@app.route('/logout')
-def logout():
-    logout_user()
-    return redirect(url_for('index'))
+    displayed_time = 'CET'
+    time_offset = '+1'
 
+    sorted_bans = sorted(bans.keys())
+    sorted_breakins = sorted(breakin_attempts.keys())
 
-@app.route('/create', methods=['GET', 'POST'])
-def create():
-    if REGISTRATION == REGISTRATION_OPEN:
-        form = CreateUserForm()
-        if form.validate_on_submit():
-            new_user = User(username=form.username.data,
-                            email=form.email.data,
-                            password=pbkdf2_sha256.encrypt(form.password.data))
-            new_user.save()
-            return redirect(url_for('panel'))
-            #else:
-            #    flash('Invalid details. Please try again.')
-            #    redirect(url_for('create'))
-        return render_template('users/create.html',
-                               title=gettext('Create account'),
-                               form=form)
+    last_month = datetime.datetime.now().replace(day=1) - datetime.timedelta(days=1)
+
+    return render_template('bans.html', displayed_time=displayed_time,
+        time_offset=time_offset, last_month=last_month,
+        breakin_attempts=breakin_attempts,
+        bans=bans, ips=ips, sorted_bans=sorted_bans,
+        sorted_breakins=sorted_breakins)
+
+@app.route('/tags/<name>/')
+def tag_name(name):
+    tag = Tag.query.filter_by(name=name).first()
+
+    if tag:
+        return render_template('tag_list.html', tag=tag)
     else:
-        return render_template('users/closed.html',
-                               title=gettext('Registration closed.'))
+        abort(404)
+
+@app.route('/categories/')
+def categories():
+    categories = Category.query.order_by('name').all()
+
+    return render_template('categories.html', categories=categories)
+
+@app.route('/categories/<name>/')
+def category(name):
+    category = Category.query.filter_by(name=name).first()
+
+    if category:
+        return render_template('category.html', category=category)
+    else:
+        abort(404)
+
+#@app.route('/posts/')
+#def posts():
+    #posts = [page for page in pages if 'date' in page.meta]
+    # Sort pages by date
+    #sorted_posts = sorted(posts, reverse=True,
+    #    key=lambda page: page.meta['date'])
+    #return render_template('posts.html', pages=sorted_posts[:POSTS_PER_PAGE])
+
+@app.route('/posts/')
+@app.route('/posts/<page>/')
+def posts(page=1):
+    #maybe we should parse the body into the DB too....
+    #this is kind of messy
+    posts = Post.query.order_by(Post.date.desc()).paginate(int(page), POSTS_PER_PAGE, False)
+    found_pages = []
+    for i in posts.items:
+        found_pages.append(pages.get(i.path))
+    if found_pages:
+        return render_template('posts.html', pages=found_pages,
+            pagination_item=posts)
+    else:
+        abort(404)
 
 
-#Atom feed
-#Based on this snippet http://flask.pocoo.org/snippets/10/
+@app.route('/post/<slug>')
+def page(slug):
+    # `path` is the filename of a page, without the file extension
+    # e.g. "first-post"
+    #page = pages.get_or_404(path)
+    #template = page.meta.get('template', 'post.html')
+    post = Post.query.filter_by(slug=slug).first()
+    if post:
+        return render_template('post.html', post=post)
+    else:
+        abort(404)
+
+@app.route('/pygments.css')
+def pygments_css():
+    return pygments_style_defs('autumn'), 200, {'Content-Type': 'text/css'}
+
 @app.route('/recent.atom')
 def recent_feed():
     feed = AtomFeed('Recent Articles',
-                    feed_url=request.url,
-                    url=request.url_root)
-    recent_posts = Post.objects(visible=True).order_by('-created_at')[:15]
-    for post in recent_posts:
-        feed.add(post.title, unicode(post.body),
+                    feed_url=request.url, url=request.url_root)
+    posts = [page for page in pages if 'date' in page.meta]
+    sorted_posts = sorted(posts, reverse=True,
+        key=lambda page: page.meta['date'])[:10]
+    for post in sorted_posts:
+        feed.add(post.meta['title'], unicode(post.body[:500] + '\n\n....'),
                  content_type='html',
-                 author=post.author.username,
-                 url=make_external(post.slug),
-                 updated=post.created_at,
-                 published=post.created_at)
-    return feed.get_response()
+                 author='Jordan',
+                 url=make_external(post.path),
+                 updated=page.meta['date'])
+    return feed.get_response(), 200, {'Content-Type': 'application/atom+xml; charset=utf-8'}
 
+#Adapted from http://flask.pocoo.org/snippets/108/
+@app.route('/sitemap.xml', methods=['GET'])
+def sitemap():
+    map_pages = []
+    ten_days_ago=(datetime.datetime.now() - datetime.timedelta(days=10)).date().isoformat()
+    for rule in app.url_map.iter_rules():
+      if "GET" in rule.methods and len(rule.arguments) == 0:
+          map_pages.append([rule.rule,ten_days_ago])
 
-@app.route('/upload', methods=['GET', 'POST'])
-def upload():
-    if request.method == 'POST' and 'img' in request.files:
-        try:
-            uploaded_files = request.files.getlist("img")
-            for i in uploaded_files:
-                #folder is the slug of the post
-                #change the name of the img? name=""
-                #If it ends with a dot, the file's extension will be appended to the end
-                filename = photos.save(i, folder='g')
-                url = photos.url(filename)
-                #append filename to post.images list
-            flash("Photo saved.")
-        except UploadNotAllowed:
-            flash("Upload not allowed")
-        return redirect(url_for('index'))
-    return render_template('posts/upload.html')
+    tags = Tag.query.all()
+    for tag in tags:
+        url = url_for('tag_name', name=tag.name)
+        map_pages.append([url, ten_days_ago])
+
+    categories = Category.query.all()
+    for category in categories:
+        url = url_for('category', name=category.name)
+        map_pages.append([url, ten_days_ago])
+
+    posts = Post.query.all()
+    for post in posts:
+        url = '/' + post.path + '/'
+        map_pages.append([url, ten_days_ago])
+
+    sitemap_xml = render_template('sitemap_template.xml', pages=map_pages)
+    response= make_response(sitemap_xml)
+    response.headers["Content-Type"] = "application/xml"
+
+    return response
 
 
 @app.errorhandler(404)
-def internal_error400(error):
+def internal_error(error):
     return render_template('404.html'), 404
-
-
-@app.errorhandler(500)
-def internal_error500(error):
-    return render_template('500.html'), 500
-
-
-@app.before_request
-def before_request():
-    g.user = current_user
-    if g.user.is_authenticated():
-        session['language'] = g.user.locale
-        g.user.last_seen = datetime.utcnow()
-        g.user.save()
-    if 'language' not in session:
-        session['language'] = request.accept_languages.best_match(LANGUAGES.keys())
-
-
-@lm.user_loader
-def load_user(id):
-    #return User.objects.get(id)
-    #the above returned MultipleObjectsReturned: 2 items returned, instead of 1
-    #the below right or messy?
-    return User.objects(id=id)[0]
-
-
-@babel.localeselector
-def get_locale():
-    return session['language']

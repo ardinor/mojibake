@@ -1,24 +1,51 @@
 {% macro render_pagination(pagination, endpoint) %}
-  <div class="pagination pagination-centered">
-    <ul>
-    {%- for page in pagination.iter_pages() %}
-      {% if page %}
+<nav class="pagination">
 
+    {% if pagination.has_prev %}
+        <a class="button" href="{{ url_for(endpoint, page=pagination.prev_num) }}">&laquo;</a>
+    {% else %}
+        <a class="button disabled" href="#">&laquo;</a>
+    {% endif %}
+
+    {% for page in pagination.iter_pages() %}
+      {% if page %}
         {% if page != pagination.page %}
-          <li><a href="{{ url_for(endpoint, page=page) }}">{{ page }}</a></li>
+          <a class="button" href="{{ url_for(endpoint, page=page) }}">{{ page }}</a>
         {% else %}
-          <li><span><strong>{{ page }}</strong></span></li>
+            <a class="button active" href="">{{ page }}</a>
         {% endif %}
-      {% else %}
-        <span class=ellipsis>…</span>
       {% endif %}
-    {%- endfor %}
-    </ul>
-  </div>
+    {% endfor %}
+
+    {% if pagination.has_next %}
+        <a class="button" href="{{ url_for(endpoint, page=pagination.next_num) }}">&raquo;</a>
+    {% else %}
+        <a class="button disabled" href="">&raquo;</a>
+    {% endif %}
+
+</nav>
 {% endmacro %}
 
-<!-- It doesn't pick these up out of header.html for some reason.... -->
-{{ _('User Panel') }}
-{{ _('Your Profile') }}
-{{ _('Home') }}
-{{ _('Logout') }}
+{% macro render_post(post) %}
+<section id="posts" class="one">
+    <div class="container">
+
+        <header>
+            <a href="{{ url_for('post', slug=post.slug) }}"><h2 style="display: inline;">{{ post.title }}</h2></a>
+
+
+        <span style="padding-top: 10px;" class="pull-right">Posted under: <a href="{{ url_for('category', name=post.category) }}">{{ post.category }}</a></span>
+
+        </header>
+
+        Posted by <a href="{{ url_for('about') }}">Jordan</a> on {{moment_js(post.date).format('LLLL')}} - <em>{{moment_js(post.date).fromNow()}}</em>
+
+        <span class="pull-right">Tagged: {% for i in post.tags %}<a href="{{ url_for('tag_name', name=i) }}">{{ i }}</a>{% if i != post.tags[-1] %}, {% endif %}{% endfor%}</span>
+
+
+        <p>{{ post.body }}</p>
+
+
+    </div>
+</section>
+{% endmacro %}
