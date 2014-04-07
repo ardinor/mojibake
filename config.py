@@ -9,16 +9,13 @@ DEBUG = True
 
 CSRF_ENABLED = True
 
-SECRET_KEY = 'SecretKeyGoesHere'
+
 
 
 
 POSTS_PER_PAGE = 2  # 5
 
-LANGUAGES = {
-    'en': 'English',
-    'ja': u'日本語'
-}
+
 
 #Set this better
 UPLOADED_PHOTOS_DEST = 'C:/git/mojibake/mojibake/static/img/upload'

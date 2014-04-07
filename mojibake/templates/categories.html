@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
-{% block title %}Defestri - Categories{% endblock %}
+{% block title %}Defestri - {{ _('Categories') }}{% endblock %}
 
 {% block content %}
 <section class="categories">
     <div class="container">
 
         <header>
-            <h2>Categories</h2>
+            <h2>{{ _('Categories') }}</h2>
         </header>
 
             {% for i in categories %}

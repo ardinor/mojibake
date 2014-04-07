@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
-{% block title %}Defestri - Archive{% endblock %}
+{% block title %}Defestri - {{ _('Archive') }}{% endblock %}
 
 {% block content %}
 <section class="archive">
     <div class="container">
 
         <header>
-            <h2>Archive</h2>
+            <h2>{{ _('Archive') }}</h2>
         </header>
 
         {% for year in years %}

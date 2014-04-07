@@ -2,7 +2,7 @@
 
 from urllib.parse import urljoin
 from flask import render_template, abort, request, make_response, url_for, g, \
-    session
+    session, redirect
 #from flask_flatpages import pygments_style_defs
 from werkzeug.contrib.atom import AtomFeed
 import datetime
@@ -146,9 +146,15 @@ def post(slug):
         abort(404)
 
 
-@app.route('/pygments.css')
-def pygments_css():
-    return pygments_style_defs('autumn'), 200, {'Content-Type': 'text/css'}
+@app.route('/language/<language>')
+def change_language(language):
+    session['language'] = language
+    return redirect(request.args.get('next') or url_for('index'))
+
+
+# @app.route('/pygments.css')
+# def pygments_css():
+#     return pygments_style_defs('autumn'), 200, {'Content-Type': 'text/css'}
 
 
 @app.route('/recent.atom')

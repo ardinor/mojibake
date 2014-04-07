@@ -21,16 +21,7 @@ $(function() {
     }
     if (window.location.pathname.indexOf("categories") !== -1)
     {
-        if (window.location.pathname === '/categories/')
-        {
-            $('#categories_tab').addClass('active');
-        }
-        else
-        {
-            var tabName = window.location.pathname.replace('/categories/', '');
-            tabName = '#' + tabName.replace('/', '') + '_tab';
-            $(tabName).addClass('active');
-        }
+        $('#categories_tab').addClass('active');
     }
     if (window.location.pathname.indexOf("contact") !== -1)
     {

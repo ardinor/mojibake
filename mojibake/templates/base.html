@@ -15,7 +15,6 @@
         {% assets "new_css" %}
         <link rel="stylesheet" href="{{ ASSET_URL }}" type="text/css">
         {% endassets %}
-        <link rel="stylesheet" href="{{ url_for('pygments_css') }}" type="text/css">
         {% assets "ie9_css" %}
         <!--[if lte IE 9]><link rel="stylesheet" href="{{ ASSET_URL }}" /><![endif]-->
         {% endassets %}
@@ -41,21 +40,13 @@
 
                         <nav id="nav">
                             <ul>
-                                <li><a href="{{ url_for('home') }}" id="home_tab"><span class="fa fa-home">Home</span></a></li>
-                                <li><a href="{{ url_for('about') }}" id="about_tab"><span class="fa fa-info">About</span></a></li>
-                                <li><a href="{{ url_for('posts') }}" id="posts_tab"><span class="fa fa-comment-o">Posts</span></a></li>
+                                <li><a href="{{ url_for('home') }}" id="home_tab"><span class="fa fa-home">{{ gettext('Home') }}</span></a></li>
+                                <li><a href="{{ url_for('about') }}" id="about_tab"><span class="fa fa-info">{{ _('About') }}</span></a></li>
+                                <li><a href="{{ url_for('posts') }}" id="posts_tab"><span class="fa fa-comment-o">{{ _('Posts') }}</span></a></li>
+                                <li><a href="{{ url_for('categories') }}" id="categories_tab"><span class="fa fa-list"><h4>{{ _('Categories') }}</h4></span></a></li>
                                 <li><a href="{{ url_for('tags') }}" id="tags_tab"><span class="fa fa-tags">Tags</span></a></li>
-                                <li><a href="{{ url_for('archive') }}" id="archive_tab"><span class="fa fa-calendar">Archive</span></a></li>
-                            </ul>
-                            <ul>
-
-                                <li><a href="{{ url_for('categories') }}" id="categories_tab"><span class="fa fa-level-down"><h4>Post Categories</h4></span></a></li>
-                                {% for i in glbl_categories %}
-                                <li>
-                                  <a href="{{ url_for('category', name=i.name) }}" id="{{ i.name }}_tab"><span class="fa fa-folder-open">{{ i.name }}</span></a>
-                                </li>
-                                {% endfor %}
-
+                                <li><a href="{{ url_for('archive') }}" id="archive_tab"><span class="fa fa-calendar">{{ _('Archive') }}</span></a></li>
+                                <li><a href="/language/{{ available_languages(session['language'])[0] }}?next={{ request.path }}" class="special"><span class="fa fa-flag-o">{{ available_languages(session['language'])[1] }}</span></a></li>
                             </ul>
                         </nav>
 
@@ -64,9 +55,9 @@
                 <div class="bottom">
 
                         <ul class="icons">
-                            <li><a href="https://github.com/ardinor" class="fa fa-github solo"><span>Github</span></a></li>
-                            <li id="contact_tab"><a href="{{ url_for('contact') }}" class="fa fa-envelope solo"><span>Email</span></a></li>
-                            <li><a href="{{ url_for('recent_feed') }}" class="fa fa-rss solo"><span>RSS</span></a></li>
+                            <li><a href="https://github.com/ardinor" class="fa fa-github solo"><span>{{ _('Github') }}</span></a></li>
+                            <li id="contact_tab"><a href="{{ url_for('contact') }}" class="fa fa-envelope solo"><span>{{ _('Email') }}</span></a></li>
+                            <li><a href="{{ url_for('recent_feed') }}" class="fa fa-rss solo"><span>{{ _('RSS') }}</span></a></li>
                         </ul>
 
                 </div>

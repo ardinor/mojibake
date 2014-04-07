@@ -7,6 +7,7 @@ from flask.ext.babel import Babel
 
 
 from mojibake.moment_js import moment_js
+from mojibake.available_languages import available_languages
 #from manage_db import ManageMetaDB
 
 app = Flask(__name__)
@@ -21,9 +22,7 @@ from mojibake import models
 #manager.add_command('manage_db', ManageMetaDB(db, pages, models))
 
 app.jinja_env.globals['moment_js'] = moment_js
-
-# This causes an error if you try and run it before the DB is initialised...
-app.jinja_env.globals['glbl_categories'] = models.Category.query.order_by('name').all()
+app.jinja_env.globals['available_languages'] = available_languages
 
 assets = Environment(app)
 app.config['ASSETS_DEBUG'] = True
@@ -62,3 +61,6 @@ assets.register('ie9_css', ie9_css)
 #Moment needs to be in the document head apparently
 moment = Bundle('js/moment.min.js')
 assets.register('js_moment', moment)
+
+ja_js = Bundle('vendor/js/moment/lang/ja.js')
+assets.register('ja_js', ja_js)
