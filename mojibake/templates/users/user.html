@@ -1,8 +1,0 @@
-{% extends "header.html" %}
-
-{% block content %}
-<h2>{{ user.username }}</h2>
-<p>
-{{ roles[user.role] }} | {{ _('Last seen') }}: {{moment_js(user.last_seen).fromNow()}}
-</p>
-{% endblock %}

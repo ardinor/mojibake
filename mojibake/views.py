@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from urlparse import urljoin
+from urllib.parse import urljoin
 from flask import render_template, abort, request, make_response, url_for
-from flask_flatpages import pygments_style_defs
+#from flask_flatpages import pygments_style_defs
 from werkzeug.contrib.atom import AtomFeed
 import datetime
 
-from app import app, pages, freezer, db
-from models import Post, Tag, Category
-from settings import POSTS_PER_PAGE
+from mojibake.app import app, db
+from mojibake.models import Post, Tag, Category
+from mojibake.settings import POSTS_PER_PAGE
 
 def make_external(url):
     return urljoin(request.url_root, url)
@@ -16,12 +16,12 @@ def make_external(url):
 @app.route('/')
 def home():
 
-    posts = Post.query.order_by(Post.date.desc()).paginate(int(page), POSTS_PER_PAGE, False)
+    posts = Post.query.order_by(Post.date.desc()).paginate(1, POSTS_PER_PAGE, False)
 
-    if len(sorted_posts) > POSTS_PER_PAGE:
-        show_more = True
-    else:
-        show_more = False
+    #if len(sorted_posts) > POSTS_PER_PAGE:
+    #    show_more = True
+    #else:
+    #    show_more = False
     return render_template('index.html', posts=posts)
 
 
@@ -64,12 +64,12 @@ def bans():
 
     breakin_attempts = {datetime.datetime(2013, 12, 2, 20, 31, 46): ('95.183.198.46', 'nagios'),
                         datetime.datetime(2013, 12, 5, 20, 56, 46): ('95.183.198.46', 'postgres'),
-                        datetime.datetime(2013, 12, 8, 21, 04, 46): ('95.183.198.46', 'igor'),
+                        datetime.datetime(2013, 12, 8, 21, 4, 46): ('95.183.198.46', 'igor'),
                         datetime.datetime(2013, 12, 12, 22, 31, 46): ('211.141.113.237', 'ftpuser'),
                         datetime.datetime(2013, 12, 25, 22, 48, 46): ('195.60.215.30', 'oracle')
                         }
 
-    bans = {datetime.datetime(2013, 12, 9, 21, 05, 46): '95.183.198.46',
+    bans = {datetime.datetime(2013, 12, 9, 21, 5, 46): '95.183.198.46',
             datetime.datetime(2013, 12, 2, 21, 10, 46): '211.141.113.237',
             datetime.datetime(2013, 12, 12, 22, 50, 46): '195.60.215.30'}
 
@@ -115,37 +115,23 @@ def category(name):
     else:
         abort(404)
 
-#@app.route('/posts/')
-#def posts():
-    #posts = [page for page in pages if 'date' in page.meta]
-    # Sort pages by date
-    #sorted_posts = sorted(posts, reverse=True,
-    #    key=lambda page: page.meta['date'])
-    #return render_template('posts.html', pages=sorted_posts[:POSTS_PER_PAGE])
-
 @app.route('/posts/')
 @app.route('/posts/<page>/')
 def posts(page=1):
-    #maybe we should parse the body into the DB too....
-    #this is kind of messy
+
     posts = Post.query.order_by(Post.date.desc()).paginate(int(page), POSTS_PER_PAGE, False)
-    found_pages = []
-    for i in posts.items:
-        found_pages.append(pages.get(i.path))
-    if found_pages:
-        return render_template('posts.html', pages=found_pages,
-            pagination_item=posts)
+
+    if posts:
+        return render_template('posts.html', posts=posts)
     else:
         abort(404)
 
 
 @app.route('/post/<slug>')
-def page(slug):
-    # `path` is the filename of a page, without the file extension
-    # e.g. "first-post"
-    #page = pages.get_or_404(path)
-    #template = page.meta.get('template', 'post.html')
+def post(slug):
+
     post = Post.query.filter_by(slug=slug).first()
+
     if post:
         return render_template('post.html', post=post)
     else:

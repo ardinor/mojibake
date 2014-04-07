@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
 
 '''Entry point to all things to avoid circular imports.'''
-from app import app, db, models
-from views import *
+from mojibake.app import app, db, models
+from mojibake.views import *

@@ -1,4 +1,4 @@
-from app import db
+from mojibake.app import db
 
 from datetime import datetime
 
@@ -16,8 +16,11 @@ class Category(db.Model):
     #posts = db.relationship('Post', backref='category',
     #                            lazy='dynamic')
 
+    def __init__(self, name):
+        self.name = name
+
     def __repr__(self):
-        return '<Category {}>'.format(self.name)
+        return '<Category: {}>'.format(self.name)
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -44,13 +47,16 @@ class Post(db.Model):
 
 
     def __repr__(self):
-        return '<Post {}>'.format(self.title)
+        return '<Post: {}>'.format(self.title)
 
 class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
 
+    def __init__(self, name):
+        self.name = name
+
     def __repr__(self):
-        return '<Tag {}>'.format(self.name)
+        return '<Tag: {}>'.format(self.name)
 
 

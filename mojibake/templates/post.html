@@ -2,10 +2,10 @@
 
 {% from '_macros.html' import render_post %}
 
-{% block title %}{{ page.meta.title }}{% endblock %}
+{% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
 
-    {{ render_post(page) }}
+    {{ render_post(post) }}
 
 {% endblock %}

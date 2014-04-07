@@ -5,18 +5,18 @@
 {% block title %}Defestri - Posts{% endblock %}
 
 {% block content %}
-{% for page in pages %}
+{% for post in posts.items %}
 
-    {{ render_post(page) }}
+    {{ render_post(post) }}
 
-    {% if pages[-1] != page %}
+    {% if posts[-1] != post %}
         <div class="post-divider"></div>
     {% endif %}
 
 {% endfor %}
 
-{% if pagination_item.has_next or pagination_item.has_prev %}
-{{ render_pagination(pagination=pagination_item, endpoint='posts') }}
+{% if posts.has_next or posts.has_prev %}
+{{ render_pagination(pagination=posts, endpoint='posts') }}
 {% endif %}
 
 {% endblock %}

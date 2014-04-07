@@ -8,7 +8,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 #from flask.ext.script import Manager
 #from flask.ext.migrate import Migrate, MigrateCommand
 
-from moment_js import moment_js
+from mojibake.moment_js import moment_js
 #from manage_db import ManageMetaDB
 
 app = Flask(__name__)
@@ -27,7 +27,7 @@ from mojibake import models
 app.jinja_env.globals['moment_js'] = moment_js
 
 # This causes an error if you try and run it before the DB is initialised...
-app.jinja_env.globals['glbl_categories'] = models.Category.query.order_by('name').all()
+#app.jinja_env.globals['glbl_categories'] = models.Category.query.order_by('name').all()
 
 assets = Environment(app)
 app.config['ASSETS_DEBUG'] = True
