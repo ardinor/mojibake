@@ -12,7 +12,7 @@
 
             {% for i in category.posts %}
             <p>
-                <h3><a href="{{ url_for('page', path='/{}'.format(i.path)) }}">{{ i.title }}</a></h3>Posted on: {{moment_js(i.date).format('LLLL')}}
+                <h3><a href="{{ url_for('post', slug=i.slug) }}">{{ i.title }}</a></h3>Posted on: {{moment_js(i.date).format('LLLL')}}
             </p>
             {% endfor %}
 

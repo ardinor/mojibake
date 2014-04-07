@@ -1,27 +1,26 @@
 # -*- coding: utf-8 -*-
 
 from urllib.parse import urljoin
-from flask import render_template, abort, request, make_response, url_for
+from flask import render_template, abort, request, make_response, url_for, g, \
+    session
 #from flask_flatpages import pygments_style_defs
 from werkzeug.contrib.atom import AtomFeed
 import datetime
 
-from mojibake.app import app, db
+from mojibake.app import app, db, babel
 from mojibake.models import Post, Tag, Category
-from mojibake.settings import POSTS_PER_PAGE
+from mojibake.settings import POSTS_PER_PAGE, LANGUAGES
+
 
 def make_external(url):
     return urljoin(request.url_root, url)
+
 
 @app.route('/')
 def home():
 
     posts = Post.query.order_by(Post.date.desc()).paginate(1, POSTS_PER_PAGE, False)
 
-    #if len(sorted_posts) > POSTS_PER_PAGE:
-    #    show_more = True
-    #else:
-    #    show_more = False
     return render_template('index.html', posts=posts)
 
 
@@ -29,9 +28,11 @@ def home():
 def about():
     return render_template('about.html')
 
+
 @app.route('/contact/')
 def contact():
     return render_template('contact.html')
+
 
 @app.route('/archive/')
 def archive():
@@ -39,6 +40,7 @@ def archive():
     years = list(set([post.date.year for post in posts]))
 
     return render_template('archive.html', years=years)
+
 
 @app.route('/archive/<year>/')
 def archive_year(year):
@@ -51,11 +53,13 @@ def archive_year(year):
     else:
         abort(404)
 
+
 @app.route('/tags/')
 def tags():
     tags = Tag.query.order_by('name').all()
 
     return render_template('tags.html', tags=tags)
+
 
 @app.route('/bans/')
 def bans():
@@ -91,6 +95,7 @@ def bans():
         bans=bans, ips=ips, sorted_bans=sorted_bans,
         sorted_breakins=sorted_breakins)
 
+
 @app.route('/tags/<name>/')
 def tag_name(name):
     tag = Tag.query.filter_by(name=name).first()
@@ -100,11 +105,13 @@ def tag_name(name):
     else:
         abort(404)
 
+
 @app.route('/categories/')
 def categories():
     categories = Category.query.order_by('name').all()
 
     return render_template('categories.html', categories=categories)
+
 
 @app.route('/categories/<name>/')
 def category(name):
@@ -114,6 +121,7 @@ def category(name):
         return render_template('category.html', category=category)
     else:
         abort(404)
+
 
 @app.route('/posts/')
 @app.route('/posts/<page>/')
@@ -137,9 +145,11 @@ def post(slug):
     else:
         abort(404)
 
+
 @app.route('/pygments.css')
 def pygments_css():
     return pygments_style_defs('autumn'), 200, {'Content-Type': 'text/css'}
+
 
 @app.route('/recent.atom')
 def recent_feed():
@@ -155,6 +165,7 @@ def recent_feed():
                  url=make_external(post.path),
                  updated=page.meta['date'])
     return feed.get_response(), 200, {'Content-Type': 'application/atom+xml; charset=utf-8'}
+
 
 #Adapted from http://flask.pocoo.org/snippets/108/
 @app.route('/sitemap.xml', methods=['GET'])
@@ -177,16 +188,34 @@ def sitemap():
 
     posts = Post.query.all()
     for post in posts:
-        url = '/' + post.path + '/'
+        url = url_for('post', slug=post.slug)
         map_pages.append([url, ten_days_ago])
 
     sitemap_xml = render_template('sitemap_template.xml', pages=map_pages)
-    response= make_response(sitemap_xml)
+    response = make_response(sitemap_xml)
     response.headers["Content-Type"] = "application/xml"
 
     return response
 
 
 @app.errorhandler(404)
-def internal_error(error):
+def internal_error400(error):
     return render_template('404.html'), 404
+
+
+@app.errorhandler(500)
+def internal_error500(error):
+    return render_template('500.html'), 500
+
+
+@app.before_request
+def before_request():
+    g.user = getattr(g, 'user', None)
+
+    if 'language' not in session:
+        session['language'] = request.accept_languages.best_match(LANGUAGES.keys())
+
+
+@babel.localeselector
+def get_locale():
+    return session['language']

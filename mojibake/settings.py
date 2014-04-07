@@ -18,3 +18,10 @@ FLATPAGES_ROOT = os.path.join(APP_DIR, 'content')
 FLATPAGES_EXTENSION = '.md'
 
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(APP_DIR, 'app.db')
+
+LANGUAGES = {
+    'en': 'English',
+    'ja': u'日本語'
+}
+
+SECRET_KEY = 'SecretKeyGoesHere'

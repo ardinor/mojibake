@@ -1,22 +1,18 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask
-#from flask_flatpages import FlatPages
-#from flask_frozen import Freezer
 from flask.ext.assets import Environment, Bundle
 from flask.ext.sqlalchemy import SQLAlchemy
-#from flask.ext.script import Manager
-#from flask.ext.migrate import Migrate, MigrateCommand
+from flask.ext.babel import Babel
+
 
 from mojibake.moment_js import moment_js
 #from manage_db import ManageMetaDB
 
 app = Flask(__name__)
 app.config.from_pyfile('settings.py')
-#pages = FlatPages(app)
-#freezer = Freezer(app)
 db = SQLAlchemy(app)
-#migrate = Migrate(app, db)
+babel = Babel(app)
 
 from mojibake import models
 
@@ -27,7 +23,7 @@ from mojibake import models
 app.jinja_env.globals['moment_js'] = moment_js
 
 # This causes an error if you try and run it before the DB is initialised...
-#app.jinja_env.globals['glbl_categories'] = models.Category.query.order_by('name').all()
+app.jinja_env.globals['glbl_categories'] = models.Category.query.order_by('name').all()
 
 assets = Environment(app)
 app.config['ASSETS_DEBUG'] = True

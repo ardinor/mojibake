@@ -12,7 +12,7 @@
 
             {% for i in posts %}
             <p>
-                <a href="{{ url_for('page', path=i.path)  }}"><h3>{{ i.title }}</h3></a>{{moment_js(i.date).format('LLLL')}}<span class="pull-right">{% for j in i.categories %}<a href="{{ url_for('category_name', name=j.name) }}">{{ j.name }}</a>{% if j != i.categories[-1] %}, {% endif %}{% endfor %}</span>
+                <a href="{{ url_for('post', slug=i.slug)  }}"><h3>{{ i.title }}</h3></a>{{moment_js(i.date).format('LLLL')}}
             </p>
             {% endfor %}
 
