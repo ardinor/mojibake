@@ -15,7 +15,7 @@
         <p>My contact details are over <a href="{{ url_for('contact') }}">here</a> and my Github is located <a href="https://github.com/ardinor">here</a></p>
 
         <h3>{{ _('This site') }}</h3>
-        <p>{{ _('Built using <a href="https://github.com/ardinor/mojibake">MØjibДĸe</a> and <a href="http://flask.pocoo.org">Flask</a>. HTML5 template from the folks at <a href="http://html5up.net/prologue/">html5up.net</a>') }}</p>
+        <p>{% trans flask='Flask', mojibake='MØjibДĸe', html5='html5up.net' %}Built using <a href="http://flask.pocoo.org/">{{ flask }}</a> and <a href="https://github.com/ardinor/mojibake">{{ mojibake }}</a>. HTML5 template from the folks at <a href="http://html5up.net/prologue/">{{  html5 }}</a>{% endtrans %}</p>
 
     </div>
 </section>

@@ -16,5 +16,8 @@ See requirements.txt
 
 
 pybabel extract -F babel.cfg -o messages.pot mojibake
+
+pybabel init -i messages.pot -d mojibake/translations -l ja
+ or
 pybabel update -i messages.pot -d mojibake/translations
 pybabel compile -d mojibake/translations
