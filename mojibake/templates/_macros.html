@@ -34,17 +34,22 @@
             <a href="{{ url_for('post', slug=post.slug) }}"><h2 style="display: inline;">{{ post.title }}</h2></a>
 
 
-        <span style="padding-top: 10px;" class="pull-right">{{ _('Posted under')}}: <a href="{{ url_for('category', name=post.category.name) }}">{{ post.category.name }}</a></span>
+        <span style="padding-top: 10px;" class="pull-right">{{ _('Posted under')}}: <a href="{{ url_for('category', name=post.category.name) }}">{% if session['language'] == 'ja' and post.category.name_ja %}{{ post.category.name_ja }}{% else %}{{ post.category.name }}{% endif %}</a></span>
 
         </header>
         {% autoescape false %}
         {{ _('Posted by %(name)s on', name='<a href="{}">Jordan</a>'.format(url_for('about'))) }} {{moment_js(post.date).format('LLLL')}} - <em>{{moment_js(post.date).fromNow()}}</em>
         {% endautoescape %}
 
-        <span class="pull-right">{{ _('Tagged')}}: {% for i in post.tags %}<a href="{{ url_for('tag_name', name=i.name) }}">{{ i.name }}</a>{% if i != post.tags[-1] %}, {% endif %}{% endfor%}</span>
+        {% if post.tags %}
+        <span class="pull-right">{{ _('Tagged')}}: {% for i in post.tags %}<a href="{{ url_for('tag_name', name=i.name) }}">{% if session['language'] == 'ja' and i.name_ja %}{{ i.name_ja }}{% else %}{{ i.name }}{% endif %}</a>{% if i != post.tags[-1] %}, {% endif %}{% endfor%}</span>
+        {% endif %}
 
-
-        <p>{{ post.body }}</p>
+        {% if session['language'] == 'ja' and post.body_ja_html %}
+        <p>{{ post.body_ja_html|safe }}</p>
+        {% else %}
+        <p>{{ post.body_html|safe }}</p>
+        {% endif %}
 
 
     </div>

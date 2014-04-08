@@ -37,20 +37,21 @@ app.config['ASSETS_DEBUG'] = True
 #             filters='rjsmin', output='gen/packed.js')
 # assets.register('js_all', js)
 
-new_js = Bundle('js/jquery.min.js',
+js = Bundle('js/jquery.min.js',
                 'js/skel.min.js',
                 'js/skel-panels.min.js',
                 'js/init.js',
                 'js/mojibake.js')
-assets.register('new_js', new_js)
+assets.register('js', js)
 
 ie8_shiv = Bundle('js/html5shiv.js')
 assets.register('ie8_shiv', ie8_shiv)
 
-new_css = Bundle('css/skel-noscript.css',
-                 'css/style.css',
-                 'css/style-wide.css')
-assets.register('new_css', new_css)
+css = Bundle('css/skel-noscript.css',
+             'css/style.css',
+             'css/style-wide.css',
+             'css/zenburn.css')
+assets.register('css', css)
 
 ie8_css = Bundle('css/ie8.css')
 assets.register('ie8_css', ie8_css)

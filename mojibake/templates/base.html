@@ -17,7 +17,7 @@
         <script type="text/javascript" src="{{ ASSET_URL }}"></script>
         {% endassets %}
         {% endif %}
-        {% assets "new_css" %}
+        {% assets "css" %}
         <link rel="stylesheet" href="{{ ASSET_URL }}" type="text/css">
         {% endassets %}
         {% assets "ie9_css" %}
@@ -79,7 +79,7 @@
                 {% block content %}{% endblock %}
 
             </div>
-    {% assets "new_js" %}
+    {% assets "js" %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
     {% endassets %}
     {% if not config.DEBUG %}
