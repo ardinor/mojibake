@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-04-08 12:32+1000\n"
+"POT-Creation-Date: 2014-04-08 14:43+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,7 +31,12 @@ msgstr ""
 msgid "Posted under"
 msgstr ""
 
-#: mojibake/templates/_macros.html:43
+#: mojibake/templates/_macros.html:41
+#, python-format
+msgid "Posted by %(name)s on"
+msgstr ""
+
+#: mojibake/templates/_macros.html:44
 msgid "Tagged"
 msgstr ""
 
@@ -44,11 +49,18 @@ msgstr ""
 msgid "One day, same day, something will be here. But not today."
 msgstr ""
 
-#: mojibake/templates/about.html:17
+#: mojibake/templates/about.html:16
+#, python-format
+msgid ""
+"My contact details are over %(contact)shere%(endc)s and my Github is "
+"located %(github)shere%(endg)s."
+msgstr ""
+
+#: mojibake/templates/about.html:19
 msgid "This site"
 msgstr ""
 
-#: mojibake/templates/about.html:18
+#: mojibake/templates/about.html:20
 #, python-format
 msgid ""
 "Built using <a href=\"http://flask.pocoo.org/\">%(flask)s</a> and <a "
@@ -62,8 +74,10 @@ msgstr ""
 msgid "Archive"
 msgstr ""
 
+#: mojibake/templates/archive_year.html:3
 #: mojibake/templates/archive_year.html:10
-msgid "Archive for %(year)"
+#, python-format
+msgid "Archive for %(year)s"
 msgstr ""
 
 #: mojibake/templates/base.html:53
@@ -96,6 +110,15 @@ msgstr ""
 msgid "Atom"
 msgstr ""
 
+#: mojibake/templates/categories.html:14 mojibake/templates/tags.html:14
+msgid "posts"
+msgstr ""
+
+#: mojibake/templates/category.html:10
+#, python-format
+msgid "Posts under \"%(category)s\""
+msgstr ""
+
 #: mojibake/templates/contact.html:3 mojibake/templates/contact.html:10
 msgid "Contact"
 msgstr ""
@@ -106,5 +129,10 @@ msgstr ""
 
 #: mojibake/templates/contact.html:17
 msgid "My PGP Public Key is included below."
+msgstr ""
+
+#: mojibake/templates/tag_list.html:10
+#, python-format
+msgid "Posts tagged \"%(tag)s\""
 msgstr ""
 

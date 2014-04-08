@@ -11,7 +11,7 @@
         </header>
 
             {% for i in categories %}
-            <h3><a href="{{ url_for('category', name=i.name) }}">{{ i.name }} ({{ i.posts.count() }} posts)</a></h3>
+            <h3><a href="{{ url_for('category', name=i.name) }}">{{ i.name }} ({{ i.posts.count() }} {{ _('posts')}})</a></h3>
             {% endfor %}
 
     </div>

@@ -3,7 +3,7 @@ $(function() {
     {
         $('#home_tab').addClass('active');
     }
-    if (window.location.pathname.indexOf("posts") !== -1)
+    if (window.location.pathname.indexOf("posts") !== -1 || window.location.pathname.indexOf("post") !== -1 )
     {
         $('#posts_tab').addClass('active');
     }

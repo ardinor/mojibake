@@ -37,8 +37,9 @@
         <span style="padding-top: 10px;" class="pull-right">{{ _('Posted under')}}: <a href="{{ url_for('category', name=post.category.name) }}">{{ post.category.name }}</a></span>
 
         </header>
-
-        Posted by <a href="{{ url_for('about') }}">Jordan</a> on {{moment_js(post.date).format('LLLL')}} - <em>{{moment_js(post.date).fromNow()}}</em>
+        {% autoescape false %}
+        {{ _('Posted by %(name)s on', name='<a href="{}">Jordan</a>'.format(url_for('about'))) }} {{moment_js(post.date).format('LLLL')}} - <em>{{moment_js(post.date).fromNow()}}</em>
+        {% endautoescape %}
 
         <span class="pull-right">{{ _('Tagged')}}: {% for i in post.tags %}<a href="{{ url_for('tag_name', name=i.name) }}">{{ i.name }}</a>{% if i != post.tags[-1] %}, {% endif %}{% endfor%}</span>
 
