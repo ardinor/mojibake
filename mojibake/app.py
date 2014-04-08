@@ -62,5 +62,5 @@ assets.register('ie9_css', ie9_css)
 moment = Bundle('js/moment.min.js')
 assets.register('js_moment', moment)
 
-ja_js = Bundle('vendor/js/moment/lang/ja.js')
+ja_js = Bundle('js/moment-ja.js')
 assets.register('ja_js', ja_js)

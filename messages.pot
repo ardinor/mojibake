@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-04-08 12:19+1000\n"
+"POT-Creation-Date: 2014-04-08 12:32+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,8 +27,16 @@ msgid ""
 "notified."
 msgstr ""
 
+#: mojibake/templates/_macros.html:37
+msgid "Posted under"
+msgstr ""
+
+#: mojibake/templates/_macros.html:43
+msgid "Tagged"
+msgstr ""
+
 #: mojibake/templates/about.html:3 mojibake/templates/about.html:10
-#: mojibake/templates/base.html:44
+#: mojibake/templates/base.html:54
 msgid "About"
 msgstr ""
 
@@ -50,7 +58,7 @@ msgid ""
 msgstr ""
 
 #: mojibake/templates/archive.html:3 mojibake/templates/archive.html:10
-#: mojibake/templates/base.html:48
+#: mojibake/templates/base.html:58
 msgid "Archive"
 msgstr ""
 
@@ -58,28 +66,33 @@ msgstr ""
 msgid "Archive for %(year)"
 msgstr ""
 
-#: mojibake/templates/base.html:43
+#: mojibake/templates/base.html:53
 msgid "Home"
 msgstr ""
 
-#: mojibake/templates/base.html:45 mojibake/templates/posts.html:5
+#: mojibake/templates/base.html:55 mojibake/templates/posts.html:5
 msgid "Posts"
 msgstr ""
 
-#: mojibake/templates/base.html:46 mojibake/templates/categories.html:3
+#: mojibake/templates/base.html:56 mojibake/templates/categories.html:3
 #: mojibake/templates/categories.html:10
 msgid "Categories"
 msgstr ""
 
-#: mojibake/templates/base.html:58
+#: mojibake/templates/base.html:57 mojibake/templates/tags.html:3
+#: mojibake/templates/tags.html:10
+msgid "Tags"
+msgstr ""
+
+#: mojibake/templates/base.html:68
 msgid "Github"
 msgstr ""
 
-#: mojibake/templates/base.html:59 mojibake/templates/contact.html:13
+#: mojibake/templates/base.html:69 mojibake/templates/contact.html:13
 msgid "Email"
 msgstr ""
 
-#: mojibake/templates/base.html:60
+#: mojibake/templates/base.html:70
 msgid "Atom"
 msgstr ""
 
@@ -93,9 +106,5 @@ msgstr ""
 
 #: mojibake/templates/contact.html:17
 msgid "My PGP Public Key is included below."
-msgstr ""
-
-#: mojibake/templates/tags.html:3 mojibake/templates/tags.html:10
-msgid "Tags"
 msgstr ""
 

@@ -34,13 +34,13 @@
             <a href="{{ url_for('post', slug=post.slug) }}"><h2 style="display: inline;">{{ post.title }}</h2></a>
 
 
-        <span style="padding-top: 10px;" class="pull-right">Posted under: <a href="{{ url_for('category', name=post.category.name) }}">{{ post.category.name }}</a></span>
+        <span style="padding-top: 10px;" class="pull-right">{{ _('Posted under')}}: <a href="{{ url_for('category', name=post.category.name) }}">{{ post.category.name }}</a></span>
 
         </header>
 
         Posted by <a href="{{ url_for('about') }}">Jordan</a> on {{moment_js(post.date).format('LLLL')}} - <em>{{moment_js(post.date).fromNow()}}</em>
 
-        <span class="pull-right">Tagged: {% for i in post.tags %}<a href="{{ url_for('tag_name', name=i.name) }}">{{ i.name }}</a>{% if i != post.tags[-1] %}, {% endif %}{% endfor%}</span>
+        <span class="pull-right">{{ _('Tagged')}}: {% for i in post.tags %}<a href="{{ url_for('tag_name', name=i.name) }}">{{ i.name }}</a>{% if i != post.tags[-1] %}, {% endif %}{% endfor%}</span>
 
 
         <p>{{ post.body }}</p>

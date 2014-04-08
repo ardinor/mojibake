@@ -103,7 +103,8 @@
 
 		a:hover
 		{
-			color: #E27689;
+			/*color: #E27689;*/
+			color: #2A9FD6;
 			border-bottom-color: rgba(255,255,255,0);
 		}
 
