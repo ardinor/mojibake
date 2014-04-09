@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Defestri - Create{% endblock %}
+
+{% block content %}
+<section class="archive">
+    <div class="container">
+        <header>
+            <h2>{{ _('New Post') }}</h2>
+        </header>
+
+        <form role="form" method="POST" action="/">
+            {{ form.hidden_tag() }}
+
+            <label>{{ _('Title') }}</label>
+            {{ form.title(size=20) }}
+            {% for error in form.errors.title %}
+            <div class="alert alert-error">
+                <p>[{{ error }}]</p>
+            </div>
+            {% endfor %}
+
+            <label>{{ _('Slug') }}</label>
+            {{ form.slug(size=20) }}
+            {% for error in form.errors.slug %}
+            <div class="alert alert-error">
+                <p>[{{ error }}]</p>
+            </div>
+            {% endfor %}
+
+
+            <div id="tabs">
+                <ul>
+                  <li><a href="#body_tab">Body</a></li>
+                  <li><a href="#body_ja_tab">本文</a></li>
+                </ul>
+
+                  <div id="body_tab">
+                    {{ form.body }}
+                  </div>
+                  <div id="body_ja_tab">
+                    {{ form.body_ja }}
+                  </div>
+
+            </div>
+
+            {{ form.date.label }} {{ form.date }}
+            {% for error in form.errors.date %}
+            <div class="alert alert-error">
+                <p>[{{ error }}]</p>
+            </div>
+            {% endfor %}
+            <input type="text" name="date2" id="date2" />
+
+            {{ form.category.label }} {{ form.category }}
+            {% for error in form.errors.category %}
+            <div class="alert alert-error">
+                <p>[{{ error }}]</p>
+            </div>
+            {% endfor %}
+            {{ form.tags.label }} {{ form.tags }}
+            {% for error in form.errors.tags %}
+            <div class="alert alert-error">
+                <p>[{{ error }}]</p>
+            </div>
+            {% endfor %}
+            <input type="submit" value="Go">
+        </form>
+    </div>
+</section>
+{% endblock %}
+

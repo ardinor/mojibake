@@ -1,4 +1,6 @@
-$(function() {
+jQuery(document).ready(function ($) {
+    $("#tabs").tabs();
+    $( "#date2" ).datepicker();
     if (window.location.pathname === "/")
     {
         $('#home_tab').addClass('active');
@@ -27,4 +29,5 @@ $(function() {
     {
         $('#contact_tab').addClass('active');
     }
+
 });

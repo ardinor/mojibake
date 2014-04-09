@@ -10,6 +10,7 @@ import datetime
 from mojibake.app import app, db, babel
 from mojibake.models import Post, Tag, Category
 from mojibake.settings import POSTS_PER_PAGE, LANGUAGES
+from mojibake.forms import PostForm
 
 
 def make_external(url):
@@ -145,6 +146,55 @@ def post(slug):
     else:
         abort(404)
 
+
+@app.route('/post/create', methods=['GET', 'POST'])
+def create_post():
+    form = PostForm()
+    if form.validate_on_submit():
+        #
+        cat = None
+
+
+        new_post = Post(form.title.data, form.slug.data)
+
+
+        new_post.body = form.body.data
+        new_post.body_ja = form.body_ja.data
+        if form.category:
+            cat = Category.query.filter_by(name=form.category).first()
+            if cat:
+                new_post.category = cat
+            else:
+                cat = Category.query.filter_by(name_ja=form.category).first()
+                if cat:
+                    new_post.category = cat
+                else:
+                    # how to know if it's name or name_ja
+                    cat = Category(form.category)
+                    db.session.add(cat)
+                    db.session.commit()
+                    new_post.category = cat
+        if form.tags:
+            for i in form.tags.split(';'):
+                tag = Tag.query.filter_by(name=i).first()
+                if tag:
+                    new_post.tags.append(tag)
+                else:
+                    tag = Tag.query.filter_by(name_ja=i).first()
+                    if tag:
+                        new_post.tags.append(tag)
+                    else:
+                        tag = Tag(i)
+                        db.session.add(tag)
+                        db.session.commit()
+                        new_post.tags.append(tag)
+        db.session.add(new_post)
+        db.session.commit()
+
+
+        return redirect(post, slug=slug)
+    return render_template('post_create.html',
+                           form=form)
 
 @app.route('/language/<language>')
 def change_language(language):
