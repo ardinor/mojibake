@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Mojibake\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2014-04-08 14:43+1000\n"
-"PO-Revision-Date: 2014-04-08 14:43+1000\n"
+"PO-Revision-Date: 2014-04-09 12:37+1000\n"
 "Last-Translator: Jordan <jordan@defestri.org>\n"
 "Language-Team: ja <jordan@defestri.org>\n"
 "Language: ja\n"
@@ -40,7 +40,7 @@ msgstr "%(name)sが書き込んだ　ー"
 
 #: mojibake/templates/_macros.html:44
 msgid "Tagged"
-msgstr "タグ"
+msgstr "タグ付け"
 
 #: mojibake/templates/about.html:3 mojibake/templates/about.html:10
 #: mojibake/templates/base.html:54
@@ -123,7 +123,7 @@ msgstr "書き込み"
 #: mojibake/templates/category.html:10
 #, python-format
 msgid "Posts under \"%(category)s\""
-msgstr "\"%(category)s\"に属す書き込み"
+msgstr "\"%(category)s\"カテゴリーの書き込み"
 
 #: mojibake/templates/contact.html:3 mojibake/templates/contact.html:10
 msgid "Contact"
@@ -135,9 +135,9 @@ msgstr "私のメールアドレスはjordan@このドメイン(defestri.org)で
 
 #: mojibake/templates/contact.html:17
 msgid "My PGP Public Key is included below."
-msgstr "私のPGPの公開鍵は下に書いてあります。"
+msgstr "私のPGPの公開鍵は以下にあります。"
 
 #: mojibake/templates/tag_list.html:10
 #, python-format
 msgid "Posts tagged \"%(tag)s\""
-msgstr "\"%(tag)s\"にタグされた書き込み"
+msgstr "\"%(tag)s\"にタグ付けされた書き込み"
