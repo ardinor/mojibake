@@ -9,7 +9,7 @@
             <h2>{{ _('New Post') }}</h2>
         </header>
 
-        <form role="form" method="POST" action="/">
+        <form role="form" method="POST" action="/post/create">
             {{ form.hidden_tag() }}
 
             <label>{{ _('Title') }}</label>
@@ -50,7 +50,6 @@
                 <p>[{{ error }}]</p>
             </div>
             {% endfor %}
-            <input type="text" name="date2" id="date2" />
 
             {{ form.category.label }} {{ form.category }}
             {% for error in form.errors.category %}
@@ -64,7 +63,7 @@
                 <p>[{{ error }}]</p>
             </div>
             {% endfor %}
-            <input type="submit" value="Go">
+            <input class="button" type="submit" value="Submit">
         </form>
     </div>
 </section>

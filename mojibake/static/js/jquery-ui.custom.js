@@ -8432,7 +8432,7 @@ $.extend(Datepicker.prototype, {
 
 		prev = (this._canAdjustMonth(inst, -1, drawYear, drawMonth) ?
 			"<a class='ui-datepicker-prev ui-corner-all' data-handler='prev' data-event='click'" +
-			" title='" + prevText + "'><span class='ui-icon ui-icon-circle-triangle-" + ( isRTL ? "e" : "w") + "'>" + prevText + "</span></a>" :
+			" title='" + prevText + "'><span class='datepicker-icon fa fa-angle-double-left'></span></a>" :
 			(hideIfNoPrevNext ? "" : "<a class='ui-datepicker-prev ui-corner-all ui-state-disabled' title='"+ prevText +"'><span class='ui-icon ui-icon-circle-triangle-" + ( isRTL ? "e" : "w") + "'>" + prevText + "</span></a>"));
 
 		nextText = this._get(inst, "nextText");
@@ -8442,7 +8442,7 @@ $.extend(Datepicker.prototype, {
 
 		next = (this._canAdjustMonth(inst, +1, drawYear, drawMonth) ?
 			"<a class='ui-datepicker-next ui-corner-all' data-handler='next' data-event='click'" +
-			" title='" + nextText + "'><span class='ui-icon ui-icon-circle-triangle-" + ( isRTL ? "w" : "e") + "'>" + nextText + "</span></a>" :
+			" title='" + nextText + "'><span class='datepicker-icon fa fa-angle-double-right'></span></a>" :
 			(hideIfNoPrevNext ? "" : "<a class='ui-datepicker-next ui-corner-all ui-state-disabled' title='"+ nextText + "'><span class='ui-icon ui-icon-circle-triangle-" + ( isRTL ? "w" : "e") + "'>" + nextText + "</span></a>"));
 
 		currentText = this._get(inst, "currentText");
@@ -12109,7 +12109,7 @@ $.widget( "ui.tabs", {
 		}
 
 		function show() {
-			eventData.newTab.closest( "li" ).addClass( "ui-tabs-active tab-active" );
+			eventData.newTab.closest( "li" ).addClass( "tab-active" );
 
 			if ( toShow.length && that.options.show ) {
 				that._show( toShow, that.options.show, complete );
@@ -12122,11 +12122,11 @@ $.widget( "ui.tabs", {
 		// start out by hiding, then showing, then completing
 		if ( toHide.length && this.options.hide ) {
 			this._hide( toHide, this.options.hide, function() {
-				eventData.oldTab.closest( "li" ).removeClass( "ui-tabs-active tab-active" );
+				eventData.oldTab.closest( "li" ).removeClass( "tab-active" );
 				show();
 			});
 		} else {
-			eventData.oldTab.closest( "li" ).removeClass( "ui-tabs-active tab-active" );
+			eventData.oldTab.closest( "li" ).removeClass( "tab-active" );
 			toHide.hide();
 			show();
 		}
