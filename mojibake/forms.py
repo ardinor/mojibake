@@ -18,6 +18,6 @@ class PostForm(Form):
     body = TextAreaField('Body', id='post_body')
     body_ja = TextAreaField('本文', id='post_body_ja')
     #visible = BooleanField('Visible')
-    date = DateTimeField('Published date', id='post_date')
+    date = DateTimeField('Published date', id='post_date', format='%d-%m-%Y')
     category = TextField('Category', id='post_category')
     tags = TextField('Tags', id='post_tags')

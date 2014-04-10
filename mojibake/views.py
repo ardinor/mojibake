@@ -157,7 +157,8 @@ def create_post():
 
         new_post = Post(form.title.data, form.slug.data)
 
-
+        # comes in format 10-04-2014
+        new_post.date = form.post_date.data
         new_post.body = form.body.data
         new_post.body_ja = form.body_ja.data
         if form.category:

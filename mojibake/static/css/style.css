@@ -341,6 +341,9 @@
 			form textarea
 			{
 				width: 100%;
+				left: 0;
+				border: 1px solid black;
+				margin-top: -1px;
 			}
 
 				form input.text:hover,
@@ -455,6 +458,7 @@
 			color: #fff !important;
 			text-decoration: none;
 			padding: 0.15em 1.5em 0.15em 1.5em;
+			margin-top: 10px;
 			background-color: #41484c; /*#8ebebc;*/
 			border: 0;
 			cursor: pointer;
@@ -1283,6 +1287,12 @@ pre {
 	padding-bottom: 1em;
 }
 
+
+.alert-error p {
+	text-decoration-color: red;
+	color: red;
+}
+
 .tab-default {
 	border-style: solid
 	border-width: 1px;
@@ -1294,4 +1304,20 @@ pre {
 .tab-default a:visited,
 {
 	text-decoration: none;
+}
+
+.ui-tabs-anchor a, a:link, a:visited {
+	text-decoration: none;
+}
+
+.tab-active {
+	border: 1px solid black;
+	color: white;
+	background-color: #272B30;
+}
+
+.datepicker-icon:before {
+	position: absolute;
+	left: 0;
+	text-align: center;
 }

@@ -15,16 +15,16 @@
             <label>{{ _('Title') }}</label>
             {{ form.title(size=20) }}
             {% for error in form.errors.title %}
-            <div class="alert alert-error">
-                <p>[{{ error }}]</p>
+            <div class="alert-error">
+                <p>{{ error }}</p>
             </div>
             {% endfor %}
 
             <label>{{ _('Slug') }}</label>
             {{ form.slug(size=20) }}
             {% for error in form.errors.slug %}
-            <div class="alert alert-error">
-                <p>[{{ error }}]</p>
+            <div class="alert-error">
+                <p>{{ error }}</p>
             </div>
             {% endfor %}
 
@@ -46,21 +46,21 @@
 
             {{ form.date.label }} {{ form.date }}
             {% for error in form.errors.date %}
-            <div class="alert alert-error">
-                <p>[{{ error }}]</p>
+            <div class="alert-error">
+                <p>{{ error }}</p>
             </div>
             {% endfor %}
 
             {{ form.category.label }} {{ form.category }}
             {% for error in form.errors.category %}
-            <div class="alert alert-error">
-                <p>[{{ error }}]</p>
+            <div class="alert-error">
+                <p>{{ error }}</p>
             </div>
             {% endfor %}
             {{ form.tags.label }} {{ form.tags }}
             {% for error in form.errors.tags %}
-            <div class="alert alert-error">
-                <p>[{{ error }}]</p>
+            <div class="alert-error">
+                <p>{{ error.text }}</p>
             </div>
             {% endfor %}
             <input class="button" type="submit" value="Submit">

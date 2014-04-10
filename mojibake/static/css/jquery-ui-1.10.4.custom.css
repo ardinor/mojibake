@@ -741,7 +741,7 @@ button.ui-button::-moz-focus-inner {
 	position: relative;
 	top: 0;
 	margin: 1px .2em 0 0;
-	border-bottom-width: 0;
+	/*border-bottom-width: 0;*/
 	padding: 0;
 	white-space: nowrap;
 }
@@ -764,7 +764,7 @@ button.ui-button::-moz-focus-inner {
 }
 .ui-tabs .ui-tabs-panel {
 	display: block;
-	border-width: 0;
+	/*border-width: 0;*/
 	/*padding: 1em 1.4em;*/
 	/*background: none;*/
 }
@@ -783,7 +783,7 @@ body .ui-tooltip {
 /* Component containers
 ----------------------------------*/
 .ui-widget {
-	font-family: Ubuntu,Verdana,Arial,sans-serif;
+	font-family: 'Ubuntu',Verdana,Arial,sans-serif;
 	font-size: 1.0em;
 }
 .ui-widget .ui-widget {
@@ -793,7 +793,7 @@ body .ui-tooltip {
 .ui-widget select,
 .ui-widget textarea,
 .ui-widget button {
-	font-family: Ubuntu,Verdana,Arial,sans-serif;
+	font-family: 'Ubuntu',Verdana,Arial,sans-serif;
 	font-size: 1em;
 }
 .ui-widget-content {

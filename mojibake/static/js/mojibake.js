@@ -1,6 +1,6 @@
 jQuery(document).ready(function ($) {
     $("#tabs").tabs();
-    $("#post_date").datepicker();
+    $("#post_date").datepicker({ dateFormat: "dd-mm-yy" });
     if (window.location.pathname === "/")
     {
         $('#home_tab').addClass('active');
