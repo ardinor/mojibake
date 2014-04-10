@@ -38,7 +38,7 @@ app.config['ASSETS_DEBUG'] = True
 # assets.register('js_all', js)
 
 js = Bundle('js/jquery.min.js',
-                'js/jquery-ui.custom.min.js',
+                'js/jquery-ui.custom.js',
                 'js/skel.min.js',
                 'js/skel-panels.min.js',
                 'js/init.js',
@@ -51,7 +51,7 @@ assets.register('ie8_shiv', ie8_shiv)
 css = Bundle('css/skel-noscript.css',
              'css/style.css',
              'css/style-wide.css',
-             'css/jquery-ui-1.10.4.custom.min.css',
+             'css/jquery-ui-1.10.4.custom.css',
              'css/zenburn.css')
 assets.register('css', css)
 
