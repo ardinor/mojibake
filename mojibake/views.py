@@ -153,47 +153,42 @@ def create_post():
     if form.validate_on_submit():
         #
         cat = None
-
-
-        new_post = Post(form.title.data, form.slug.data)
-
-        # comes in format 10-04-2014
-        new_post.date = form.post_date.data
-        new_post.body = form.body.data
-        new_post.body_ja = form.body_ja.data
-        if form.category:
-            cat = Category.query.filter_by(name=form.category).first()
-            if cat:
-                new_post.category = cat
-            else:
-                cat = Category.query.filter_by(name_ja=form.category).first()
-                if cat:
-                    new_post.category = cat
-                else:
+        if form.category.data:
+            cat = Category.query.filter_by(name=form.category.data).first()
+            if cat is None:
+                cat = Category.query.filter_by(name_ja=form.category.data).first()
+                if cat is None:
                     # how to know if it's name or name_ja
-                    cat = Category(form.category)
+                    cat = Category(form.category.data)
                     db.session.add(cat)
                     db.session.commit()
-                    new_post.category = cat
-        if form.tags:
-            for i in form.tags.split(';'):
+                    #new_post.category = cat
+        tags = []
+        if form.tags.data:
+            for i in form.tags.data.split(';'):
                 tag = Tag.query.filter_by(name=i).first()
                 if tag:
-                    new_post.tags.append(tag)
+                    tags.append(tag)
                 else:
                     tag = Tag.query.filter_by(name_ja=i).first()
                     if tag:
-                        new_post.tags.append(tag)
+                        tags.append(tag)
                     else:
                         tag = Tag(i)
                         db.session.add(tag)
                         db.session.commit()
-                        new_post.tags.append(tag)
+                        tags.append(tag)
+
+        body = form.body.data
+        body_ja = form.body_ja.data
+
+        new_post = Post(form.title.data, form.slug.data, cat, tags,
+                        date=form.date.data, body=body, body_ja=body_ja)
+
         db.session.add(new_post)
         db.session.commit()
 
-
-        return redirect(post, slug=slug)
+        return redirect(post, slug=form.slug.data)
     return render_template('post_create.html',
                            form=form)
 
