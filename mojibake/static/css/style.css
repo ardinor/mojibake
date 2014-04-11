@@ -453,7 +453,7 @@
 		.button
 		{
 			position: relative;
-			display: block;
+			display: inline-block;
 			border-radius: 0.35em;
 			color: #fff !important;
 			text-decoration: none;
@@ -1285,6 +1285,7 @@ pre {
 	text-align: center;
 	margin-bottom: 5em;
 	padding-bottom: 1em;
+	background: #272B30;
 }
 
 

@@ -6,6 +6,7 @@ from flask import render_template, abort, request, make_response, url_for, g, \
 #from flask_flatpages import pygments_style_defs
 from werkzeug.contrib.atom import AtomFeed
 import datetime
+import markdown
 
 from mojibake.app import app, db, babel
 from mojibake.models import Post, Tag, Category
@@ -99,12 +100,8 @@ def bans():
 
 @app.route('/tags/<name>/')
 def tag_name(name):
-    tag = Tag.query.filter_by(name=name).first()
-
-    if tag:
-        return render_template('tag_list.html', tag=tag)
-    else:
-        abort(404)
+    tag = Tag.query.filter_by(name=name).first_or_404()
+    return render_template('tag_list.html', tag=tag)
 
 
 @app.route('/categories/')
@@ -148,10 +145,11 @@ def post(slug):
 
 
 @app.route('/post/create', methods=['GET', 'POST'])
+#@login_required
 def create_post():
     form = PostForm()
     if form.validate_on_submit():
-        #
+
         cat = None
         if form.category.data:
             cat = Category.query.filter_by(name=form.category.data).first()
@@ -162,7 +160,7 @@ def create_post():
                     cat = Category(form.category.data)
                     db.session.add(cat)
                     db.session.commit()
-                    #new_post.category = cat
+
         tags = []
         if form.tags.data:
             for i in form.tags.data.split(';'):
@@ -188,9 +186,58 @@ def create_post():
         db.session.add(new_post)
         db.session.commit()
 
-        return redirect(post, slug=form.slug.data)
+        return redirect(url_for('post', slug=form.slug.data))
     return render_template('post_create.html',
                            form=form)
+
+@app.route('/post/<slug>/edit', methods=['GET', 'POST'])
+def edit_post(slug):
+    post = Post.query.filter_by(slug=slug).first_or_404()
+    form = PostForm(obj=post)
+    if form.validate_on_submit():
+        cat = None
+        if form.category.data:
+            cat = Category.query.filter_by(name=form.category.data).first()
+            if cat is None:
+                cat = Category.query.filter_by(name_ja=form.category.data).first()
+                if cat is None:
+                    # how to know if it's name or name_ja
+                    cat = Category(form.category.data)
+                    db.session.add(cat)
+                    db.session.commit()
+
+        tags = []
+        if form.tags.data:
+            for i in form.tags.data.split(';'):
+                tag = Tag.query.filter_by(name=i).first()
+                if tag:
+                    tags.append(tag)
+                else:
+                    tag = Tag.query.filter_by(name_ja=i).first()
+                    if tag:
+                        tags.append(tag)
+                    else:
+                        tag = Tag(i)
+                        db.session.add(tag)
+                        db.session.commit()
+                        tags.append(tag)
+
+        post.title = form.title.data
+        post.slug = form.slug.data
+        post.category = cat
+        post.tags = tags
+        post.date = form.date.data
+        post.body = form.body.data
+        post.body_html = markdown.markdown(form.body.data, extensions=['codehilite'])
+        post.body_ja = form.body_ja.data
+        post.body_ja_html = markdown.markdown(form.body_ja.data, extensions=['codehilite'])
+        db.session.commit()
+
+        return redirect(url_for('post', slug=form.slug.data))
+
+    return render_template('post_create.html',
+                       form=form)
+
 
 @app.route('/language/<language>')
 def change_language(language):

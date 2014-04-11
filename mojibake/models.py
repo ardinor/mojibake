@@ -38,8 +38,8 @@ class Category(db.Model):
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(120), index=True)
-    slug = db.Column(db.String(120))
+    title = db.Column(db.String(120), unique=True, index=True)
+    slug = db.Column(db.String(120), unique=True)
     #path = db.Column(db.String(240), index=True)
     body = db.Column(db.Text)
     body_html = db.Column(db.Text)
@@ -55,7 +55,8 @@ class Post(db.Model):
 
     def __init__(self, title, slug, category, tags, date=None, body=None, body_ja=None):
         self.title = title
-        self.slug = slug
+        self.slug = slug  #check slug is unique
+
         if body is None and body_ja is None:
             raise ValidationError("Both body and body_ja cannot be empty!")
 
