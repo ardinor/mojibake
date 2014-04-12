@@ -1248,7 +1248,8 @@
 pre {
     background-color: #FAFAFA;
     line-height: 1.4em;
-    margin-left: 10px;
+    margin-top: 5px;
+    /*margin-left: 10px;*/
     margin-right: 20px;
     font-size: 1.0em;
     font-family: 'Ubuntu Mono', monospace;

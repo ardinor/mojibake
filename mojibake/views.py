@@ -3,7 +3,6 @@
 from urllib.parse import urljoin
 from flask import render_template, abort, request, make_response, url_for, g, \
     session, redirect
-#from flask_flatpages import pygments_style_defs
 from werkzeug.contrib.atom import AtomFeed
 import datetime
 import markdown
@@ -245,24 +244,17 @@ def change_language(language):
     return redirect(request.args.get('next') or url_for('index'))
 
 
-# @app.route('/pygments.css')
-# def pygments_css():
-#     return pygments_style_defs('autumn'), 200, {'Content-Type': 'text/css'}
-
-
 @app.route('/recent.atom')
 def recent_feed():
     feed = AtomFeed('Recent Articles',
                     feed_url=request.url, url=request.url_root)
-    posts = [page for page in pages if 'date' in page.meta]
-    sorted_posts = sorted(posts, reverse=True,
-        key=lambda page: page.meta['date'])[:10]
-    for post in sorted_posts:
-        feed.add(post.meta['title'], unicode(post.body[:500] + '\n\n....'),
+    posts = Post.query.order_by(Post.date.desc()).all()
+    for post in posts:
+        feed.add(post.title, post.body[:500] + '\n\n....',
                  content_type='html',
                  author='Jordan',
-                 url=make_external(post.path),
-                 updated=page.meta['date'])
+                 url=make_external(post.slug),
+                 updated=post.date)
     return feed.get_response(), 200, {'Content-Type': 'application/atom+xml; charset=utf-8'}
 
 
