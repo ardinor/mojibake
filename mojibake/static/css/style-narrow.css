@@ -22,8 +22,8 @@
 
 		ul.icons
 		{
-		}	
-		
+		}
+
 			ul.icons li
 			{
 			}
@@ -34,7 +34,7 @@
 			}
 
 	/* Item */
-	
+
 		.item
 		{
 			margin-bottom: 20px;
@@ -52,7 +52,7 @@
 	#logo
 	{
 	}
-	
+
 		#logo .image
 		{
 			position: relative;
@@ -62,31 +62,31 @@
 	#nav
 	{
 	}
-	
+
 		#nav ul
 		{
 		}
-		
+
 			#nav ul li
 			{
 			}
-			
+
 				#nav ul li a
 				{
 					font-size: 0.8em;
 					padding-top: 0.5em;
 					padding-bottom: 0.5em;
 				}
-				
+
 					#nav ul li a span
 					{
 						padding-right: 2.25em;
 					}
-					
+
 						#nav ul li a span:before
 						{
-							left: 100%;
-							margin-left: -1.25em;
+							/*left: 100%;
+							margin-left: -1.25em;*/
 							line-height: 2.25em;
 						}
 

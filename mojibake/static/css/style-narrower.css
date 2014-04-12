@@ -28,7 +28,7 @@
 	}
 
 	/* Item */
-	
+
 		.item
 		{
 			margin-bottom: 15px;
@@ -45,12 +45,12 @@
 		background: none !important;
 		box-shadow: none !important;
 	}
-	
+
 		#header .top
 		{
 			position: relative;
 		}
-	
+
 		#header .bottom
 		{
 			border-top: solid 1px rgba(255,255,255,0.05);
@@ -68,15 +68,15 @@
 	#nav
 	{
 	}
-	
+
 		#nav ul
 		{
 		}
-		
+
 			#nav ul li
 			{
 			}
-			
+
 				#nav ul li a
 				{
 					padding: 0.5em 1.25em 0.5em 1.25em;
@@ -85,7 +85,7 @@
 /*********************************************************************************/
 /* Footer                                                                        */
 /*********************************************************************************/
-	
+
 	#footer
 	{
 		margin-left: 0;
@@ -113,7 +113,7 @@
 	#sidePanelToggle
 	{
 	}
-	
+
 		#sidePanelToggle .toggle
 		{
 			position: absolute;
