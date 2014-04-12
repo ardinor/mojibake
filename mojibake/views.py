@@ -253,7 +253,7 @@ def recent_feed():
         feed.add(post.title, post.body[:500] + '\n\n....',
                  content_type='html',
                  author='Jordan',
-                 url=make_external(post.slug),
+                 url=make_external(url_for('post', slug=post.slug)),
                  updated=post.date)
     return feed.get_response(), 200, {'Content-Type': 'application/atom+xml; charset=utf-8'}
 
