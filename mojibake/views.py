@@ -238,6 +238,13 @@ def edit_post(slug):
                        form=form)
 
 
+@app.route('/post/<slug>/delete', methods=['POST'])
+def delete_post(slug):
+    post = Post.query.filter_by(slug=slug).first_or_404()
+    db.session.delete(post)
+    return redirect(url_for('posts'))
+
+
 @app.route('/language/<language>')
 def change_language(language):
     session['language'] = language
