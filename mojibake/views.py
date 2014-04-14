@@ -336,7 +336,8 @@ def internal_error500(error):
 
 @app.before_request
 def before_request():
-    g.user = getattr(g, 'user', None)
+    #g.user = getattr(g, 'user', None)
+    g.user = current_user
 
     if 'language' not in session:
         session['language'] = request.accept_languages.best_match(LANGUAGES.keys())

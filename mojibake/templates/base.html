@@ -50,12 +50,15 @@
 
                         <nav id="nav">
                             <ul>
-                                <li><a href="{{ url_for('home') }}" id="home_tab"><span class="fa fa-home">{{ gettext('Home') }}</span></a></li>
+                                <li><a href="{{ url_for('home') }}" id="home_tab"><span class="fa fa-home">{{ _('Home') }}</span></a></li>
                                 <li><a href="{{ url_for('about') }}" id="about_tab"><span class="fa fa-info">{{ _('About') }}</span></a></li>
                                 <li><a href="{{ url_for('posts') }}" id="posts_tab"><span class="fa fa-comment-o">{{ _('Posts') }}</span></a></li>
                                 <li><a href="{{ url_for('categories') }}" id="categories_tab"><span class="fa fa-list">{{ _('Categories') }}</span></a></li>
                                 <li><a href="{{ url_for('tags') }}" id="tags_tab"><span class="fa fa-tags">{{ _('Tags')}}</span></a></li>
                                 <li><a href="{{ url_for('archive') }}" id="archive_tab"><span class="fa fa-calendar">{{ _('Archive') }}</span></a></li>
+                                {% if g.user.is_authenticated() %}
+                                <li><a href="{{ url_for('logout') }}"><span class="fa fa-power-off">{{ _('Logout') }}</span></a></li>
+                                {% endif %}
                                 <li><a href="/language/{{ available_languages(session['language'])[0] }}?next={{ request.path }}" class="special"><span class="fa fa-flag-o">{{ available_languages(session['language'])[1] }}</span></a></li>
                             </ul>
                         </nav>
