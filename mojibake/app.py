@@ -4,6 +4,7 @@ from flask import Flask
 from flask.ext.assets import Environment, Bundle
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.babel import Babel
+from flask.ext.login import LoginManager
 
 
 from mojibake.moment_js import moment_js
@@ -14,6 +15,10 @@ app = Flask(__name__)
 app.config.from_pyfile('settings.py')
 db = SQLAlchemy(app)
 babel = Babel(app)
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.session_protection = "strong"
 
 from mojibake import models
 

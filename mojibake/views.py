@@ -7,10 +7,10 @@ from werkzeug.contrib.atom import AtomFeed
 import datetime
 import markdown
 
-from mojibake.app import app, db, babel
+from mojibake.app import app, db, babel, login_manager
 from mojibake.models import Post, Tag, Category
 from mojibake.settings import POSTS_PER_PAGE, LANGUAGES
-from mojibake.forms import PostForm
+from mojibake.forms import PostForm, LoginForm
 
 
 def make_external(url):
@@ -144,7 +144,7 @@ def post(slug):
 
 
 @app.route('/post/create', methods=['GET', 'POST'])
-#@login_required
+@login_required
 def create_post():
     form = PostForm()
     if form.validate_on_submit():
@@ -190,6 +190,7 @@ def create_post():
                            form=form)
 
 @app.route('/post/<slug>/edit', methods=['GET', 'POST'])
+@login_required
 def edit_post(slug):
     post = Post.query.filter_by(slug=slug).first_or_404()
     form = PostForm(obj=post)
@@ -239,10 +240,29 @@ def edit_post(slug):
 
 
 @app.route('/post/<slug>/delete', methods=['POST'])
+@login_required
 def delete_post(slug):
     post = Post.query.filter_by(slug=slug).first_or_404()
     db.session.delete(post)
     return redirect(url_for('posts'))
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        # login and validate the user...
+        login_user(user)
+        flash("Logged in successfully.")
+        return redirect(request.args.get("next") or url_for("index"))
+    return render_template("login.html", form=form)
+
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(request.args.get("next") or url_for("index"))
 
 
 @app.route('/language/<language>')
@@ -317,3 +337,8 @@ def before_request():
 @babel.localeselector
 def get_locale():
     return session['language']
+
+
+@login_manager.user_loader
+def load_user(userid):
+    return User.get(userid)

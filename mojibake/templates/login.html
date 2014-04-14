@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Defestri - Create{% endblock %}
+
+{% block content %}
+<section class="login">
+    <div class="container">
+        <header>
+            <h2>{{ _('Login') }}</h2>
+        </header>
+
+        <form role="form" method="POST" action="">
+            {{ form.hidden_tag() }}
+
+            <label>{{ _('Username') }}</label>
+            {{ form.username(size=20) }}
+            {% for error in form.errors.username %}
+            <div class="alert-error">
+                <p>{{ error }}</p>
+            </div>
+            {% endfor %}
+
+            <label>{{ _('Password') }}</label>
+            {{ form.password(size=20) }}
+            {% for error in form.errors.password %}
+            <div class="alert-error">
+                <p>{{ error }}</p>
+            </div>
+            {% endfor %}
+
+            <label>{{ form.remember_me }} {{ _('Remember Me') }}</label>
+
+            <input class="button" type="submit" value="{{ _('Login') }}">
+        </form>
+    </div>
+</section>
+{% endblock %}
+
