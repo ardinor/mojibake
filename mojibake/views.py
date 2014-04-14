@@ -2,13 +2,17 @@
 
 from urllib.parse import urljoin
 from flask import render_template, abort, request, make_response, url_for, g, \
-    session, redirect
+    session, redirect, flash
+from flask.ext.login import login_required, login_user, \
+    logout_user, current_user
+from flask.ext.babel import gettext
 from werkzeug.contrib.atom import AtomFeed
+from passlib.hash import pbkdf2_sha256
 import datetime
 import markdown
 
 from mojibake.app import app, db, babel, login_manager
-from mojibake.models import Post, Tag, Category
+from mojibake.models import Post, Tag, Category, User
 from mojibake.settings import POSTS_PER_PAGE, LANGUAGES
 from mojibake.forms import PostForm, LoginForm
 
@@ -251,10 +255,14 @@ def delete_post(slug):
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        # login and validate the user...
-        login_user(user)
-        flash("Logged in successfully.")
-        return redirect(request.args.get("next") or url_for("index"))
+        user = User.query.filter_by(username=form.username.data).first_or_404()
+        if pbkdf2_sha256.verify(form.password.data, user.password):
+            login_user(user, remember=form.remember_me.data)
+            flash(gettext("Logged in successfully."))
+            return redirect(request.args.get("next") or url_for("home"))
+        else:
+            flash(gettext("Invalid Login"))
+            redirect(url_for('login'))
     return render_template("login.html", form=form)
 
 
@@ -262,13 +270,13 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect(request.args.get("next") or url_for("index"))
+    return redirect(request.args.get("next") or url_for("home"))
 
 
 @app.route('/language/<language>')
 def change_language(language):
     session['language'] = language
-    return redirect(request.args.get('next') or url_for('index'))
+    return redirect(request.args.get('next') or url_for('home'))
 
 
 @app.route('/recent.atom')
@@ -341,4 +349,4 @@ def get_locale():
 
 @login_manager.user_loader
 def load_user(userid):
-    return User.get(userid)
+    return User.query.filter_by(id=userid).first()
