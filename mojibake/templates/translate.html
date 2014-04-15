@@ -10,15 +10,23 @@
             <h2>{{ _('Translate') }}</h2>
         </header>
 
+        {% if tags %}
         <h3>{{ _('Tags needing translation') }}</h3>
-            {% for i in tags %}
-            <a href="{{ url_for('tag_name', name=i.name) }}">{{ i.name }}</a>
-            {% endfor %}
+        {% for i in tags %}
+        <a href="{{ url_for('tag_name', name=i.name) }}">{{ i.name }}</a>
+        {% endfor %}
+        {% endif %}
 
-            <h3>{{ _('Categories needing translation') }}</h3>
-            {% for i in cats %}
-            <a href="{{ url_for('category', name=i.name) }}">{{ i.name }}</a>
-            {% endfor %}
+        {% if cats %}
+        <h3>{{ _('Categories needing translation') }}</h3>
+        {% for i in cats %}
+        <a href="{{ url_for('category', name=i.name) }}">{{ i.name }}</a>
+        {% endfor %}
+        {% endif %}
+
+        {% if tags|length == 0 and cats|length == 0 %}
+        <p>{{ _('Looks like everything so far has been translated!')}}</p>
+        {% endif %}
 
     </div>
 </section>

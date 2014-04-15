@@ -259,9 +259,10 @@ def translate():
     return render_template('translate.html', tags=tags, cats=cats)
 
 
-
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    if g.user is not None and g.user.is_authenticated():
+        return redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first_or_404()
