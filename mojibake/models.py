@@ -21,8 +21,8 @@ class ValidationError(Exception):
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50))
-    name_ja = db.Column(db.String(50))
+    name = db.Column(db.String(50), unique=True)
+    name_ja = db.Column(db.String(50), unique=True)
     #posts = db.relationship('Post', backref='category',
     #                            lazy='dynamic')
 
@@ -30,8 +30,6 @@ class Category(db.Model):
         self.name = name
         if name_ja:
             self.name_ja = name_ja
-        else:
-            self.name_ja = name
 
     def __repr__(self):
         return '<Category: {}>'.format(self.name)
@@ -78,15 +76,13 @@ class Post(db.Model):
 
 class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50))
-    name_ja = db.Column(db.String(50))
+    name = db.Column(db.String(50), unique=True)
+    name_ja = db.Column(db.String(50), unique=True)
 
     def __init__(self, name, name_ja=None):
         self.name = name
         if name_ja:
             self.name_ja = name_ja
-        else:
-            self.name_ja = name
 
     def __repr__(self):
         return '<Tag: {}>'.format(self.name)

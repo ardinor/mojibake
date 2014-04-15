@@ -22,12 +22,10 @@ login_manager.session_protection = "strong"
 
 from mojibake import models
 
-#manager = Manager(app)
-#manager.add_command('db', MigrateCommand)
-#manager.add_command('manage_db', ManageMetaDB(db, pages, models))
-
 app.jinja_env.globals['moment_js'] = moment_js
 app.jinja_env.globals['available_languages'] = available_languages
+app.jinja_env.trim_blocks = True
+#app.jinja_env.lstrip_blocks = True
 
 assets = Environment(app)
 app.config['ASSETS_DEBUG'] = True

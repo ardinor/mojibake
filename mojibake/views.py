@@ -251,6 +251,15 @@ def delete_post(slug):
     return redirect(url_for('posts'))
 
 
+@app.route('/translate')
+@login_required
+def translate():
+    tags = Tag.query.filter_by(name_ja=None).all()
+    cats = Category.query.filter_by(name_ja=None).all()
+    return render_template('translate.html', tags=tags, cats=cats)
+
+
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
