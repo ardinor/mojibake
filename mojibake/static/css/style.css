@@ -1295,7 +1295,13 @@ pre {
 
 
 .alert-error p {
-	color: red;
+	color: #A94442;
+	border: 1px solid #F2DEDE;
+	background: #F2DEDE;
+	width: 30%;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 }
 
 .tab-default {

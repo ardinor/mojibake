@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-04-15 12:42+1000\n"
+"POT-Creation-Date: 2014-04-16 16:25+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
 
-#: mojibake/views.py:261
+#: mojibake/views.py:271
 msgid "Logged in successfully."
 msgstr ""
 
-#: mojibake/views.py:264
+#: mojibake/views.py:274
 msgid "Invalid Login"
 msgstr ""
 
@@ -101,24 +101,33 @@ msgstr ""
 msgid "Categories"
 msgstr ""
 
-#: mojibake/templates/base.html:57 mojibake/templates/tags.html:3
-#: mojibake/templates/tags.html:10
+#: mojibake/templates/base.html:57 mojibake/templates/post_create.html:60
+#: mojibake/templates/tags.html:3 mojibake/templates/tags.html:10
+#: mojibake/templates/translate.html:3
 msgid "Tags"
 msgstr ""
 
-#: mojibake/templates/base.html:60
+#: mojibake/templates/base.html:60 mojibake/templates/post_create.html:9
+msgid "New Post"
+msgstr ""
+
+#: mojibake/templates/base.html:62 mojibake/templates/translate.html:10
+msgid "Translate"
+msgstr ""
+
+#: mojibake/templates/base.html:64
 msgid "Logout"
 msgstr ""
 
-#: mojibake/templates/base.html:71
+#: mojibake/templates/base.html:75
 msgid "Github"
 msgstr ""
 
-#: mojibake/templates/base.html:72 mojibake/templates/contact.html:13
+#: mojibake/templates/base.html:76 mojibake/templates/contact.html:13
 msgid "Email"
 msgstr ""
 
-#: mojibake/templates/base.html:73
+#: mojibake/templates/base.html:77
 msgid "Atom"
 msgstr ""
 
@@ -159,10 +168,6 @@ msgstr ""
 msgid "Remember Me"
 msgstr ""
 
-#: mojibake/templates/post_create.html:9
-msgid "New Post"
-msgstr ""
-
 #: mojibake/templates/post_create.html:15
 msgid "Title"
 msgstr ""
@@ -171,8 +176,32 @@ msgstr ""
 msgid "Slug"
 msgstr ""
 
+#: mojibake/templates/post_create.html:44
+msgid "Published date"
+msgstr ""
+
+#: mojibake/templates/post_create.html:52
+msgid "Category"
+msgstr ""
+
+#: mojibake/templates/post_create.html:67
+msgid "Submit"
+msgstr ""
+
 #: mojibake/templates/tag_list.html:10
 #, python-format
 msgid "Posts tagged \"%(tag)s\""
+msgstr ""
+
+#: mojibake/templates/translate.html:14
+msgid "Tags needing translation"
+msgstr ""
+
+#: mojibake/templates/translate.html:21
+msgid "Categories needing translation"
+msgstr ""
+
+#: mojibake/templates/translate.html:28
+msgid "Looks like everything so far has been translated!"
 msgstr ""
 

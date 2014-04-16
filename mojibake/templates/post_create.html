@@ -28,20 +28,17 @@
             </div>
             {% endfor %}
 
-
             <div id="tabs">
                 <ul>
                   <li><a href="#body_tab">Body</a></li>
                   <li><a href="#body_ja_tab">本文</a></li>
                 </ul>
-
-                  <div id="body_tab">
+                <div id="body_tab">
                     {{ form.body }}
-                  </div>
-                  <div id="body_ja_tab">
+                </div>
+                <div id="body_ja_tab">
                     {{ form.body_ja }}
-                  </div>
-
+                </div>
             </div>
 
             <label>{{ _('Published date') }}</label>
