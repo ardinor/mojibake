@@ -31,8 +31,7 @@
     <div class="container">
 
         <header>
-            <a href="{{ url_for('post', slug=post.slug) }}"><h2 style="display: inline;">{{ post.title }}</h2></a>
-
+            <a href="{{ url_for('post', slug=post.slug) }}"><h2 style="display: inline;">{% if session['language'] == 'ja' and post.title_ja %}{{ post.title_ja }}{% else %}{{ post.title }}{% endif %}</h2></a>
 
         <span style="padding-top: 10px;" class="pull-right">{{ _('Posted under')}}: <a href="{{ url_for('category', name=post.category.name) }}">{% if session['language'] == 'ja' and post.category.name_ja %}{{ post.category.name_ja }}{% else %}{{ post.category.name }}{% endif %}</a></span>
 

@@ -24,7 +24,7 @@ def make_external(url):
 @app.route('/')
 def home():
 
-    posts = Post.query.order_by(Post.date.desc()).paginate(1, POSTS_PER_PAGE, False)
+    posts = Post.query.filter_by(published=True).order_by(Post.date.desc()).paginate(1, POSTS_PER_PAGE, False)
 
     return render_template('index.html', posts=posts)
 
@@ -41,7 +41,7 @@ def contact():
 
 @app.route('/archive/')
 def archive():
-    posts = Post.query.all()
+    posts = Post.query.filter_by(published=True).all()
     years = list(set([post.date.year for post in posts]))
 
     return render_template('archive.html', years=years)
@@ -50,7 +50,7 @@ def archive():
 @app.route('/archive/<year>/')
 def archive_year(year):
     year_posts = Post.query.filter("strftime('%Y', date) = :year"). \
-            params(year=year).order_by('-date').all()
+            params(year=year).filter_by(published=True).order_by('-date').all()
 
     if year_posts:
         return render_template('archive_year.html', year=year,
@@ -103,6 +103,7 @@ def bans():
 
 @app.route('/tags/<name>/')
 def tag_name(name):
+    #these still show unpublished posts
     tag = Tag.query.filter_by(name=name).first_or_404()
     return render_template('tag_list.html', tag=tag)
 
@@ -116,6 +117,7 @@ def categories():
 
 @app.route('/categories/<name>/')
 def category(name):
+    #these still show unpublished posts
     category = Category.query.filter_by(name=name).first()
 
     if category:
@@ -128,7 +130,7 @@ def category(name):
 @app.route('/posts/<page>/')
 def posts(page=1):
 
-    posts = Post.query.order_by(Post.date.desc()).paginate(int(page), POSTS_PER_PAGE, False)
+    posts = Post.query.filter_by(published=True).order_by(Post.date.desc()).paginate(int(page), POSTS_PER_PAGE, False)
 
     if posts:
         return render_template('posts.html', posts=posts)
@@ -139,7 +141,7 @@ def posts(page=1):
 @app.route('/post/<slug>')
 def post(slug):
 
-    post = Post.query.filter_by(slug=slug).first()
+    post = Post.query.filter_by(slug=slug, published=True).first()
 
     if post:
         return render_template('post.html', post=post)
@@ -154,19 +156,24 @@ def create_post():
     if form.validate_on_submit():
 
         cat = None
+        cat_ja = None
         if form.category.data:
             cat = Category.query.filter_by(name=form.category.data).first()
             if cat is None:
                 cat = Category.query.filter_by(name_ja=form.category.data).first()
                 if cat is None:
-                    # how to know if it's name or name_ja
-                    cat = Category(form.category.data)
+                    if form.category_ja.data:
+                        cat_ja = form.category_ja.data
+                    cat = Category(form.category.data, cat_ja)
                     db.session.add(cat)
                     db.session.commit()
 
         tags = []
+        tags_ja = []
         if form.tags.data:
-            for i in form.tags.data.split(';'):
+            if form.tags_ja.data:
+                tags_ja = form.tags_ja.data.split(';')
+            for index, i in enumerate(form.tags.data.split(';')):
                 tag = Tag.query.filter_by(name=i).first()
                 if tag:
                     tags.append(tag)
@@ -175,7 +182,12 @@ def create_post():
                     if tag:
                         tags.append(tag)
                     else:
-                        tag = Tag(i)
+                        #this is a bit ugly.. maybe do something better with this in the future?
+                        if len(tags_ja) >= index:
+                            tag = Tag(i, tags_ja[index])
+                        else:
+                            tag = Tag(i)
+
                         db.session.add(tag)
                         db.session.commit()
                         tags.append(tag)
@@ -184,7 +196,8 @@ def create_post():
         body_ja = form.body_ja.data
 
         new_post = Post(form.title.data, form.slug.data, cat, tags,
-                        date=form.date.data, body=body, body_ja=body_ja)
+                        date=form.date.data, body=body, body_ja=body_ja,
+                        title_ja=form.title_ja.data, published=form.published.data)
 
         db.session.add(new_post)
         db.session.commit()
@@ -256,6 +269,7 @@ def delete_post(slug):
 def translate():
     tags = Tag.query.filter_by(name_ja=None).all()
     cats = Category.query.filter_by(name_ja=None).all()
+    # do posts as well?
     return render_template('translate.html', tags=tags, cats=cats)
 
 

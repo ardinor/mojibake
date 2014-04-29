@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import os
 
+VERSION = 1.0
+
 DEBUG = True
 
 POSTS_PER_PAGE = 3
@@ -18,6 +20,7 @@ FLATPAGES_ROOT = os.path.join(APP_DIR, 'content')
 FLATPAGES_EXTENSION = '.md'
 
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(APP_DIR, 'app.db')
+TEST_DATABASE = 'sqlite:///' + os.path.join(APP_DIR, 'test.db')
 
 LANGUAGES = {
     'en': 'English',

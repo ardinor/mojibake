@@ -34,10 +34,11 @@ class Category(db.Model):
     def __repr__(self):
         return '<Category: {}>'.format(self.name)
 
+
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120), unique=True, index=True)
-    #title_ja = db.Column(db.String(120), unique=True)
+    title_ja = db.Column(db.String(120), unique=True)
     slug = db.Column(db.String(120), unique=True)
     body = db.Column(db.Text)
     body_html = db.Column(db.Text)
@@ -45,14 +46,18 @@ class Post(db.Model):
     body_ja_html = db.Column(db.Text)
     date = db.Column(db.DateTime)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
-    #published = db.Column(db.Boolean)
+    published = db.Column(db.Boolean)
     category = db.relationship('Category', backref=db.backref('posts', lazy='dynamic'))
     tags = db.relationship('Tag', secondary=tags,
                                  backref=db.backref('posts',
                                                     lazy='dynamic'))
 
-    def __init__(self, title, slug, category, tags, date=None, body=None, body_ja=None):
+    def __init__(self, title, slug, category, tags, date=None, body=None, body_ja=None, title_ja=None, published=False):
+
         self.title = title
+
+        if title_ja:
+            self.title_ja = title_ja
         self.slug = slug  #check slug is unique
 
         if body is None and body_ja is None:
@@ -69,10 +74,12 @@ class Post(db.Model):
         self.date = date
         self.category = category
         self.tags = tags
+        self.published = published
 
 
     def __repr__(self):
         return '<Post: {}>'.format(self.title)
+
 
 class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)

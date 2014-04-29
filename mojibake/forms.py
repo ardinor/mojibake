@@ -24,4 +24,4 @@ class PostForm(Form):
     category_ja = TextField(gettext('Category (ja)'), id='post_category_ja')
     tags = TextField(gettext('Tags (en)'), id='post_tags')
     tags_ja = TextField(gettext('Tags (ja)'), id='post_tags_ja')
-    visible = BooleanField(gettext('Publish'))
+    published = BooleanField(gettext('Publish'))
