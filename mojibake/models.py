@@ -37,16 +37,15 @@ class Category(db.Model):
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120), unique=True, index=True)
-    #title_ja = db.Column(db.String(120), unique=True) ??
+    #title_ja = db.Column(db.String(120), unique=True)
     slug = db.Column(db.String(120), unique=True)
-    #path = db.Column(db.String(240), index=True)
     body = db.Column(db.Text)
     body_html = db.Column(db.Text)
     body_ja = db.Column(db.Text)
     body_ja_html = db.Column(db.Text)
-    #body_html?
     date = db.Column(db.DateTime)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+    #published = db.Column(db.Boolean)
     category = db.relationship('Category', backref=db.backref('posts', lazy='dynamic'))
     tags = db.relationship('Tag', secondary=tags,
                                  backref=db.backref('posts',

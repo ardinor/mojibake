@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Mojibake\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-04-29 12:27+1000\n"
-"PO-Revision-Date: 2014-04-29 12:28+1000\n"
+"POT-Creation-Date: 2014-04-29 12:41+1000\n"
+"PO-Revision-Date: 2014-04-29 12:42+1000\n"
 "Last-Translator: Jordan <jordan@defestri.org>\n"
 "Language-Team: ja <jordan@defestri.org>\n"
 "Language: ja\n"
@@ -24,8 +24,23 @@ msgstr ""
 msgid "Title"
 msgstr "題名"
 
-#: mojibake/forms.py:26
-#, fuzzy
+#: mojibake/forms.py:22 mojibake/templates/post_create.html:44
+msgid "Published date"
+msgstr "出版された日付"
+
+#: mojibake/forms.py:23
+msgid "Category"
+msgstr "カテゴリー"
+
+#: mojibake/forms.py:24 mojibake/templates/post_create.html:62
+msgid "Category (ja)"
+msgstr "カテゴリー"
+
+#: mojibake/forms.py:25 mojibake/templates/post_create.html:73
+msgid "Tags (en)"
+msgstr "タグ（英）"
+
+#: mojibake/forms.py:26 mojibake/templates/post_create.html:82
 msgid "Tags (ja)"
 msgstr "タグ"
 
@@ -116,9 +131,8 @@ msgstr "書き込み"
 msgid "Categories"
 msgstr "カテゴリー"
 
-#: mojibake/templates/base.html:57 mojibake/templates/post_create.html:60
-#: mojibake/templates/tags.html:3 mojibake/templates/tags.html:10
-#: mojibake/templates/translate.html:3
+#: mojibake/templates/base.html:57 mojibake/templates/tags.html:3
+#: mojibake/templates/tags.html:10 mojibake/templates/translate.html:3
 msgid "Tags"
 msgstr "タグ"
 
@@ -187,15 +201,19 @@ msgstr "ログインしたままにする"
 msgid "Slug"
 msgstr "ユーアールエル"
 
-#: mojibake/templates/post_create.html:44
-msgid "Published date"
-msgstr "出版された日付"
+#: mojibake/templates/post_create.html:33
+msgid "Body (en)"
+msgstr "本文（英）"
 
-#: mojibake/templates/post_create.html:52
-msgid "Category"
-msgstr "カテゴリー"
+#: mojibake/templates/post_create.html:34
+msgid "Body (ja)"
+msgstr "本文"
 
-#: mojibake/templates/post_create.html:67
+#: mojibake/templates/post_create.html:53
+msgid "Category (en)"
+msgstr "カテゴリー（英）"
+
+#: mojibake/templates/post_create.html:91
 msgid "Submit"
 msgstr "投稿"
 

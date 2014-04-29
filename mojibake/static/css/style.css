@@ -405,6 +405,12 @@
 					border: 0;
 				}
 
+		.inline-form-element
+		{
+			float: left;
+			width: 50%;
+		}
+
 	/* Tables */
 
 		table

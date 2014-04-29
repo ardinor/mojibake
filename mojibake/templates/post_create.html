@@ -12,13 +12,27 @@
         <form role="form" method="POST" action="">
             {{ form.hidden_tag() }}
 
-            <label>{{ _('Title') }}</label>
-            {{ form.title(size=20) }}
-            {% for error in form.errors.title %}
-            <div class="alert-error">
-                <p>{{ error }}</p>
+            <div class="inline-form-element">
+                <label>{{ _('Title (en)') }}</label>
+                {{ form.title(size=20) }}
+                {% for error in form.errors.title %}
+                <div class="alert-error">
+                    <p>{{ error }}</p>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+
+            <div class="inline-form-element">
+                <label>{{ _('Title (ja)') }}</label>
+                {{ form.title_ja(size=20) }}
+                {% for error in form.errors.title_ja %}
+                <div class="alert-error">
+                    <p>{{ error }}</p>
+                </div>
+                {% endfor %}
+            </div>
+
+
 
             <label>{{ _('Slug') }}</label>
             {{ form.slug(size=20) }}
@@ -30,8 +44,8 @@
 
             <div id="tabs">
                 <ul>
-                  <li><a href="#body_tab">Body</a></li>
-                  <li><a href="#body_ja_tab">本文</a></li>
+                  <li><a href="#body_tab">{{ _('Body (en)') }}</a></li>
+                  <li><a href="#body_ja_tab">{{ _('Body (ja)') }}</a></li>
                 </ul>
                 <div id="body_tab">
                     {{ form.body }}
@@ -49,21 +63,53 @@
             </div>
             {% endfor %}
 
-            <label>{{ _('Category') }}</label>
-            {{ form.category }}
-            {% for error in form.errors.category %}
-            <div class="alert-error">
-                <p>{{ error }}</p>
+            <div class="inline-form-element">
+                <label>{{ _('Category (en)') }}</label>
+                {{ form.category }}
+                {% for error in form.errors.category %}
+                <div class="alert-error">
+                    <p>{{ error }}</p>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+            <div class="inline-form-element">
+                <label>{{ _('Category (ja)') }}</label>
+                {{ form.category_ja }}
+                {% for error in form.errors.category_ja %}
+                <div class="alert-error">
+                    <p>{{ error }}</p>
+                </div>
+                {% endfor %}
+            </div>
 
-            <label>{{ _('Tags') }}</label>
-            {{ form.tags }}
-            {% for error in form.errors.tags %}
+
+            <div class="inline-form-element">
+                <label>{{ _('Tags (en)') }}</label>
+                {{ form.tags }}
+                {% for error in form.errors.tags %}
+                <div class="alert-error">
+                    <p>{{ error.text }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="inline-form-element">
+                <label>{{ _('Tags (ja)') }}</label>
+                {{ form.tags_ja }}
+                {% for error in form.errors.tags_ja %}
+                <div class="alert-error">
+                    <p>{{ error.text }}</p>
+                </div>
+                {% endfor %}
+            </div>
+
+
+            <label>{{ form.visible }} {{ _('Publish') }}</label>
+            {% for error in form.errors.visible %}
             <div class="alert-error">
                 <p>{{ error.text }}</p>
             </div>
             {% endfor %}
+
             <button class="button" type="submit"><span class="fa fa-save"></span> {{ _('Submit') }}</button>
         </form>
     </div>

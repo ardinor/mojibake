@@ -14,13 +14,14 @@ class LoginForm(Form):
 
 
 class PostForm(Form):
-    title = TextField(gettext('Title'), id='post_title', validators=[DataRequired(), Length(max=255)])
+    title = TextField(gettext('Title (en)'), id='post_title', validators=[DataRequired(), Length(max=255)])
+    title_ja = TextField(gettext('Title (ja)'), id='post_title_ja', validators=[Length(max=255)])
     slug = TextField('Slug', id='post_slug', validators=[DataRequired(), Length(max=255)])
     body = TextAreaField('Body', id='post_body')
     body_ja = TextAreaField('本文', id='post_body_ja')
-    #visible = BooleanField('Visible')
     date = DateTimeField(gettext('Published date'), id='post_date', format='%d-%m-%Y')
     category = TextField(gettext('Category'), id='post_category')
-    ja_category = TextField(gettext('Category (ja)'), id='post_category_ja')
+    category_ja = TextField(gettext('Category (ja)'), id='post_category_ja')
     tags = TextField(gettext('Tags (en)'), id='post_tags')
-    ja_tags = TextField(gettext('Tags (ja)'), id='post_tags_ja')
+    tags_ja = TextField(gettext('Tags (ja)'), id='post_tags_ja')
+    visible = BooleanField(gettext('Publish'))
