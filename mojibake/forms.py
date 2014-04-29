@@ -4,6 +4,7 @@ from flask_wtf import Form
 from wtforms import TextField, BooleanField, PasswordField, \
     TextAreaField, DateTimeField
 from wtforms.validators import DataRequired, Length
+from flask.ext.babel import gettext
 
 
 class LoginForm(Form):
@@ -13,11 +14,13 @@ class LoginForm(Form):
 
 
 class PostForm(Form):
-    title = TextField('Title', id='post_title', validators=[DataRequired(), Length(max=255)])
+    title = TextField(gettext('Title'), id='post_title', validators=[DataRequired(), Length(max=255)])
     slug = TextField('Slug', id='post_slug', validators=[DataRequired(), Length(max=255)])
     body = TextAreaField('Body', id='post_body')
     body_ja = TextAreaField('本文', id='post_body_ja')
     #visible = BooleanField('Visible')
-    date = DateTimeField('Published date', id='post_date', format='%d-%m-%Y')
-    category = TextField('Category', id='post_category')
-    tags = TextField('Tags', id='post_tags')
+    date = DateTimeField(gettext('Published date'), id='post_date', format='%d-%m-%Y')
+    category = TextField(gettext('Category'), id='post_category')
+    ja_category = TextField(gettext('Category (ja)'), id='post_category_ja')
+    tags = TextField(gettext('Tags (en)'), id='post_tags')
+    ja_tags = TextField(gettext('Tags (ja)'), id='post_tags_ja')

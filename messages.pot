@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-04-16 16:25+1000\n"
+"POT-Creation-Date: 2014-04-29 12:27+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,14 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
+
+#: mojibake/forms.py:17 mojibake/templates/post_create.html:15
+msgid "Title"
+msgstr ""
+
+#: mojibake/forms.py:26
+msgid "Tags (ja)"
+msgstr ""
 
 #: mojibake/views.py:271
 msgid "Logged in successfully."
@@ -166,10 +174,6 @@ msgstr ""
 
 #: mojibake/templates/login.html:31
 msgid "Remember Me"
-msgstr ""
-
-#: mojibake/templates/post_create.html:15
-msgid "Title"
 msgstr ""
 
 #: mojibake/templates/post_create.html:23
