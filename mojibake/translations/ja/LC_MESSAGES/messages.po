@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Mojibake\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-04-29 12:41+1000\n"
-"PO-Revision-Date: 2014-04-29 12:42+1000\n"
+"POT-Creation-Date: 2014-04-30 10:55+1000\n"
+"PO-Revision-Date: 2014-04-30 11:00+1000\n"
 "Last-Translator: Jordan <jordan@defestri.org>\n"
 "Language-Team: ja <jordan@defestri.org>\n"
 "Language: ja\n"
@@ -20,11 +20,15 @@ msgstr ""
 "X-Generator: Poedit 1.6.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: mojibake/forms.py:17 mojibake/templates/post_create.html:15
-msgid "Title"
+#: mojibake/forms.py:17 mojibake/templates/post_create.html:16
+msgid "Title (en)"
+msgstr "題名（英）"
+
+#: mojibake/forms.py:18 mojibake/templates/post_create.html:26
+msgid "Title (ja)"
 msgstr "題名"
 
-#: mojibake/forms.py:22 mojibake/templates/post_create.html:44
+#: mojibake/forms.py:22 mojibake/templates/post_create.html:58
 msgid "Published date"
 msgstr "出版された日付"
 
@@ -32,23 +36,27 @@ msgstr "出版された日付"
 msgid "Category"
 msgstr "カテゴリー"
 
-#: mojibake/forms.py:24 mojibake/templates/post_create.html:62
+#: mojibake/forms.py:24 mojibake/templates/post_create.html:76
 msgid "Category (ja)"
 msgstr "カテゴリー"
 
-#: mojibake/forms.py:25 mojibake/templates/post_create.html:73
+#: mojibake/forms.py:25 mojibake/templates/post_create.html:87
 msgid "Tags (en)"
 msgstr "タグ（英）"
 
-#: mojibake/forms.py:26 mojibake/templates/post_create.html:82
+#: mojibake/forms.py:26 mojibake/templates/post_create.html:96
 msgid "Tags (ja)"
 msgstr "タグ"
 
-#: mojibake/views.py:271
+#: mojibake/forms.py:27 mojibake/templates/post_create.html:106
+msgid "Publish"
+msgstr "出版する"
+
+#: mojibake/views.py:288
 msgid "Logged in successfully."
 msgstr "ログインしました。"
 
-#: mojibake/views.py:274
+#: mojibake/views.py:291
 msgid "Invalid Login"
 msgstr "ユーザ名またはパスワードが違います。"
 
@@ -61,16 +69,16 @@ msgid ""
 "There was an unexpected internal error. The administrator has been notified."
 msgstr "サーバ内部エラー。　このサイトのアドミニストレータは知らせました。"
 
-#: mojibake/templates/_macros.html:37
+#: mojibake/templates/_macros.html:36
 msgid "Posted under"
 msgstr "カテゴリー"
 
-#: mojibake/templates/_macros.html:41
+#: mojibake/templates/_macros.html:40
 #, python-format
 msgid "Posted by %(name)s on"
 msgstr "%(name)sが書き込んだ　ー"
 
-#: mojibake/templates/_macros.html:45
+#: mojibake/templates/_macros.html:44
 msgid "Tagged"
 msgstr "タグ付け"
 
@@ -111,6 +119,11 @@ msgstr ""
 #: mojibake/templates/base.html:58
 msgid "Archive"
 msgstr "アーカイブ"
+
+#: mojibake/templates/archive.html:14
+#, python-format
+msgid "%(year)s"
+msgstr "%(year)s年"
 
 #: mojibake/templates/archive_year.html:3
 #: mojibake/templates/archive_year.html:10
@@ -197,23 +210,23 @@ msgstr "パスワード"
 msgid "Remember Me"
 msgstr "ログインしたままにする"
 
-#: mojibake/templates/post_create.html:23
+#: mojibake/templates/post_create.html:37
 msgid "Slug"
 msgstr "ユーアールエル"
 
-#: mojibake/templates/post_create.html:33
+#: mojibake/templates/post_create.html:47
 msgid "Body (en)"
 msgstr "本文（英）"
 
-#: mojibake/templates/post_create.html:34
+#: mojibake/templates/post_create.html:48
 msgid "Body (ja)"
 msgstr "本文"
 
-#: mojibake/templates/post_create.html:53
+#: mojibake/templates/post_create.html:67
 msgid "Category (en)"
 msgstr "カテゴリー（英）"
 
-#: mojibake/templates/post_create.html:91
+#: mojibake/templates/post_create.html:113
 msgid "Submit"
 msgstr "投稿"
 
@@ -222,14 +235,18 @@ msgstr "投稿"
 msgid "Posts tagged \"%(tag)s\""
 msgstr "\"%(tag)s\"にタグ付けされた書き込み"
 
-#: mojibake/templates/translate.html:14
+#: mojibake/templates/translate.html:19
 msgid "Tags needing translation"
 msgstr "翻訳されていないタグ"
 
-#: mojibake/templates/translate.html:21
+#: mojibake/templates/translate.html:23 mojibake/templates/translate.html:43
+msgid "Translation"
+msgstr "翻訳"
+
+#: mojibake/templates/translate.html:40
 msgid "Categories needing translation"
 msgstr "翻訳されていないカテゴリー"
 
-#: mojibake/templates/translate.html:28
+#: mojibake/templates/translate.html:59
 msgid "Looks like everything so far has been translated!"
 msgstr "全文翻訳されました！"

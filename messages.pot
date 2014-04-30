@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-04-29 12:41+1000\n"
+"POT-Creation-Date: 2014-04-30 10:55+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
 
-#: mojibake/forms.py:17 mojibake/templates/post_create.html:15
-msgid "Title"
+#: mojibake/forms.py:17 mojibake/templates/post_create.html:16
+msgid "Title (en)"
 msgstr ""
 
-#: mojibake/forms.py:22 mojibake/templates/post_create.html:44
+#: mojibake/forms.py:18 mojibake/templates/post_create.html:26
+msgid "Title (ja)"
+msgstr ""
+
+#: mojibake/forms.py:22 mojibake/templates/post_create.html:58
 msgid "Published date"
 msgstr ""
 
@@ -29,23 +33,27 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#: mojibake/forms.py:24 mojibake/templates/post_create.html:62
+#: mojibake/forms.py:24 mojibake/templates/post_create.html:76
 msgid "Category (ja)"
 msgstr ""
 
-#: mojibake/forms.py:25 mojibake/templates/post_create.html:73
+#: mojibake/forms.py:25 mojibake/templates/post_create.html:87
 msgid "Tags (en)"
 msgstr ""
 
-#: mojibake/forms.py:26 mojibake/templates/post_create.html:82
+#: mojibake/forms.py:26 mojibake/templates/post_create.html:96
 msgid "Tags (ja)"
 msgstr ""
 
-#: mojibake/views.py:271
+#: mojibake/forms.py:27 mojibake/templates/post_create.html:106
+msgid "Publish"
+msgstr ""
+
+#: mojibake/views.py:288
 msgid "Logged in successfully."
 msgstr ""
 
-#: mojibake/views.py:274
+#: mojibake/views.py:291
 msgid "Invalid Login"
 msgstr ""
 
@@ -59,16 +67,16 @@ msgid ""
 "notified."
 msgstr ""
 
-#: mojibake/templates/_macros.html:37
+#: mojibake/templates/_macros.html:36
 msgid "Posted under"
 msgstr ""
 
-#: mojibake/templates/_macros.html:41
+#: mojibake/templates/_macros.html:40
 #, python-format
 msgid "Posted by %(name)s on"
 msgstr ""
 
-#: mojibake/templates/_macros.html:45
+#: mojibake/templates/_macros.html:44
 msgid "Tagged"
 msgstr ""
 
@@ -104,6 +112,11 @@ msgstr ""
 #: mojibake/templates/archive.html:3 mojibake/templates/archive.html:10
 #: mojibake/templates/base.html:58
 msgid "Archive"
+msgstr ""
+
+#: mojibake/templates/archive.html:14
+#, python-format
+msgid "%(year)s"
 msgstr ""
 
 #: mojibake/templates/archive_year.html:3
@@ -191,23 +204,23 @@ msgstr ""
 msgid "Remember Me"
 msgstr ""
 
-#: mojibake/templates/post_create.html:23
+#: mojibake/templates/post_create.html:37
 msgid "Slug"
 msgstr ""
 
-#: mojibake/templates/post_create.html:33
+#: mojibake/templates/post_create.html:47
 msgid "Body (en)"
 msgstr ""
 
-#: mojibake/templates/post_create.html:34
+#: mojibake/templates/post_create.html:48
 msgid "Body (ja)"
 msgstr ""
 
-#: mojibake/templates/post_create.html:53
+#: mojibake/templates/post_create.html:67
 msgid "Category (en)"
 msgstr ""
 
-#: mojibake/templates/post_create.html:91
+#: mojibake/templates/post_create.html:113
 msgid "Submit"
 msgstr ""
 
@@ -216,15 +229,19 @@ msgstr ""
 msgid "Posts tagged \"%(tag)s\""
 msgstr ""
 
-#: mojibake/templates/translate.html:14
+#: mojibake/templates/translate.html:19
 msgid "Tags needing translation"
 msgstr ""
 
-#: mojibake/templates/translate.html:21
+#: mojibake/templates/translate.html:23 mojibake/templates/translate.html:43
+msgid "Translation"
+msgstr ""
+
+#: mojibake/templates/translate.html:40
 msgid "Categories needing translation"
 msgstr ""
 
-#: mojibake/templates/translate.html:28
+#: mojibake/templates/translate.html:59
 msgid "Looks like everything so far has been translated!"
 msgstr ""
 

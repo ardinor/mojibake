@@ -5,7 +5,11 @@ jQuery(document).ready(function ($) {
     {
         $('#home_tab').addClass('active');
     }
-    if (window.location.pathname.indexOf("posts") !== -1 || window.location.pathname.indexOf("post") !== -1 )
+    if (window.location.pathname.indexOf("create") !== -1)
+    {
+        $('#newpost_tab').addClass('active');
+    }
+    else if (window.location.pathname.indexOf("posts") !== -1 || window.location.pathname.indexOf("post") !== -1 )
     {
         $('#posts_tab').addClass('active');
     }
@@ -28,6 +32,10 @@ jQuery(document).ready(function ($) {
     if (window.location.pathname.indexOf("contact") !== -1)
     {
         $('#contact_tab').addClass('active');
+    }
+    if (window.location.pathname.indexOf("translate") !== -1)
+    {
+        $('#translate_tab').addClass('active');
     }
     $("#post_body").keydown(function(e) {
       var $this, end, start;
