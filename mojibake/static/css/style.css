@@ -1347,3 +1347,7 @@ pre {
 	left: 0;
 	text-align: center;
 }
+
+.translation-header {
+	padding-bottom: 30px;
+}

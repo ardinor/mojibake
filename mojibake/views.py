@@ -14,7 +14,7 @@ import markdown
 from mojibake.app import app, db, babel, login_manager
 from mojibake.models import Post, Tag, Category, User
 from mojibake.settings import POSTS_PER_PAGE, LANGUAGES
-from mojibake.forms import PostForm, LoginForm
+from mojibake.forms import PostForm, LoginForm, TranslateForm
 
 
 def make_external(url):
@@ -267,10 +267,13 @@ def delete_post(slug):
 @app.route('/translate')
 @login_required
 def translate():
+    form = TranslateForm()
     tags = Tag.query.filter_by(name_ja=None).all()
     cats = Category.query.filter_by(name_ja=None).all()
+    if request.method == 'POST':
+        pass
     # do posts as well?
-    return render_template('translate.html', tags=tags, cats=cats)
+    return render_template('translate.html', tags=tags, cats=cats, form=form)
 
 
 @app.route("/login", methods=["GET", "POST"])
