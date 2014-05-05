@@ -219,20 +219,26 @@ def edit_post(slug):
     post = Post.query.filter_by(slug=slug).first_or_404()
     form = PostForm(obj=post)
     if form.validate_on_submit():
+
         cat = None
+        cat_ja = None
         if form.category.data:
             cat = Category.query.filter_by(name=form.category.data).first()
             if cat is None:
                 cat = Category.query.filter_by(name_ja=form.category.data).first()
                 if cat is None:
-                    # how to know if it's name or name_ja
-                    cat = Category(form.category.data)
+                    if form.category_ja.data:
+                        cat_ja = form.category_ja.data
+                    cat = Category(form.category.data, cat_ja)
                     db.session.add(cat)
                     db.session.commit()
 
         tags = []
+        tags_ja = []
         if form.tags.data:
-            for i in form.tags.data.split(';'):
+            if form.tags_ja.data:
+                tags_ja = form.tags_ja.data.split(';')
+            for index, i in enumerate(form.tags.data.split(';')):
                 tag = Tag.query.filter_by(name=i).first()
                 if tag:
                     tags.append(tag)
@@ -241,12 +247,18 @@ def edit_post(slug):
                     if tag:
                         tags.append(tag)
                     else:
-                        tag = Tag(i)
+                        #this is a bit ugly.. maybe do something better with this in the future?
+                        if len(tags_ja) >= index+1 and tags_ja != ['']:
+                            tag = Tag(i, tags_ja[index+1])
+                        else:
+                            tag = Tag(i)
+
                         db.session.add(tag)
                         db.session.commit()
                         tags.append(tag)
 
         post.title = form.title.data
+        post.title_ja = form.title_ja.data
         post.slug = form.slug.data
         post.category = cat
         post.tags = tags
@@ -255,6 +267,7 @@ def edit_post(slug):
         post.body_html = markdown.markdown(form.body.data, extensions=['codehilite'])
         post.body_ja = form.body_ja.data
         post.body_ja_html = markdown.markdown(form.body_ja.data, extensions=['codehilite'])
+        post.published = form.published.data
         db.session.commit()
 
         return redirect(url_for('post', slug=form.slug.data))

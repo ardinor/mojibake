@@ -48,7 +48,7 @@
         <p>
             <a href="{{ url_for('edit_post', slug=post.slug) }}"><button class="button"><span class="fa fa-edit"></span> {{ _('Edit') }}</button></a>
             {% if post.published == False %}
-                <span class="red-text">** {{ _('Not yet published') }} **</span>
+                <span class="red-text centre-item">** {{ _('Not yet published') }} **</span>
             {% endif %}
             <span class="pull-right">
                 <a href="{{ url_for('delete_post', slug=post.slug) }}"><button class="button"><span class="fa fa-warning"></span> {{ _('Delete') }}</button></a>

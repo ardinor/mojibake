@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Mojibake\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-04-30 10:55+1000\n"
-"PO-Revision-Date: 2014-05-02 16:33+1000\n"
+"POT-Creation-Date: 2014-05-05 11:48+1000\n"
+"PO-Revision-Date: 2014-05-05 11:50+1000\n"
 "Last-Translator: Jordan <jordan@defestri.org>\n"
 "Language-Team: Jordan <jordan@defestri.org>\n"
 "Language: ja\n"
@@ -52,11 +52,11 @@ msgstr "タグ"
 msgid "Publish"
 msgstr "出版する"
 
-#: mojibake/views.py:288
+#: mojibake/views.py:308
 msgid "Logged in successfully."
 msgstr "ログインしました。"
 
-#: mojibake/views.py:291
+#: mojibake/views.py:311
 msgid "Invalid Login"
 msgstr "ユーザ名またはパスワードが違います。"
 
@@ -81,6 +81,18 @@ msgstr "%(name)sが書き込んだ　ー"
 #: mojibake/templates/_macros.html:44
 msgid "Tagged"
 msgstr "タグ付け"
+
+#: mojibake/templates/_macros.html:49
+msgid "Edit"
+msgstr "編集する"
+
+#: mojibake/templates/_macros.html:51
+msgid "Not yet published"
+msgstr "まだ出版されていない"
+
+#: mojibake/templates/_macros.html:54
+msgid "Delete"
+msgstr "削除する"
 
 #: mojibake/templates/about.html:3 mojibake/templates/about.html:10
 #: mojibake/templates/base.html:54

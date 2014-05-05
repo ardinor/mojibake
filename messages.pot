@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-04-30 10:55+1000\n"
+"POT-Creation-Date: 2014-05-05 11:48+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,11 +49,11 @@ msgstr ""
 msgid "Publish"
 msgstr ""
 
-#: mojibake/views.py:288
+#: mojibake/views.py:308
 msgid "Logged in successfully."
 msgstr ""
 
-#: mojibake/views.py:291
+#: mojibake/views.py:311
 msgid "Invalid Login"
 msgstr ""
 
@@ -78,6 +78,18 @@ msgstr ""
 
 #: mojibake/templates/_macros.html:44
 msgid "Tagged"
+msgstr ""
+
+#: mojibake/templates/_macros.html:49
+msgid "Edit"
+msgstr ""
+
+#: mojibake/templates/_macros.html:51
+msgid "Not yet published"
+msgstr ""
+
+#: mojibake/templates/_macros.html:54
+msgid "Delete"
 msgstr ""
 
 #: mojibake/templates/about.html:3 mojibake/templates/about.html:10
