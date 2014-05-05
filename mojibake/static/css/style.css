@@ -1351,3 +1351,7 @@ pre {
 .translation-header {
 	padding-bottom: 30px;
 }
+
+.red-text {
+	color: #EF6666;
+}

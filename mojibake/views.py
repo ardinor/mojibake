@@ -23,8 +23,10 @@ def make_external(url):
 
 @app.route('/')
 def home():
-
-    posts = Post.query.filter_by(published=True).order_by(Post.date.desc()).paginate(1, POSTS_PER_PAGE, False)
+    if g.user is not None and g.user.is_authenticated():
+        posts = Post.query.order_by(Post.date.desc()).paginate(1, POSTS_PER_PAGE, False)
+    else:
+        posts = Post.query.filter_by(published=True).order_by(Post.date.desc()).paginate(1, POSTS_PER_PAGE, False)
 
     return render_template('index.html', posts=posts)
 
@@ -129,8 +131,10 @@ def category(name):
 @app.route('/posts/')
 @app.route('/posts/<page>/')
 def posts(page=1):
-
-    posts = Post.query.filter_by(published=True).order_by(Post.date.desc()).paginate(int(page), POSTS_PER_PAGE, False)
+    if g.user is not None and g.user.is_authenticated():
+        posts = Post.query.order_by(Post.date.desc()).paginate(int(page), POSTS_PER_PAGE, False)
+    else:
+        posts = Post.query.filter_by(published=True).order_by(Post.date.desc()).paginate(int(page), POSTS_PER_PAGE, False)
 
     if posts:
         return render_template('posts.html', posts=posts)
@@ -152,6 +156,9 @@ def post(slug):
 @app.route('/post/create', methods=['GET', 'POST'])
 @login_required
 def create_post():
+
+    #can't make a post without a published date?
+
     form = PostForm()
     if form.validate_on_submit():
 
@@ -183,8 +190,8 @@ def create_post():
                         tags.append(tag)
                     else:
                         #this is a bit ugly.. maybe do something better with this in the future?
-                        if len(tags_ja) >= index:
-                            tag = Tag(i, tags_ja[index])
+                        if len(tags_ja) >= index+1 and tags_ja != ['']:
+                            tag = Tag(i, tags_ja[index+1])
                         else:
                             tag = Tag(i)
 
