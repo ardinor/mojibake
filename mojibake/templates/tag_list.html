@@ -7,12 +7,16 @@
     <div class="container">
 
         <header>
+        {% if session['language'] == 'ja' and tag.name_ja %}
+            <h2>{{ _('Posts tagged "%(tag)s"', tag=tag.name_ja)}}</h2>
+        {% else %}
             <h2>{{ _('Posts tagged "%(tag)s"', tag=tag.name)}}</h2>
+        {% endif %}
         </header>
 
 {% for i in tag.posts %}
 <p>
-    <h3><a href="{{ url_for('post', slug=i.slug) }}">{{ i.title }}</a></h3>{{moment_js(i.date).format('LLLL')}}
+    <h3><a href="{{ url_for('post', slug=i.slug) }}">{% if session['language'] == 'ja' and i.title_ja %}{{ i.title_ja }}{% else %}{{ i.title }}{% endif %}</a></h3>{{moment_js(i.date).format('LLLL')}}
 </p>
 {% endfor %}
 

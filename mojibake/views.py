@@ -43,7 +43,10 @@ def contact():
 
 @app.route('/archive/')
 def archive():
-    posts = Post.query.filter_by(published=True).all()
+    if g.user is not None and g.user.is_authenticated():
+        posts = Post.query.all()
+    else:
+        posts = Post.query.filter_by(published=True).all()
     years = list(set([post.date.year for post in posts]))
 
     return render_template('archive.html', years=years)
@@ -51,7 +54,11 @@ def archive():
 
 @app.route('/archive/<year>/')
 def archive_year(year):
-    year_posts = Post.query.filter("strftime('%Y', date) = :year"). \
+    if g.user is not None and g.user.is_authenticated():
+        year_posts = Post.query.filter("strftime('%Y', date) = :year"). \
+            params(year=year).order_by('-date').all()
+    else:
+        year_posts = Post.query.filter("strftime('%Y', date) = :year"). \
             params(year=year).filter_by(published=True).order_by('-date').all()
 
     if year_posts:
@@ -100,7 +107,6 @@ def bans():
 def tags():
     tags = Tag.query.order_by('name').all()
     if g.user is None or g.user.is_authenticated() == False:
-        tags = Tag.query.order_by('name').all()
         for i in tags:
             if i.posts.filter_by(published=True).count() == 0:
                 tags.remove(i)
@@ -110,7 +116,6 @@ def tags():
 
 @app.route('/tags/<name>/')
 def tag_name(name):
-    #these still show unpublished posts
     tag = Tag.query.filter_by(name=name).first_or_404()
     if g.user is None or g.user.is_authenticated() == False:
         if tag.posts.filter_by(published=True).count() == 0:
@@ -121,13 +126,20 @@ def tag_name(name):
 @app.route('/categories/')
 def categories():
     categories = Category.query.order_by('name').all()
+    if g.user is None or g.user.is_authenticated() == False:
+        for i in categories:
+            if i.posts.filter_by(published=True).count() == 0:
+                categories.remove(i)
+
     return render_template('categories.html', categories=categories)
 
 
 @app.route('/categories/<name>/')
 def category(name):
-    #these still show unpublished posts
     category = Category.query.filter_by(name=name).first_or_404()
+    if g.user is None or g.user.is_authenticated() == False:
+        if category.posts.filter_by(published=True).count() == 0:
+            abort(404)
     return render_template('category.html', category=category)
 
 
@@ -147,8 +159,10 @@ def posts(page=1):
 
 @app.route('/post/<slug>')
 def post(slug):
-
-    post = Post.query.filter_by(slug=slug, published=True).first_or_404()
+    if g.user is not None and g.user.is_authenticated():
+        post = Post.query.filter_by(slug=slug).first_or_404()
+    else:
+        post = Post.query.filter_by(slug=slug, published=True).first_or_404()
     return render_template('post.html', post=post)
 
 
