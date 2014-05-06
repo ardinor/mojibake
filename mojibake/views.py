@@ -61,13 +61,6 @@ def archive_year(year):
         abort(404)
 
 
-@app.route('/tags/')
-def tags():
-    tags = Tag.query.order_by('name').all()
-
-    return render_template('tags.html', tags=tags)
-
-
 @app.route('/bans/')
 def bans():
 
@@ -103,29 +96,39 @@ def bans():
         sorted_breakins=sorted_breakins)
 
 
+@app.route('/tags/')
+def tags():
+    tags = Tag.query.order_by('name').all()
+    if g.user is None or g.user.is_authenticated() == False:
+        tags = Tag.query.order_by('name').all()
+        for i in tags:
+            if i.posts.filter_by(published=True).count() == 0:
+                tags.remove(i)
+
+    return render_template('tags.html', tags=tags)
+
+
 @app.route('/tags/<name>/')
 def tag_name(name):
     #these still show unpublished posts
     tag = Tag.query.filter_by(name=name).first_or_404()
+    if g.user is None or g.user.is_authenticated() == False:
+        if tag.posts.filter_by(published=True).count() == 0:
+            abort(404)
     return render_template('tag_list.html', tag=tag)
 
 
 @app.route('/categories/')
 def categories():
     categories = Category.query.order_by('name').all()
-
     return render_template('categories.html', categories=categories)
 
 
 @app.route('/categories/<name>/')
 def category(name):
     #these still show unpublished posts
-    category = Category.query.filter_by(name=name).first()
-
-    if category:
-        return render_template('category.html', category=category)
-    else:
-        abort(404)
+    category = Category.query.filter_by(name=name).first_or_404()
+    return render_template('category.html', category=category)
 
 
 @app.route('/posts/')
@@ -145,12 +148,8 @@ def posts(page=1):
 @app.route('/post/<slug>')
 def post(slug):
 
-    post = Post.query.filter_by(slug=slug, published=True).first()
-
-    if post:
-        return render_template('post.html', post=post)
-    else:
-        abort(404)
+    post = Post.query.filter_by(slug=slug, published=True).first_or_404()
+    return render_template('post.html', post=post)
 
 
 @app.route('/post/create', methods=['GET', 'POST'])
@@ -330,7 +329,7 @@ def change_language(language):
 def recent_feed():
     feed = AtomFeed('Recent Articles',
                     feed_url=request.url, url=request.url_root)
-    posts = Post.query.order_by(Post.date.desc()).all()
+    posts = Post.query.filter_by(published=True).order_by(Post.date.desc()).all()
     for post in posts:
         feed.add(post.title, post.body[:500] + '\n\n....',
                  content_type='html',
@@ -345,6 +344,7 @@ def recent_feed():
 def sitemap():
     map_pages = []
     ten_days_ago=(datetime.datetime.now() - datetime.timedelta(days=10)).date().isoformat()
+    #this lists all the admin views as well, need to remove them
     for rule in app.url_map.iter_rules():
       if "GET" in rule.methods and len(rule.arguments) == 0:
           map_pages.append([rule.rule,ten_days_ago])
@@ -359,7 +359,7 @@ def sitemap():
         url = url_for('category', name=category.name)
         map_pages.append([url, ten_days_ago])
 
-    posts = Post.query.all()
+    posts = Post.query.filter_by(published=True).all()
     for post in posts:
         url = url_for('post', slug=post.slug)
         map_pages.append([url, ten_days_ago])

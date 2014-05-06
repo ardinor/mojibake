@@ -11,9 +11,8 @@
         </header>
 
             {% for i in tags %}
-            <h3><a href="{{ url_for('tag_name', name=i.name) }}">{{ i.name }} ({{ i.posts.count() }} {{ _('posts')}})</a></h3>
+            <h3><a href="{{ url_for('tag_name', name=i.name) }}">{% if session['language'] == 'ja' and i.name_ja %}{{ i.name_ja }}{% else %}{{ i.name }}{% endif %} ({{ i.posts.count() }} {{ _('posts')}})</a></h3>
             {% endfor %}
-
     </div>
 </section>
 {% endblock %}

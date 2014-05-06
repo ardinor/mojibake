@@ -7,12 +7,18 @@
     <div class="container">
 
         <header>
+            {% if session['language'] == 'ja' and category.name_ja %}
+            <h2>{{ _('Posts under "%(category)s"', category=category.name_ja) }}</h2>
+            {% else %}
             <h2>{{ _('Posts under "%(category)s"', category=category.name) }}</h2>
+            {% endif %}
+
         </header>
 
             {% for i in category.posts %}
             <p>
-                <h3><a href="{{ url_for('post', slug=i.slug) }}">{{ i.title }}</a></h3>Posted on: {{moment_js(i.date).format('LLLL')}}
+                <h3><a href="{{ url_for('post', slug=i.slug) }}">{% if session['language'] == 'ja' and i.title_ja %}{{ i.title_ja }}{% else %}{{ i.title }}{% endif %}</a></h3>
+                {{ _('Posted on: %(date)s', date=moment_js(i.date).format('LLLL')) }}
             </p>
             {% endfor %}
 
