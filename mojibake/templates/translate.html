@@ -10,6 +10,11 @@
             <h2>{{ _('Translate') }}</h2>
         </header>
 
+        {% if tags|length == 0 and cats|length == 0 %}
+        <p>{{ _('Looks like everything so far has been translated!')}}</p>
+
+        {% else %}
+
         <form role="form" method="POST" action="">
             {{ form.hidden_tag() }}
 
@@ -29,7 +34,7 @@
                 <a href="{{ url_for('tag_name', name=i.name) }}">{{ i.name }}</a>
             </div>
             <div class="inline-form-element">
-                <input id="" type="text">
+                <input name="tag_{{ i.name }}_ja" id="tag_{{ i.name }}_ja" type="text">
             </div>
             {% endfor %}
             {% endif %}
@@ -49,16 +54,15 @@
                 <a href="{{ url_for('category', name=i.name) }}">{{ i.name }}</a>
             </div>
             <div class="inline-form-element">
-                <input id="" type="text">
+                <input name="cat_{{ i.name }}_ja" id="cat_{{ i.name }}_ja" type="text">
             </div>
             {% endfor %}
             {% endif %}
+
+            <button class="button" type="submit"><span class="fa fa-save"></span> {{ _('Submit') }}</button>
          </form>
 
-        {% if tags|length == 0 and cats|length == 0 %}
-        <p>{{ _('Looks like everything so far has been translated!')}}</p>
-        {% endif %}
-
+         {% endif %}
 
     </div>
 </section>

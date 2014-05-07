@@ -29,3 +29,6 @@ class PostForm(Form):
 
 class TranslateForm(Form):
     title = TextField('Title')
+    #tags = []
+    #for i in tags:
+    #    tags.append(TextField(i.name))
