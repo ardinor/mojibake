@@ -10,7 +10,7 @@
             <h2>{{ _('Translate') }}</h2>
         </header>
 
-        {% if tags|length == 0 and cats|length == 0 %}
+        {% if tags|length == 0 and cats|length == 0 and posts|length == 0%}
         <p>{{ _('Looks like everything so far has been translated!')}}</p>
 
         {% else %}
@@ -21,11 +21,11 @@
             {% if tags %}
             <div class="translation-header">
                 <div class="inline-form-element translation-header">
-                    <h4>{{ _('Tags needing translation') }}</h4>
+                    <h3>{{ _('Tags needing translation') }}</h3>
                 </div>
 
                 <div class="inline-form-element translation-header">
-                    <h4>{{ _('Translation')}}</h4>
+                    <h3>{{ _('Translation')}}</h3>
                 </div>
             </div>
 
@@ -42,10 +42,10 @@
             {% if cats %}
             <div class="translation-header">
                 <div class="inline-form-element translation-header">
-                    <h4>{{ _('Categories needing translation') }}</h4>
+                    <h3>{{ _('Categories needing translation') }}</h3>
                 </div>
                 <div class="inline-form-element translation-header">
-                    <h4>{{ _('Translation')}}</h4>
+                    <h3>{{ _('Translation')}}</h3>
                 </div>
             </div>
 
@@ -61,6 +61,22 @@
 
             <button class="button" type="submit"><span class="fa fa-save"></span> {{ _('Submit') }}</button>
          </form>
+    </div>
+</section>
+
+         {% if posts %}
+<div class="post-divider"></div>
+<section class="translate">
+    <div class="container">
+            <h3>{{ _('Posts in need of translation') }}</h3>
+
+
+         {% for i in posts %}
+            <p>
+                <a href="{{ url_for('edit_post', slug=i.slug) }}">{% if session['language'] == 'ja' and i.title_ja %}{{ i.title_ja }}{% else %}{{ i.title }}{% endif %}</a>{% if i.published == False %} - {{ _('Not yet published') }}{% endif %}
+            </p>
+         {% endfor %}
+         {% endif %}
 
          {% endif %}
 

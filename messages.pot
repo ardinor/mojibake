@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-05-05 11:48+1000\n"
+"POT-Creation-Date: 2014-05-07 12:21+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,11 +49,11 @@ msgstr ""
 msgid "Publish"
 msgstr ""
 
-#: mojibake/views.py:308
+#: mojibake/views.py:339
 msgid "Logged in successfully."
 msgstr ""
 
-#: mojibake/views.py:311
+#: mojibake/views.py:342
 msgid "Invalid Login"
 msgstr ""
 
@@ -84,7 +84,7 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: mojibake/templates/_macros.html:51
+#: mojibake/templates/_macros.html:51 mojibake/templates/translate.html:76
 msgid "Not yet published"
 msgstr ""
 
@@ -183,9 +183,14 @@ msgstr ""
 msgid "posts"
 msgstr ""
 
-#: mojibake/templates/category.html:10
+#: mojibake/templates/category.html:11 mojibake/templates/category.html:13
 #, python-format
 msgid "Posts under \"%(category)s\""
+msgstr ""
+
+#: mojibake/templates/category.html:21
+#, python-format
+msgid "Posted on: %(date)s"
 msgstr ""
 
 #: mojibake/templates/contact.html:3 mojibake/templates/contact.html:10
@@ -232,28 +237,32 @@ msgstr ""
 msgid "Category (en)"
 msgstr ""
 
-#: mojibake/templates/post_create.html:113
+#: mojibake/templates/post_create.html:113 mojibake/templates/translate.html:62
 msgid "Submit"
 msgstr ""
 
-#: mojibake/templates/tag_list.html:10
+#: mojibake/templates/tag_list.html:11 mojibake/templates/tag_list.html:13
 #, python-format
 msgid "Posts tagged \"%(tag)s\""
 msgstr ""
 
-#: mojibake/templates/translate.html:19
+#: mojibake/templates/translate.html:14
+msgid "Looks like everything so far has been translated!"
+msgstr ""
+
+#: mojibake/templates/translate.html:24
 msgid "Tags needing translation"
 msgstr ""
 
-#: mojibake/templates/translate.html:23 mojibake/templates/translate.html:43
+#: mojibake/templates/translate.html:28 mojibake/templates/translate.html:48
 msgid "Translation"
 msgstr ""
 
-#: mojibake/templates/translate.html:40
+#: mojibake/templates/translate.html:45
 msgid "Categories needing translation"
 msgstr ""
 
-#: mojibake/templates/translate.html:59
-msgid "Looks like everything so far has been translated!"
+#: mojibake/templates/translate.html:71
+msgid "Posts in need of translation"
 msgstr ""
 

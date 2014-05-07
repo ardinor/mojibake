@@ -300,8 +300,6 @@ def delete_post(slug):
 @app.route('/translate', methods=['GET', 'POST'])
 @login_required
 def translate():
-    #tags = Tag.query.filter_by(name_ja=None).all()
-
     form = TranslateForm()
     if request.method == 'POST':
         req_dict = request.form.to_dict()
@@ -323,10 +321,10 @@ def translate():
 
     tags = Tag.query.filter_by(name_ja=None).all()
     cats = Category.query.filter_by(name_ja=None).all()
+    posts = Post.query.filter_by(body_ja=None).all()
 
-        #request.form
-    # do posts as well?
-    return render_template('translate.html', tags=tags, cats=cats, form=form)
+    return render_template('translate.html', tags=tags, cats=cats, form=form,
+        posts=posts)
 
 
 @app.route("/login", methods=["GET", "POST"])

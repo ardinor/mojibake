@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Mojibake\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-05-05 11:48+1000\n"
-"PO-Revision-Date: 2014-05-05 11:50+1000\n"
+"POT-Creation-Date: 2014-05-07 12:21+1000\n"
+"PO-Revision-Date: 2014-05-07 12:21+1000\n"
 "Last-Translator: Jordan <jordan@defestri.org>\n"
 "Language-Team: Jordan <jordan@defestri.org>\n"
 "Language: ja\n"
@@ -52,11 +52,11 @@ msgstr "タグ"
 msgid "Publish"
 msgstr "出版する"
 
-#: mojibake/views.py:308
+#: mojibake/views.py:339
 msgid "Logged in successfully."
 msgstr "ログインしました。"
 
-#: mojibake/views.py:311
+#: mojibake/views.py:342
 msgid "Invalid Login"
 msgstr "ユーザ名またはパスワードが違います。"
 
@@ -86,7 +86,7 @@ msgstr "タグ付け"
 msgid "Edit"
 msgstr "編集する"
 
-#: mojibake/templates/_macros.html:51
+#: mojibake/templates/_macros.html:51 mojibake/templates/translate.html:76
 msgid "Not yet published"
 msgstr "まだ出版されていない"
 
@@ -189,10 +189,15 @@ msgstr "アトム"
 msgid "posts"
 msgstr "書き込み"
 
-#: mojibake/templates/category.html:10
+#: mojibake/templates/category.html:11 mojibake/templates/category.html:13
 #, python-format
 msgid "Posts under \"%(category)s\""
 msgstr "\"%(category)s\"カテゴリーの書き込み"
+
+#: mojibake/templates/category.html:21
+#, python-format
+msgid "Posted on: %(date)s"
+msgstr "%(date)sに書き込んだ"
 
 #: mojibake/templates/contact.html:3 mojibake/templates/contact.html:10
 msgid "Contact"
@@ -239,26 +244,31 @@ msgid "Category (en)"
 msgstr "カテゴリー（英）"
 
 #: mojibake/templates/post_create.html:113
+#: mojibake/templates/translate.html:62
 msgid "Submit"
 msgstr "投稿"
 
-#: mojibake/templates/tag_list.html:10
+#: mojibake/templates/tag_list.html:11 mojibake/templates/tag_list.html:13
 #, python-format
 msgid "Posts tagged \"%(tag)s\""
 msgstr "\"%(tag)s\"にタグ付けされた書き込み"
 
-#: mojibake/templates/translate.html:19
+#: mojibake/templates/translate.html:14
+msgid "Looks like everything so far has been translated!"
+msgstr "全文翻訳されました！"
+
+#: mojibake/templates/translate.html:24
 msgid "Tags needing translation"
 msgstr "翻訳されていないタグ"
 
-#: mojibake/templates/translate.html:23 mojibake/templates/translate.html:43
+#: mojibake/templates/translate.html:28 mojibake/templates/translate.html:48
 msgid "Translation"
 msgstr "翻訳"
 
-#: mojibake/templates/translate.html:40
+#: mojibake/templates/translate.html:45
 msgid "Categories needing translation"
 msgstr "翻訳されていないカテゴリー"
 
-#: mojibake/templates/translate.html:59
-msgid "Looks like everything so far has been translated!"
-msgstr "全文翻訳されました！"
+#: mojibake/templates/translate.html:71
+msgid "Posts in need of translation"
+msgstr "翻訳されていない書き込み"
