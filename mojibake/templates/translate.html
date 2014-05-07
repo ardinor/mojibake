@@ -61,10 +61,11 @@
 
             <button class="button" type="submit"><span class="fa fa-save"></span> {{ _('Submit') }}</button>
          </form>
+         {% endif %}
     </div>
 </section>
 
-         {% if posts %}
+{% if posts %}
 <div class="post-divider"></div>
 <section class="translate">
     <div class="container">
@@ -76,10 +77,8 @@
                 <a href="{{ url_for('edit_post', slug=i.slug) }}">{% if session['language'] == 'ja' and i.title_ja %}{{ i.title_ja }}{% else %}{{ i.title }}{% endif %}</a>{% if i.published == False %} - {{ _('Not yet published') }}{% endif %}
             </p>
          {% endfor %}
-         {% endif %}
-
-         {% endif %}
 
     </div>
 </section>
+{% endif %}
 {% endblock %}
