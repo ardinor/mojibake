@@ -6,10 +6,8 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.babel import Babel
 from flask.ext.login import LoginManager
 
-
 from mojibake.moment_js import moment_js
 from mojibake.available_languages import available_languages
-#from manage_db import ManageMetaDB
 
 app = Flask(__name__)
 app.config.from_pyfile('settings.py')

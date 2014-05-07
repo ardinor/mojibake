@@ -7,6 +7,8 @@ from settings import APP_DIR, FLATPAGES_ROOT, FLATPAGES_EXTENSION
 #from mojibake.models import Post
 #from app import manager
 
+### CURRENTLY UNUSED ###
+
 class ManageMetaDB(Command):
 
     def __init__(self, db, pages, models):

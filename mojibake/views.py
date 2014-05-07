@@ -356,22 +356,28 @@ def recent_feed():
 #Adapted from http://flask.pocoo.org/snippets/108/
 @app.route('/sitemap.xml', methods=['GET'])
 def sitemap():
+    hide_views = ['/post/create', '/post/<slug>/edit', '/post/<slug>/delete',
+                    '/translate', '/login', '/logout']
+
     map_pages = []
     ten_days_ago=(datetime.datetime.now() - datetime.timedelta(days=10)).date().isoformat()
-    #this lists all the admin views as well, need to remove them
     for rule in app.url_map.iter_rules():
-      if "GET" in rule.methods and len(rule.arguments) == 0:
-          map_pages.append([rule.rule,ten_days_ago])
+        if "GET" in rule.methods and len(rule.arguments) == 0:
+            #kind of a temporary hack, I'd like to find a better way to do this
+            if (rule.rule in hide_views) == False:
+                map_pages.append([rule.rule,ten_days_ago])
 
     tags = Tag.query.all()
     for tag in tags:
-        url = url_for('tag_name', name=tag.name)
-        map_pages.append([url, ten_days_ago])
+        if tag.posts.filter_by(published=True).count() > 0:
+            url = url_for('tag_name', name=tag.name)
+            map_pages.append([url, ten_days_ago])
 
     categories = Category.query.all()
     for category in categories:
-        url = url_for('category', name=category.name)
-        map_pages.append([url, ten_days_ago])
+        if category.posts.filter_by(published=True).count() > 0:
+            url = url_for('category', name=category.name)
+            map_pages.append([url, ten_days_ago])
 
     posts = Post.query.filter_by(published=True).all()
     for post in posts:

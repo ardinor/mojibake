@@ -12,7 +12,7 @@ class moment_js:
         return self.format(*args)
 
     def render(self, format):
-        return Markup('<script>\ndocument.write(moment("{}").{});\n</script>'.format(self.timestamp.strftime('%Y-%m-%dT%H:%M:%S Z'), format))
+        return Markup('<script>\ndocument.write(moment("{}").{});\n</script>'.format(self.timestamp.strftime('%Y-%m-%dT%H:%M Z'), format))
 
     def format(self, fmt):
         return self.render('format("{}")'.format(fmt))

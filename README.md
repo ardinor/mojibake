@@ -10,6 +10,7 @@ TO DO
 -------------------------
 - Add a Tag and Category slug? Okay with spaces in the url?
 - Add a preview view for writing posts?
+- Add search
 
 REQUIREMENTS
 -------------------------
