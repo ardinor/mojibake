@@ -78,7 +78,11 @@
             </div>
             <div class="inline-form-element">
                 <label>{{ _('Category (ja)') }}</label>
-                {{ form.category_ja }}
+                {% if form.category.data and form.category.data.name_ja %}
+                    <input id="post_category_ja" name="category_ja" type="text" value="{{ form.category.data.name_ja }}">
+                {% else %}
+                    {{ form.category_ja }}
+                {% endif %}
                 {% for error in form.errors.category_ja %}
                 <div class="alert-error">
                     <p>{{ error }}</p>
@@ -102,8 +106,8 @@
             </div>
             <div class="inline-form-element">
                 <label>{{ _('Tags (ja)') }}</label>
-                {% if form.tags_ja.data %}
-                    <input id="post_tags_ja" name="tags_ja" type="text" value="{% for i in form.tags_ja.data %}{{ i.name }}{% if form.tags_ja.data[-1] != i %};{% endif %}{% endfor %}">
+                {% if form.tags.data %}
+                    <input id="post_tags_ja" name="tags_ja" type="text" value="{% for i in form.tags.data %}{{ i.name_ja }}{% if form.tags.data[-1] != i %};{% endif %}{% endfor %}">
                 {% else %}
                     {{ form.tags_ja }}
                 {% endif %}

@@ -255,6 +255,12 @@ def edit_post(slug):
                 tag = Tag.query.filter_by(name=i).first()
                 if tag:
                     tags.append(tag)
+                    if tag.name_ja is None:
+                        if len(tags_ja) >= index+1 and tags_ja != ['']:
+                            if tags_ja[index] != 'None':
+                                tag.name_ja = tags_ja[index]
+                                db.session.add(tag)
+                                db.session.commit()
                 else:
                     tag = Tag.query.filter_by(name_ja=i).first()
                     if tag:
@@ -262,7 +268,7 @@ def edit_post(slug):
                     else:
                         #this is a bit ugly.. maybe do something better with this in the future?
                         if len(tags_ja) >= index+1 and tags_ja != ['']:
-                            tag = Tag(i, tags_ja[index+1])
+                            tag = Tag(i, tags_ja[index])
                         else:
                             tag = Tag(i)
 
@@ -289,6 +295,7 @@ def edit_post(slug):
                        form=form)
 
 
+#change this to GET?
 @app.route('/post/<slug>/delete', methods=['POST'])
 @login_required
 def delete_post(slug):
