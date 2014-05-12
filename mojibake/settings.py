@@ -15,16 +15,17 @@ def parent_dir(path):
     '''Return the parent of a directory.'''
     return os.path.abspath(os.path.join(path, os.pardir))
 
-FLATPAGES_MARKDOWN_EXTENSIONS = ['codehilite']
-FLATPAGES_ROOT = os.path.join(APP_DIR, 'content')
-FLATPAGES_EXTENSION = '.md'
+#FLATPAGES_MARKDOWN_EXTENSIONS = ['codehilite']
+#FLATPAGES_ROOT = os.path.join(APP_DIR, 'content')
+#FLATPAGES_EXTENSION = '.md'
 
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(APP_DIR, 'app.db')
 TEST_DATABASE = 'sqlite:///' + os.path.join(APP_DIR, 'test.db')
 
 LANGUAGES = {
     'en': 'English',
-    'ja': u'日本語'
+    'ja': '日本語'
 }
 
+#print(base64.b64encode(uuid.uuid4().bytes + uuid.uuid4().bytes))
 SECRET_KEY = 'SecretKeyGoesHere'
