@@ -12,6 +12,11 @@ POSTS_PER_PAGE = 3
 # where this file resides
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
 
+LANGUAGES = {
+    'en': 'English',
+    'ja': '日本語'
+}
+
 def parent_dir(path):
     '''Return the parent of a directory.'''
     return os.path.abspath(os.path.join(path, os.pardir))
@@ -19,17 +24,12 @@ def parent_dir(path):
 if DEBUG:
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(APP_DIR, 'app.db')
     TEST_DATABASE = 'sqlite:///' + os.path.join(APP_DIR, 'test.db')
+    #print(base64.b64encode(uuid.uuid4().bytes + uuid.uuid4().bytes))
+    SECRET_KEY = 'SecretKeyGoesHere'
 else:
     config = configparser.ConfigParser()
     config.read("")
     username = config.get("credentials", "username")
     password = config.get("credentials", "password")
-    SQLALCHEMY_DATABASE_URI = 'mysql:///' + username + ':' + password + '@localhost/mojibake')
-
-LANGUAGES = {
-    'en': 'English',
-    'ja': '日本語'
-}
-
-#print(base64.b64encode(uuid.uuid4().bytes + uuid.uuid4().bytes))
-SECRET_KEY = 'SecretKeyGoesHere'
+    SQLALCHEMY_DATABASE_URI = "mysql:///" + username + ":" + password + "@localhost/mojibake"
+    SECRET_KEY = config.get("credentials", "secret_key")
