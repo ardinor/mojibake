@@ -202,9 +202,9 @@ def create_post():
                     if tag:
                         tags.append(tag)
                     else:
-                        #this is a bit ugly.. maybe do something better with this in the future?
+                        #this is a bit ugly. maybe do something better with this in the future?
                         if len(tags_ja) >= index+1 and tags_ja != ['']:
-                            tag = Tag(i, tags_ja[index+1])
+                            tag = Tag(i, tags_ja[index])
                         else:
                             tag = Tag(i)
 
