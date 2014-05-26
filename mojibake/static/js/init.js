@@ -175,10 +175,11 @@
 
 						// If we found one ...
 							if (found
+							&& elements[lastId] != null
 							&&	!links.hasClass('scrollzer-locked'))
 							{
 								links.removeClass(settings.activeClassName);
-								elements[lastId].link.addClass(settings.activeClassName);
+								elements[lastId].links.addClass(settings.activeClassName);
 							}
 					});
 
