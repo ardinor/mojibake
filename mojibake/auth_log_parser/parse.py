@@ -32,7 +32,7 @@ def tz_setup():
     a = os.popen("cat /etc/timezone")   # Debian
     cat_res = a.read()
     if cat_res:
-        cat_res = cat_res.replace('ZONE="', '')
+        #cat_res = cat_res.replace('ZONE="', '')  # Debian doesn't need this
         cat_res = cat_res.replace('"\n', '')
         try:
             sys_tz = pytz.timezone(cat_res)
