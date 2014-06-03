@@ -5,8 +5,8 @@ import time
 import json
 import codecs
 import urllib.request, urllib.parse  # urllib.error
-import pyt
-zlinfrom datetime import timedelta, datetime
+import pytz
+from datetime import timedelta, datetime
 from jinja2 import Environment, FileSystemLoader
 
 from mojibake.settings import API_URL, API_KEY, LOG_DIR, SEARCH_STRING, FAIL2BAN_SEARCH_STRING
