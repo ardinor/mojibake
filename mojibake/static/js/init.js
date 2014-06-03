@@ -179,7 +179,7 @@
 							&&	!links.hasClass('scrollzer-locked'))
 							{
 								links.removeClass(settings.activeClassName);
-								elements[lastId].links.addClass(settings.activeClassName);
+								elements[lastId].link.addClass(settings.activeClassName);
 							}
 					});
 

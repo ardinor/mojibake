@@ -1,4 +1,4 @@
 from mojibake.main import app
-from config import DEBUG
+from mojibake.settings import DEBUG
 
 app.run(debug=DEBUG)
