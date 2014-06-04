@@ -12,7 +12,8 @@ import datetime
 import markdown
 
 from mojibake.app import app, db, babel, login_manager
-from mojibake.models import Post, Tag, Category, User
+from mojibake.models import Post, Tag, Category, User, \
+    IPAddr, BreakinAttempts, BannedIPs
 from mojibake.settings import POSTS_PER_PAGE, LANGUAGES
 from mojibake.forms import PostForm, LoginForm, TranslateForm
 
@@ -71,30 +72,42 @@ def archive_year(year):
 @app.route('/bans/')
 def bans():
 
-    #just fill it with filler information, this template is made elsewhere
+    #breakin_attempts = {datetime.datetime(2013, 12, 2, 20, 31, 46): ('95.183.198.46', 'nagios'),
+    #                    datetime.datetime(2013, 12, 5, 20, 56, 46): ('95.183.198.46', 'postgres'),
+    #                    datetime.datetime(2013, 12, 8, 21, 4, 46): ('95.183.198.46', 'igor'),
+    #                    datetime.datetime(2013, 12, 12, 22, 31, 46): ('211.141.113.237', 'ftpuser'),
+    #                    datetime.datetime(2013, 12, 25, 22, 48, 46): ('195.60.215.30', 'oracle')
+    #                    }
 
-    breakin_attempts = {datetime.datetime(2013, 12, 2, 20, 31, 46): ('95.183.198.46', 'nagios'),
-                        datetime.datetime(2013, 12, 5, 20, 56, 46): ('95.183.198.46', 'postgres'),
-                        datetime.datetime(2013, 12, 8, 21, 4, 46): ('95.183.198.46', 'igor'),
-                        datetime.datetime(2013, 12, 12, 22, 31, 46): ('211.141.113.237', 'ftpuser'),
-                        datetime.datetime(2013, 12, 25, 22, 48, 46): ('195.60.215.30', 'oracle')
-                        }
+    #bans = {datetime.datetime(2013, 12, 9, 21, 5, 46): '95.183.198.46',
+    #        datetime.datetime(2013, 12, 2, 21, 10, 46): '211.141.113.237',
+    #        datetime.datetime(2013, 12, 12, 22, 50, 46): '195.60.215.30'}
 
-    bans = {datetime.datetime(2013, 12, 9, 21, 5, 46): '95.183.198.46',
-            datetime.datetime(2013, 12, 2, 21, 10, 46): '211.141.113.237',
-            datetime.datetime(2013, 12, 12, 22, 50, 46): '195.60.215.30'}
-
-    ips = {'95.183.198.46': {'country':u'日本', 'region': u'大坂'},
-           '211.141.113.237': {'country':'Test', 'region': 'Test Region'},
-           '195.60.215.30': {'country':'Test', 'region': 'Test Region'}}
+    #ips = {'95.183.198.46': {'country':'日本', 'region': '大坂'},
+    #       '211.141.113.237': {'country':'Test', 'region': 'Test Region'},
+    #       '195.60.215.30': {'country':'Test', 'region': 'Test Region'}}
 
     displayed_time = 'CET'
     time_offset = '+1'
 
-    sorted_bans = sorted(bans.keys())
-    sorted_breakins = sorted(breakin_attempts.keys())
+    #sorted_bans = sorted(bans.keys())
+    #sorted_breakins = sorted(breakin_attempts.keys())
 
     last_month = datetime.datetime.now().replace(day=1) - datetime.timedelta(days=1)
+
+    breakin_attempts = BreakinAttempts.query.filter("strftime('%Y', date) = :year").params(year=last_month.year). \
+        filter("strftime('%m', date) = :month").params(month=last_month).order_by('-date').all()
+    bans = BannedIPs.query.filter("strftime('%Y', date) = :year").params(year=last_month.year). \
+        filter("strftime('%m', date) = :month").params(month=last_month).order_by('-date').all()
+
+    ip_ids = set(i.ipaddr for i in breakin_attempts)
+    ban_ips = set(i.ipaddr for i in bans)
+    # just in case there are entries in bans not in break_attempts
+    # although this should be unlikely
+    ip_ids.union(ban_ips)
+
+    ips = IPAddr.query.filter(IPAddr.id.in_(ip_ids)).all()
+
 
     return render_template('bans.html', displayed_time=displayed_time,
         time_offset=time_offset, last_month=last_month,
