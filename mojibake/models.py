@@ -115,3 +115,45 @@ class User(db.Model):
     def __repr__(self):
         return '<User %r>' % (self.username)
 
+
+class IPAddr(db.Model):
+    __tablename__ = 'ipaddr'
+    id = db.Column(db.Integer, primary_key=True)
+    ip_addr = db.Column(db.String(45), unique=True)
+    city_name = db.Column(db.String(255))
+    region = db.Column(db.String(255))
+    country = db.Column(db.String(255))
+    bans = db.relationship('BannedIPs', backref='ip', lazy='dynamic')
+    breakins = db.relationship('BreakinAttempts', backref='ip', lazy='dynamic')
+    #ban = db.Column(db.Integer, db.ForeignKey('bannedips.id'))
+
+    def __init__(self, ip_addr):
+        self.ip_addr = ip_addr
+
+    def __repr__(self):
+        return '<IP: {}>'.format(self.ip_addr)
+
+class BannedIPs(db.Model):
+    # Without setting table name we end up with a table named
+    # 'banned_i_ps'
+    __tablename__ = 'bannedips'
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.DateTime)
+    ipaddr = db.Column(db.Integer, db.ForeignKey('ipaddr.id'))
+
+    def __repr__(self):
+        return '<BannedIP: {}>'.format(self.date.strftime('%d-%m-%Y - %H:%M:%S'))
+
+
+class BreakinAttempts(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.DateTime)
+    # Some programs accept only 8 character user names
+    # The max for useradd seems to be 32 though, don't think
+    # we'll see attempts with usernames longer than that though
+    user = db.Column(db.String(32))
+    ipaddr = db.Column(db.Integer, db.ForeignKey('ipaddr.id'))
+
+    def __repr__(self):
+        return '<BreakinAttempt: {} on {}>'.format(self.user, self.date.strftime('%d-%m-%Y - %H:%M:%S'))
+

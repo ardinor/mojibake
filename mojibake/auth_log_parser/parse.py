@@ -27,8 +27,8 @@ def tz_setup():
     if time_offset > 0:
         time_offset = '+{}'.format(time_offset)
 
-	#Get zone info (aka just set the system time to UTC already)
-	#a = os.popen("cat /etc/sysconfig/clock | grep ZONE")  # RHEL
+    #Get zone info (aka just set the system time to UTC already)
+    #a = os.popen("cat /etc/sysconfig/clock | grep ZONE")  # RHEL
     a = os.popen("cat /etc/timezone")   # Debian
     cat_res = a.read()
     if cat_res:
@@ -76,9 +76,11 @@ def parse_content(content, breakin_attempt, banned_ip, last_month, auth_log):
                 if m.group('log_date')[:3] == last_month.strftime('%b'):
                     log_date = datetime.strptime(m.group('log_date'), '%b %d %H:%M:%S')
                     log_date = log_date.replace(year=last_month.year)
-                    #log_date.replace(tzinfo=sys_tz)
+                    # Set the time zone info for the system
+                    #log_date = log_date.replace(tzinfo=sys_tz)
                     # Convert it to UTC time
-                    #log_date.astimezone(pytz.utc)
+                    #log_date = log_date.astimezone(pytz.utc)
+
                     #sometimes there's multiple entries per second, since we're
                     #not that concerned about to the second accuracy just increment
                     #the seconds until we find a unique log date to put in
@@ -119,6 +121,7 @@ def read_logs(log_dir):
                 else:
                     auth_log = False
                 if os.path.splitext(i)[1] == '.gz':
+                    # Use zcat?
                     f = gzip.open(os.path.join(log_dir, i), 'r')
                     file_content = f.read()
                     split_text = file_content.split('\n')
