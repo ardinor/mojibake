@@ -75,33 +75,20 @@ def bans():
     #displayed_time = 'CET'
     #time_offset = '+1'
 
-    #last_month = datetime.datetime.now().replace(day=1) - datetime.timedelta(days=1)
-    last_month = datetime.datetime.now()
+    last_month = datetime.datetime.now().replace(day=1) - datetime.timedelta(days=1)
+    #last_month = datetime.datetime.now()  # for testing
 
     breakin_attempts = BreakinAttempts.query.filter("strftime('%Y', date) = :year").params(year=last_month.strftime('%Y')). \
         filter("strftime('%m', date) = :month").params(month=last_month.strftime('%m')).order_by('-date').all()
     bans = BannedIPs.query.filter("strftime('%Y', date) = :year").params(year=last_month.strftime('%Y')). \
         filter("strftime('%m', date) = :month").params(month=last_month.strftime('%m')).order_by('-date').all()
 
-    ip_ids = set(i.ipaddr for i in breakin_attempts)
-    ban_ips = set(i.ipaddr for i in bans)
-    # just in case there are entries in bans not in break_attempts
-    # although this should be unlikely
-    ip_ids.union(ban_ips)
-
-    ips = {}
-    if ip_ids:
-        ip_list = IPAddr.query.filter(IPAddr.id.in_(ip_ids)).all()
-
-        for i in ip_list:
-            ips[i.id] = i
-
     #displayed_time=displayed_time,
     #    time_offset=time_offset,
 
     return render_template('bans.html', last_month=last_month,
         breakin_attempts=breakin_attempts,
-        bans=bans, ips=ips)
+        bans=bans)
 
 
 @app.route('/tags/')
