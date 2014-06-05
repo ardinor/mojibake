@@ -82,11 +82,30 @@
             </div>
 
             <div id="main">
-            {% with messages = get_flashed_messages(category_filter=['success']) %}
 
-            {% endwith %}
-            {% with messages = get_flashed_messages(category_filter=['error']) %}
-            {% endwith %}
+                {% with messages = get_flashed_messages(category_filter=['success']) %}
+                    {% for message in messages %}
+
+                <div class="flashed-message">
+                    <div class="alert-success">
+                        <p>{{ message }}</p>
+                    </div>
+                </div>
+
+                    {% endfor %}
+                {% endwith %}
+                {% with messages = get_flashed_messages(category_filter=['error']) %}
+                    {% for message in messages %}
+
+                <div class="flashed-message">
+                    <div class="alert-error">
+                        <p>{{ message }}</p>
+                    </div>
+                </div>
+
+                    {% endfor %}
+                {% endwith %}
+
                 {% block content %}{% endblock %}
 
             </div>

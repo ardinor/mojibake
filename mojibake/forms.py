@@ -8,8 +8,8 @@ from flask.ext.babel import gettext
 
 
 class LoginForm(Form):
-    username = TextField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
+    username = TextField('Username', validators=[DataRequired(gettext('Enter valid username'))])
+    password = PasswordField('Password', validators=[DataRequired(gettext('Enter valid password'))])
     remember_me = BooleanField('remember_me', default=False)
 
 

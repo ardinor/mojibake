@@ -345,10 +345,10 @@ def login():
         if user:
             if pbkdf2_sha256.verify(form.password.data, user.password):
                 login_user(user, remember=form.remember_me.data)
-                flash(gettext("Logged in successfully."))
+                flash(gettext("Logged in successfully."), 'success')
                 return redirect(request.args.get("next") or url_for("home"))
         else:
-            flash(gettext("Invalid Login"))
+            flash(gettext("Invalid Login"), 'error')
             redirect(url_for('login'))
     return render_template("login.html", form=form)
 
