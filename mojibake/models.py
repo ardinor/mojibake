@@ -1,6 +1,7 @@
 from mojibake.app import db
 
 from datetime import datetime
+from passlib.hash import pbkdf2_sha256
 import markdown
 
 tags = db.Table('tags',
@@ -99,6 +100,12 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(255))
+
+    def __init__(self, username):
+        self.username = username
+
+    def set_password(self, password):
+        self.password = pbkdf2_sha256.encrypt(password)
 
     def is_authenticated(self):
         return True

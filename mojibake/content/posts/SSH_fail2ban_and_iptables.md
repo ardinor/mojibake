@@ -33,7 +33,7 @@ I was somewhat surprised to see the number of attempts on even a fairly new serv
 
 I have of course set up fail2ban which on the default settings, bans them after six failed attempts for one hour. But it seems this lot are pretty persistent. First up, let's harden fail2ban a bit, reduce the number of failed attempts to three and increase the ban time to one day.
 
-    sudo nano /etc/fail2ban/jail.local
+    sudo vim /etc/fail2ban/jail.local
 
 Scroll down to the section with bantime and maxretry and set as:
 
@@ -59,7 +59,7 @@ Now that that's taken care of, let's take it one further step. We can see there'
 
 Let's first open up the existing test rules for iptables (if you have any):
 
-    sudo nano /etc/iptables.test.rules
+    sudo vim /etc/iptables.test.rules
 
 And let's make a new section for banned IPs:
 

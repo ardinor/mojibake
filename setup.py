@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import getpass
-from passlib.hash import pbkdf2_sha256
+#from passlib.hash import pbkdf2_sha256
 
 from mojibake.app import db
 from mojibake.models import User
@@ -17,14 +17,15 @@ def get_admin_details():
         print('Passwords do match. Try again.')
         p1, p2 = pprompt()
 
-    admin_pass = pbkdf2_sha256.encrypt(p1)
+    #admin_pass = pbkdf2_sha256.encrypt(p1)
 
-    return admin_name, admin_pass
+    return admin_name, p1
 
 
 def create_admin(admin_name, admin_pass):
 
-    admin = User(username=admin_name, password=admin_pass)
+    admin = User(username=admin_name)
+    admin.set_password(admin_pass)
     db.session.add(admin)
     db.session.commit()
 

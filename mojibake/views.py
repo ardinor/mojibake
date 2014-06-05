@@ -75,8 +75,8 @@ def bans():
     #displayed_time = 'CET'
     #time_offset = '+1'
 
-    last_month = datetime.datetime.now().replace(day=1) - datetime.timedelta(days=1)
-    #last_month = datetime.datetime.now()  # for testing
+    #last_month = datetime.datetime.now().replace(day=1) - datetime.timedelta(days=1)
+    last_month = datetime.datetime.now()  # for testing
 
     breakin_attempts = BreakinAttempts.query.filter("strftime('%Y', date) = :year").params(year=last_month.strftime('%Y')). \
         filter("strftime('%m', date) = :month").params(month=last_month.strftime('%m')).order_by('-date').all()
