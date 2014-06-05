@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Mojibake\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-05-07 12:21+1000\n"
-"PO-Revision-Date: 2014-05-07 12:21+1000\n"
+"POT-Creation-Date: 2014-06-05 11:33+1000\n"
+"PO-Revision-Date: 2014-06-05 11:43+1000\n"
 "Last-Translator: Jordan <jordan@defestri.org>\n"
 "Language-Team: Jordan <jordan@defestri.org>\n"
 "Language: ja\n"
@@ -19,6 +19,16 @@ msgstr ""
 "Generated-By: Babel 1.3\n"
 "X-Generator: Poedit 1.6.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+
+#: mojibake/forms.py:11
+#, fuzzy
+msgid "Enter valid username"
+msgstr "有効なユーザ名を記入してください"
+
+#: mojibake/forms.py:12
+#, fuzzy
+msgid "Enter valid password"
+msgstr "有効なパスワードを記入してください"
 
 #: mojibake/forms.py:17 mojibake/templates/post_create.html:16
 msgid "Title (en)"
@@ -36,27 +46,27 @@ msgstr "出版された日付"
 msgid "Category"
 msgstr "カテゴリー"
 
-#: mojibake/forms.py:24 mojibake/templates/post_create.html:76
+#: mojibake/forms.py:24 mojibake/templates/post_create.html:80
 msgid "Category (ja)"
 msgstr "カテゴリー"
 
-#: mojibake/forms.py:25 mojibake/templates/post_create.html:87
+#: mojibake/forms.py:25 mojibake/templates/post_create.html:95
 msgid "Tags (en)"
 msgstr "タグ（英）"
 
-#: mojibake/forms.py:26 mojibake/templates/post_create.html:96
+#: mojibake/forms.py:26 mojibake/templates/post_create.html:108
 msgid "Tags (ja)"
 msgstr "タグ"
 
-#: mojibake/forms.py:27 mojibake/templates/post_create.html:106
+#: mojibake/forms.py:27 mojibake/templates/post_create.html:122
 msgid "Publish"
 msgstr "出版する"
 
-#: mojibake/views.py:339
+#: mojibake/views.py:348
 msgid "Logged in successfully."
 msgstr "ログインしました。"
 
-#: mojibake/views.py:342
+#: mojibake/views.py:351
 msgid "Invalid Login"
 msgstr "ユーザ名またはパスワードが違います。"
 
@@ -86,7 +96,7 @@ msgstr "タグ付け"
 msgid "Edit"
 msgstr "編集する"
 
-#: mojibake/templates/_macros.html:51 mojibake/templates/translate.html:76
+#: mojibake/templates/_macros.html:51 mojibake/templates/translate.html:77
 msgid "Not yet published"
 msgstr "まだ出版されていない"
 
@@ -142,6 +152,46 @@ msgstr "%(year)s年"
 #, python-format
 msgid "Archive for %(year)s"
 msgstr "%(year)s年のアーカイブ"
+
+#: mojibake/templates/bans.html:10
+#, fuzzy
+msgid "Break-in attempts &amp; Bans"
+msgstr "このサーバーに侵入試みと禁止された試みた侵入者"
+
+#: mojibake/templates/bans.html:14
+#, fuzzy, python-format
+msgid "For the month of %(last_month)s"
+msgstr "%(last_month)sについて"
+
+#: mojibake/templates/bans.html:17
+#, fuzzy
+msgid "Break-in attempts"
+msgstr "侵入試み"
+
+#: mojibake/templates/bans.html:21 mojibake/templates/bans.html:47
+msgid "When"
+msgstr "いつ"
+
+#: mojibake/templates/bans.html:22 mojibake/templates/login.html:15
+msgid "Username"
+msgstr "ユーザ名"
+
+#: mojibake/templates/bans.html:23 mojibake/templates/bans.html:48
+msgid "IP"
+msgstr "IP"
+
+#: mojibake/templates/bans.html:24 mojibake/templates/bans.html:49
+msgid "Location"
+msgstr "場所"
+
+#: mojibake/templates/bans.html:28 mojibake/templates/bans.html:53
+msgid "Total"
+msgstr "全部で"
+
+#: mojibake/templates/bans.html:43
+#, fuzzy
+msgid "Bans"
+msgstr "禁止された試みた侵入者"
 
 #: mojibake/templates/base.html:53
 msgid "Home"
@@ -215,10 +265,6 @@ msgstr "私のPGPの公開鍵は以下にあります。"
 msgid "Login"
 msgstr "ログイン"
 
-#: mojibake/templates/login.html:15
-msgid "Username"
-msgstr "ユーザ名"
-
 #: mojibake/templates/login.html:23
 msgid "Password"
 msgstr "パスワード"
@@ -243,7 +289,7 @@ msgstr "本文"
 msgid "Category (en)"
 msgstr "カテゴリー（英）"
 
-#: mojibake/templates/post_create.html:113
+#: mojibake/templates/post_create.html:129
 #: mojibake/templates/translate.html:62
 msgid "Submit"
 msgstr "投稿"
@@ -269,6 +315,6 @@ msgstr "翻訳"
 msgid "Categories needing translation"
 msgstr "翻訳されていないカテゴリー"
 
-#: mojibake/templates/translate.html:71
+#: mojibake/templates/translate.html:72
 msgid "Posts in need of translation"
 msgstr "翻訳されていない書き込み"
