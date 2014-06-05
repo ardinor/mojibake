@@ -14,8 +14,14 @@ class moment_js:
     def render(self, format):
         return Markup('<script>\ndocument.write(moment("{}").{});\n</script>'.format(self.timestamp.strftime('%Y-%m-%dT%H:%M Z'), format))
 
+    #def render_day_time(self, format):
+    #    return Markup('<script>\ndocument.write(moment("{}").{});\n</script>'.format(self.timestamp.strftime('%dT%H:%M:%S Z'), format))
+
     def format(self, fmt):
         return self.render('format("{}")'.format(fmt))
+
+    #def format_day_time(self, fmt):
+    #    return self.render_day_time('format("{}")').format(fmt)
 
     def calendar(self):
         return self.render('calendar()')

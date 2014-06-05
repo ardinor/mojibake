@@ -82,7 +82,13 @@
             </div>
 
             <div id="main">
+            {% with messages = get_flashed_messages(category_filter=['success']) %}
+
+            {% endwith %}
+            {% with messages = get_flashed_messages(category_filter=['error']) %}
+            {% endwith %}
                 {% block content %}{% endblock %}
+
             </div>
     {% assets "js" %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>

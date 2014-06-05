@@ -72,33 +72,16 @@ def archive_year(year):
 @app.route('/bans/')
 def bans():
 
-    #breakin_attempts = {datetime.datetime(2013, 12, 2, 20, 31, 46): ('95.183.198.46', 'nagios'),
-    #                    datetime.datetime(2013, 12, 5, 20, 56, 46): ('95.183.198.46', 'postgres'),
-    #                    datetime.datetime(2013, 12, 8, 21, 4, 46): ('95.183.198.46', 'igor'),
-    #                    datetime.datetime(2013, 12, 12, 22, 31, 46): ('211.141.113.237', 'ftpuser'),
-    #                    datetime.datetime(2013, 12, 25, 22, 48, 46): ('195.60.215.30', 'oracle')
-    #                    }
+    #displayed_time = 'CET'
+    #time_offset = '+1'
 
-    #bans = {datetime.datetime(2013, 12, 9, 21, 5, 46): '95.183.198.46',
-    #        datetime.datetime(2013, 12, 2, 21, 10, 46): '211.141.113.237',
-    #        datetime.datetime(2013, 12, 12, 22, 50, 46): '195.60.215.30'}
+    #last_month = datetime.datetime.now().replace(day=1) - datetime.timedelta(days=1)
+    last_month = datetime.datetime.now()
 
-    #ips = {'95.183.198.46': {'country':'日本', 'region': '大坂'},
-    #       '211.141.113.237': {'country':'Test', 'region': 'Test Region'},
-    #       '195.60.215.30': {'country':'Test', 'region': 'Test Region'}}
-
-    displayed_time = 'CET'
-    time_offset = '+1'
-
-    #sorted_bans = sorted(bans.keys())
-    #sorted_breakins = sorted(breakin_attempts.keys())
-
-    last_month = datetime.datetime.now().replace(day=1) - datetime.timedelta(days=1)
-
-    breakin_attempts = BreakinAttempts.query.filter("strftime('%Y', date) = :year").params(year=last_month.year). \
-        filter("strftime('%m', date) = :month").params(month=last_month).order_by('-date').all()
-    bans = BannedIPs.query.filter("strftime('%Y', date) = :year").params(year=last_month.year). \
-        filter("strftime('%m', date) = :month").params(month=last_month).order_by('-date').all()
+    breakin_attempts = BreakinAttempts.query.filter("strftime('%Y', date) = :year").params(year=last_month.strftime('%Y')). \
+        filter("strftime('%m', date) = :month").params(month=last_month.strftime('%m')).order_by('-date').all()
+    bans = BannedIPs.query.filter("strftime('%Y', date) = :year").params(year=last_month.strftime('%Y')). \
+        filter("strftime('%m', date) = :month").params(month=last_month.strftime('%m')).order_by('-date').all()
 
     ip_ids = set(i.ipaddr for i in breakin_attempts)
     ban_ips = set(i.ipaddr for i in bans)
@@ -106,14 +89,19 @@ def bans():
     # although this should be unlikely
     ip_ids.union(ban_ips)
 
-    ips = IPAddr.query.filter(IPAddr.id.in_(ip_ids)).all()
+    ips = {}
+    if ip_ids:
+        ip_list = IPAddr.query.filter(IPAddr.id.in_(ip_ids)).all()
 
+        for i in ip_list:
+            ips[i.id] = i
 
-    return render_template('bans.html', displayed_time=displayed_time,
-        time_offset=time_offset, last_month=last_month,
+    #displayed_time=displayed_time,
+    #    time_offset=time_offset,
+
+    return render_template('bans.html', last_month=last_month,
         breakin_attempts=breakin_attempts,
-        bans=bans, ips=ips, sorted_bans=sorted_bans,
-        sorted_breakins=sorted_breakins)
+        bans=bans, ips=ips)
 
 
 @app.route('/tags/')
@@ -353,11 +341,12 @@ def login():
         return redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first_or_404()
-        if pbkdf2_sha256.verify(form.password.data, user.password):
-            login_user(user, remember=form.remember_me.data)
-            flash(gettext("Logged in successfully."))
-            return redirect(request.args.get("next") or url_for("home"))
+        user = User.query.filter_by(username=form.username.data).first()
+        if user:
+            if pbkdf2_sha256.verify(form.password.data, user.password):
+                login_user(user, remember=form.remember_me.data)
+                flash(gettext("Logged in successfully."))
+                return redirect(request.args.get("next") or url_for("home"))
         else:
             flash(gettext("Invalid Login"))
             redirect(url_for('login'))

@@ -125,13 +125,22 @@ class IPAddr(db.Model):
     country = db.Column(db.String(255))
     bans = db.relationship('BannedIPs', backref='ip', lazy='dynamic')
     breakins = db.relationship('BreakinAttempts', backref='ip', lazy='dynamic')
-    #ban = db.Column(db.Integer, db.ForeignKey('bannedips.id'))
 
     def __init__(self, ip_addr):
         self.ip_addr = ip_addr
 
     def __repr__(self):
         return '<IP: {}>'.format(self.ip_addr)
+
+    def print_location(self):
+        if self.city_name and self.region and self.country:
+            return '{}, {}, {}'.format(self.city_name, self.region, self.country)
+        elif self.region and self.country:
+            return '{}, {}'.format(self.region, self.country)
+        elif self.country:
+            return '{}'.format(self.country)
+        else:
+            return '-'
 
 class BannedIPs(db.Model):
     # Without setting table name we end up with a table named
@@ -142,7 +151,7 @@ class BannedIPs(db.Model):
     ipaddr = db.Column(db.Integer, db.ForeignKey('ipaddr.id'))
 
     def __repr__(self):
-        return '<BannedIP: {}>'.format(self.date.strftime('%d-%m-%Y - %H:%M:%S'))
+        return '<BannedIP: {}>'.format(self.date.strftime('%d-%m-%Y %H:%M:%S'))
 
 
 class BreakinAttempts(db.Model):
@@ -155,5 +164,5 @@ class BreakinAttempts(db.Model):
     ipaddr = db.Column(db.Integer, db.ForeignKey('ipaddr.id'))
 
     def __repr__(self):
-        return '<BreakinAttempt: {} on {}>'.format(self.user, self.date.strftime('%d-%m-%Y - %H:%M:%S'))
+        return '<BreakinAttempt: {} on {}>'.format(self.user, self.date.strftime('%d-%m-%Y %H:%M:%S'))
 
