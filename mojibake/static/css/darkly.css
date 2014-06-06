@@ -1,0 +1,40 @@
+/*
+  Darkly Pygments Theme
+  (c) 2014 Sourcey
+  http://sourcey.com
+*/
+/*
+  Modified to work on defestri.org - ardinor
+*/
+
+.codehilite {
+  white-space: pre;
+  overflow: auto;
+  word-wrap: normal; /* horizontal scrolling */
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  padding: 10px;
+  background: #2E4A57;
+  color: #C1C2C3;
+}
+.codehilite .hll { background-color: #ffc; }
+.codehilite .gd { color: #2e3436; background-color: #0e1416; }
+.codehilite .gr { color: #eeeeec; background-color: #c00; }
+.codehilite .gi { color: #babdb6; background-color: #1f2b2d; }
+.codehilite .go { color: #2c3032; background-color: #2c3032; }
+.codehilite .kt { color: #e3e7df; }
+.codehilite .ni { color: #888a85; }
+.codehilite .c,.codehilite .cm,.codehilite .c1,.codehilite .cs { color: #8D9684; }
+.codehilite .err,.codehilite .g,.codehilite .l,.codehilite .n,.codehilite .x,.codehilite .p,.codehilite .ge,
+.codehilite .gp,.codehilite .gs,.codehilite .gt,.codehilite .ld,.codehilite .s,.codehilite .nc,.codehilite .nd,
+.codehilite .ne,.codehilite .nl,.codehilite .nn,.codehilite .nx,.codehilite .py,.codehilite .ow,.codehilite .w,.codehilite .sb,
+.codehilite .sc,.codehilite .sd,.codehilite .s2,.codehilite .se,.codehilite .sh,.codehilite .si,.codehilite .sx,.codehilite .sr,
+.codehilite .s1,.codehilite .ss,.codehilite .bp { color: #C1C2C3; }
+.codehilite .k,.codehilite .kc,.codehilite .kd,.codehilite .kn,.codehilite .kp,.codehilite .kr,
+.codehilite .nt { color: #729fcf; }
+.codehilite .cp,.codehilite .gh,.codehilite .gu,.codehilite .na,.codehilite .nf { color: #E9A94B ; }
+.codehilite .m,.codehilite .nb,.codehilite .no,.codehilite .mf,.codehilite .mh,.codehilite .mi,.codehilite .mo,
+.codehilite .il { color: #8ae234; }
+.codehilite .o { color: #989DAA; }
+.codehilite .nv,.codehilite .vc,.codehilite .vg,.codehilite .vi { color: #fff; }

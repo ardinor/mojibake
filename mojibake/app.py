@@ -53,7 +53,7 @@ css = Bundle('css/skel-noscript.css',
              'css/style.css',
              'css/style-wide.css',
              'css/jquery-ui-1.10.4.custom.css',
-             'css/zenburn.css')
+             'css/darkly.css')
 assets.register('css', css)
 
 ie8_css = Bundle('css/ie8.css')
