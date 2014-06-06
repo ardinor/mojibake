@@ -168,3 +168,8 @@ pip-log.txt
 
 #No db
 *.db
+
+#Don't bring up the web assets cache
+.webassets-cache/
+#Don't bring up the packed js
+gen/
