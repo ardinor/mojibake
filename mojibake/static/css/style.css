@@ -444,7 +444,7 @@
 
 				table.default thead
 				{
-					background: #444;
+					background: #2E4A57;
 					color: #fff;
 				}
 
@@ -460,7 +460,7 @@
 
 				table.default tr:hover
 				{
-					background: #444 !important;
+					background: #2E4A57 !important; /*#444;*/
 					color: #fff;
 				}
 

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Mojibake\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2014-06-05 11:33+1000\n"
-"PO-Revision-Date: 2014-06-05 11:43+1000\n"
+"PO-Revision-Date: 2014-06-06 11:00+1000\n"
 "Last-Translator: Jordan <jordan@defestri.org>\n"
 "Language-Team: Jordan <jordan@defestri.org>\n"
 "Language: ja\n"
@@ -86,7 +86,7 @@ msgstr "カテゴリー"
 #: mojibake/templates/_macros.html:40
 #, python-format
 msgid "Posted by %(name)s on"
-msgstr "%(name)sが書き込んだ　ー"
+msgstr "%(name)sが書き込んだ ー"
 
 #: mojibake/templates/_macros.html:44
 msgid "Tagged"
