@@ -26,7 +26,7 @@ app.jinja_env.trim_blocks = True
 #app.jinja_env.lstrip_blocks = True
 
 assets = Environment(app)
-app.config['ASSETS_DEBUG'] = True
+app.config['ASSETS_DEBUG'] = app.config['DEBUG']
 
 # css = Bundle('css/bootstrap.min.css',
 #              'css/mojibake.css')
@@ -43,7 +43,9 @@ js = Bundle('js/jquery.min.js',
                 'js/skel.min.js',
                 'js/skel-panels.min.js',
                 'js/init.js',
-                'js/mojibake.js')
+                'js/mojibake.js',
+                filters='jsmin',
+                output='gen/packed.js')
 assets.register('js', js)
 
 ie8_shiv = Bundle('js/html5shiv.js')
@@ -53,7 +55,9 @@ css = Bundle('css/skel-noscript.css',
              'css/style.css',
              'css/style-wide.css',
              'css/jquery-ui-1.10.4.custom.css',
-             'css/darkly.css')
+             'css/darkly.css',
+             ) #filters='cssmin',
+             #output='static/css/site.css'
 assets.register('css', css)
 
 ie8_css = Bundle('css/ie8.css')

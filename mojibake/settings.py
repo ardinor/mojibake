@@ -27,8 +27,9 @@ if DEBUG:
     #print(base64.b64encode(uuid.uuid4().bytes + uuid.uuid4().bytes))
     SECRET_KEY = 'SecretKeyGoesHere'
 else:
+    credentials_file = ''
     config = configparser.ConfigParser()
-    config.read("")
+    config.read(credentials_file)
     username = config.get("credentials", "username")
     password = config.get("credentials", "password")
     SQLALCHEMY_DATABASE_URI = "mysql:///" + username + ":" + password + "@localhost/mojibake"
