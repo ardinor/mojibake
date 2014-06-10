@@ -107,6 +107,9 @@ class User(db.Model):
     def set_password(self, password):
         self.password = pbkdf2_sha256.encrypt(password)
 
+    def verify_password(self, password):
+        return pbkdf2_sha256.verify(password, self.password)
+
     def is_authenticated(self):
         return True
 

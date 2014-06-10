@@ -7,7 +7,7 @@ from flask.ext.login import login_required, login_user, \
     logout_user, current_user
 from flask.ext.babel import gettext
 from werkzeug.contrib.atom import AtomFeed
-from passlib.hash import pbkdf2_sha256
+#from passlib.hash import pbkdf2_sha256
 import datetime
 import markdown
 
@@ -330,7 +330,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user:
-            if pbkdf2_sha256.verify(form.password.data, user.password):
+            if user.verify_password(form.password.data): # pbkdf2_sha256.verify(form.password.data, user.password)
                 login_user(user, remember=form.remember_me.data)
                 flash(gettext("Logged in successfully."), 'success')
                 return redirect(request.args.get("next") or url_for("home"))
