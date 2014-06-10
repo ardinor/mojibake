@@ -53,29 +53,66 @@ class Post(db.Model):
                                  backref=db.backref('posts',
                                                     lazy='dynamic'))
 
-    def __init__(self, title, slug, category, tags, date=None, body=None, body_ja=None, title_ja=None, published=False):
-
+    def __init__(self, title, slug):
         self.title = title
+        self.slug = slug
 
-        if title_ja:
-            self.title_ja = title_ja
-        self.slug = slug  #check slug is unique
 
-        if body is None and body_ja is None:
-            raise ValidationError("Both body and body_ja cannot be empty!")
+    def add_category(self, form_cat, form_cat_ja=None):
+        cat = Category.query.filter_by(name=form_cat).first()
+        if cat is None and form_cat_ja:
+            cat = Category.query.filter_by(name_ja=form_cat_ja).first()
+            if cat is None:
+                cat = Category(form_cat, form_cat_ja)
+                db.session.add(cat)
+                db.session.commit()
+        elif cat is None:
+            cat = Category(form_cat)
+            db.session.add(cat)
+            db.session.commit()
+        self.category = cat
 
+
+    def add_tags(self, form_tags, form_tags_ja=None):
+        tags = []
+        tags_ja = []
+        if form_tags:
+            if form_tags_ja:
+                tags_ja = form_tags_ja.split(';')
+            for index, i in enumerate(form_tags.split(';')):
+                tag = Tag.query.filter_by(name=i).first()
+                if tag:
+                    tags.append(tag)
+                    if tag.name_ja is None:
+                        if len(tags_ja) >= index+1 and tags_ja != ['']:
+                            if tags_ja[index] != 'None':
+                                tag.name_ja = tags_ja[index]
+                                db.session.add(tag)
+                                db.session.commit()
+                else:
+                    tag = Tag.query.filter_by(name_ja=i).first()
+                    if tag:
+                        tags.append(tag)
+                    else:
+                        #this is a bit ugly. maybe do something better with this in the future?
+                        if len(tags_ja) >= index+1 and tags_ja != ['']:
+                            tag = Tag(i, tags_ja[index])
+                        else:
+                            tag = Tag(i)
+
+                        db.session.add(tag)
+                        db.session.commit()
+                        tags.append(tag)
+            self.tags = tags
+
+
+    def add_body(self, body, body_ja=None):
         if body:
             self.body = body
             self.body_html = markdown.markdown(body, extensions=['codehilite'])
         if body_ja:
             self.body_ja = body_ja
             self.body_ja_html = markdown.markdown(body_ja, extensions=['codehilite'])
-        if date is None:
-            date = datetime.utcnow()
-        self.date = date
-        self.category = category
-        self.tags = tags
-        self.published = published
 
 
     def __repr__(self):

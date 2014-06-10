@@ -163,49 +163,15 @@ def create_post():
     form = PostForm()
     if form.validate_on_submit():
 
-        cat = None
-        cat_ja = None
-        if form.category.data:
-            cat = Category.query.filter_by(name=form.category.data).first()
-            if cat is None:
-                cat = Category.query.filter_by(name_ja=form.category.data).first()
-                if cat is None:
-                    if form.category_ja.data:
-                        cat_ja = form.category_ja.data
-                    cat = Category(form.category.data, cat_ja)
-                    db.session.add(cat)
-                    db.session.commit()
+        new_post = Post(form.title.data, form.slug.data)
 
-        tags = []
-        tags_ja = []
-        if form.tags.data:
-            if form.tags_ja.data:
-                tags_ja = form.tags_ja.data.split(';')
-            for index, i in enumerate(form.tags.data.split(';')):
-                tag = Tag.query.filter_by(name=i).first()
-                if tag:
-                    tags.append(tag)
-                else:
-                    tag = Tag.query.filter_by(name_ja=i).first()
-                    if tag:
-                        tags.append(tag)
-                    else:
-                        #this is a bit ugly. maybe do something better with this in the future?
-                        if len(tags_ja) >= index+1 and tags_ja != ['']:
-                            tag = Tag(i, tags_ja[index])
-                        else:
-                            tag = Tag(i)
+        new_post.add_category(form.category.data, form.category_ja.data)
+        new_post.add_tags(form.tags.data, form.tags_ja.data)
+        new_post.add_body(form.body.data, form.body_ja.data)
 
-                        db.session.add(tag)
-                        db.session.commit()
-                        tags.append(tag)
-
-        body = form.body.data
-        body_ja = form.body_ja.data
-
-        new_post = Post(form.title.data, form.slug.data, cat, tags,
-                        date=form.date.data, body=body, body_ja=body_ja,
-                        title_ja=form.title_ja.data, published=form.published.data)
+        new_post.date = form.date.data
+        new_post.published = form.published.data
+        new_post.title_ja = form.title_ja.data
 
         db.session.add(new_post)
         db.session.commit()
@@ -220,60 +186,16 @@ def edit_post(slug):
     post = Post.query.filter_by(slug=slug).first_or_404()
     form = PostForm(obj=post)
     if form.validate_on_submit():
-
-        cat = None
-        cat_ja = None
-        if form.category.data:
-            cat = Category.query.filter_by(name=form.category.data).first()
-            if cat is None:
-                cat = Category.query.filter_by(name_ja=form.category.data).first()
-                if cat is None:
-                    if form.category_ja.data:
-                        cat_ja = form.category_ja.data
-                    cat = Category(form.category.data, cat_ja)
-                    db.session.add(cat)
-                    db.session.commit()
-
-        tags = []
-        tags_ja = []
-        if form.tags.data:
-            if form.tags_ja.data:
-                tags_ja = form.tags_ja.data.split(';')
-            for index, i in enumerate(form.tags.data.split(';')):
-                tag = Tag.query.filter_by(name=i).first()
-                if tag:
-                    tags.append(tag)
-                    if tag.name_ja is None:
-                        if len(tags_ja) >= index+1 and tags_ja != ['']:
-                            if tags_ja[index] != 'None':
-                                tag.name_ja = tags_ja[index]
-                                db.session.add(tag)
-                                db.session.commit()
-                else:
-                    tag = Tag.query.filter_by(name_ja=i).first()
-                    if tag:
-                        tags.append(tag)
-                    else:
-                        #this is a bit ugly.. maybe do something better with this in the future?
-                        if len(tags_ja) >= index+1 and tags_ja != ['']:
-                            tag = Tag(i, tags_ja[index])
-                        else:
-                            tag = Tag(i)
-
-                        db.session.add(tag)
-                        db.session.commit()
-                        tags.append(tag)
+        # Still if you change the ja category or tag (as in add a translation),
+        # the below won't update it
+        post.add_category(form.category.data, form.category_ja.data)
+        post.add_tags(form.tags.data, form.tags_ja.data)
+        post.add_body(form.body.data, form.body_ja.data)
 
         post.title = form.title.data
         post.title_ja = form.title_ja.data
         post.slug = form.slug.data
-        post.category = cat
-        post.tags = tags
         post.date = form.date.data
-        post.body = form.body.data
-        post.body_html = markdown.markdown(form.body.data, extensions=['codehilite'])
-        post.body_ja = form.body_ja.data
-        post.body_ja_html = markdown.markdown(form.body_ja.data, extensions=['codehilite'])
         post.published = form.published.data
         db.session.commit()
 

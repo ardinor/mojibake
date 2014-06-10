@@ -12,7 +12,11 @@ class moment_js:
         return self.format(*args)
 
     def render(self, format):
-        return Markup('<script>\ndocument.write(moment("{}").{});\n</script>'.format(self.timestamp.strftime('%Y-%m-%dT%H:%M Z'), format))
+        # Maybe do something better with this in instances where timestamp is None
+        if self.timestamp:
+            return Markup('<script>\ndocument.write(moment("{}").{});\n</script>'.format(self.timestamp.strftime('%Y-%m-%dT%H:%M Z'), format))
+        else:
+            return ''
 
     #def render_day_time(self, format):
     #    return Markup('<script>\ndocument.write(moment("{}").{});\n</script>'.format(self.timestamp.strftime('%dT%H:%M:%S Z'), format))

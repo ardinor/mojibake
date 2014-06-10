@@ -14,11 +14,12 @@ class LoginForm(Form):
 
 
 class PostForm(Form):
-    title = TextField(gettext('Title (en)'), id='post_title', validators=[DataRequired(), Length(max=255)])
+    title = TextField(gettext('Title (en)'), id='post_title', validators=[DataRequired(gettext('Enter a title')), Length(max=255)])
     title_ja = TextField(gettext('Title (ja)'), id='post_title_ja', validators=[Length(max=255)])
-    slug = TextField('Slug', id='post_slug', validators=[DataRequired(), Length(max=255)])
+    slug = TextField('Slug', id='post_slug', validators=[DataRequired(gettext('Enter a slug')), Length(max=255)])
     body = TextAreaField('Body', id='post_body')
     body_ja = TextAreaField('本文', id='post_body_ja')
+    # Doesn't accept no date?
     date = DateTimeField(gettext('Published date'), id='post_date', format='%d-%m-%Y')
     category = TextField(gettext('Category'), id='post_category')
     category_ja = TextField(gettext('Category (ja)'), id='post_category_ja')
