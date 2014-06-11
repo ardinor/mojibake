@@ -9,8 +9,9 @@ import pytz
 from datetime import timedelta, datetime
 #from jinja2 import Environment, FileSystemLoader
 
-from mojibake.settings import API_URL, API_KEY, LOG_DIR, SEARCH_STRING, FAIL2BAN_SEARCH_STRING, \
-    ROOT_NOT_ALLOWED_SEARCH_STRING
+from mojibake.app import db, models
+from mojibake.settings import API_URL, API_KEY, LOG_DIR, SEARCH_STRING, \
+    FAIL2BAN_SEARCH_STRING, ROOT_NOT_ALLOWED_SEARCH_STRING
 
 DIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -148,6 +149,22 @@ def read_logs(log_dir):
 
     return breakin_attempt, banned_ip
 
+def insert_into_db(ips, breakin_attempts, bans):
+
+    ip_items = {}
+
+    for ip, location in ips.items():
+        # Query to see if already exists first
+        ip_addr = models.IPAddr.query.filter_by(ip_addr=ip).first()
+        if ip_addr is None:
+            ip_addr = models.IPAddr(ip)
+            if 'region' in location:
+                ip_addr.region = location['region']
+            ip_addr.country = location['country']
+            db.session.add(ip_addr)
+            db.session.commit()
+        ip_items[ip] = ip_addr
+
 
 def parse():
 
@@ -166,6 +183,8 @@ def parse():
         ##ip_and_location[i] = check_ip_location(i)
         # be a good citizen and only hit the site every two seconds
         time.sleep(2)
+
+    insert_into_db(ip_and_location, breakin_attempt, banned_ip)
 
     print('Building output...')
     #output_parsed_template = template.render(displayed_time=displayed_time,
