@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Mojibake\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2014-06-05 11:33+1000\n"
-"PO-Revision-Date: 2014-06-06 11:00+1000\n"
+"PO-Revision-Date: 2014-06-11 11:23+1000\n"
 "Last-Translator: Jordan <jordan@defestri.org>\n"
 "Language-Team: Jordan <jordan@defestri.org>\n"
 "Language: ja\n"
@@ -21,14 +21,12 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: mojibake/forms.py:11
-#, fuzzy
 msgid "Enter valid username"
-msgstr "有効なユーザ名を記入してください"
+msgstr "有効なユーザ名を入力してください"
 
 #: mojibake/forms.py:12
-#, fuzzy
 msgid "Enter valid password"
-msgstr "有効なパスワードを記入してください"
+msgstr "有効なパスワードを入力してください"
 
 #: mojibake/forms.py:17 mojibake/templates/post_create.html:16
 msgid "Title (en)"
