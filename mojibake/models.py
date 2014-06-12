@@ -28,7 +28,8 @@ class Category(db.Model):
     #                            lazy='dynamic')
 
     def __init__(self, name, name_ja=None):
-        self.name = name
+        if name:
+            self.name = name
         if name_ja:
             self.name_ja = name_ja
 
@@ -125,7 +126,8 @@ class Tag(db.Model):
     name_ja = db.Column(db.String(50), unique=True)
 
     def __init__(self, name, name_ja=None):
-        self.name = name
+        if name:
+            self.name = name
         if name_ja:
             self.name_ja = name_ja
 

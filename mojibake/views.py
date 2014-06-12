@@ -45,9 +45,9 @@ def contact():
 @app.route('/archive/')
 def archive():
     if g.user is not None and g.user.is_authenticated():
-        posts = Post.query.all()
+        posts = Post.query.filter(Post.date != None).all()
     else:
-        posts = Post.query.filter_by(published=True).all()
+        posts = Post.query.filter_by(published=True).filter(Post.date != None).all()
     years = list(set([post.date.year for post in posts]))
 
     return render_template('archive.html', years=years)
@@ -93,7 +93,10 @@ def bans():
 
 @app.route('/tags/')
 def tags():
-    tags = Tag.query.order_by('name').all()
+    # Shouldn't be able to make tags with no name, but just in case
+    tags = Tag.query.filter(Tag.name != None).filter(Tag.name != ''). \
+        order_by('name').all()
+
     if g.user is None or g.user.is_authenticated() == False:
         for i in tags:
             if i.posts.filter_by(published=True).count() == 0:
@@ -113,7 +116,10 @@ def tag_name(name):
 
 @app.route('/categories/')
 def categories():
-    categories = Category.query.order_by('name').all()
+    # Shouldn't be able to create categories with no name, but just in case
+    categories = Category.query.filter(Category.name != None). \
+        filter(Category.name != '').order_by('name').all()
+
     if g.user is None or g.user.is_authenticated() == False:
         for i in categories:
             if i.posts.filter_by(published=True).count() == 0:
@@ -206,11 +212,14 @@ def edit_post(slug):
 
 
 #change this to GET?
-@app.route('/post/<slug>/delete', methods=['POST'])
+@app.route('/post/<slug>/delete')
 @login_required
 def delete_post(slug):
     post = Post.query.filter_by(slug=slug).first_or_404()
     db.session.delete(post)
+    db.session.commit()
+    flash(gettext("Deleted."), 'success')
+
     return redirect(url_for('posts'))
 
 
@@ -354,3 +363,7 @@ def get_locale():
 @login_manager.user_loader
 def load_user(userid):
     return User.query.filter_by(id=userid).first()
+
+@login_manager.unauthorized_handler
+def unauthorised():
+    return render_template('unauthorised.html'), 403

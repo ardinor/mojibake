@@ -39,9 +39,11 @@
         {% if post.published == False %}
             <span class="red-text centre-item">** {{ _('Not yet published') }} **</span>
         {% else %}
-        {% autoescape false %}
-        {{ _('Posted by %(name)s on', name='<a href="{}">Jordan</a>'.format(url_for('about'))) }} {{moment_js(post.date).format('LLLL')}} - <em>{{moment_js(post.date).fromNow()}}</em>
-        {% endautoescape %}
+        {% if post.date %}
+            {% autoescape false %}
+            {{moment_js(post.date).format('LLLL')}} - <em>{{moment_js(post.date).fromNow()}}</em>
+            {% endautoescape %}
+        {% endif %}
         {% endif %}
 
         {% if post.tags %}
