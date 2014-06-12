@@ -165,6 +165,18 @@ def insert_into_db(ips, breakin_attempts, bans):
             db.session.commit()
         ip_items[ip] = ip_addr
 
+    for attempt_date, attempt_details in breakin_attempts.items:
+        new_attempt = models.BreakinAttempts(date=attempt_date,
+            user=attempt_details[1])
+        new_attempt.ipaddr = ip_items[attempt_details[0]]
+        db.session.add(new_attempt)
+        db.session.commit()
+
+    for banned_date, banned_ip in bans.items():
+        new_ban = models.BannedIPs(date=banned_date)
+        new_ban.ipaddr = ip_items[banned_ip]
+        db.session.add(new_ban)
+        db.session.commit()
 
 def parse():
 
