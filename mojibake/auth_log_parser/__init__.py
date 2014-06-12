@@ -196,9 +196,10 @@ def parse():
         # be a good citizen and only hit the site every two seconds
         time.sleep(2)
 
+    print('Inserting results into database...')
     insert_into_db(ip_and_location, breakin_attempt, banned_ip)
 
-    print('Building output...')
+    #print('Building output...')
     #output_parsed_template = template.render(displayed_time=displayed_time,
     #                                         time_offset=time_offset,
     #                                         last_month=last_month,

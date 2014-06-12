@@ -11,6 +11,8 @@ POSTS_PER_PAGE = 3
 # Assumes the app is located in the same directory
 # where this file resides
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
+# Directory to where the site will log to
+SITE_LOG_DIR = ''
 
 LANGUAGES = {
     'en': 'English',
@@ -34,6 +36,17 @@ else:
     password = config.get("credentials", "password")
     SQLALCHEMY_DATABASE_URI = "mysql:///" + username + ":" + password + "@localhost/mojibake"
     SECRET_KEY = config.get("credentials", "secret_key")
+
+    import logging
+    from logging.handlers import RotatingFileHandler
+    # Set the size limit to 50~mb
+    file_handler = RotatingFileHandler('mojibake.log', maxBytes=1024 * 1024 * 50, backupCount=5)
+    file_handler.setLevel(logging.WARNING)
+    file_handler.setFormatter(logging.Formatter(
+    '%(asctime)s %(levelname)s: %(message)s '
+    '[in %(pathname)s:%(lineno)d]'
+    ))
+    app.logger.addHandler(file_handler)
 
 ### Settings for auth_log_parser ###
 HOST_SERVER_NAME = 'defestri'
