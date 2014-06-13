@@ -1120,13 +1120,15 @@
 
 							#nav ul li a.active span:before
 							{
-								/*color: #E27689;*/
-								color: #2A9FD6;
+								/*color: #E27689;
+								color: #2A9FD6; #80B195*/
+								color: #9FEE00;
 							}
 
 					#nav ul li a:hover span:before
 					{
-						color: #2A9FD6;
+						/*color: #2A9FD6;*/
+						color: #9FEE00;
 					}
 
 					#nav ul li a.special
