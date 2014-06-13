@@ -1,5 +1,5 @@
 from flask import Blueprint, abort, g, render_template, request, \
-    redirect, flash, url_for
+    redirect, flash, url_for, session
 from flask.ext.login import login_required, login_user, \
     logout_user, current_user
 from flask.ext.babel import gettext
