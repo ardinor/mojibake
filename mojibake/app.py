@@ -18,6 +18,8 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.session_protection = "strong"
 
+celery = create_celery(app)
+
 from mojibake import models
 
 app.jinja_env.globals['moment_js'] = moment_js

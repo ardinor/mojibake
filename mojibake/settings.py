@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import os
-import configparser
 
 VERSION = 1.0
 
@@ -19,6 +18,8 @@ LANGUAGES = {
     'ja': '日本語'
 }
 
+CELERY_BROKER_URL = 'amqp://localhost'
+
 def parent_dir(path):
     '''Return the parent of a directory.'''
     return os.path.abspath(os.path.join(path, os.pardir))
@@ -29,6 +30,7 @@ if DEBUG:
     #print(base64.b64encode(uuid.uuid4().bytes + uuid.uuid4().bytes))
     SECRET_KEY = 'SecretKeyGoesHere'
 else:
+    import configparser
     credentials_file = ''
     config = configparser.ConfigParser()
     config.read(credentials_file)

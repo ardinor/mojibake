@@ -7,7 +7,6 @@ from flask.ext.login import login_required, login_user, \
     logout_user, current_user
 from flask.ext.babel import gettext
 from werkzeug.contrib.atom import AtomFeed
-#from passlib.hash import pbkdf2_sha256
 import datetime
 import markdown
 

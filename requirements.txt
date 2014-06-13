@@ -12,9 +12,14 @@ Pygments==1.6
 SQLAlchemy==0.9.4
 WTForms==1.0.5
 Werkzeug==0.9.4
+amqp==1.4.5
+anyjson==0.3.3
+billiard==3.3.0.17
+celery==3.1.12
 cssmin==0.2.0
 itsdangerous==0.24
 jsmin==2.0.9
+kombu==3.0.19
 passlib==1.6.2
 pytz==2014.2
 speaklater==1.3
