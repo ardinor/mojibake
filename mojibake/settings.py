@@ -18,7 +18,8 @@ LANGUAGES = {
     'ja': '日本語'
 }
 
-CELERY_BROKER_URL = 'amqp://localhost'
+# Celery settings
+CELERY_BROKER_URL = 'amqp:guest:guest//localhost'
 
 def parent_dir(path):
     '''Return the parent of a directory.'''

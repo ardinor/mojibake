@@ -8,6 +8,7 @@ from flask.ext.login import LoginManager
 
 from mojibake.moment_js import moment_js
 from mojibake.available_languages import available_languages
+from mojibake.tasks import create_celery
 
 app = Flask(__name__)
 app.config.from_pyfile('settings.py')
