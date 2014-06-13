@@ -11,7 +11,7 @@
         </header>
 
         {% for year in years %}
-        <h3><a href="{{ url_for('archive_year', year=year)  }}">{{ _('%(year)s', year=year )}}</a></h3>
+        <h3><a href="{{ url_for('archive.archive_year', year=year)  }}">{{ _('%(year)s', year=year )}}</a></h3>
         {% endfor %}
 
     </div>

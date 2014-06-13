@@ -14,7 +14,7 @@
 
         <p>
         {% autoescape false %}
-        {{ _('My contact details are over %(contact)shere%(endc)s and my Github is located %(github)shere%(endg)s.', contact='<a href="{}">'.format(url_for('contact')), endc='</a>', github='<a href="https://github.com/ardinor">', endg='</a>')}}
+        {{ _('My contact details are over %(contact)shere%(endc)s and my Github is located %(github)shere%(endg)s.', contact='<a href="{}">'.format(url_for('base.contact')), endc='</a>', github='<a href="https://github.com/ardinor">', endg='</a>')}}
         {% endautoescape %}
         </p>
 

@@ -11,7 +11,7 @@
         </header>
 
             {% for i in categories %}
-            <h3><a href="{{ url_for('category', name=i.name) }}">{% if session['language'] == 'ja' and i.name_ja %}{{ i.name_ja }}{% else %}{{ i.name }}{% endif %} ({{ i.posts.count() }} {{ _('posts')}})</a></h3>
+            <h3><a href="{{ url_for('category.category_item', name=i.name) }}">{% if session['language'] == 'ja' and i.name_ja %}{{ i.name_ja }}{% else %}{{ i.name }}{% endif %} ({{ i.posts.count() }} {{ _('posts')}})</a></h3>
             {% endfor %}
 
     </div>

@@ -17,7 +17,7 @@
 
             {% for i in category.posts %}
             <p>
-                <h3><a href="{{ url_for('post', slug=i.slug) }}">{% if session['language'] == 'ja' and i.title_ja %}{{ i.title_ja }}{% else %}{{ i.title }}{% endif %}</a></h3>
+                <h3><a href="{{ url_for('posts.post_item', slug=i.slug) }}">{% if session['language'] == 'ja' and i.title_ja %}{{ i.title_ja }}{% else %}{{ i.title }}{% endif %}</a></h3>
                 {{ _('Posted on: %(date)s', date=moment_js(i.date).format('LLLL')) }}
             </p>
             {% endfor %}

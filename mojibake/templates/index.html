@@ -17,7 +17,7 @@
 
 {% if posts.has_next %}
 <nav class="pagination">
-    <a class="button" href="{{ url_for('posts', page=2) }}">Show more &raquo;</a>
+    <a class="button" href="{{ url_for('posts.post_list', page=2) }}">Show more &raquo;</a>
 </nav>
 {% endif %}
 

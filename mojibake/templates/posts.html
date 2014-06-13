@@ -16,7 +16,7 @@
 {% endfor %}
 
 {% if posts.has_next or posts.has_prev %}
-{{ render_pagination(pagination=posts, endpoint='posts') }}
+{{ render_pagination(pagination=posts, endpoint='posts.post_list') }}
 {% endif %}
 
 {% endblock %}

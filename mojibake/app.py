@@ -8,7 +8,7 @@ from flask.ext.login import LoginManager
 
 from mojibake.moment_js import moment_js
 from mojibake.available_languages import available_languages
-from mojibake.tasks import create_celery
+#from mojibake.tasks import create_celery
 
 app = Flask(__name__)
 app.config.from_pyfile('settings.py')
@@ -19,7 +19,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.session_protection = "strong"
 
-celery = create_celery(app)
+#celery = create_celery(app)
 
 from mojibake import models
 

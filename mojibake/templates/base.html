@@ -32,7 +32,7 @@
         </script>
         {% endif %}
         <link rel="shortcut icon" type="image/png" href="static/favicon.ico"/>
-        <link href="{{ url_for('recent_feed') }}"
+        <link href="{{ url_for('base.recent_feed') }}"
           rel="alternate"
           title="Recent Posts"
           type="application/atom+xml">
@@ -44,24 +44,24 @@
                 <div class="top">
 
                         <div id="logo">
-                            <a href="{{ url_for('home') }}"><h1 id="title">Defestri  <img src="/static/img/defestri_blue.png" width="20" height="22" width="24" alt="Defestri"></h1></a>
+                            <a href="{{ url_for('base.home') }}"><h1 id="title">Defestri  <img src="/static/img/defestri_blue.png" width="20" height="22" width="24" alt="Defestri"></h1></a>
                             <span title="It often takes time to bear the fruit of one's actions" class="byline">桃栗三年柿八年</span>
                         </div>
 
                         <nav id="nav">
                             <ul>
-                                <li><a href="{{ url_for('home') }}" id="home_tab"><span class="fa fa-home">{{ _('Home') }}</span></a></li>
-                                <li><a href="{{ url_for('about') }}" id="about_tab"><span class="fa fa-info">{{ _('About') }}</span></a></li>
-                                <li><a href="{{ url_for('posts') }}" id="posts_tab"><span class="fa fa-comment-o">{{ _('Posts') }}</span></a></li>
-                                <li><a href="{{ url_for('categories') }}" id="categories_tab"><span class="fa fa-list">{{ _('Categories') }}</span></a></li>
-                                <li><a href="{{ url_for('tags') }}" id="tags_tab"><span class="fa fa-tags">{{ _('Tags')}}</span></a></li>
-                                <li><a href="{{ url_for('archive') }}" id="archive_tab"><span class="fa fa-calendar">{{ _('Archive') }}</span></a></li>
+                                <li><a href="{{ url_for('base.home') }}" id="home_tab"><span class="fa fa-home">{{ _('Home') }}</span></a></li>
+                                <li><a href="{{ url_for('base.about') }}" id="about_tab"><span class="fa fa-info">{{ _('About') }}</span></a></li>
+                                <li><a href="{{ url_for('posts.post_list') }}" id="posts_tab"><span class="fa fa-comment-o">{{ _('Posts') }}</span></a></li>
+                                <li><a href="{{ url_for('category.category_list') }}" id="categories_tab"><span class="fa fa-list">{{ _('Categories') }}</span></a></li>
+                                <li><a href="{{ url_for('tag.tag_list') }}" id="tags_tab"><span class="fa fa-tags">{{ _('Tags')}}</span></a></li>
+                                <li><a href="{{ url_for('archive.archive_list') }}" id="archive_tab"><span class="fa fa-calendar">{{ _('Archive') }}</span></a></li>
                                 {% if g.user.is_authenticated() %}
-                                <li><a href="{{ url_for('create_post') }}" id="newpost_tab"><span class="fa fa-pencil-square-o">{{ _('New Post') }}</span></a></li>
+                                <li><a href="{{ url_for('posts.create_post') }}" id="newpost_tab"><span class="fa fa-pencil-square-o">{{ _('New Post') }}</span></a></li>
 
-                                <li><a href="{{ url_for('translate') }}" id="translate_tab"><span class="fa fa-tasks">{{ _('Translate') }}</span></a></li>
+                                <li><a href="{{ url_for('base.translate') }}" id="translate_tab"><span class="fa fa-tasks">{{ _('Translate') }}</span></a></li>
 
-                                <li><a href="{{ url_for('logout') }}"><span class="fa fa-power-off">{{ _('Logout') }}</span></a></li>
+                                <li><a href="{{ url_for('base.logout') }}"><span class="fa fa-power-off">{{ _('Logout') }}</span></a></li>
                                 {% endif %}
                                 <li><a href="/language/{{ available_languages(session['language'])[0] }}?next={{ request.path }}" class="special"><span class="fa fa-flag-o">{{ available_languages(session['language'])[1] }}</span></a></li>
                             </ul>
@@ -73,8 +73,8 @@
 
                         <ul class="icons">
                             <li><a href="https://github.com/ardinor" class="fa fa-github solo"><span>{{ _('Github') }}</span></a></li>
-                            <li id="contact_tab"><a href="{{ url_for('contact') }}" class="fa fa-envelope solo"><span>{{ _('Email') }}</span></a></li>
-                            <li><a href="{{ url_for('recent_feed') }}" class="fa fa-rss solo"><span>{{ _('Atom') }}</span></a></li>
+                            <li id="contact_tab"><a href="{{ url_for('base.contact') }}" class="fa fa-envelope solo"><span>{{ _('Email') }}</span></a></li>
+                            <li><a href="{{ url_for('base.recent_feed') }}" class="fa fa-rss solo"><span>{{ _('Atom') }}</span></a></li>
                         </ul>
 
                 </div>

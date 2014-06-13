@@ -31,7 +31,7 @@
 
             {% for i in tags %}
             <div class="inline-form-element">
-                <a href="{{ url_for('tag_name', name=i.name) }}">{{ i.name }}</a>
+                <a href="{{ url_for('tag.tag_name', name=i.name) }}">{{ i.name }}</a>
             </div>
             <div class="inline-form-element">
                 <input name="tag_{{ i.name }}_ja" id="tag_{{ i.name }}_ja" type="text">
@@ -51,7 +51,7 @@
 
             {% for i in cats %}
             <div class="inline-form-element">
-                <a href="{{ url_for('category', name=i.name) }}">{{ i.name }}</a>
+                <a href="{{ url_for('category.category_item', name=i.name) }}">{{ i.name }}</a>
             </div>
             <div class="inline-form-element">
                 <input name="cat_{{ i.name }}_ja" id="cat_{{ i.name }}_ja" type="text">
@@ -74,7 +74,7 @@
 
          {% for i in posts %}
             <p>
-                <a href="{{ url_for('edit_post', slug=i.slug) }}">{% if session['language'] == 'ja' and i.title_ja %}{{ i.title_ja }}{% else %}{{ i.title }}{% endif %}</a>{% if i.published == False %} - {{ _('Not yet published') }}{% endif %}
+                <a href="{{ url_for('posts.edit_post', slug=i.slug) }}">{% if session['language'] == 'ja' and i.title_ja %}{{ i.title_ja }}{% else %}{{ i.title }}{% endif %}</a>{% if i.published == False %} - {{ _('Not yet published') }}{% endif %}
             </p>
          {% endfor %}
 

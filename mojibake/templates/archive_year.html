@@ -12,7 +12,7 @@
 
             {% for i in posts %}
             <p>
-                <a href="{{ url_for('post', slug=i.slug)  }}"><h3>{{ i.title }}</h3></a>{{moment_js(i.date).format('LLLL')}}
+                <a href="{{ url_for('posts.post_item', slug=i.slug)  }}"><h3>{{ i.title }}</h3></a>{{moment_js(i.date).format('LLLL')}}
             </p>
             {% endfor %}
 
