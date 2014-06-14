@@ -3,7 +3,7 @@ import os
 
 VERSION = 1.0
 
-DEBUG = True
+DEBUG = False #True
 
 POSTS_PER_PAGE = 3
 
@@ -31,14 +31,17 @@ if DEBUG:
     #print(base64.b64encode(uuid.uuid4().bytes + uuid.uuid4().bytes))
     SECRET_KEY = 'SecretKeyGoesHere'
 else:
+    #from mojibake.main import app
     import configparser
     credentials_file = ''
-    config = configparser.ConfigParser()
-    config.read(credentials_file)
-    username = config.get("credentials", "username")
-    password = config.get("credentials", "password")
-    SQLALCHEMY_DATABASE_URI = "mysql:///" + username + ":" + password + "@localhost/mojibake"
-    SECRET_KEY = config.get("credentials", "secret_key")
+    #config = configparser.ConfigParser()
+    #config.read(credentials_file)
+    #username = config.get("credentials", "username")
+    #password = config.get("credentials", "password")
+    #SQLALCHEMY_DATABASE_URI = "mysql:///" + username + ":" + password + "@localhost/mojibake"
+    SQLALCHEMY_DATABASE_URI = "mysql+oursql://jordan@localhost/mojibake"
+    #SECRET_KEY = config.get("credentials", "secret_key")
+    SECRET_KEY = "Key goes here"
 
     import logging
     from logging.handlers import RotatingFileHandler
@@ -49,7 +52,7 @@ else:
     '%(asctime)s %(levelname)s: %(message)s '
     '[in %(pathname)s:%(lineno)d]'
     ))
-    app.logger.addHandler(file_handler)
+    #app.logger.addHandler(file_handler)
 
 ### Settings for auth_log_parser ###
 HOST_SERVER_NAME = 'defestri'
