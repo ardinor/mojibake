@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: Mojibake\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2014-06-05 11:33+1000\n"
-"PO-Revision-Date: 2014-06-11 11:23+1000\n"
-"Last-Translator: Jordan <jordan@defestri.org>\n"
+"PO-Revision-Date: 2014-06-14 14:48+1000\n"
+"Last-Translator: Jordan Moeser <jordan@defestri.org>\n"
 "Language-Team: Jordan <jordan@defestri.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -152,19 +152,17 @@ msgid "Archive for %(year)s"
 msgstr "%(year)s年のアーカイブ"
 
 #: mojibake/templates/bans.html:10
-#, fuzzy
 msgid "Break-in attempts &amp; Bans"
-msgstr "このサーバーに侵入試みと禁止された試みた侵入者"
+msgstr "サーバーへの侵入未遂および侵入未遂遮断"
 
 #: mojibake/templates/bans.html:14
-#, fuzzy, python-format
+#, python-format
 msgid "For the month of %(last_month)s"
-msgstr "%(last_month)sについて"
+msgstr "%(last_month)s月間"
 
 #: mojibake/templates/bans.html:17
-#, fuzzy
 msgid "Break-in attempts"
-msgstr "侵入試み"
+msgstr "侵入未遂"
 
 #: mojibake/templates/bans.html:21 mojibake/templates/bans.html:47
 msgid "When"
@@ -187,9 +185,8 @@ msgid "Total"
 msgstr "全部で"
 
 #: mojibake/templates/bans.html:43
-#, fuzzy
 msgid "Bans"
-msgstr "禁止された試みた侵入者"
+msgstr "侵入未遂遮断"
 
 #: mojibake/templates/base.html:53
 msgid "Home"
