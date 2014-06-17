@@ -3,7 +3,7 @@ import os
 
 VERSION = 1.0
 
-DEBUG = False #True
+DEBUG = True
 
 POSTS_PER_PAGE = 3
 

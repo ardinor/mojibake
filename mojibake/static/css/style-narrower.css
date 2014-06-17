@@ -106,7 +106,7 @@
 
 	#sidePanel
 	{
-		background: #222729 url('images/overlay.png');
+		background: #2E4A57; /* #222729 url('images/overlay.png');*/
 		box-shadow: inset -0.25em 0 0.25em 0 rgba(0,0,0,0.125);
 	}
 
@@ -121,7 +121,7 @@
 			top: 0;
 			width: 100%;
 			height: 100%;
-			background: rgba(128,136,144,0.5) url('images/toggle.svg') center center no-repeat;
+			background: rgba(46,74,87,0.5) url('images/toggle.svg') center center no-repeat;
 			border-radius: 0.35em;
 			margin: 0.25em;
 		}
