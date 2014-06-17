@@ -10,7 +10,7 @@ posts = Blueprint('posts', __name__,
     template_folder='templates')
 
 @posts.route('/')
-@posts.route('/<page>/')
+@posts.route('/<int:page>/')
 def post_list(page=1):
     if g.user is not None and g.user.is_authenticated():
         posts = Post.query.order_by(Post.date.desc()).paginate(int(page), POSTS_PER_PAGE, False)
