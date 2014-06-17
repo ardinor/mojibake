@@ -5,7 +5,7 @@ from mojibake.models import Tag
 tag = Blueprint('tag', __name__,
     template_folder='templates')
 
-@tag.route('/tags/')
+@tag.route('/')
 def tag_list():
     # Shouldn't be able to make tags with no name, but just in case
     tags = Tag.query.filter(Tag.name != None).filter(Tag.name != ''). \
@@ -19,7 +19,7 @@ def tag_list():
     return render_template('tags.html', tags=tags)
 
 
-@tag.route('/tags/<name>/')
+@tag.route('/<name>/')
 def tag_name(name):
     tag = Tag.query.filter_by(name=name).first_or_404()
     if g.user is None or g.user.is_authenticated() == False:

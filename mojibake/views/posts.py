@@ -9,8 +9,8 @@ from flask.ext.login import login_required
 posts = Blueprint('posts', __name__,
     template_folder='templates')
 
-@posts.route('/posts/')
-@posts.route('/posts/<page>/')
+@posts.route('/')
+@posts.route('/<page>/')
 def post_list(page=1):
     if g.user is not None and g.user.is_authenticated():
         posts = Post.query.order_by(Post.date.desc()).paginate(int(page), POSTS_PER_PAGE, False)
@@ -23,7 +23,7 @@ def post_list(page=1):
         abort(404)
 
 
-@posts.route('/post/<slug>')
+@posts.route('/<slug>')
 def post_item(slug):
     if g.user is not None and g.user.is_authenticated():
         post = Post.query.filter_by(slug=slug).first_or_404()
@@ -32,7 +32,7 @@ def post_item(slug):
     return render_template('post.html', post=post)
 
 
-@posts.route('/post/create', methods=['GET', 'POST'])
+@posts.route('/create', methods=['GET', 'POST'])
 @login_required
 def create_post():
 
@@ -58,7 +58,7 @@ def create_post():
     return render_template('post_create.html',
                            form=form)
 
-@posts.route('/post/<slug>/edit', methods=['GET', 'POST'])
+@posts.route('/<slug>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_post(slug):
     post = Post.query.filter_by(slug=slug).first_or_404()
@@ -83,8 +83,7 @@ def edit_post(slug):
                        form=form)
 
 
-#change this to GET?
-@posts.route('/post/<slug>/delete')
+@posts.route('/<slug>/delete')
 @login_required
 def delete_post(slug):
     post = Post.query.filter_by(slug=slug).first_or_404()

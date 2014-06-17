@@ -5,6 +5,7 @@ from flask.ext.assets import Environment, Bundle
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.babel import Babel
 from flask.ext.login import LoginManager
+import jinja2_highlight
 
 from mojibake.moment_js import moment_js
 from mojibake.available_languages import available_languages
@@ -26,6 +27,8 @@ from mojibake import models
 app.jinja_env.globals['moment_js'] = moment_js
 app.jinja_env.globals['available_languages'] = available_languages
 app.jinja_env.trim_blocks = True
+app.jinja_env.add_extension('jinja2_highlight.HighlightExtension')
+app.jinja_env.globals['jinja2_highlight_divname'] = 'codehilite'
 #app.jinja_env.lstrip_blocks = True
 
 assets = Environment(app)

@@ -37,6 +37,10 @@ jQuery(document).ready(function ($) {
     {
         $('#translate_tab').addClass('active');
     }
+    if (window.location.pathname.indexOf("projects") !== -1)
+    {
+        $('#projects_tab').addClass('active');
+    }
     $("#post_body").keydown(function(e) {
       var $this, end, start;
       if (e.keyCode === 9) {

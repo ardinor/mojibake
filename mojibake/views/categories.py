@@ -5,7 +5,7 @@ from mojibake.models import Category
 category = Blueprint('category', __name__,
     template_folder='templates')
 
-@category.route('/categories/')
+@category.route('/')
 def category_list():
     # Shouldn't be able to create categories with no name, but just in case
     categories = Category.query.filter(Category.name != None). \
@@ -19,7 +19,7 @@ def category_list():
     return render_template('categories.html', categories=categories)
 
 
-@category.route('/categories/<name>/')
+@category.route('/<name>/')
 def category_item(name):
     category = Category.query.filter_by(name=name).first_or_404()
     if g.user is None or g.user.is_authenticated() == False:

@@ -6,7 +6,7 @@ from mojibake.models import BreakinAttempts, BannedIPs
 bans = Blueprint('bans', __name__,
     template_folder='templates')
 
-@bans.route('/bans/')
+@bans.route('/')
 def bans_list():
 
     #displayed_time = 'CET'

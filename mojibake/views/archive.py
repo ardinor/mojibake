@@ -5,7 +5,7 @@ from mojibake.models import Post
 archive = Blueprint('archive', __name__,
     template_folder='templates')
 
-@archive.route('/archive/')
+@archive.route('/')
 def archive_list():
     if g.user is not None and g.user.is_authenticated():
         posts = Post.query.filter(Post.date != None).all()
@@ -16,7 +16,7 @@ def archive_list():
     return render_template('archive.html', years=years)
 
 
-@archive.route('/archive/<year>/')
+@archive.route('/<year>/')
 def archive_year(year):
     if g.user is not None and g.user.is_authenticated():
         year_posts = Post.query.filter("strftime('%Y', date) = :year"). \
