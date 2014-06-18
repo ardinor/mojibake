@@ -28,7 +28,7 @@ app.jinja_env.globals['moment_js'] = moment_js
 app.jinja_env.globals['available_languages'] = available_languages
 app.jinja_env.trim_blocks = True
 app.jinja_env.add_extension('jinja2_highlight.HighlightExtension')
-app.jinja_env.globals['jinja2_highlight_divname'] = 'codehilite'
+app.jinja_env.extend(jinja2_highlight_cssclass = 'codehilite')
 #app.jinja_env.lstrip_blocks = True
 
 assets = Environment(app)

@@ -1384,3 +1384,12 @@ pre {
   /*margin-left: 25%;
   text-align: center;*/
 }
+
+/* Used for code blocks line numbering when in table format */
+.linenos {
+	width: 10px;
+	background: #2E4A57;
+	color: #C1C2C3;
+	border-right: 1px solid white;
+	text-align: center;
+}

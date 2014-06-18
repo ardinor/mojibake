@@ -11,17 +11,10 @@
         </header>
 
         <h3>{{ _('This site') }}</h3>
-        <p>{% trans flask='Flask', mojibake='MØjibДĸe', html5='html5up.net' %}Built using <a href="http://flask.pocoo.org/">{{ flask }}</a> and <a href="https://github.com/ardinor/mojibake">{{ mojibake }}</a>. HTML5 template from the folks at <a href="http://html5up.net/prologue/">{{  html5 }}</a>{% endtrans %}</p>
+        <p>{% trans flask='Flask', mojibake='MØjibДĸe', html5='html5up.net' %}Built using <a href="https://www.python.org/">Python</a>, <a href="http://flask.pocoo.org/">{{ flask }}</a> and my blogging engine <a href="https://github.com/ardinor/mojibake">{{ mojibake }}</a>. HTML5 template modified from the original located at <a href="http://html5up.net/prologue/">{{  html5 }}</a>{% endtrans %}</p>
+        <p>{% trans %}The site itself is running on a Debian 7.5 (Wheezy) VPS. The website is served by nginx and gunicorn and is using MariaDB as the database backend.{% endtrans %}</p>
 
         <h3>{{ _('Frisk') }}</h3>
-        {% highlight 'bash', True %}
-frisk --version{% endhighlight %}
-        <p>Or this</p>
-        {% highlight 'python' %}
-from fridge import Beer
-glass = Beer(lt=500)
-glass.drink(){% endhighlight %}
-        <p></p>
 
     </div>
 </section>
