@@ -1393,3 +1393,10 @@ pre {
 	border-right: 1px solid white;
 	text-align: center;
 }
+
+.small {
+	font-size: 0.8em;
+	color: #9CA2A6;
+	display: inline-block;
+	padding-left: 10px;
+}
