@@ -10,7 +10,7 @@ from mojibake.views.base import base
 from mojibake.views.tags import tag
 from mojibake.views.categories import category
 from mojibake.views.posts import posts
-from mojibake.views.bans import bans
+from mojibake.monitoring.views import bans
 from mojibake.projects.views import projects
 
 app.register_blueprint(base)

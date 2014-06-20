@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Mojibake\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-06-05 11:33+1000\n"
-"PO-Revision-Date: 2014-06-16 14:06+1000\n"
+"POT-Creation-Date: 2014-06-20 12:40+1000\n"
+"PO-Revision-Date: 2014-06-20 12:49+1000\n"
 "Last-Translator: Jordan <jordan@defestri.org>\n"
 "Language-Team: Jordan <jordan@defestri.org>\n"
 "Language: ja\n"
@@ -32,41 +32,128 @@ msgstr "有効なパスワードを入力してください"
 msgid "Title (en)"
 msgstr "題名（英）"
 
+#: mojibake/forms.py:17
+msgid "Enter a title"
+msgstr "題名を入力してください。"
+
 #: mojibake/forms.py:18 mojibake/templates/post_create.html:26
 msgid "Title (ja)"
 msgstr "題名"
 
-#: mojibake/forms.py:22 mojibake/templates/post_create.html:58
+#: mojibake/forms.py:19
+msgid "Enter a slug"
+msgstr "ユーアールエルを入力してください。"
+
+#: mojibake/forms.py:23 mojibake/templates/post_create.html:58
 msgid "Published date"
 msgstr "出版された日付"
 
-#: mojibake/forms.py:23
+#: mojibake/forms.py:24
 msgid "Category"
 msgstr "カテゴリー"
 
-#: mojibake/forms.py:24 mojibake/templates/post_create.html:80
+#: mojibake/forms.py:25 mojibake/templates/post_create.html:80
 msgid "Category (ja)"
 msgstr "カテゴリー"
 
-#: mojibake/forms.py:25 mojibake/templates/post_create.html:95
+#: mojibake/forms.py:26 mojibake/templates/post_create.html:95
 msgid "Tags (en)"
 msgstr "タグ（英）"
 
-#: mojibake/forms.py:26 mojibake/templates/post_create.html:108
+#: mojibake/forms.py:27 mojibake/templates/post_create.html:108
 msgid "Tags (ja)"
 msgstr "タグ"
 
-#: mojibake/forms.py:27 mojibake/templates/post_create.html:122
+#: mojibake/forms.py:28 mojibake/templates/post_create.html:122
 msgid "Publish"
 msgstr "出版する"
 
-#: mojibake/views.py:348
-msgid "Logged in successfully."
-msgstr "ログインしました。"
+#: mojibake/monitoring/templates/monitoring/index.html:3
+#: mojibake/monitoring/templates/monitoring/index.html:10
+msgid "Break-in attempts &amp; Bans"
+msgstr "サーバーへの侵入未遂および侵入未遂遮断"
 
-#: mojibake/views.py:351
-msgid "Invalid Login"
-msgstr "ユーザ名またはパスワードが違います。"
+#: mojibake/monitoring/templates/monitoring/index.html:14
+#, python-format
+msgid "For the month of %(last_month)s"
+msgstr "%(last_month)s月間"
+
+#: mojibake/monitoring/templates/monitoring/index.html:17
+msgid "Break-in attempts"
+msgstr "侵入未遂"
+
+#: mojibake/monitoring/templates/monitoring/index.html:21
+#: mojibake/monitoring/templates/monitoring/index.html:47
+msgid "When"
+msgstr "いつ"
+
+#: mojibake/monitoring/templates/monitoring/index.html:22
+#: mojibake/templates/login.html:15
+msgid "Username"
+msgstr "ユーザ名"
+
+#: mojibake/monitoring/templates/monitoring/index.html:23
+#: mojibake/monitoring/templates/monitoring/index.html:48
+msgid "IP"
+msgstr "IP"
+
+#: mojibake/monitoring/templates/monitoring/index.html:24
+#: mojibake/monitoring/templates/monitoring/index.html:49
+msgid "Location"
+msgstr "場所"
+
+#: mojibake/monitoring/templates/monitoring/index.html:28
+#: mojibake/monitoring/templates/monitoring/index.html:53
+msgid "Total"
+msgstr "全部で"
+
+#: mojibake/monitoring/templates/monitoring/index.html:43
+msgid "Bans"
+msgstr "侵入未遂遮断"
+
+#: mojibake/projects/templates/projects/index.html:3
+#: mojibake/projects/templates/projects/index.html:10
+#: mojibake/templates/base.html:55
+msgid "My Projects"
+msgstr "私のプロジェクト"
+
+#: mojibake/projects/templates/projects/index.html:13
+#: mojibake/templates/about.html:21
+msgid "This site"
+msgstr "このサイト"
+
+#: mojibake/projects/templates/projects/index.html:14
+#, fuzzy, python-format
+msgid ""
+"Built using <a href=\"https://www.python.org/\">Python</a>, <a href=\"http://"
+"flask.pocoo.org/\">%(flask)s</a> and my blogging engine <a href=\"https://"
+"github.com/ardinor/mojibake\">%(mojibake)s</a>. HTML5 template modified from "
+"the original located at <a href=\"http://html5up.net/prologue/\">%(html5)s</"
+"a>"
+msgstr ""
+"<a href=\"https://www.python.org/\">Python</a>、<a href=\"http://flask.pocoo."
+"org/\">%(flask)s</a>と<a href=\"https://github.com/ardinor/mojibake\">"
+"%(mojibake)s</a>を利用しています。変更されたHTML5のテンプレートのオリジナルは"
+"<a href=\"http://html5up.net/prologue/\">%(html5)s</a>からです。"
+
+#: mojibake/projects/templates/projects/index.html:15
+msgid ""
+"The site itself is running on a Debian 7.5 (Wheezy) VPS. The website is "
+"served by nginx and gunicorn and is using MariaDB as the database backend."
+msgstr ""
+
+#: mojibake/projects/templates/projects/index.html:17
+#, fuzzy
+msgid "Scrutiny"
+msgstr "スクルーティニー（精査）"
+
+#: mojibake/projects/templates/projects/index.html:19
+msgid "Frisk"
+msgstr "フリスク"
+
+#: mojibake/projects/templates/projects/index.html:21
+msgid "Picture Sorter"
+msgstr "写真分類"
 
 #: mojibake/templates/404.html:12
 msgid "Well, looks like there's nothing here..."
@@ -81,24 +168,19 @@ msgstr "サーバ内部エラー。　このサイトのアドミニストレー
 msgid "Posted under"
 msgstr "カテゴリー"
 
-#: mojibake/templates/_macros.html:40
-#, python-format
-msgid "Posted by %(name)s on"
-msgstr "%(name)sが書き込んだ ー"
-
-#: mojibake/templates/_macros.html:44
-msgid "Tagged"
-msgstr "タグ付け"
-
-#: mojibake/templates/_macros.html:49
-msgid "Edit"
-msgstr "編集する"
-
-#: mojibake/templates/_macros.html:51 mojibake/templates/translate.html:77
+#: mojibake/templates/_macros.html:40 mojibake/templates/translate.html:77
 msgid "Not yet published"
 msgstr "まだ出版されていない"
 
-#: mojibake/templates/_macros.html:54
+#: mojibake/templates/_macros.html:50
+msgid "Tagged"
+msgstr "タグ付け"
+
+#: mojibake/templates/_macros.html:55
+msgid "Edit"
+msgstr "編集する"
+
+#: mojibake/templates/_macros.html:57
 msgid "Delete"
 msgstr "削除する"
 
@@ -120,10 +202,6 @@ msgstr ""
 "私の連絡先は%(contact)sこちら%(endc)sと私のギットハブは%(github)sこち"
 "ら%(endg)sです。"
 
-#: mojibake/templates/about.html:21
-msgid "This site"
-msgstr "このサイト"
-
 #: mojibake/templates/about.html:22
 #, python-format
 msgid ""
@@ -136,7 +214,7 @@ msgstr ""
 "は<a href=\"http://html5up.net/prologue/\">%(html5)s</a>からです。"
 
 #: mojibake/templates/archive.html:3 mojibake/templates/archive.html:10
-#: mojibake/templates/base.html:58
+#: mojibake/templates/base.html:59
 msgid "Archive"
 msgstr "アーカイブ"
 
@@ -151,82 +229,50 @@ msgstr "%(year)s年"
 msgid "Archive for %(year)s"
 msgstr "%(year)s年のアーカイブ"
 
-#: mojibake/templates/bans.html:10
-msgid "Break-in attempts &amp; Bans"
-msgstr "サーバーへの侵入未遂および侵入未遂遮断"
-
-#: mojibake/templates/bans.html:14
-#, python-format
-msgid "For the month of %(last_month)s"
-msgstr "%(last_month)s月間"
-
-#: mojibake/templates/bans.html:17
-msgid "Break-in attempts"
-msgstr "侵入未遂"
-
-#: mojibake/templates/bans.html:21 mojibake/templates/bans.html:47
-msgid "When"
-msgstr "いつ"
-
-#: mojibake/templates/bans.html:22 mojibake/templates/login.html:15
-msgid "Username"
-msgstr "ユーザ名"
-
-#: mojibake/templates/bans.html:23 mojibake/templates/bans.html:48
-msgid "IP"
-msgstr "IP"
-
-#: mojibake/templates/bans.html:24 mojibake/templates/bans.html:49
-msgid "Location"
-msgstr "場所"
-
-#: mojibake/templates/bans.html:28 mojibake/templates/bans.html:53
-msgid "Total"
-msgstr "全部で"
-
-#: mojibake/templates/bans.html:43
-msgid "Bans"
-msgstr "侵入未遂遮断"
-
 #: mojibake/templates/base.html:53
 msgid "Home"
 msgstr "ホーム"
 
-#: mojibake/templates/base.html:55 mojibake/templates/posts.html:5
+#: mojibake/templates/base.html:56 mojibake/templates/posts.html:5
 msgid "Posts"
 msgstr "書き込み"
 
-#: mojibake/templates/base.html:56 mojibake/templates/categories.html:3
+#: mojibake/templates/base.html:57 mojibake/templates/categories.html:3
 #: mojibake/templates/categories.html:10
 msgid "Categories"
 msgstr "カテゴリー"
 
-#: mojibake/templates/base.html:57 mojibake/templates/tags.html:3
+#: mojibake/templates/base.html:58 mojibake/templates/tags.html:3
 #: mojibake/templates/tags.html:10 mojibake/templates/translate.html:3
 msgid "Tags"
 msgstr "タグ"
 
-#: mojibake/templates/base.html:60 mojibake/templates/post_create.html:9
+#: mojibake/templates/base.html:61 mojibake/templates/post_create.html:3
+#: mojibake/templates/post_create.html:9
 msgid "New Post"
 msgstr "新たな書き込み"
 
-#: mojibake/templates/base.html:62 mojibake/templates/translate.html:10
+#: mojibake/templates/base.html:63 mojibake/templates/translate.html:10
 msgid "Translate"
 msgstr "翻訳"
 
-#: mojibake/templates/base.html:64
+#: mojibake/templates/base.html:65
 msgid "Logout"
 msgstr "ログアウト"
 
-#: mojibake/templates/base.html:75
+#: mojibake/templates/base.html:76
 msgid "Github"
 msgstr "ギットハブ"
 
-#: mojibake/templates/base.html:76 mojibake/templates/contact.html:13
+#: mojibake/templates/base.html:77
+msgid "LinkedIn"
+msgstr "リンクトイン"
+
+#: mojibake/templates/base.html:78 mojibake/templates/contact.html:13
 msgid "Email"
 msgstr "メール"
 
-#: mojibake/templates/base.html:77
+#: mojibake/templates/base.html:79
 msgid "Atom"
 msgstr "アトム"
 
@@ -313,3 +359,27 @@ msgstr "翻訳されていないカテゴリー"
 #: mojibake/templates/translate.html:72
 msgid "Posts in need of translation"
 msgstr "翻訳されていない書き込み"
+
+#: mojibake/templates/unauthorised.html:3
+msgid "Unauthorised"
+msgstr "無許可"
+
+#: mojibake/templates/unauthorised.html:12
+#, fuzzy
+msgid "You shouldn't be here."
+msgstr "ここにいてはいけません。"
+
+#: mojibake/views/base.py:51
+msgid "Logged in successfully."
+msgstr "ログインしました。"
+
+#: mojibake/views/base.py:54
+msgid "Invalid Login"
+msgstr "ユーザ名またはパスワードが違います。"
+
+#: mojibake/views/posts.py:92
+msgid "Deleted."
+msgstr "削除しました。"
+
+#~ msgid "Posted by %(name)s on"
+#~ msgstr "%(name)sが書き込んだ ー"

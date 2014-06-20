@@ -204,6 +204,7 @@ class BannedIPs(db.Model):
 
 
 class BreakinAttempts(db.Model):
+    __tablename__ = 'breakinattempts'
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.DateTime)
     # Some programs accept only 8 character user names

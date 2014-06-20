@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-06-05 11:33+1000\n"
+"POT-Creation-Date: 2014-06-20 12:40+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,40 +29,123 @@ msgstr ""
 msgid "Title (en)"
 msgstr ""
 
+#: mojibake/forms.py:17
+msgid "Enter a title"
+msgstr ""
+
 #: mojibake/forms.py:18 mojibake/templates/post_create.html:26
 msgid "Title (ja)"
 msgstr ""
 
-#: mojibake/forms.py:22 mojibake/templates/post_create.html:58
+#: mojibake/forms.py:19
+msgid "Enter a slug"
+msgstr ""
+
+#: mojibake/forms.py:23 mojibake/templates/post_create.html:58
 msgid "Published date"
 msgstr ""
 
-#: mojibake/forms.py:23
+#: mojibake/forms.py:24
 msgid "Category"
 msgstr ""
 
-#: mojibake/forms.py:24 mojibake/templates/post_create.html:80
+#: mojibake/forms.py:25 mojibake/templates/post_create.html:80
 msgid "Category (ja)"
 msgstr ""
 
-#: mojibake/forms.py:25 mojibake/templates/post_create.html:95
+#: mojibake/forms.py:26 mojibake/templates/post_create.html:95
 msgid "Tags (en)"
 msgstr ""
 
-#: mojibake/forms.py:26 mojibake/templates/post_create.html:108
+#: mojibake/forms.py:27 mojibake/templates/post_create.html:108
 msgid "Tags (ja)"
 msgstr ""
 
-#: mojibake/forms.py:27 mojibake/templates/post_create.html:122
+#: mojibake/forms.py:28 mojibake/templates/post_create.html:122
 msgid "Publish"
 msgstr ""
 
-#: mojibake/views.py:348
-msgid "Logged in successfully."
+#: mojibake/monitoring/templates/monitoring/index.html:3
+#: mojibake/monitoring/templates/monitoring/index.html:10
+msgid "Break-in attempts &amp; Bans"
 msgstr ""
 
-#: mojibake/views.py:351
-msgid "Invalid Login"
+#: mojibake/monitoring/templates/monitoring/index.html:14
+#, python-format
+msgid "For the month of %(last_month)s"
+msgstr ""
+
+#: mojibake/monitoring/templates/monitoring/index.html:17
+msgid "Break-in attempts"
+msgstr ""
+
+#: mojibake/monitoring/templates/monitoring/index.html:21
+#: mojibake/monitoring/templates/monitoring/index.html:47
+msgid "When"
+msgstr ""
+
+#: mojibake/monitoring/templates/monitoring/index.html:22
+#: mojibake/templates/login.html:15
+msgid "Username"
+msgstr ""
+
+#: mojibake/monitoring/templates/monitoring/index.html:23
+#: mojibake/monitoring/templates/monitoring/index.html:48
+msgid "IP"
+msgstr ""
+
+#: mojibake/monitoring/templates/monitoring/index.html:24
+#: mojibake/monitoring/templates/monitoring/index.html:49
+msgid "Location"
+msgstr ""
+
+#: mojibake/monitoring/templates/monitoring/index.html:28
+#: mojibake/monitoring/templates/monitoring/index.html:53
+msgid "Total"
+msgstr ""
+
+#: mojibake/monitoring/templates/monitoring/index.html:43
+msgid "Bans"
+msgstr ""
+
+#: mojibake/projects/templates/projects/index.html:3
+#: mojibake/projects/templates/projects/index.html:10
+#: mojibake/templates/base.html:55
+msgid "My Projects"
+msgstr ""
+
+#: mojibake/projects/templates/projects/index.html:13
+#: mojibake/templates/about.html:21
+msgid "This site"
+msgstr ""
+
+#: mojibake/projects/templates/projects/index.html:14
+#, python-format
+msgid ""
+"Built using <a href=\"https://www.python.org/\">Python</a>, <a "
+"href=\"http://flask.pocoo.org/\">%(flask)s</a> and my blogging engine <a "
+"href=\"https://github.com/ardinor/mojibake\">%(mojibake)s</a>. HTML5 "
+"template modified from the original located at <a "
+"href=\"http://html5up.net/prologue/\">%(html5)s</a>"
+msgstr ""
+
+#: mojibake/projects/templates/projects/index.html:15
+msgid ""
+"The site itself is running on a Debian 7.5 (Wheezy) VPS. The website is "
+"served by nginx and gunicorn and is using MariaDB as the database "
+"backend."
+msgstr ""
+
+#: mojibake/projects/templates/projects/index.html:17
+msgid "Scrutiny"
+msgstr ""
+
+#: mojibake/projects/templates/projects/index.html:19
+msgid "Frisk"
+msgstr ""
+
+#: mojibake/projects/templates/projects/index.html:21
+msgid "Picture Sorter"
 msgstr ""
 
 #: mojibake/templates/404.html:12
@@ -79,24 +162,19 @@ msgstr ""
 msgid "Posted under"
 msgstr ""
 
-#: mojibake/templates/_macros.html:40
-#, python-format
-msgid "Posted by %(name)s on"
-msgstr ""
-
-#: mojibake/templates/_macros.html:44
-msgid "Tagged"
-msgstr ""
-
-#: mojibake/templates/_macros.html:49
-msgid "Edit"
-msgstr ""
-
-#: mojibake/templates/_macros.html:51 mojibake/templates/translate.html:77
+#: mojibake/templates/_macros.html:40 mojibake/templates/translate.html:77
 msgid "Not yet published"
 msgstr ""
 
-#: mojibake/templates/_macros.html:54
+#: mojibake/templates/_macros.html:50
+msgid "Tagged"
+msgstr ""
+
+#: mojibake/templates/_macros.html:55
+msgid "Edit"
+msgstr ""
+
+#: mojibake/templates/_macros.html:57
 msgid "Delete"
 msgstr ""
 
@@ -116,10 +194,6 @@ msgid ""
 "located %(github)shere%(endg)s."
 msgstr ""
 
-#: mojibake/templates/about.html:21
-msgid "This site"
-msgstr ""
-
 #: mojibake/templates/about.html:22
 #, python-format
 msgid ""
@@ -130,7 +204,7 @@ msgid ""
 msgstr ""
 
 #: mojibake/templates/archive.html:3 mojibake/templates/archive.html:10
-#: mojibake/templates/base.html:58
+#: mojibake/templates/base.html:59
 msgid "Archive"
 msgstr ""
 
@@ -145,82 +219,50 @@ msgstr ""
 msgid "Archive for %(year)s"
 msgstr ""
 
-#: mojibake/templates/bans.html:10
-msgid "Break-in attempts &amp; Bans"
-msgstr ""
-
-#: mojibake/templates/bans.html:14
-#, python-format
-msgid "For the month of %(last_month)s"
-msgstr ""
-
-#: mojibake/templates/bans.html:17
-msgid "Break-in attempts"
-msgstr ""
-
-#: mojibake/templates/bans.html:21 mojibake/templates/bans.html:47
-msgid "When"
-msgstr ""
-
-#: mojibake/templates/bans.html:22 mojibake/templates/login.html:15
-msgid "Username"
-msgstr ""
-
-#: mojibake/templates/bans.html:23 mojibake/templates/bans.html:48
-msgid "IP"
-msgstr ""
-
-#: mojibake/templates/bans.html:24 mojibake/templates/bans.html:49
-msgid "Location"
-msgstr ""
-
-#: mojibake/templates/bans.html:28 mojibake/templates/bans.html:53
-msgid "Total"
-msgstr ""
-
-#: mojibake/templates/bans.html:43
-msgid "Bans"
-msgstr ""
-
 #: mojibake/templates/base.html:53
 msgid "Home"
 msgstr ""
 
-#: mojibake/templates/base.html:55 mojibake/templates/posts.html:5
+#: mojibake/templates/base.html:56 mojibake/templates/posts.html:5
 msgid "Posts"
 msgstr ""
 
-#: mojibake/templates/base.html:56 mojibake/templates/categories.html:3
+#: mojibake/templates/base.html:57 mojibake/templates/categories.html:3
 #: mojibake/templates/categories.html:10
 msgid "Categories"
 msgstr ""
 
-#: mojibake/templates/base.html:57 mojibake/templates/tags.html:3
+#: mojibake/templates/base.html:58 mojibake/templates/tags.html:3
 #: mojibake/templates/tags.html:10 mojibake/templates/translate.html:3
 msgid "Tags"
 msgstr ""
 
-#: mojibake/templates/base.html:60 mojibake/templates/post_create.html:9
+#: mojibake/templates/base.html:61 mojibake/templates/post_create.html:3
+#: mojibake/templates/post_create.html:9
 msgid "New Post"
 msgstr ""
 
-#: mojibake/templates/base.html:62 mojibake/templates/translate.html:10
+#: mojibake/templates/base.html:63 mojibake/templates/translate.html:10
 msgid "Translate"
 msgstr ""
 
-#: mojibake/templates/base.html:64
+#: mojibake/templates/base.html:65
 msgid "Logout"
 msgstr ""
 
-#: mojibake/templates/base.html:75
+#: mojibake/templates/base.html:76
 msgid "Github"
 msgstr ""
 
-#: mojibake/templates/base.html:76 mojibake/templates/contact.html:13
+#: mojibake/templates/base.html:77
+msgid "LinkedIn"
+msgstr ""
+
+#: mojibake/templates/base.html:78 mojibake/templates/contact.html:13
 msgid "Email"
 msgstr ""
 
-#: mojibake/templates/base.html:77
+#: mojibake/templates/base.html:79
 msgid "Atom"
 msgstr ""
 
@@ -305,5 +347,25 @@ msgstr ""
 
 #: mojibake/templates/translate.html:72
 msgid "Posts in need of translation"
+msgstr ""
+
+#: mojibake/templates/unauthorised.html:3
+msgid "Unauthorised"
+msgstr ""
+
+#: mojibake/templates/unauthorised.html:12
+msgid "You shouldn't be here."
+msgstr ""
+
+#: mojibake/views/base.py:51
+msgid "Logged in successfully."
+msgstr ""
+
+#: mojibake/views/base.py:54
+msgid "Invalid Login"
+msgstr ""
+
+#: mojibake/views/posts.py:92
+msgid "Deleted."
 msgstr ""
 
