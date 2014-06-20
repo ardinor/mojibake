@@ -26,12 +26,18 @@ MISC
 -------------------------
 
 ### PyBabel Commands ###
-pybabel extract -F babel.cfg -o messages.pot mojibake
+    pybabel extract -F babel.cfg -o messages.pot mojibake
 
-Then use [Poedit](http://poedit.net/) to update the translation from the .pot file
+Then use [Poedit](http://poedit.net/) to update the translation from the .pot file, or do it from the command line;
 
-~~pybabel init -i messages.pot -d mojibake/translations -l ja~~
- ~~or~~
-~~pybabel update -i messages.pot -d mojibake/translations~~
+To create the translations
 
-~~pybabel compile -d mojibake/translations~~
+    pybabel init -i messages.pot -d mojibake/translations -l ja
+
+To update the translations with new text from messages.pot
+
+    pybabel update -i messages.pot -d mojibake/translations
+
+To use the translations once translated or pulled down from Git
+
+    pybabel compile -d mojibake/translations
