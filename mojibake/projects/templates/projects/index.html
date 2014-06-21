@@ -12,10 +12,10 @@
 
         <h3>{{ _('This site') }} <div class="small">Python</div></h3>
         <p>{% trans flask='Flask', mojibake='MØjibДĸe', html5='html5up.net' %}Built using <a href="https://www.python.org/">Python</a>, <a href="http://flask.pocoo.org/">{{ flask }}</a> and my blogging engine <a href="https://github.com/ardinor/mojibake">{{ mojibake }}</a>. HTML5 template modified from the original located at <a href="http://html5up.net/prologue/">{{  html5 }}</a>{% endtrans %}</p>
-        <p>{% trans %}The site itself is running on a Debian 7.5 (Wheezy) VPS. The website is served by nginx and gunicorn and is using MariaDB as the database backend.{% endtrans %}</p>
+        <p>{% trans %}The site itself has been running since September 2013 on a Debian 7.5 (Wheezy) VPS. The website is served by nginx and gunicorn and is using MariaDB as the database backend.{% endtrans %}</p>
 
         <h3><a href="https://github.com/ardinor/scrutiny">{{ _('Scrutiny') }}</a> <div class="small">Python</div></h3>
-        <p></p>
+        <p>{% trans %}Scrutiny is a log parser currently designed to parse /var/log/auth.log and /var/log/fail2ban.log and inserts details about malicious attempts to break into the server in a database for easy access. It also queries an external service to insert geographical information about suspicious IPs into the database as well.{% endtrans %}</p>
         <h3><a href="https://github.com/ardinor/frisk">{{ _('Frisk') }}</a> <div class="small">Python</div></h3>
         <p></p>
         <h3><a href="https://github.com/ardinor/PictureSorter">{{ _('Picture Sorter') }}</a> <div class="small">C#</div></h3>
