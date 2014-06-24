@@ -94,7 +94,7 @@
             <div class="inline-form-element">
                 <label>{{ _('Tags (en)') }}</label>
                 {% if form.tags.data %}
-                    <input id="post_tags" name="tags" type="text" value="{% for i in form.tags.data %}{{ i.name }}{% if form.tags.data[-1] != i %};{% endif %}{% endfor %}">
+                    <input id="post_tags" name="tags" type="text" value="{% for i in form.tags.data %}{% if i.name %}{{ i.name }}{% if form.tags.data[-1] != i %};{% endif %}{% endif %}{% endfor %}">
                 {% else %}
                     {{ form.tags }}
                 {% endif %}
@@ -107,7 +107,7 @@
             <div class="inline-form-element">
                 <label>{{ _('Tags (ja)') }}</label>
                 {% if form.tags.data %}
-                    <input id="post_tags_ja" name="tags_ja" type="text" value="{% for i in form.tags.data %}{{ i.name_ja }}{% if form.tags.data[-1] != i %};{% endif %}{% endfor %}">
+                    <input id="post_tags_ja" name="tags_ja" type="text" value="{% for i in form.tags.data %}{% if i.name_ja %}{{ i.name_ja }}{% if form.tags.data[-1] != i %};{% endif %}{% endif %}{% endfor %}">
                 {% else %}
                     {{ form.tags_ja }}
                 {% endif %}
