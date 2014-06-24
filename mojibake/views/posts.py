@@ -1,4 +1,6 @@
 from flask import Blueprint, abort, g, render_template, redirect, url_for
+import time
+from datetime import timedelta
 
 from mojibake.main import db
 from mojibake.models import Post
@@ -8,6 +10,16 @@ from flask.ext.login import login_required
 
 posts = Blueprint('posts', __name__,
     template_folder='templates')
+
+
+def get_tz_offset():
+    # Returns the timezone offset in hours
+    # E.g. AEST (+10) will return 10
+    if time.localtime().tm_isdst:
+        return (time.altzone * -1) / 3600
+    else:
+        return (time.timezone * -1) / 3600
+
 
 @posts.route('/')
 @posts.route('/<int:page>/')
@@ -47,11 +59,8 @@ def create_post():
         new_post.add_tags(form.tags.data, form.tags_ja.data)
         new_post.add_body(form.body.data, form.body_ja.data)
 
-        if form.date.data.find('/') > 0:
-            published_date = datetime.strptime(form.date.data, '%d/%m/%y %H:%M')
-        elif form.date.data.find('-') > 0:
-            published_date = datetime.strptime(form.date.data, '%d-%m-%y %H:%M')
         if new_post.published:
+            published_date = form.date.data - timedelta(hours=get_tz_offset())
             new_post.date = published_date
         new_post.title_ja = form.title_ja.data
 
@@ -77,8 +86,10 @@ def edit_post(slug):
         post.title = form.title.data
         post.title_ja = form.title_ja.data
         post.slug = form.slug.data
-        post.date = form.date.data
         post.published = form.published.data
+        if post.published:
+            published_date = form.date.data - timedelta(hours=get_tz_offset())
+            post.date = published_date
         db.session.commit()
 
         return redirect(url_for('posts.post_item', slug=form.slug.data))

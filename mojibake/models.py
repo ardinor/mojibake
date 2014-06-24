@@ -40,7 +40,9 @@ class Category(db.Model):
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120), unique=True, index=True)
-    title_ja = db.Column(db.String(120), unique=True)
+    # Having unique set here will cause issues if multiple posts
+    # don't have a title_ja and are using None
+    title_ja = db.Column(db.String(120))
     slug = db.Column(db.String(120), unique=True)
     body = db.Column(db.Text)
     body_html = db.Column(db.Text)

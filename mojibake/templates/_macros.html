@@ -36,7 +36,7 @@
         <span style="padding-top: 10px;" class="pull-right">{{ _('Posted under')}}: <a href="{{ url_for('category.category_item', name=post.category.name) }}">{% if session['language'] == 'ja' and post.category.name_ja %}{{ post.category.name_ja }}{% else %}{{ post.category.name }}{% endif %}</a></span>
 
         </header>
-        {% if post.published == False %}
+        {% if post.published == False or post.published == None %}
             <span class="red-text centre-item">** {{ _('Not yet published') }} **</span>
         {% else %}
         {% if post.date %}
