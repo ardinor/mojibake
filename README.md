@@ -8,11 +8,10 @@ Currently in the process of re-writing this.
 
 TO DO
 -------------------------
-- Currently all times added are assumed UTC
+- Check adding translations from post edit
 - Add a Tag and Category slug? Okay with spaces in the url?
 - Add a preview view for writing posts?
 - Add search
-- ~~For narrow view settings, move the tags under the post date~~ This should be okay now I've removed the author name
 - Do similar for category, except under the title?
 - Look at Disqus for comments?
 
