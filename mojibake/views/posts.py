@@ -47,8 +47,12 @@ def create_post():
         new_post.add_tags(form.tags.data, form.tags_ja.data)
         new_post.add_body(form.body.data, form.body_ja.data)
 
-        new_post.date = form.date.data
-        new_post.published = form.published.data
+        if form.date.data.find('/') > 0:
+            published_date = datetime.strptime(form.date.data, '%d/%m/%y %H:%M')
+        elif form.date.data.find('-') > 0:
+            published_date = datetime.strptime(form.date.data, '%d-%m-%y %H:%M')
+        if new_post.published:
+            new_post.date = published_date
         new_post.title_ja = form.title_ja.data
 
         db.session.add(new_post)

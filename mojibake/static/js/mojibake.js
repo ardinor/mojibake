@@ -1,6 +1,15 @@
 jQuery(document).ready(function ($) {
     $("#tabs").tabs();
-    $("#post_date").datepicker({ dateFormat: "dd-mm-yy" });
+    /*$("#post_date").datepicker({ dateFormat: "dd-mm-yy" });
+    $("#post_date").bind('input', function () {
+        var match = /\d{2}[-]\d{2}[-]\d{4}/.match($("#post_date").datepicker("getDate"));
+        if (match) {
+            console.log(match);
+        }
+        if ($("#post_date").datepicker("getDate")) {
+
+        }
+    });*/
     if (window.location.pathname === "/")
     {
         $('#home_tab').addClass('active');

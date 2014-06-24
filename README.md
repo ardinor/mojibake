@@ -8,6 +8,7 @@ Currently in the process of re-writing this.
 
 TO DO
 -------------------------
+- Currently all times added are assumed UTC
 - Add a Tag and Category slug? Okay with spaces in the url?
 - Add a preview view for writing posts?
 - Add search

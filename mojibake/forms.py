@@ -20,7 +20,7 @@ class PostForm(Form):
     body = TextAreaField('Body', id='post_body')
     body_ja = TextAreaField('本文', id='post_body_ja')
     # Doesn't accept no date?
-    date = DateTimeField(gettext('Published date'), id='post_date', format='%d-%m-%Y')
+    date = DateTimeField(gettext('Published date'), id='post_date', format='%d-%m-%Y %H:%M')
     category = TextField(gettext('Category'), id='post_category')
     category_ja = TextField(gettext('Category (ja)'), id='post_category_ja')
     tags = TextField(gettext('Tags (en)'), id='post_tags')
