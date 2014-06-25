@@ -1,5 +1,6 @@
 from mojibake.app import db
 
+import time
 from datetime import datetime
 from passlib.hash import pbkdf2_sha256
 import markdown
@@ -116,6 +117,14 @@ class Post(db.Model):
         if body_ja:
             self.body_ja = body_ja
             self.body_ja_html = markdown.markdown(body_ja, extensions=['codehilite'])
+
+    def get_tz_offset(self):
+        # Returns the timezone offset in hours
+        # E.g. AEST (+10) will return 10
+        if time.localtime().tm_isdst:
+            return (time.altzone * -1) / 3600
+        else:
+            return (time.timezone * -1) / 3600
 
 
     def __repr__(self):

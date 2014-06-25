@@ -1,12 +1,12 @@
 from flask import Blueprint, render_template
 import datetime
 
-from mojibake.models import BreakinAttempts, BannedIPs
+from mojibake.models import BreakinAttempts, BannedIPs, IPAddr
 
-bans = Blueprint('bans', __name__,
+monitor = Blueprint('monitor', __name__,
     template_folder='templates')
 
-@bans.route('/')
+@monitor.route('/')
 def bans_list():
 
     #displayed_time = 'CET'
@@ -26,3 +26,13 @@ def bans_list():
     return render_template('monitoring/index.html', last_month=last_month,
         breakin_attempts=breakin_attempts,
         bans=bans)
+
+@monitor.route('/ips')
+def ip_list():
+    full_ips = IPAddr.query.filter_by(breakins.count > 3).all()
+
+    common_ips = {}
+    subnets = {}
+
+    return render_template('monitoring/ips.html', common_ips=common_ips,
+        subnets=subnets)
