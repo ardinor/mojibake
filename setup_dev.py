@@ -20,15 +20,15 @@ def create_test_monitoring():
     db.session.add(ip3)
     db.session.commit()
     b1 = BreakinAttempts(date=datetime.now(), user='admin')
-    b1.ipaddr = ip1.id
+    b1.ip = ip1
     b2 = BreakinAttempts(date=datetime.now(), user='admin')
-    b2.ipaddr = ip1.id
+    b2.ip = ip1
     b3 = BreakinAttempts(date=datetime.now(), user='admin')
-    b3.ipaddr = ip1.id
+    b3.ip = ip1
     b4 = BreakinAttempts(date=datetime.now(), user='oracle')
-    b4.ipaddr = ip2.id
+    b4.ip = ip2
     b5 = BreakinAttempts(date=datetime.now(), user='aaa')
-    b5.ipaddr = ip3.id
+    b5.ip = ip3
     db.session.add(b1)
     db.session.add(b2)
     db.session.add(b3)

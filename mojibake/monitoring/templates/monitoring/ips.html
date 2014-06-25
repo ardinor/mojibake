@@ -29,7 +29,7 @@
                 <tr>
                     <td>{{ ipaddr.ip_addr }}</td>
                     <td>{{ ipaddr.print_location() }}</td>
-                    <td>{{ ipaddr.breakins|length }}</td>
+                    <td>{{ ipaddr.breakins.count() }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
