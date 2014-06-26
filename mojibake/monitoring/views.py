@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template
 from sqlalchemy import func
+from collections import Counter
 import datetime
 
 from mojibake.models import BreakinAttempts, BannedIPs, IPAddr
@@ -30,8 +31,15 @@ def bans_list():
 
 @monitor.route('/ips')
 def ip_list():
+    # Need to tune how many attempts are needed for it to be common
     common_ips = IPAddr.query.join(BreakinAttempts).group_by(IPAddr.ip_addr). \
-        having(func.count(IPAddr.breakins)>1).all()
+        having(func.count(IPAddr.breakins)>=3).all()
+
+    ip_list = []
+    for ip in common_ips:
+        split_ip = ip.ip_addr.split('.')
+        ip_list.append(split_ip[0] + '.' + split_ip[1])
+    ip_cntr = Counter(ip_list)
 
     subnets = {}
 
