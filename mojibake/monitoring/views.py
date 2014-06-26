@@ -41,6 +41,11 @@ def ip_list():
         ip_list.append(split_ip[0] + '.' + split_ip[1])
     ip_cntr = Counter(ip_list)
 
+    for [ip_start, count] in ip_cntr.most_common():
+        # How many times for this to be common as well?
+        if count > 5:
+
+
     subnets = {}
 
     return render_template('monitoring/ips.html', common_ips=common_ips,
