@@ -50,6 +50,10 @@ jQuery(document).ready(function ($) {
     {
         $('#projects_tab').addClass('active');
     }
+    if (window.location.pathname.indexOf("monitoring") !== -1)
+    {
+        $('#monitoring_tab').addClass('active');
+    }
     $("#post_body").keydown(function(e) {
       var $this, end, start;
       if (e.keyCode === 9) {

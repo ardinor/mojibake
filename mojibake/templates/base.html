@@ -62,6 +62,8 @@
 
                                 <li><a href="{{ url_for('base.translate') }}" id="translate_tab"><span class="fa fa-tasks">{{ _('Translate') }}</span></a></li>
 
+                                <li><a href="{{ url_for('monitor.bans_list') }}" id="monitoring_tab"><span class="fa fa-eye">{{ _('Monitoring') }}</span></a></li>
+
                                 <li><a href="{{ url_for('base.logout') }}"><span class="fa fa-power-off">{{ _('Logout') }}</span></a></li>
                                 {% endif %}
                                 <li><a href="/language/{{ available_languages(session['language'])[0] }}?next={{ request.path }}" class="special"><span class="fa fa-flag-o">{{ available_languages(session['language'])[1] }}</span></a></li>
