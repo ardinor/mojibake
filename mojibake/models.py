@@ -202,6 +202,11 @@ class IPAddr(db.Model):
         else:
             return '-'
 
+    def get_ip_in_binary(self):
+        if self.ip_addr:
+            return ' '.join('{:08b}'.format(int(n)) for n in self.ip_addr.split('.'))
+
+
 class BannedIPs(db.Model):
     # Without setting table name we end up with a table named
     # 'banned_i_ps'

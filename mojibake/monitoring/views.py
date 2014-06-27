@@ -43,7 +43,7 @@ def ip_list():
 
     for [ip_start, count] in ip_cntr.most_common():
         # How many times for this to be common as well?
-        if count > 5:
+        if count > 3:
             pass
 
     subnets = {}
