@@ -26,7 +26,3 @@ class PostForm(Form):
     tags = TextField(gettext('Tags (en)'), id='post_tags')
     tags_ja = TextField(gettext('Tags (ja)'), id='post_tags_ja')
     published = BooleanField(gettext('Publish'))
-
-
-class TranslateForm(Form):
-    title = TextField('Title')

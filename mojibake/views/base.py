@@ -86,7 +86,7 @@ def recent_feed():
 @base.route('/translate', methods=['GET', 'POST'])
 @login_required
 def translate():
-    form = TranslateForm()
+    #form = TranslateForm()
     if request.method == 'POST':
         req_dict = request.form.to_dict()
         for i, j in req_dict.items():
@@ -109,5 +109,5 @@ def translate():
     cats = Category.query.filter_by(name_ja=None).all()
     posts = Post.query.filter_by(body_ja=None).all()
 
-    return render_template('translate.html', tags=tags, cats=cats, form=form,
+    return render_template('translate.html', tags=tags, cats=cats,
         posts=posts)
