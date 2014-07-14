@@ -10,7 +10,7 @@ from werkzeug.contrib.atom import AtomFeed
 from mojibake.models import Post, Tag, Category, User
 from mojibake.settings import POSTS_PER_PAGE, LANGUAGES
 from mojibake.app import babel, login_manager
-from mojibake.forms import LoginForm, TranslateForm
+from mojibake.forms import LoginForm
 
 base = Blueprint('base', __name__,
     template_folder='templates')
@@ -86,7 +86,6 @@ def recent_feed():
 @base.route('/translate', methods=['GET', 'POST'])
 @login_required
 def translate():
-    #form = TranslateForm()
     if request.method == 'POST':
         req_dict = request.form.to_dict()
         for i, j in req_dict.items():

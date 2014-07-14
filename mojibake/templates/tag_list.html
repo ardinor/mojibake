@@ -16,7 +16,7 @@
 
 {% for i in tag.posts %}
 <p>
-    <h3><a href="{{ url_for('posts.post_item', slug=i.slug) }}">{% if session['language'] == 'ja' and i.title_ja %}{{ i.title_ja }}{% else %}{{ i.title }}{% endif %}</a></h3>{{moment_js(i.date).format('LLLL')}}
+    <h3><a href="{{ url_for('posts.post_item', slug=i.slug) }}">{% if session['language'] == 'ja' and i.title_ja %}{{ i.title_ja }}{% else %}{{ i.title }}{% endif %}</a></h3>{% if i.published == False or i.published == None %}<span class="red-text">{{ _('Not yet published') }}</span>{% else %}{% if i.date %}{{moment_js(i.date).format('LLLL')}}{% endif %}{% endif %}
 </p>
 {% endfor %}
 
