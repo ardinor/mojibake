@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-06-20 12:40+1000\n"
+"POT-Creation-Date: 2014-07-15 15:03+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -91,21 +91,47 @@ msgstr ""
 
 #: mojibake/monitoring/templates/monitoring/index.html:23
 #: mojibake/monitoring/templates/monitoring/index.html:48
+#: mojibake/monitoring/templates/monitoring/ips.html:18
 msgid "IP"
 msgstr ""
 
 #: mojibake/monitoring/templates/monitoring/index.html:24
 #: mojibake/monitoring/templates/monitoring/index.html:49
+#: mojibake/monitoring/templates/monitoring/ips.html:19
 msgid "Location"
 msgstr ""
 
 #: mojibake/monitoring/templates/monitoring/index.html:28
 #: mojibake/monitoring/templates/monitoring/index.html:53
+#: mojibake/monitoring/templates/monitoring/ips.html:24
+#: mojibake/monitoring/templates/monitoring/ips.html:47
 msgid "Total"
 msgstr ""
 
 #: mojibake/monitoring/templates/monitoring/index.html:43
 msgid "Bans"
+msgstr ""
+
+#: mojibake/monitoring/templates/monitoring/ips.html:3
+#: mojibake/monitoring/templates/monitoring/ips.html:10
+msgid "Commonly seen IPs and Subnets"
+msgstr ""
+
+#: mojibake/monitoring/templates/monitoring/ips.html:14
+msgid "Common IPs"
+msgstr ""
+
+#: mojibake/monitoring/templates/monitoring/ips.html:20
+#: mojibake/monitoring/templates/monitoring/ips.html:43
+msgid "Times seen"
+msgstr ""
+
+#: mojibake/monitoring/templates/monitoring/ips.html:38
+msgid "Subnets"
+msgstr ""
+
+#: mojibake/monitoring/templates/monitoring/ips.html:42
+msgid "Subnet"
 msgstr ""
 
 #: mojibake/projects/templates/projects/index.html:3
@@ -131,13 +157,22 @@ msgstr ""
 
 #: mojibake/projects/templates/projects/index.html:15
 msgid ""
-"The site itself is running on a Debian 7.5 (Wheezy) VPS. The website is "
-"served by nginx and gunicorn and is using MariaDB as the database "
-"backend."
+"The site itself has been running since September 2013 on a Debian 7.6 "
+"(Wheezy) VPS. The website is served by nginx and gunicorn and is using "
+"MariaDB as the database backend."
 msgstr ""
 
 #: mojibake/projects/templates/projects/index.html:17
 msgid "Scrutiny"
+msgstr ""
+
+#: mojibake/projects/templates/projects/index.html:18
+msgid ""
+"Scrutiny is a log parser currently designed to parse /var/log/auth.log "
+"and /var/log/fail2ban.log and inserts details about malicious attempts to"
+" break into the server in a database for easy access. It also queries an "
+"external service to insert geographical information about suspicious IPs "
+"into the database as well."
 msgstr ""
 
 #: mojibake/projects/templates/projects/index.html:19
@@ -162,7 +197,8 @@ msgstr ""
 msgid "Posted under"
 msgstr ""
 
-#: mojibake/templates/_macros.html:40 mojibake/templates/translate.html:77
+#: mojibake/templates/_macros.html:40 mojibake/templates/category.html:23
+#: mojibake/templates/tag_list.html:19 mojibake/templates/translate.html:76
 msgid "Not yet published"
 msgstr ""
 
@@ -247,22 +283,26 @@ msgid "Translate"
 msgstr ""
 
 #: mojibake/templates/base.html:65
+msgid "Monitoring"
+msgstr ""
+
+#: mojibake/templates/base.html:67
 msgid "Logout"
 msgstr ""
 
-#: mojibake/templates/base.html:76
+#: mojibake/templates/base.html:78
 msgid "Github"
 msgstr ""
 
-#: mojibake/templates/base.html:77
+#: mojibake/templates/base.html:79
 msgid "LinkedIn"
 msgstr ""
 
-#: mojibake/templates/base.html:78 mojibake/templates/contact.html:13
+#: mojibake/templates/base.html:80 mojibake/templates/contact.html:13
 msgid "Email"
 msgstr ""
 
-#: mojibake/templates/base.html:79
+#: mojibake/templates/base.html:81
 msgid "Atom"
 msgstr ""
 
@@ -275,7 +315,7 @@ msgstr ""
 msgid "Posts under \"%(category)s\""
 msgstr ""
 
-#: mojibake/templates/category.html:21
+#: mojibake/templates/category.html:26
 #, python-format
 msgid "Posted on: %(date)s"
 msgstr ""
@@ -320,7 +360,12 @@ msgstr ""
 msgid "Category (en)"
 msgstr ""
 
-#: mojibake/templates/post_create.html:129 mojibake/templates/translate.html:62
+#: mojibake/templates/post_create.html:95
+#: mojibake/templates/post_create.html:108
+msgid "Tags; seperate with a ;"
+msgstr ""
+
+#: mojibake/templates/post_create.html:129 mojibake/templates/translate.html:61
 msgid "Submit"
 msgstr ""
 
@@ -333,19 +378,19 @@ msgstr ""
 msgid "Looks like everything so far has been translated!"
 msgstr ""
 
-#: mojibake/templates/translate.html:24
+#: mojibake/templates/translate.html:23
 msgid "Tags needing translation"
 msgstr ""
 
-#: mojibake/templates/translate.html:28 mojibake/templates/translate.html:48
+#: mojibake/templates/translate.html:27 mojibake/templates/translate.html:47
 msgid "Translation"
 msgstr ""
 
-#: mojibake/templates/translate.html:45
+#: mojibake/templates/translate.html:44
 msgid "Categories needing translation"
 msgstr ""
 
-#: mojibake/templates/translate.html:72
+#: mojibake/templates/translate.html:71
 msgid "Posts in need of translation"
 msgstr ""
 
@@ -365,7 +410,7 @@ msgstr ""
 msgid "Invalid Login"
 msgstr ""
 
-#: mojibake/views/posts.py:92
+#: mojibake/views/posts.py:96
 msgid "Deleted."
 msgstr ""
 

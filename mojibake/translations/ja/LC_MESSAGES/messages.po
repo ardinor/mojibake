@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Mojibake\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-06-20 12:40+1000\n"
-"PO-Revision-Date: 2014-06-20 12:49+1000\n"
+"POT-Creation-Date: 2014-07-15 15:03+1000\n"
+"PO-Revision-Date: 2014-07-15 15:08+1000\n"
 "Last-Translator: Jordan <jordan@defestri.org>\n"
 "Language-Team: Jordan <jordan@defestri.org>\n"
 "Language: ja\n"
@@ -94,22 +94,51 @@ msgstr "ユーザ名"
 
 #: mojibake/monitoring/templates/monitoring/index.html:23
 #: mojibake/monitoring/templates/monitoring/index.html:48
+#: mojibake/monitoring/templates/monitoring/ips.html:18
 msgid "IP"
 msgstr "IP"
 
 #: mojibake/monitoring/templates/monitoring/index.html:24
 #: mojibake/monitoring/templates/monitoring/index.html:49
+#: mojibake/monitoring/templates/monitoring/ips.html:19
 msgid "Location"
 msgstr "場所"
 
 #: mojibake/monitoring/templates/monitoring/index.html:28
 #: mojibake/monitoring/templates/monitoring/index.html:53
+#: mojibake/monitoring/templates/monitoring/ips.html:24
+#: mojibake/monitoring/templates/monitoring/ips.html:47
 msgid "Total"
 msgstr "全部で"
 
 #: mojibake/monitoring/templates/monitoring/index.html:43
 msgid "Bans"
 msgstr "侵入未遂遮断"
+
+#: mojibake/monitoring/templates/monitoring/ips.html:3
+#: mojibake/monitoring/templates/monitoring/ips.html:10
+#, fuzzy
+msgid "Commonly seen IPs and Subnets"
+msgstr "よく見たＩＰアドレスとサブネット"
+
+#: mojibake/monitoring/templates/monitoring/ips.html:14
+#, fuzzy
+msgid "Common IPs"
+msgstr "よく見たＩＰアドレス"
+
+#: mojibake/monitoring/templates/monitoring/ips.html:20
+#: mojibake/monitoring/templates/monitoring/ips.html:43
+#, fuzzy
+msgid "Times seen"
+msgstr "何回見た"
+
+#: mojibake/monitoring/templates/monitoring/ips.html:38
+msgid "Subnets"
+msgstr "サブネット"
+
+#: mojibake/monitoring/templates/monitoring/ips.html:42
+msgid "Subnet"
+msgstr "サブネット"
 
 #: mojibake/projects/templates/projects/index.html:3
 #: mojibake/projects/templates/projects/index.html:10
@@ -138,14 +167,24 @@ msgstr ""
 
 #: mojibake/projects/templates/projects/index.html:15
 msgid ""
-"The site itself is running on a Debian 7.5 (Wheezy) VPS. The website is "
-"served by nginx and gunicorn and is using MariaDB as the database backend."
+"The site itself has been running since September 2013 on a Debian 7.6 "
+"(Wheezy) VPS. The website is served by nginx and gunicorn and is using "
+"MariaDB as the database backend."
 msgstr ""
 
 #: mojibake/projects/templates/projects/index.html:17
 #, fuzzy
 msgid "Scrutiny"
 msgstr "スクルーティニー（精査）"
+
+#: mojibake/projects/templates/projects/index.html:18
+msgid ""
+"Scrutiny is a log parser currently designed to parse /var/log/auth.log and /"
+"var/log/fail2ban.log and inserts details about malicious attempts to break "
+"into the server in a database for easy access. It also queries an external "
+"service to insert geographical information about suspicious IPs into the "
+"database as well."
+msgstr ""
 
 #: mojibake/projects/templates/projects/index.html:19
 msgid "Frisk"
@@ -168,7 +207,8 @@ msgstr "サーバ内部エラー。　このサイトのアドミニストレー
 msgid "Posted under"
 msgstr "カテゴリー"
 
-#: mojibake/templates/_macros.html:40 mojibake/templates/translate.html:77
+#: mojibake/templates/_macros.html:40 mojibake/templates/category.html:23
+#: mojibake/templates/tag_list.html:19 mojibake/templates/translate.html:76
 msgid "Not yet published"
 msgstr "まだ出版されていない"
 
@@ -257,22 +297,27 @@ msgid "Translate"
 msgstr "翻訳"
 
 #: mojibake/templates/base.html:65
+#, fuzzy
+msgid "Monitoring"
+msgstr "監視"
+
+#: mojibake/templates/base.html:67
 msgid "Logout"
 msgstr "ログアウト"
 
-#: mojibake/templates/base.html:76
+#: mojibake/templates/base.html:78
 msgid "Github"
 msgstr "ギットハブ"
 
-#: mojibake/templates/base.html:77
+#: mojibake/templates/base.html:79
 msgid "LinkedIn"
 msgstr "リンクトイン"
 
-#: mojibake/templates/base.html:78 mojibake/templates/contact.html:13
+#: mojibake/templates/base.html:80 mojibake/templates/contact.html:13
 msgid "Email"
 msgstr "メール"
 
-#: mojibake/templates/base.html:79
+#: mojibake/templates/base.html:81
 msgid "Atom"
 msgstr "アトム"
 
@@ -285,7 +330,7 @@ msgstr "書き込み"
 msgid "Posts under \"%(category)s\""
 msgstr "\"%(category)s\"カテゴリーの書き込み"
 
-#: mojibake/templates/category.html:21
+#: mojibake/templates/category.html:26
 #, python-format
 msgid "Posted on: %(date)s"
 msgstr "%(date)sに書き込んだ"
@@ -330,8 +375,14 @@ msgstr "本文"
 msgid "Category (en)"
 msgstr "カテゴリー（英）"
 
+#: mojibake/templates/post_create.html:95
+#: mojibake/templates/post_create.html:108
+#, fuzzy
+msgid "Tags; seperate with a ;"
+msgstr "タグ（；で分ける）"
+
 #: mojibake/templates/post_create.html:129
-#: mojibake/templates/translate.html:62
+#: mojibake/templates/translate.html:61
 msgid "Submit"
 msgstr "投稿"
 
@@ -344,19 +395,19 @@ msgstr "\"%(tag)s\"にタグ付けされた書き込み"
 msgid "Looks like everything so far has been translated!"
 msgstr "全文翻訳されました！"
 
-#: mojibake/templates/translate.html:24
+#: mojibake/templates/translate.html:23
 msgid "Tags needing translation"
 msgstr "翻訳されていないタグ"
 
-#: mojibake/templates/translate.html:28 mojibake/templates/translate.html:48
+#: mojibake/templates/translate.html:27 mojibake/templates/translate.html:47
 msgid "Translation"
 msgstr "翻訳"
 
-#: mojibake/templates/translate.html:45
+#: mojibake/templates/translate.html:44
 msgid "Categories needing translation"
 msgstr "翻訳されていないカテゴリー"
 
-#: mojibake/templates/translate.html:72
+#: mojibake/templates/translate.html:71
 msgid "Posts in need of translation"
 msgstr "翻訳されていない書き込み"
 
@@ -377,7 +428,7 @@ msgstr "ログインしました。"
 msgid "Invalid Login"
 msgstr "ユーザ名またはパスワードが違います。"
 
-#: mojibake/views/posts.py:92
+#: mojibake/views/posts.py:96
 msgid "Deleted."
 msgstr "削除しました。"
 
