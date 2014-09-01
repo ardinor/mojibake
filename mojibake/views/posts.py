@@ -1,4 +1,5 @@
-from flask import Blueprint, abort, g, render_template, redirect, url_for
+from flask import Blueprint, abort, g, render_template, redirect, url_for, \
+    flash
 from datetime import timedelta
 
 from mojibake.main import db
