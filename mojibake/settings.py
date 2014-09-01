@@ -5,7 +5,7 @@ VERSION = 1.0
 
 PORT = 8000
 
-DEBUG = True
+DEBUG = False
 
 POSTS_PER_PAGE = 3
 
