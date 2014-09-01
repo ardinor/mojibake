@@ -18,7 +18,7 @@ babel = Babel(app)
 if app.config['DEBUG']:
     pass
 else:
-    from settings import file_handler
+    from mojibake.settings import file_handler
     app.logger.addHandler(file_handler)
 
 login_manager = LoginManager()
