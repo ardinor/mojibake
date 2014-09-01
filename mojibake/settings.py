@@ -66,5 +66,5 @@ Message: %(message)s
     #'%(asctime)s %(levelname)s: %(message)s '
     #'[in %(pathname)s:%(lineno)d]'
     #))
-    file_handler.addFormatter(file_formatter)
+    file_handler.setFormatter(file_formatter)
     app.logger.addHandler(file_handler)
