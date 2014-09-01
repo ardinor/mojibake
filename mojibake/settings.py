@@ -50,7 +50,7 @@ else:
     import logging
     from logging.handlers import TimedRotatingFileHandler
     # Set the size limit to 5~mb
-    file_handler = TimedRotatingFileHandler(os.path.join(LOG_DIR, 'mojibake.log'), when="D", backupCount=7)
+    file_handler = TimedRotatingFileHandler(os.path.join(LOG_DIR, 'mojibake-flask.log'), when="D", backupCount=7)
     file_formatter = logging.Formatter("""
 Time: %(asctime)s
 Level: %(levelname)s
