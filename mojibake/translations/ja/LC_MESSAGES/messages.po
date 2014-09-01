@@ -227,7 +227,7 @@ msgstr "削除する"
 #: mojibake/templates/about.html:3 mojibake/templates/about.html:10
 #: mojibake/templates/base.html:54
 msgid "About"
-msgstr "私につぃて"
+msgstr "私について"
 
 #: mojibake/templates/about.html:13
 msgid "One day, same day, something will be here. But not today."

@@ -3,13 +3,17 @@ import os
 
 VERSION = 1.0
 
-DEBUG = True
+PORT = 8000
+
+DEBUG = False
 
 POSTS_PER_PAGE = 3
 
 # Assumes the app is located in the same directory
 # where this file resides
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
+
+LOG_DIR = '/opt/mojibake/logs/current'
 # Directory to where the site will log to
 SITE_LOG_DIR = ''
 
@@ -19,7 +23,7 @@ LANGUAGES = {
 }
 
 # Celery settings
-CELERY_BROKER_URL = 'amqp:guest:guest//localhost'
+#CELERY_BROKER_URL = 'amqp:guest:guest//localhost'
 
 def parent_dir(path):
     '''Return the parent of a directory.'''
@@ -33,23 +37,34 @@ if DEBUG:
 else:
     #from mojibake.main import app
     import configparser
-    credentials_file = ''
-    #config = configparser.ConfigParser()
-    #config.read(credentials_file)
-    #username = config.get("credentials", "username")
-    #password = config.get("credentials", "password")
+    credentials_file = '/home/mojibake/.mojibake_settings'
+    config = configparser.ConfigParser()
+    config.read(credentials_file)
+    username = config.get("credentials", "username")
+    password = config.get("credentials", "password")
     #SQLALCHEMY_DATABASE_URI = "mysql:///" + username + ":" + password + "@localhost/mojibake"
-    SQLALCHEMY_DATABASE_URI = "mysql+oursql://jordan@localhost/mojibake"
-    #SECRET_KEY = config.get("credentials", "secret_key")
-    SECRET_KEY = "Key goes here"
+    SQLALCHEMY_DATABASE_URI = "mysql+oursql://" + username + ":" + password + "@localhost/mojibake?default_charset=utf8"
+    SECRET_KEY = config.get("credentials", "secret_key")
+    #SECRET_KEY = "Key goes here"
 
     import logging
-    from logging.handlers import RotatingFileHandler
-    # Set the size limit to 50~mb
-    file_handler = RotatingFileHandler('mojibake.log', maxBytes=1024 * 1024 * 50, backupCount=5)
+    from logging.handlers import TimedRotatingFileHandler
+    # Set the size limit to 5~mb
+    file_handler = TimedRotatingFileHandler(os.path.join(LOG_DIR, 'mojibake.log'), when="D", backupCount=7)
+    file_formatter = logging.Formatter("""
+Time: %(asctime)s
+Level: %(levelname)s
+Method: %(method)s
+Path: %(url)s
+IP: %(ip)s
+Message: %(message)s
+-------------
+""")
+
     file_handler.setLevel(logging.WARNING)
-    file_handler.setFormatter(logging.Formatter(
-    '%(asctime)s %(levelname)s: %(message)s '
-    '[in %(pathname)s:%(lineno)d]'
-    ))
-    #app.logger.addHandler(file_handler)
+    #file_handler.setFormatter(logging.Formatter(
+    #'%(asctime)s %(levelname)s: %(message)s '
+    #'[in %(pathname)s:%(lineno)d]'
+    #))
+    file_handler.addFormatter(file_formatter)
+    app.logger.addHandler(file_handler)
