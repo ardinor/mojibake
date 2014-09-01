@@ -77,7 +77,7 @@ def edit_post(slug):
         post.slug = form.slug.data
         post.published = form.published.data
         if post.published:
-            published_date = form.date.data - timedelta(hours=new_post.get_tz_offset())
+            published_date = form.date.data - timedelta(hours=post.get_tz_offset())
             post.date = published_date
         db.session.commit()
 
