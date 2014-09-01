@@ -43,7 +43,7 @@ else:
     username = config.get("credentials", "username")
     password = config.get("credentials", "password")
     #SQLALCHEMY_DATABASE_URI = "mysql:///" + username + ":" + password + "@localhost/mojibake"
-    SQLALCHEMY_DATABASE_URI = "mysql+oursql://" + username + ":" + password + "@localhost/mojibake?default_charset=utf8"
+    SQLALCHEMY_DATABASE_URI = "mysql+oursql://" + username + ":" + password + "@localhost/mojibake"
     SECRET_KEY = config.get("credentials", "secret_key")
     #SECRET_KEY = "Key goes here"
 
