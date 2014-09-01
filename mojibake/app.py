@@ -15,7 +15,7 @@ app.config.from_pyfile('settings.py')
 db = SQLAlchemy(app)
 babel = Babel(app)
 
-if DEBUG:
+if app.config['DEBUG']:
     pass
 else:
     from settings import file_handler
