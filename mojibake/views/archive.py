@@ -1,4 +1,5 @@
 from flask import Blueprint, abort, g, render_template
+from sqlalchemy.sql import func
 
 from mojibake.models import Post
 
@@ -19,10 +20,14 @@ def archive_list():
 @archive.route('/<year>/')
 def archive_year(year):
     if g.user is not None and g.user.is_authenticated():
-        year_posts = Post.query.filter("strftime('%Y', date) = :year"). \
+        #year_posts = Post.query.filter("strftime('%Y', date) = :year"). \
+        #    params(year=year).order_by('-date').all()
+        year_posts = Post.query.filter(func.YEAR(Post.date) == year). \
             params(year=year).order_by('-date').all()
     else:
-        year_posts = Post.query.filter("strftime('%Y', date) = :year"). \
+        #year_posts = Post.query.filter("strftime('%Y', date) = :year"). \
+        #    params(year=year).filter_by(published=True).order_by('-date').all()
+        year_posts = Post.query.filter(func.YEAR(Post.date) == year). \
             params(year=year).filter_by(published=True).order_by('-date').all()
 
     if year_posts:
