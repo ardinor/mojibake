@@ -15,6 +15,12 @@ app.config.from_pyfile('settings.py')
 db = SQLAlchemy(app)
 babel = Babel(app)
 
+if DEBUG:
+    pass
+else:
+    from settings import file_handler
+    app.logger.addHandler(file_handler)
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.session_protection = "strong"

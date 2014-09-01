@@ -67,4 +67,4 @@ Message: %(message)s
     #'[in %(pathname)s:%(lineno)d]'
     #))
     file_handler.setFormatter(file_formatter)
-    app.logger.addHandler(file_handler)
+    #app.logger.addHandler(file_handler)
