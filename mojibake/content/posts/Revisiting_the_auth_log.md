@@ -28,8 +28,8 @@ As we can see there's still plenty of log in attempts coming in, although slight
 
 So we can see it has successfully banned the three IPs that have attempted to break in three or more times in the log.
 
-Out of curiousity I've written a parser to parse the auth.log and fail2ban.log and see not only the IPs (and the countries) these attempts are coming from but also the usernames they're trying to log in with. The files are up on my Github [here](https://github.com/ardinor/misc/tree/master/auth-log%20parser) and the results of the parser are [here](https://defestri.org/bans/).
+Out of curiosity I've written a parser to parse the auth.log and fail2ban.log and see not only the IPs (and the countries) these attempts are coming from but also the usernames they're trying to log in with. The files are up on my Github [here](https://github.com/ardinor/misc/tree/master/auth-log%20parser) and the results of the parser are [here](https://defestri.org/bans/).
 
 The auth-log parser script basically looks through the log, pulling out attempts for the last month, checks the location of the attempts using [ipinfodb's](http://www.ipinfodb.com/) API then uses [jinja2](http://jinja.pocoo.org/docs/) to output it into a HTML file.
 
-From here I'd like to get the auth-log parser to run as a cron job every month, parse the log in attempts from the previous month and output it to a page visable on this site. On the side of security however, next up I think I'll get fail2ban to monitor it's own log, banning people who have been banned multiple times before. Then we should hopefully have a more secure server.
+From here I'd like to get the auth-log parser to run as a cron job every month, parse the log in attempts from the previous month and output it to a page visible on this site. On the side of security however, next up I think I'll get fail2ban to monitor it's own log, banning people who have been banned multiple times before. Then we should hopefully have a more secure server.
