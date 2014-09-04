@@ -5,7 +5,7 @@ VERSION = 1.0
 
 PORT = 8000
 
-DEBUG = False
+DEBUG = True
 
 POSTS_PER_PAGE = 3
 
@@ -44,6 +44,8 @@ else:
     password = config.get("credentials", "password")
     #SQLALCHEMY_DATABASE_URI = "mysql:///" + username + ":" + password + "@localhost/mojibake"
     SQLALCHEMY_DATABASE_URI = "mysql+oursql://" + username + ":" + password + "@localhost/mojibake"
+    # On the prod server the wait-timeout is currently set to 600
+    SQLALCHEMY_POOL_RECYCLE = 500
     SECRET_KEY = config.get("credentials", "secret_key")
     #SECRET_KEY = "Key goes here"
 
