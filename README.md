@@ -8,6 +8,7 @@ Currently in the process of re-writing this.
 
 TO DO
 -------------------------
+- If a post is deleted and then a tag or category has no other posts, delete that tag or category
 - Check adding translations from post edit
 - Add a Tag and Category slug? Okay with spaces in the url?
 - Add a preview view for writing posts?

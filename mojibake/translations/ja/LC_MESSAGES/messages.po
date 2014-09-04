@@ -231,7 +231,7 @@ msgstr "私について"
 
 #: mojibake/templates/about.html:13
 msgid "One day, same day, something will be here. But not today."
-msgstr "いつか、ここに何か書こうと思っていますが、まだです。"
+msgstr "いつか、ここに何か書こうと思っています。"
 
 #: mojibake/templates/about.html:17
 #, python-format
@@ -239,7 +239,7 @@ msgid ""
 "My contact details are over %(contact)shere%(endc)s and my Github is located "
 "%(github)shere%(endg)s."
 msgstr ""
-"私の連絡先は%(contact)sこちら%(endc)sと私のギットハブは%(github)sこち"
+"私の連絡先は%(contact)sこちら%(endc)s、私のギットハブは%(github)sこち"
 "ら%(endg)sです。"
 
 #: mojibake/templates/about.html:22
