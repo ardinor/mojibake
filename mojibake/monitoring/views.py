@@ -4,6 +4,7 @@ from collections import Counter
 import datetime
 
 from mojibake.models import BreakinAttempts, BannedIPs, IPAddr
+from mojibake.settings import DEBUG
 
 monitor = Blueprint('monitor', __name__,
     template_folder='templates')
@@ -14,13 +15,19 @@ def bans_list():
     #displayed_time = 'CET'
     #time_offset = '+1'
 
-    #last_month = datetime.datetime.now().replace(day=1) - datetime.timedelta(days=1)
-    last_month = datetime.datetime.now()  # for testing
+    last_month = datetime.datetime.now().replace(day=1) - datetime.timedelta(days=1)
+    #last_month = datetime.datetime.now()  # for testing
 
-    breakin_attempts = BreakinAttempts.query.filter("strftime('%Y', date) = :year").params(year=last_month.strftime('%Y')). \
-        filter("strftime('%m', date) = :month").params(month=last_month.strftime('%m')).order_by('-date').all()
-    bans = BannedIPs.query.filter("strftime('%Y', date) = :year").params(year=last_month.strftime('%Y')). \
-        filter("strftime('%m', date) = :month").params(month=last_month.strftime('%m')).order_by('-date').all()
+    if DEBUG:
+        breakin_attempts = BreakinAttempts.query.filter("strftime('%Y', date) = :year").params(year=last_month.strftime('%Y')). \
+            filter("strftime('%m', date) = :month").params(month=last_month.strftime('%m')).order_by('-date').all()
+        bans = BannedIPs.query.filter("strftime('%Y', date) = :year").params(year=last_month.strftime('%Y')). \
+            filter("strftime('%m', date) = :month").params(month=last_month.strftime('%m')).order_by('-date').all()
+    else:
+        breakin_attempts = BreakinAttempts.query.filter(func.YEAR(BreakinAttempts.date) == year).params(year=last_month.strftime('%Y')). \
+            filter(func.MONTH(BreakinAttempts.date) == month).params(month=last_month.strftime('%m')).order_by('-date').all()
+        bans = BannedIPs.query.filter(func.YEAR(BannedIPs.date) == year).params(year=last_month.strftime('%Y')). \
+            filter(func.MONTH(BannedIPs.date) == month).params(month=last_month.strftime('%m')).order_by('-date').all()
 
     #displayed_time=displayed_time,
     #    time_offset=time_offset,
