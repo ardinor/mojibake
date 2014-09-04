@@ -24,10 +24,12 @@ def bans_list():
         bans = BannedIPs.query.filter("strftime('%Y', date) = :year").params(year=last_month.strftime('%Y')). \
             filter("strftime('%m', date) = :month").params(month=last_month.strftime('%m')).order_by('-date').all()
     else:
-        breakin_attempts = BreakinAttempts.query.filter(func.YEAR(BreakinAttempts.date) == year).params(year=last_month.strftime('%Y')). \
-            filter(func.MONTH(BreakinAttempts.date) == month).params(month=last_month.strftime('%m')).order_by('-date').all()
-        bans = BannedIPs.query.filter(func.YEAR(BannedIPs.date) == year).params(year=last_month.strftime('%Y')). \
-            filter(func.MONTH(BannedIPs.date) == month).params(month=last_month.strftime('%m')).order_by('-date').all()
+        year = last_month.strftime('%Y')
+        month = last_month.strftime('%m')
+        breakin_attempts = BreakinAttempts.query.filter(func.YEAR(BreakinAttempts.date) == year). \
+            filter(func.MONTH(BreakinAttempts.date) == month).order_by('-date').all()
+        bans = BannedIPs.query.filter(func.YEAR(BannedIPs.date) == year). \
+            filter(func.MONTH(BannedIPs.date) == month).order_by('-date').all()
 
     #displayed_time=displayed_time,
     #    time_offset=time_offset,
