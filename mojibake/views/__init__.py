@@ -12,7 +12,7 @@ import datetime
 @app.route('/sitemap.xml', methods=['GET'])
 def sitemap():
     hide_views = ['/posts/create', '/post/<slug>/edit', '/post/<slug>/delete',
-                    '/translate', '/login', '/logout']
+                    '/translate', '/login', '/logout', '/sitemap.xml']
 
     map_pages = []
     ten_days_ago=(datetime.datetime.now() - datetime.timedelta(days=10)).date().isoformat()
