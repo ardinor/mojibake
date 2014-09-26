@@ -11,7 +11,7 @@ import datetime
 #Adapted from http://flask.pocoo.org/snippets/108/
 @app.route('/sitemap.xml', methods=['GET'])
 def sitemap():
-    hide_views = ['/post/create', '/post/<slug>/edit', '/post/<slug>/delete',
+    hide_views = ['/posts/create', '/post/<slug>/edit', '/post/<slug>/delete',
                     '/translate', '/login', '/logout']
 
     map_pages = []
@@ -45,11 +45,12 @@ def sitemap():
 
     return response
 
-@app.route('/robots.txt')
-def robots():
-    response = make_response("User-agent: *\nDisallow:")
-    response.headers["Content-Type"] = "text/plain"
-    return response
+# Scratch that, don't need this
+# @app.route('/robots.txt')
+# def robots():
+#     response = make_response("User-agent: *\nDisallow:")
+#     response.headers["Content-Type"] = "text/plain"
+#     return response
 
 @app.errorhandler(404)
 def internal_error400(error):
