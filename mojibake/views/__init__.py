@@ -45,6 +45,12 @@ def sitemap():
 
     return response
 
+@app.route('/robots.txt')
+def robots():
+    response = make_response("User-agent: *\nDisallow:")
+    response.headers["Content-Type"] = "text/plain"
+    return response
+
 @app.errorhandler(404)
 def internal_error400(error):
     return render_template('404.html'), 404
