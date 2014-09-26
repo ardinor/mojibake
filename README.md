@@ -15,6 +15,7 @@ TO DO
 - Add search
 - Do similar for category, except under the title?
 - Look at Disqus for comments?
+- Maybe make the links a little more visible?
 
 REQUIREMENTS
 -------------------------

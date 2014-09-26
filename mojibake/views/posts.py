@@ -92,8 +92,17 @@ def edit_post(slug):
 @login_required
 def delete_post(slug):
     post = Post.query.filter_by(slug=slug).first_or_404()
+    cat = post.category    
+    tags = post.tags
     db.session.delete(post)
     db.session.commit()
+    if cat.posts.count() == 0:
+        db.session.delete(cat)
+        db.session.commit()
+    for i in tags:
+        if i.posts.count() == 0:
+            db.session.delete(i)
+            db.session.commit()
     flash(gettext("Deleted."), 'success')
 
     return redirect(url_for('posts.post_list'))
