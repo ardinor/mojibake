@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import getpass
+import argparse
 #from passlib.hash import pbkdf2_sha256
 
 from mojibake.app import db
@@ -32,11 +33,45 @@ def create_admin(admin_name, admin_pass):
 
 if __name__ == '__main__':
 
+    arg_parser = argparse.ArgumentParser(description='Mojibake Setup')
+
+    arg_parser.add_argument('-r', '--reset-pass',
+            action='store_true',
+            default=False,
+            dest='reset_pass',
+            help='Reset the admin password.')
+
+    args = arg_parser.parse_args()
+
     print('=== Mojibake Setup v{} ==='.format(VERSION))
 
-    db.create_all()
+    if args.reset_pass:
+        print('Reset Admin Pass.')
+        print("If you continue, the site admin's password will be reset.")
+        while 1:
+            response = input('Do you wish to continue? (y/n) -> ')
+            if response == 'y':
+                pass
+                break
+            elif response = 'n':
+                break
+            else:
+                print('Unknown respose: {}'.format(response))
 
-    admin_name, admin_pass = get_admin_details()
-    create_admin(admin_name, admin_pass)
+    else:
+        print('Initial Setup.')
+        print('This will create all the tables and create a new admin user.')
+        while 1:
+            response = input('Do you wish to continue? (y/n) -> ')
+            if response == 'y':
+                db.create_all()
 
+                admin_name, admin_pass = get_admin_details()
+                create_admin(admin_name, admin_pass)
+
+                break
+            elif response == 'n':
+                break
+            else:
+                print('Unknown respose: {}'.format(response))
     print('Finished')
