@@ -13,9 +13,9 @@ def get_pass():
     pprompt = lambda: (getpass.getpass('Input Admin Password: '), getpass.getpass('Retype password: '))
 
     p1, p2 = pprompt()
-        while p1 != p2:
-            print('Passwords do match. Try again.')
-            p1, p2 = pprompt()
+    while p1 != p2:
+        print('Passwords do match. Try again.')
+        p1, p2 = pprompt()
 
     return p1
 
@@ -26,7 +26,6 @@ def get_admin_details():
     p1 = get_pass()
 
     return admin_name, p1
-
 
 def create_admin(admin_name, admin_pass):
 
