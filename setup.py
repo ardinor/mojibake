@@ -73,7 +73,7 @@ if __name__ == '__main__':
                     else:
                         print('User {} not found.'.format(response))
                 break
-            elif response = 'n':
+            elif response == 'n':
                 break
             else:
                 print('Unknown respose: {}'.format(response))
