@@ -61,7 +61,7 @@ if __name__ == '__main__':
         print("If you continue, the site admin's password will be reset.")
         while 1:
             response = input('Do you wish to continue? (y/n) -> ')
-            if response == 'y':
+            if response.lower() == 'y':
                 response = input('Admin username: ')
                 if response:
                     admin = get_admin(response)
@@ -73,7 +73,7 @@ if __name__ == '__main__':
                     else:
                         print('User {} not found.'.format(response))
                 break
-            elif response == 'n':
+            elif response.lower() == 'n':
                 break
             else:
                 print('Unknown respose: {}'.format(response))

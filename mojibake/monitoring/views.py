@@ -12,11 +12,12 @@ monitor = Blueprint('monitor', __name__,
 @monitor.route('/')
 def bans_list():
 
-    #displayed_time = 'CET'
-    #time_offset = '+1'
+    # Since we set up port knocking there are no longer any failed
+    # attempts to access the server, use this date to show some historical
+    # data instead
+    #last_month = datetime.datetime.now().replace(day=1) - datetime.timedelta(days=1)
+    last_month = datetime.datetime(2014, 10, 31)
 
-    last_month = datetime.datetime.now().replace(day=1) - datetime.timedelta(days=1)
-    #last_month = datetime.datetime.now()  # for testing
 
     if DEBUG:
         breakin_attempts = BreakinAttempts.query.filter("strftime('%Y', date) = :year").params(year=last_month.strftime('%Y')). \

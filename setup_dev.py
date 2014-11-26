@@ -6,6 +6,13 @@ from mojibake.models import Category, Post, Tag, User, \
     IPAddr, BannedIPs, BreakinAttempts
 
 def create_test_monitoring():
+
+    # Since we changed the date monitoring looks for (see monitoring/views.py)
+    # Set the date to the Oct 2014 so they show up
+    last_month = datetime(2014, 10, 12)
+
+    db.session.query(IPAddr).delete()
+    db.session.query(BreakinAttempts).delete()
     ip1 = IPAddr('192.168.1.1')
     ip1.region = 'Test'
     ip1.country = 'Antartica'
@@ -19,23 +26,32 @@ def create_test_monitoring():
     db.session.add(ip2)
     db.session.add(ip3)
     db.session.commit()
-    b1 = BreakinAttempts(date=datetime.now(), user='admin')
+    b1 = BreakinAttempts(date=last_month, user='admin')
     b1.ip = ip1
-    b2 = BreakinAttempts(date=datetime.now(), user='admin')
+    b2 = BreakinAttempts(date=last_month, user='admin')
     b2.ip = ip1
-    b3 = BreakinAttempts(date=datetime.now(), user='admin')
+    b3 = BreakinAttempts(date=last_month, user='admin')
     b3.ip = ip1
-    b4 = BreakinAttempts(date=datetime.now(), user='oracle')
+    b4 = BreakinAttempts(date=last_month, user='oracle')
     b4.ip = ip2
-    b5 = BreakinAttempts(date=datetime.now(), user='aaa')
+    b5 = BreakinAttempts(date=last_month, user='aaa')
     b5.ip = ip3
+    b6 = BreakinAttempts(date=last_month, user='qwe')
+    b6.ip = ip3
+    b7 = BreakinAttempts(date=last_month, user='qwe')
+    b7.ip = ip3
+    b8 = BreakinAttempts(date=last_month, user='qwe')
+    b8.ip = ip3
     db.session.add(b1)
     db.session.add(b2)
     db.session.add(b3)
     db.session.add(b4)
     db.session.add(b5)
+    db.session.add(b6)
+    db.session.add(b7)
+    db.session.add(b8)
     db.session.commit()
-    ba1 = BannedIPs(date=datetime.now())
+    ba1 = BannedIPs(date=last_month)
     ba1.ipaddr = ip1.id
     db.session.add(ba1)
     db.session.commit()
@@ -58,5 +74,5 @@ def create_test_posts():
 
 if __name__ == '__main__':
     db.create_all()
-    create_test_posts()
+    #create_test_posts()
     create_test_monitoring()
