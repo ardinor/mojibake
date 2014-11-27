@@ -13,60 +13,57 @@ def create_test_monitoring():
 
     db.session.query(IPAddr).delete()
     db.session.query(BreakinAttempts).delete()
-    ip1 = IPAddr('192.168.1.1')
-    ip1.region = 'Test'
-    ip1.country = 'Antartica'
-    ip2 = IPAddr('10.0.0.1')
-    ip2.region = 'Unknown'
-    ip2.country = 'Luxembourg'
-    ip3 = IPAddr('172.16.0.1')
-    ip3.region = '大阪'
-    ip3.country = '日本'
-    ip4 = IPAddr('172.16.0.56')
-    ip4.region = '熊本県'
-    ip4.country = '日本'
-    db.session.add(ip1)
-    db.session.add(ip2)
-    db.session.add(ip3)
-    db.session.commit()
-    b1 = BreakinAttempts(date=last_month, user='admin')
-    b1.ip = ip1
-    b2 = BreakinAttempts(date=last_month, user='admin')
-    b2.ip = ip1
-    b3 = BreakinAttempts(date=last_month, user='admin')
-    b3.ip = ip1
-    b4 = BreakinAttempts(date=last_month, user='oracle')
-    b4.ip = ip2
-    b5 = BreakinAttempts(date=last_month, user='aaa')
-    b5.ip = ip3
-    b6 = BreakinAttempts(date=last_month, user='qwe')
-    b6.ip = ip3
-    b7 = BreakinAttempts(date=last_month, user='qwe')
-    b7.ip = ip3
-    b8 = BreakinAttempts(date=last_month, user='qwe')
-    b8.ip = ip3
-    b9 = BreakinAttempts(date=last_month, user='qwe')
-    b9.ip = ip4
-    b10 = BreakinAttempts(date=last_month, user='qwe')
-    b10.ip = ip4
-    b11 = BreakinAttempts(date=last_month, user='qwe')
-    b11.ip = ip4
-    db.session.add(b1)
-    db.session.add(b2)
-    db.session.add(b3)
-    db.session.add(b4)
-    db.session.add(b5)
-    db.session.add(b6)
-    db.session.add(b7)
-    db.session.add(b8)
-    db.session.add(b9)
-    db.session.add(b10)
-    db.session.add(b11)
-    db.session.commit()
-    ba1 = BannedIPs(date=last_month)
-    ba1.ipaddr = ip1.id
-    db.session.add(ba1)
-    db.session.commit()
+
+    sample_ip_data = {
+        '192.168.1.1': ['McMurdo', 'Antartica'],
+        '10.0.0.1': ['Luxembourg City', 'Luxembourg'],
+        '172.16.0.1': ['大阪', '日本'],
+        '172.16.0.56': ['熊本県', '日本'],
+        '163.12.76.193': ['Düsseldorf', 'Germany'],
+        '163.12.76.222': ['Düsseldorf', 'Germany'],
+        '74.123.51.130': ['Ljubljana', 'Slovenia'],
+        '74.123.51.139': ['Ljubljana', 'Slovenia'],
+        '74.123.51.240': ['Ljubljana', 'Slovenia'],
+        '74.123.51.251': ['Ljubljana', 'Slovenia'],
+    }
+
+    sample_attempts = {
+        '192.168.1.1': ['admin', 'admin', 'admin'],
+        '10.0.0.1': ['oracle', 'nagios', 'aaa'],
+        '172.16.0.1': ['aaa', 'aaa', 'aaa'],
+        '172.16.0.56': ['qwe', 'qwe', 'qwe'],
+        '163.12.76.193': ['wertwasdcw', 'Hanz', 'Prometheus'],
+        '163.12.76.222': ['asdqwqwqq', 'bob'],
+        '74.123.51.130': ['abebrabr', 'abebrabr', 'aberbaerb'],
+        '74.123.51.139': ['abebrabr', 'abebrabr', 'aberbaerb'],
+        '74.123.51.240': ['abebrabr', 'abebrabr', 'aberbaerb'],
+        '74.123.51.251': ['abebrabr', 'abebrabr', 'aberbaerb'],
+    }
+
+    sample_bans = [
+        '192.168.1.1',
+    ]
+
+    for i, j in sample_ip_data.items():
+
+        ip_entry = IPAddr(i)
+        ip_entry.region = j[0]
+        ip_entry.country = j[1]
+        db.session.add(ip_entry)
+        db.session.commit()
+
+        for user in sample_attempts[i]:
+            attempt = BreakinAttempts(date=last_month, user=user)
+            attempt.ip = ip_entry
+            db.session.add(attempt)
+        db.session.commit()
+
+        if i in sample_bans:
+            sample_ban = BannedIPs(date=last_month)
+            sample_ban.ipaddr = ip_entry.id
+            db.session.add(sample_ban)
+            db.session.commit()
+
 
 def create_test_posts():
     p1 = Post('Test Post', 'test_post')

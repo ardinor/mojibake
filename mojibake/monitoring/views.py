@@ -42,15 +42,6 @@ def bans_list():
 
 @monitor.route('/ips')
 def ip_list():
-
-    CIDR_24 = {0: '/24', 128: '/25', 192: '/26',
-               224: '/27', 240: '/28', 248: '/29',
-               252: '/30', 254: '/31', 255: '/32'}
-
-    CIDR_16 = {0: '/24', 128: '/25', 192: '/26',
-               224: '/27', 240: '/28', 248: '/29',
-               252: '/30', 254: '/31', 255: '/32'}
-
     # Need to tune how many attempts are needed for it to be common
     common_ips = IPAddr.query.join(BreakinAttempts).group_by(IPAddr.ip_addr). \
         having(func.count(IPAddr.breakins)>=3).all()
@@ -86,20 +77,35 @@ def ip_list():
     subnets_to_block = {}
 
     for ip_24, ips in common_24s.items():
+        # If we've seen this /24 more than twice
         if ip_cntr_24[ip_24] >= 2:
+            # Begin by making a range of the IPs we've seen in the /24
             ip_range = []
             for ip in ips:
                 reverse_ip = ip[::-1]
                 split_ip_24 = int(reverse_ip[:reverse_ip.find('.')])
                 ip_range += [split_ip_24]
+            # Find the difference between the highest and lowest IPs seen
             ip_range_diff = max(ip_range) - min(ip_range)
-            # find the nearest power of 2 (credit to http://mccormick.cx/news/entries/nearest-power-of-two)
+            # Find the nearest power of 2 (credit to http://mccormick.cx/news/entries/nearest-power-of-two)
             subnet_range = pow(2, int(log(ip_range_diff, 2) + 0.5))
-            no_hosts = subnet_range - 2
+            # Calculate the net mask, it'll be 256 - the subnet range (e.g. 256 - 64 = 192)
             net_mask = '255.255.255.{}'.format(256 - subnet_range)
+            # Calculate the CIDR notation
             cidr = 8 - int(log(ip_range_diff, 2) + 0.5)
+            # Calculate the number of hosts
+            no_hosts = pow(2, 8 - cidr) - 2 # subnet_range - 2  # this won't work for /16, need to add 8 to it?
             cidr = '/{}'.format(24 + cidr)
-            subnets_to_block[ip_24] = {'net_mask': net_mask,
+
+            # Next work out the subnet id
+            range_step = 0
+            while range_step < 256:
+                next_step = range_step + subnet_range
+                if range_step < min(ip_range) < next_step: # and range_step < min(ip_range) < next_step:
+                    break
+                range_step = next_step
+            subnet_id = '{}.{}'.format(ip_24, range_step)
+            subnets_to_block[subnet_id] = {'net_mask': net_mask,
                                                'cidr': cidr,
                                                'no_hosts': no_hosts}
 
