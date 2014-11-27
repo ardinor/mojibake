@@ -22,7 +22,7 @@ def create_test_monitoring():
     ip3 = IPAddr('172.16.0.1')
     ip3.region = '大阪'
     ip3.country = '日本'
-    ip4 = IPAddr('172.16.1.1')
+    ip4 = IPAddr('172.16.0.56')
     ip4.region = '熊本県'
     ip4.country = '日本'
     db.session.add(ip1)

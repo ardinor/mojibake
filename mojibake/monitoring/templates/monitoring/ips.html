@@ -83,6 +83,34 @@
             </tbody>
         </table>
 
+        <h3 style="padding-bottom: 10px;">{{ _('Subnets to block') }}</h3>
+        <table class="default">
+            <thead>
+                <tr>
+                    <th>{{ _('Subnet') }}</th>
+                    <th>{{ _('Net mask') }}</th>
+                    <th>{{ _('CIDR') }}</th>
+                    <th>{{ _('No. of hosts') }}</th>
+                </tr>
+            </thead>
+            <!-- <tfoot class="row-total">
+                <td>{{ _('Total')}}:</td>
+                <td colspan="2">{{ subnets|length }}</td>
+            </tfoot> -->
+            <tbody>
+
+                {% for subnet in subnets_to_block.keys() %}
+                <tr class="{{ loop.cycle('odd', 'even')}}">
+                    <td>{{ subnet }}</td>
+                    <td>{{ subnets_to_block[subnet]['net_mask'] }}</td>
+                    <td>{{ subnets_to_block[subnet]['cidr'] }}</td>
+                    <td>{{ subnets_to_block[subnet]['no_hosts'] }}</td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
     </div>
 </section>
 {% endblock %}
