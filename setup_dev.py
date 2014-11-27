@@ -22,6 +22,9 @@ def create_test_monitoring():
     ip3 = IPAddr('172.16.0.1')
     ip3.region = '大阪'
     ip3.country = '日本'
+    ip4 = IPAddr('172.16.1.1')
+    ip4.region = '熊本県'
+    ip4.country = '日本'
     db.session.add(ip1)
     db.session.add(ip2)
     db.session.add(ip3)
@@ -42,6 +45,12 @@ def create_test_monitoring():
     b7.ip = ip3
     b8 = BreakinAttempts(date=last_month, user='qwe')
     b8.ip = ip3
+    b9 = BreakinAttempts(date=last_month, user='qwe')
+    b9.ip = ip4
+    b10 = BreakinAttempts(date=last_month, user='qwe')
+    b10.ip = ip4
+    b11 = BreakinAttempts(date=last_month, user='qwe')
+    b11.ip = ip4
     db.session.add(b1)
     db.session.add(b2)
     db.session.add(b3)
@@ -50,6 +59,9 @@ def create_test_monitoring():
     db.session.add(b6)
     db.session.add(b7)
     db.session.add(b8)
+    db.session.add(b9)
+    db.session.add(b10)
+    db.session.add(b11)
     db.session.commit()
     ba1 = BannedIPs(date=last_month)
     ba1.ipaddr = ip1.id

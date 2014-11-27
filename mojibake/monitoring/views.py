@@ -45,18 +45,33 @@ def ip_list():
     common_ips = IPAddr.query.join(BreakinAttempts).group_by(IPAddr.ip_addr). \
         having(func.count(IPAddr.breakins)>=3).all()
 
-    ip_list = []
+    # Start with the /16
+    list_ips_16 = []
+    list_ips_24 = []
     for ip in common_ips:
+        #count = ip.breakins.count()
+
+        # Start with the /16
         split_ip = ip.ip_addr.split('.')
-        ip_list.append(split_ip[0] + '.' + split_ip[1])
-    ip_cntr = Counter(ip_list)
+        list_ips_16 += [split_ip[0] + '.' + split_ip[1]]  # count *
 
-    for [ip_start, count] in ip_cntr.most_common():
-        # How many times for this to be common as well?
-        if count > 3:
-            pass
+        # Then the /24
+        # [::-1] flips the string around (http://stackoverflow.com/a/931095)
+        reverse_ip = ip.ip_addr[::-1]
+        split_ip_24 = reverse_ip[reverse_ip.find('.')+1:]
+        split_ip_24 = split_ip_24[::-1]
+        list_ips_24 += [split_ip_24]  # count *
 
-    subnets = {}
+    ip_cntr_16 = Counter(list_ips_16)
+    ip_cntr_24 = Counter(list_ips_24)
+
+    #subnets = ip_cntr_16 + ip_cntr_24
+
+    # for [ip_start, count] in ip_cntr.most_common():
+    #     # How many times for this to be common as well?
+    #     if count > 3:
+    #         pass
+
 
     return render_template('monitoring/ips.html', common_ips=common_ips,
-        subnets=subnets)
+        subnets_16=ip_cntr_16, subnets_24=ip_cntr_24)

@@ -35,7 +35,7 @@
             </tbody>
         </table>
 
-        <h3 style="padding-bottom: 10px;">{{ _('Subnets') }}</h3>
+        <h3 style="padding-bottom: 10px;">{{ _('Subnets /16') }}</h3>
         <table class="default">
             <thead>
                 <tr>
@@ -43,16 +43,40 @@
                     <th>{{ _('Times seen') }}</th>
                 </tr>
             </thead>
-            <tfoot class="row-total">
+            <!-- <tfoot class="row-total">
                 <td>{{ _('Total')}}:</td>
                 <td colspan="2">{{ subnets|length }}</td>
-            </tfoot>
+            </tfoot> -->
             <tbody>
 
-                {% for subnet in subnets %}
+                {% for subnet, count in subnets_16.items() %}
                 <tr class="{{ loop.cycle('odd', 'even')}}">
-                    <td>{{ subnet['subnet'] }}</td>
-                    <td>{{ subnet['count'] }}</td>
+                    <td>{{ subnet }}</td>
+                    <td>{{ count }}</td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+        <h3 style="padding-bottom: 10px;">{{ _('Subnets /24') }}</h3>
+        <table class="default">
+            <thead>
+                <tr>
+                    <th>{{ _('Subnet') }}</th>
+                    <th>{{ _('Times seen') }}</th>
+                </tr>
+            </thead>
+            <!-- <tfoot class="row-total">
+                <td>{{ _('Total')}}:</td>
+                <td colspan="2">{{ subnets|length }}</td>
+            </tfoot> -->
+            <tbody>
+
+                {% for subnet, count in subnets_24.items() %}
+                <tr class="{{ loop.cycle('odd', 'even')}}">
+                    <td>{{ subnet }}</td>
+                    <td>{{ count }}</td>
                 </tr>
                 {% endfor %}
 
