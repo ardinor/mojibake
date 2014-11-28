@@ -28,13 +28,13 @@ def create_test_monitoring():
     }
 
     sample_attempts = {
-        '192.168.1.1': ['admin', 'admin', 'admin'],
+        '192.168.1.1': ['admin', 'admin', 'admin', 'admin'],
         '10.0.0.1': ['oracle', 'nagios', 'aaa'],
         '172.16.0.1': ['aaa', 'aaa', 'aaa'],
         '172.16.0.56': ['qwe', 'qwe', 'qwe'],
-        '163.12.76.193': ['wertwasdcw', 'Hanz', 'Prometheus'],
+        '163.12.76.193': ['wertwasdcw', 'Hanz', 'Hanz', 'Prometheus'],
         '163.12.76.222': ['asdqwqwqq', 'bob'],
-        '74.123.51.130': ['abebrabr', 'abebrabr', 'aberbaerb'],
+        '74.123.51.130': ['abebrabr', 'abebrabr', 'aberbaerb', 'aberbaerb', 'aberbaerb'],
         '74.123.51.139': ['abebrabr', 'abebrabr', 'aberbaerb'],
         '74.123.51.240': ['abebrabr', 'abebrabr', 'aberbaerb'],
         '74.123.51.251': ['abebrabr', 'abebrabr', 'aberbaerb'],

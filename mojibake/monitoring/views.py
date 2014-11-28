@@ -83,7 +83,8 @@ def ip_list():
             ip_range = []
             for ip in ips:
                 reverse_ip = ip[::-1]
-                split_ip_24 = int(reverse_ip[:reverse_ip.find('.')])
+                split_ip_24 = reverse_ip[:reverse_ip.find('.')]
+                split_ip_24 = int(split_ip_24[::-1])
                 ip_range += [split_ip_24]
             # Find the difference between the highest and lowest IPs seen
             ip_range_diff = max(ip_range) - min(ip_range)
