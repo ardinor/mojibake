@@ -12,6 +12,7 @@
         </header>
 
         <p>{{ _('For the month of %(last_month)s', last_month=last_month.strftime('%B, %Y')) }}.</p>
+        <p>{% trans common_ip_url=url_for('monitor.common_ips') %}To see details about commonly seen IPs and their subnets, visit the <a href="{{ common_ip_url }}">Common IPs and Subnets</a> page.{% endtrans %}</p>
             <!--<span class="pull-right">All times posted are </span></p>-->
 
         <h3 style="padding-bottom: 10px;">{{ _('Break-in attempts') }}</h3>

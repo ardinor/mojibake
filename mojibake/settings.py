@@ -34,6 +34,9 @@ if DEBUG:
     TEST_DATABASE = 'sqlite:///' + os.path.join(APP_DIR, 'test.db')
     #print(base64.b64encode(uuid.uuid4().bytes + uuid.uuid4().bytes))
     SECRET_KEY = 'SecretKeyGoesHere'
+    # How many times an IP is seen trying to breakin before it is considered
+    # 'common'. Common IPs will be listed in the
+    COMMON_IP_COUNT = 3
 else:
     #from mojibake.main import app
     import configparser
@@ -48,6 +51,7 @@ else:
     SQLALCHEMY_POOL_RECYCLE = 500
     SECRET_KEY = config.get("credentials", "secret_key")
     #SECRET_KEY = "Key goes here"
+    COMMON_IP_COUNT = 6
 
     import logging
     from logging.handlers import TimedRotatingFileHandler

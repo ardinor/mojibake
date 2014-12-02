@@ -10,6 +10,7 @@ from mojibake.settings import DEBUG
 monitor = Blueprint('monitor', __name__,
     template_folder='templates')
 
+
 @monitor.route('/')
 def bans_list():
 
@@ -18,7 +19,6 @@ def bans_list():
     # data instead
     #last_month = datetime.datetime.now().replace(day=1) - datetime.timedelta(days=1)
     last_month = datetime.datetime(2014, 10, 31)
-
 
     if DEBUG:
         breakin_attempts = BreakinAttempts.query.filter("strftime('%Y', date) = :year").params(year=last_month.strftime('%Y')). \
@@ -33,16 +33,15 @@ def bans_list():
         bans = BannedIPs.query.filter(func.YEAR(BannedIPs.date) == year). \
             filter(func.MONTH(BannedIPs.date) == month).order_by('-date').all()
 
-    #displayed_time=displayed_time,
-    #    time_offset=time_offset,
-
     return render_template('monitoring/index.html', last_month=last_month,
         breakin_attempts=breakin_attempts,
         bans=bans)
 
-@monitor.route('/ips')
-def ip_list():
+
+@monitor.route('/common')
+def common_ips():
     # Need to tune how many attempts are needed for it to be common
+    # Also set the date to be last month as well? Happy showing data from all time?
     common_ips = IPAddr.query.join(BreakinAttempts).group_by(IPAddr.ip_addr). \
         having(func.count(IPAddr.breakins)>=3).all()
 
@@ -111,6 +110,6 @@ def ip_list():
                                                'no_hosts': no_hosts}
 
 
-    return render_template('monitoring/ips.html', common_ips=common_ips,
+    return render_template('monitoring/common.html', common_ips=common_ips,
         subnets_16=ip_cntr_16, subnets_24=ip_cntr_24,
         subnets_to_block=subnets_to_block)
