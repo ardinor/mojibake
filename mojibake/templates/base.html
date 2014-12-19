@@ -57,12 +57,11 @@
                                 <li><a href="{{ url_for('category.category_list') }}" id="categories_tab"><span class="fa fa-list">{{ _('Categories') }}</span></a></li>
                                 <li><a href="{{ url_for('tag.tag_list') }}" id="tags_tab"><span class="fa fa-tags">{{ _('Tags')}}</span></a></li>
                                 <li><a href="{{ url_for('archive.archive_list') }}" id="archive_tab"><span class="fa fa-calendar">{{ _('Archive') }}</span></a></li>
+                                <li><a href="{{ url_for('monitor.bans_list') }}" id="monitoring_tab"><span class="fa fa-eye">{{ _('Monitoring') }}</span></a></li>
                                 {% if g.user.is_authenticated() %}
                                 <li><a href="{{ url_for('posts.create_post') }}" id="newpost_tab"><span class="fa fa-pencil-square-o">{{ _('New Post') }}</span></a></li>
 
                                 <li><a href="{{ url_for('base.translate') }}" id="translate_tab"><span class="fa fa-tasks">{{ _('Translate') }}</span></a></li>
-
-                                <li><a href="{{ url_for('monitor.bans_list') }}" id="monitoring_tab"><span class="fa fa-eye">{{ _('Monitoring') }}</span></a></li>
 
                                 <li><a href="{{ url_for('base.logout') }}"><span class="fa fa-power-off">{{ _('Logout') }}</span></a></li>
                                 {% endif %}

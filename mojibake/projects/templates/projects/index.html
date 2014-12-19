@@ -15,7 +15,7 @@
         <p>{% trans %}The site itself has been running since September 2013 on a Debian 7.6 (Wheezy) VPS. The website is served by nginx and tornado and is using MariaDB as the database backend.{% endtrans %}</p>
 
         <h3><a href="https://github.com/ardinor/scrutiny">{{ _('Scrutiny') }}</a> <div class="small">Python</div></h3>
-        <p>{% trans %}Scrutiny is a log parser currently designed to parse auth.log (under Debian) and fail2ban.log and inserts details about malicious attempts to break into the server in a database for easy access. It also queries an external service to insert geographical information about suspicious IPs into the database as well.{% endtrans %}</p>
+        <p>{% trans %}Scrutiny is a log parser currently designed to parse auth.log (under Debian) and fail2ban.log and inserts details about malicious attempts to break into the server in a database for easy access. It also queries an external service to insert geographical information about suspicious IPs into the database as well. An example of what is produced is available here. Scrutiny can also calculate commonly seen subnets of attackers and produce rules (iptables or FirewallD) that can be used to block the subnet at the firewall, an example of this can be seen here.{% endtrans %}</p>
 
         <h3><a href="https://github.com/ardinor/frisk">{{ _('Frisk') }}</a> <div class="small">Python</div></h3>
         <p>{% trans %}Frisk is a simple duplicate file finder which stores the SHA-1 hashes of files it checks in an SQLite DB. This allows for easy checking of existing and/or new files against files that are already on the system.{% endtrans %}</p>
