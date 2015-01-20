@@ -1,5 +1,6 @@
 from flask import Blueprint, abort, g, render_template, redirect, url_for, \
     flash
+from flask.ext.babel import gettext
 from datetime import timedelta
 
 from mojibake.main import db
@@ -92,7 +93,7 @@ def edit_post(slug):
 @login_required
 def delete_post(slug):
     post = Post.query.filter_by(slug=slug).first_or_404()
-    cat = post.category    
+    cat = post.category
     tags = post.tags
     db.session.delete(post)
     db.session.commit()
@@ -103,6 +104,6 @@ def delete_post(slug):
         if i.posts.count() == 0:
             db.session.delete(i)
             db.session.commit()
-    flash(gettext("Deleted."), 'success')
+    flash(gettext("Deleted"), 'success')
 
     return redirect(url_for('posts.post_list'))

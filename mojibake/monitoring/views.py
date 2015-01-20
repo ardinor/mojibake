@@ -45,6 +45,11 @@ def common_ips():
     common_ips = IPAddr.query.join(BreakinAttempts).group_by(IPAddr.ip_addr). \
         having(func.count(IPAddr.breakins)>=3).all()
 
+    # We shouldn't put items in the common_16s list if they're only
+    # a /24 worth of IPs
+    # This is too heavy to do in the view itself, update the DB with it
+    # from scrutiny
+
     list_ips_16 = []
     list_ips_24 = []
     common_16s = {}

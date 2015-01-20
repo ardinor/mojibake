@@ -13,6 +13,7 @@ def create_test_monitoring():
 
     db.session.query(IPAddr).delete()
     db.session.query(BreakinAttempts).delete()
+    db.session.query(BannedIPs).delete()  # need this?
 
     sample_ip_data = {
         '192.168.1.1': ['McMurdo', 'Antartica'],
