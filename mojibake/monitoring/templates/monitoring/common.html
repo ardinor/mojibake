@@ -50,10 +50,12 @@
             <tbody>
 
                 {% for subnet, count in subnets_16.items() %}
+                {% if count > 2 %}
                 <tr class="{{ loop.cycle('odd', 'even')}}">
                     <td>{{ subnet }}.x.x</td>
                     <td>{{ count }}</td>
                 </tr>
+                {% endif %}
                 {% endfor %}
 
             </tbody>
@@ -74,10 +76,12 @@
             <tbody>
 
                 {% for subnet, count in subnets_24.items() %}
+                {% if count > 2 %}
                 <tr class="{{ loop.cycle('odd', 'even')}}">
                     <td>{{ subnet }}.x</td>
                     <td>{{ count }}</td>
                 </tr>
+                {% endif %}
                 {% endfor %}
 
             </tbody>
