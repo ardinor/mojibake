@@ -85,4 +85,5 @@ def create_test_posts():
 if __name__ == '__main__':
     db.create_all()
     #create_test_posts()
+    # Automatically create a test admin? Import from setup
     create_test_monitoring()
