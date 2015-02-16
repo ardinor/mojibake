@@ -53,24 +53,3 @@ else:
     #SECRET_KEY = "Key goes here"
     COMMON_IP_COUNT = 6
 
-    import logging
-    from logging.handlers import TimedRotatingFileHandler
-    # Set the size limit to 5~mb
-    file_handler = TimedRotatingFileHandler(os.path.join(LOG_DIR, 'mojibake-flask.log'), when="D", backupCount=7)
-    file_formatter = logging.Formatter("""
-Time: %(asctime)s
-Level: %(levelname)s
-Method: %(method)s
-Path: %(url)s
-IP: %(ip)s
-Message: %(message)s
--------------
-""")
-
-    file_handler.setLevel(logging.WARNING)
-    #file_handler.setFormatter(logging.Formatter(
-    #'%(asctime)s %(levelname)s: %(message)s '
-    #'[in %(pathname)s:%(lineno)d]'
-    #))
-    file_handler.setFormatter(file_formatter)
-    #app.logger.addHandler(file_handler)
