@@ -9,6 +9,7 @@ import jinja2_highlight
 
 from mojibake.moment_js import moment_js
 from mojibake.available_languages import available_languages
+from mojibake.logging import stream_handler, file_handler
 
 app = Flask(__name__)
 app.config.from_pyfile('settings.py')
@@ -16,9 +17,9 @@ db = SQLAlchemy(app)
 babel = Babel(app)
 
 if app.config['DEBUG']:
-    pass
+    app.logger.addHandler(stream_handler)
 else:
-    from mojibake.settings import file_handler
+    app.logger.addHandler(stream_handler)
     app.logger.addHandler(file_handler)
 
 login_manager = LoginManager()

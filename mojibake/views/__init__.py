@@ -59,6 +59,7 @@ def internal_error400(error):
 
 @app.errorhandler(500)
 def internal_error500(error):
+    app.logger.error('500 internal server error - %s', error)
     return render_template('500.html'), 500
 
 

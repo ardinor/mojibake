@@ -14,16 +14,11 @@ POSTS_PER_PAGE = 3
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
 
 LOG_DIR = '/opt/mojibake/logs/current'
-# Directory to where the site will log to
-SITE_LOG_DIR = ''
 
 LANGUAGES = {
     'en': 'English',
     'ja': '日本語'
 }
-
-# Celery settings
-#CELERY_BROKER_URL = 'amqp:guest:guest//localhost'
 
 def parent_dir(path):
     '''Return the parent of a directory.'''
@@ -32,7 +27,8 @@ def parent_dir(path):
 if DEBUG:
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(APP_DIR, 'app.db')
     TEST_DATABASE = 'sqlite:///' + os.path.join(APP_DIR, 'test.db')
-    #print(base64.b64encode(uuid.uuid4().bytes + uuid.uuid4().bytes))
+    # To get a good secret key
+    #   print(base64.b64encode(uuid.uuid4().bytes + uuid.uuid4().bytes))
     SECRET_KEY = 'SecretKeyGoesHere'
     # How many times an IP is seen trying to breakin before it is considered
     # 'common'. Common IPs will be listed in the
@@ -52,4 +48,3 @@ else:
     SECRET_KEY = config.get("credentials", "secret_key")
     #SECRET_KEY = "Key goes here"
     COMMON_IP_COUNT = 6
-
