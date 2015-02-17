@@ -1,5 +1,7 @@
 import logging
 from logging.handlers import TimedRotatingFileHandler
+import sys
+import os
 
 from mojibake.settings import DEBUG, LOG_DIR
 

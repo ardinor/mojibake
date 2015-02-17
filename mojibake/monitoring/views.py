@@ -28,7 +28,7 @@ def bans_list():
     else:
         year = last_month.strftime('%Y')
         month = last_month.strftime('%m')
-        breakin_attempts = BreakinAttempts.query.filter(func.YEAR(BreakinAttempts.date) == year). \
+        breakin_attempts_query = BreakinAttempts.query.filter(func.YEAR(BreakinAttempts.date) == year). \
             filter(func.MONTH(BreakinAttempts.date) == month).order_by('-date').all()
         bans = BannedIPs.query.filter(func.YEAR(BannedIPs.date) == year). \
             filter(func.MONTH(BannedIPs.date) == month).order_by('-date').all()

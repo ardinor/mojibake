@@ -17,6 +17,8 @@ TO DO
 - Look at Disqus for comments?
 - Maybe make the links a little more visible?
 - Logging - send it to stdout so it shows up in docker logs
+- Remove all the logic out of monitoring/templates/views.py and into scrutiny (to be uploaded into the DB).
+ - Look at paginating the results of monitoring, it's far too large to display on one page.
 
 REQUIREMENTS
 -------------------------

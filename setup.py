@@ -41,9 +41,9 @@ if __name__ == '__main__':
 
     if args.reset_pass:
         print('Reset Admin Pass.')
-        admin = get_admin(username)
+        admin = get_admin(args.username)
         if admin:
-            admin.set_password(password)
+            admin.set_password(args.password)
             db.session.add(admin)
             db.session.commit()
         else:
@@ -53,5 +53,5 @@ if __name__ == '__main__':
         print('Initial Setup.')
         print('This will create all the tables and create a new admin user.')
         db.create_all()
-        create_admin(username, password)
+        create_admin(args.username, args.password)
     print('Finished')

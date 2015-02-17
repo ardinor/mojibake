@@ -5,7 +5,7 @@ VERSION = 1.0
 
 PORT = 8000
 
-DEBUG = False
+DEBUG = True
 
 POSTS_PER_PAGE = 3
 
@@ -33,6 +33,7 @@ if DEBUG:
     # How many times an IP is seen trying to breakin before it is considered
     # 'common'. Common IPs will be listed in the
     COMMON_IP_COUNT = 3
+    LOG_DIR = APP_DIR
 else:
     #from mojibake.main import app
     import configparser

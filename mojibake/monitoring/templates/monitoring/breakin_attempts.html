@@ -1,0 +1,8 @@
+{% for breakin in breakin_attempts %}
+<tr>
+    <td>{{moment_js(breakin.date).format('L, LT')}}</td>
+    <td>{{ breakin.user }}</td>
+    <td>{{ breakin.ip.ip_addr }}</td>
+    <td>{{ breakin.ip.print_location() }}</td>
+</tr>
+{% endfor %}

@@ -17,7 +17,8 @@ db = SQLAlchemy(app)
 babel = Babel(app)
 
 if app.config['DEBUG']:
-    app.logger.addHandler(stream_handler)
+    #app.logger.addHandler(stream_handler)
+    pass
 else:
     app.logger.addHandler(stream_handler)
     app.logger.addHandler(file_handler)
