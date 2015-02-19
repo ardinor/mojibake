@@ -35,59 +35,7 @@
             </tbody>
         </table>
 
-        <h3 style="padding-bottom: 10px;">{{ _('Subnets /16') }}</h3>
-        <table class="default">
-            <thead>
-                <tr>
-                    <th>{{ _('Subnet') }}</th>
-                    <th>{{ _('Times seen') }}</th>
-                </tr>
-            </thead>
-            <!-- <tfoot class="row-total">
-                <td>{{ _('Total')}}:</td>
-                <td colspan="2">{{ subnets|length }}</td>
-            </tfoot> -->
-            <tbody>
-
-                {% for subnet, count in subnets_16.items() %}
-                {% if count > 2 %}
-                <tr class="{{ loop.cycle('odd', 'even')}}">
-                    <td>{{ subnet }}.x.x</td>
-                    <td>{{ count }}</td>
-                </tr>
-                {% endif %}
-                {% endfor %}
-
-            </tbody>
-        </table>
-
-        <h3 style="padding-bottom: 10px;">{{ _('Subnets /24') }}</h3>
-        <table class="default">
-            <thead>
-                <tr>
-                    <th>{{ _('Subnet') }}</th>
-                    <th>{{ _('Times seen') }}</th>
-                </tr>
-            </thead>
-            <!-- <tfoot class="row-total">
-                <td>{{ _('Total')}}:</td>
-                <td colspan="2">{{ subnets|length }}</td>
-            </tfoot> -->
-            <tbody>
-
-                {% for subnet, count in subnets_24.items() %}
-                {% if count > 2 %}
-                <tr class="{{ loop.cycle('odd', 'even')}}">
-                    <td>{{ subnet }}.x</td>
-                    <td>{{ count }}</td>
-                </tr>
-                {% endif %}
-                {% endfor %}
-
-            </tbody>
-        </table>
-
-        <h3 style="padding-bottom: 10px;">{{ _('Subnets to block') }}</h3>
+        <h3 style="padding-bottom: 10px;">{{ _('Common Subnets') }}</h3>
         <table class="default">
             <thead>
                 <tr>
@@ -95,6 +43,7 @@
                     <th>{{ _('Net mask') }}</th>
                     <th>{{ _('CIDR') }}</th>
                     <th>{{ _('No. of hosts') }}</th>
+                    <th>{{ _('Times seen') }}</th>
                 </tr>
             </thead>
             <!-- <tfoot class="row-total">
@@ -103,12 +52,13 @@
             </tfoot> -->
             <tbody>
 
-                {% for subnet in subnets_to_block.keys() %}
+                {% for subnet in subnet_details %}
                 <tr class="{{ loop.cycle('odd', 'even')}}">
-                    <td>{{ subnet }}</td>
-                    <td>{{ subnets_to_block[subnet]['net_mask'] }}</td>
-                    <td>{{ subnets_to_block[subnet]['cidr'] }}</td>
-                    <td>{{ subnets_to_block[subnet]['no_hosts'] }}</td>
+                    <td>{{ subnet_details.subnet_id }}</td>
+                    <td>{{ subnet_details.net_mask }}</td>
+                    <td>{{ subnet_details.cidr }}</td>
+                    <td>{{ subnet_details.number_hosts }}</td>
+                    <td>{{ subnet_detials.ipaddr.count() }}</td>
                 </tr>
                 {% endfor %}
 

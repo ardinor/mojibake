@@ -177,6 +177,13 @@ class User(db.Model):
 
 
 class IPAddr(db.Model):
+
+    """
+    This IP address table, holds the actual address and the location as found
+    from the GeoIP service. Holds links to the other tables, BannedIPs, BreakinAttempts
+    and SubnetDetails.
+    """
+
     __tablename__ = 'ipaddr'
     id = db.Column(db.Integer, primary_key=True)
     ip_addr = db.Column(db.String(45), unique=True)
@@ -193,6 +200,13 @@ class IPAddr(db.Model):
         return '<IP: {}>'.format(self.ip_addr)
 
     def print_location(self):
+
+        """
+        Prints the (rough) location of this IP address. Our GeoIP service
+        does not return full details (such as city name) for all IP address,
+        this will return as much information as we've been given in a nice format.
+        """
+
         if self.city_name and self.region and self.country:
             return '{}, {}, {}'.format(self.city_name, self.region, self.country)
         elif self.region and self.country:
@@ -208,6 +222,13 @@ class IPAddr(db.Model):
 
 
 class BannedIPs(db.Model):
+
+    """
+    The Banned IPs table, holds details about IP addresses that have been
+    banned by fail2ban. Details are the date it was banned and a link back
+    to the IP address table row for this IP address.
+    """
+
     # Without setting table name we end up with a table named
     # 'banned_i_ps'
     __tablename__ = 'bannedips'
@@ -220,6 +241,13 @@ class BannedIPs(db.Model):
 
 
 class BreakinAttempts(db.Model):
+
+    """
+    The Breakin Attempts table. This table holds details of login attempts
+    by an IP address, including the username they tried and the date/time.
+    Has a link to the IP address table row for the IP address.
+    """
+
     __tablename__ = 'breakinattempts'
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.DateTime)
@@ -232,3 +260,29 @@ class BreakinAttempts(db.Model):
     def __repr__(self):
         return '<BreakinAttempt: {} on {}>'.format(self.user, self.date.strftime('%d-%m-%Y %H:%M:%S'))
 
+
+class SubnetDetails(db.Model):
+
+    """
+    The Subnet Details table. This table holds details about common subnets
+    as calculated by Scrutiny. The details included are the subnet id, the
+    CIDR, the netmask and the number of hosts in the subnet. It also includes
+    links back to the IP address table rows that hold IP addresses that are
+    members of this subnet.
+    """
+
+    __tablename__ = 'subnetdetails'
+    id = db.Column(db.Integer, primary_key=True)
+    subnet_id = db.Column(db.String(15))
+    cidr = db.Column(db.String(3))
+    netmask = db.Column(db.String(15))
+    number_hosts = db.Column(db.Integer)
+    date_added = db.Column(db.DateTime)
+    ip_addr = db.relationship('IPAddr', backref=db.backref('subnetdetails',
+                                                           lazy='dynamic'))
+
+    def __init__(self, subnet_id):
+        self.subnet_id = subnet_id
+
+    def __repr__(self):
+        return '<Subnet:{}>'.format(self.subnet_id)
