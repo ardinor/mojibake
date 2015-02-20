@@ -1,9 +1,11 @@
-from mojibake.app import db
-
 import time
+import markdown
 from datetime import datetime
 from passlib.hash import pbkdf2_sha256
-import markdown
+from flask.ext.sqlalchemy import models_committed
+
+from mojibake.app import db, app
+
 
 tags = db.Table('tags',
                  db.Column('post_id',
@@ -28,11 +30,13 @@ class Category(db.Model):
     #posts = db.relationship('Post', backref='category',
     #                            lazy='dynamic')
 
+
     def __init__(self, name, name_ja=None):
         if name:
             self.name = name
         if name_ja:
             self.name_ja = name_ja
+
 
     def __repr__(self):
         return '<Category: {}>'.format(self.name)
@@ -56,6 +60,7 @@ class Post(db.Model):
     tags = db.relationship('Tag', secondary=tags,
                                  backref=db.backref('posts',
                                                     lazy='dynamic'))
+
 
     def __init__(self, title, slug):
         self.title = title
@@ -118,6 +123,7 @@ class Post(db.Model):
             self.body_ja = body_ja
             self.body_ja_html = markdown.markdown(body_ja, extensions=['codehilite'])
 
+
     def get_tz_offset(self):
         # Returns the timezone offset in hours
         # E.g. AEST (+10) will return 10
@@ -125,6 +131,11 @@ class Post(db.Model):
             return (time.altzone * -1) / 3600
         else:
             return (time.timezone * -1) / 3600
+
+
+    def __before_delete__(self):
+        # In here, check to see if the category and/or tags will be orphaned
+        # by the delete, if so, delete them too
 
 
     def __repr__(self):
@@ -136,11 +147,13 @@ class Tag(db.Model):
     name = db.Column(db.String(50), unique=True)
     name_ja = db.Column(db.String(50), unique=True)
 
+
     def __init__(self, name, name_ja=None):
         if name:
             self.name = name
         if name_ja:
             self.name_ja = name_ja
+
 
     def __repr__(self):
         return '<Tag: {}>'.format(self.name)
@@ -151,26 +164,34 @@ class User(db.Model):
     username = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(255))
 
+
     def __init__(self, username):
         self.username = username
+
 
     def set_password(self, password):
         self.password = pbkdf2_sha256.encrypt(password)
 
+
     def verify_password(self, password):
         return pbkdf2_sha256.verify(password, self.password)
+
 
     def is_authenticated(self):
         return True
 
+
     def is_active(self):
         return True
+
 
     def is_anonymous(self):
         return False
 
+
     def get_id(self):
         return str(self.id)
+
 
     def __repr__(self):
         return '<User %r>' % (self.username)
@@ -286,3 +307,11 @@ class SubnetDetails(db.Model):
 
     def __repr__(self):
         return '<Subnet:{}>'.format(self.subnet_id)
+
+
+# Not really sure if this is the best place to put this...
+@models_committed.connect_via(app)
+def on_models_committed(sender, changes):
+for obj, change in changes:
+    if change == 'delete' and hasattr(obj, '__before_delete__'):
+        obj.__before_delete__()

@@ -35,19 +35,11 @@ if DEBUG:
     COMMON_IP_COUNT = 3
     LOG_DIR = APP_DIR
 else:
-    #from mojibake.main import app
-    #import configparser
-    #credentials_file = '/home/mojibake/.mojibake_settings'
-    #config = configparser.ConfigParser()
-    #config.read(credentials_file)
-    #username = config.get("credentials", "username")
-    #password = config.get("credentials", "password")
     USERNAME = 'username'
     PASSWORD = 'password'
     #SQLALCHEMY_DATABASE_URI = "mysql:///" + username + ":" + password + "@localhost/mojibake"
     SQLALCHEMY_DATABASE_URI = "mysql+oursql://" + username + ":" + password + "@localhost/mojibake"
     # On the prod server the wait-timeout is currently set to 600
     SQLALCHEMY_POOL_RECYCLE = 500
-    #SECRET_KEY = config.get("credentials", "secret_key")
     SECRET_KEY = 'SecretKeyGoesHere'
     COMMON_IP_COUNT = 6
