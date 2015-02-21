@@ -61,18 +61,18 @@ class Tests(unittest.TestCase):
         db.session.add(test_post)
         db.session.commit()
 
-        db_test_post = Post.query.filter(slug == 'test_post').first()
+        db_test_post = Post.query.filter(Post.slug == 'test_post').first()
         self.assertIsNotNone(db_test_post)
-        self.assertIsEqual(db_test_post.body_html, '<p>This is a <strong>test</strong> post</p>')
-        self.assertIsEqual(db_test_post.body_ja_html, '<p>これはテスト書き込みですね。</p>')
+        self.assertEqual(db_test_post.body_html, '<p>This is a <strong>test</strong> post.</p>')
+        self.assertEqual(db_test_post.body_ja_html, '<p>これはテスト書き込みですね。</p>')
         db_cat = db_test_post.category_id
         self.assertIsNotNone(db_cat)
         db_tags = []
         for tag in db_test_post.tags:
             db_tags.append(tag.id)
-        self.assertIsNot(db_tags.count(), 0)
+        self.assertIsNot(len(db_tags), 0)
 
-        db.session.delete(post)
+        db.session.delete(db_test_post)
         db.session.commit()
 
         # Ensure orphaned categories and tags are deleted

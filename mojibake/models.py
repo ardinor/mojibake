@@ -2,9 +2,13 @@ import time
 import markdown
 from datetime import datetime
 from passlib.hash import pbkdf2_sha256
-from flask.ext.sqlalchemy import models_committed
+from flask.ext.sqlalchemy import models_committed  #before_models_committed
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
+from sqlalchemy.exc import InvalidRequestError
 
 from mojibake.app import db, app
+from mojibake.settings import SQLALCHEMY_DATABASE_URI
 
 
 tags = db.Table('tags',
@@ -132,10 +136,50 @@ class Post(db.Model):
         else:
             return (time.timezone * -1) / 3600
 
+    def before_delete_tidy_up(self):
+        # In here, check to see if the category and/or tags will be orphaned
+        # by the delete, if so, delete them too
+        if self.category:
+            if self.category.posts.count() == 1:
+                if self.category.posts.first() == self:
+                    db.session.delete(self.category)
+                    db.session.commit()
+
+        if self.tags:
+            for tag in self.tags:
+                if tag.posts.count() == 1:
+                    if tag.posts.first() == self:
+                        db.session.delete(tag)
+                        db.session.commit()
+
 
     def __before_delete__(self):
         # In here, check to see if the category and/or tags will be orphaned
         # by the delete, if so, delete them too
+        Session = sessionmaker()
+        #engine = db.session.get_bind()
+        engine = create_engine(SQLALCHEMY_DATABASE_URI)
+        #app.logger.debug('engine - %s', engine)
+        Session.configure(bind=engine)
+        session = Session()
+        if self.category:
+            if self.category.posts.count() == 1:
+                if self.category.posts.first() == self:
+                    #db.session.begin()
+                    session.delete(self.category)
+                    #db.session.commit()
+
+        if self.tags:
+            for tag in self.tags:
+                if tag.posts.count() == 1:
+                    if tag.posts.first() == self:
+                        session.delete(tag)
+                        #db.session.commit()
+        try:
+            session.commit()
+        except InvalidRequestError:
+            pass
+        session.close()
 
 
     def __repr__(self):
@@ -213,6 +257,7 @@ class IPAddr(db.Model):
     country = db.Column(db.String(255))
     bans = db.relationship('BannedIPs', backref='ip', lazy='dynamic')
     breakins = db.relationship('BreakinAttempts', backref='ip', lazy='dynamic')
+    subnet = db.Column(db.Integer, db.ForeignKey('subnetdetails.id'))
 
     def __init__(self, ip_addr):
         self.ip_addr = ip_addr
@@ -299,8 +344,7 @@ class SubnetDetails(db.Model):
     netmask = db.Column(db.String(15))
     number_hosts = db.Column(db.Integer)
     date_added = db.Column(db.DateTime)
-    ip_addr = db.relationship('IPAddr', backref=db.backref('subnetdetails',
-                                                           lazy='dynamic'))
+    ip_addr = db.relationship('IPAddr', backref=db.backref('subnetdetails'))
 
     def __init__(self, subnet_id):
         self.subnet_id = subnet_id
@@ -310,8 +354,12 @@ class SubnetDetails(db.Model):
 
 
 # Not really sure if this is the best place to put this...
-@models_committed.connect_via(app)
+#@before_models_committed.connect_via(app)
+#@models_committed.connect
 def on_models_committed(sender, changes):
-for obj, change in changes:
-    if change == 'delete' and hasattr(obj, '__before_delete__'):
-        obj.__before_delete__()
+    for obj, change in changes:
+        if change == 'delete' and hasattr(obj, '__before_delete__'):
+            obj.__before_delete__()
+
+models_committed.connect(on_models_committed, sender=app)
+#before_models_committed.connect(before_model_commit, sender=app)
