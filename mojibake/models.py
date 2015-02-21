@@ -3,21 +3,18 @@ import markdown
 from datetime import datetime
 from passlib.hash import pbkdf2_sha256
 from flask.ext.sqlalchemy import models_committed  #before_models_committed
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, scoped_session
+from sqlalchemy import create_engine, func
 from sqlalchemy.exc import InvalidRequestError
 
 from mojibake.app import db, app
 from mojibake.settings import SQLALCHEMY_DATABASE_URI
 
-
+# Many-to-many relationship for Post and Tag
 tags = db.Table('tags',
-                 db.Column('post_id',
-                    db.Integer,
-                    db.ForeignKey('post.id')),
-                 db.Column('tag_id',
-                    db.Integer,
-                    db.ForeignKey('tag.id')))
+                db.Column('post_id', db.Integer, db.ForeignKey('post.id')),
+                db.Column('tag_id', db.Integer, db.ForeignKey('tag.id'))
+                )
 
 
 class ValidationError(Exception):
@@ -136,45 +133,44 @@ class Post(db.Model):
         else:
             return (time.timezone * -1) / 3600
 
-    def before_delete_tidy_up(self):
-        # In here, check to see if the category and/or tags will be orphaned
-        # by the delete, if so, delete them too
-        if self.category:
-            if self.category.posts.count() == 1:
-                if self.category.posts.first() == self:
-                    db.session.delete(self.category)
-                    db.session.commit()
-
-        if self.tags:
-            for tag in self.tags:
-                if tag.posts.count() == 1:
-                    if tag.posts.first() == self:
-                        db.session.delete(tag)
-                        db.session.commit()
-
 
     def __before_delete__(self):
         # In here, check to see if the category and/or tags will be orphaned
         # by the delete, if so, delete them too
-        Session = sessionmaker()
-        #engine = db.session.get_bind()
+        # Seems we need to make a new session to perform transactions
+        #
         engine = create_engine(SQLALCHEMY_DATABASE_URI)
-        #app.logger.debug('engine - %s', engine)
-        Session.configure(bind=engine)
+        session_factory = sessionmaker(bind=engine)
+        Session = scoped_session(session_factory)
         session = Session()
-        if self.category:
-            if self.category.posts.count() == 1:
-                if self.category.posts.first() == self:
+
+        if self.category_id:
+            category = session.query(Category).filter(Category.id==self.category_id).first()
+            #category = Category.query.filter_by(id=self.category_id).first()
+            if category:
+                if category.posts.count() == 0:
                     #db.session.begin()
-                    session.delete(self.category)
+                    session.delete(category)
                     #db.session.commit()
 
-        if self.tags:
-            for tag in self.tags:
-                if tag.posts.count() == 1:
-                    if tag.posts.first() == self:
-                        session.delete(tag)
-                        #db.session.commit()
+
+        #orphaned_tags = session.query(Tag).join(Post).group_by(Tag.posts). \
+        #                    having(func.count(Tag.posts)==0).all()
+
+        tag_list = session.query(Tag).join(tags).group_by(tags.c.tag_id).having(func.count(tags.c.post_id)==0).all()
+        #tags = session.query(Tag).all()
+        ###orphaned_tags = []
+        ###for tag in tags:
+        ###    if tag.posts.count() == 0:
+        ###        orphaned_tags.append(tag)
+        ###for tag in orphaned_tags:
+        ###    session.delete(tag)
+        # if self.tags:
+        #     for tag in self.tags:
+        #         if tag.posts.count() == 1:
+        #             if tag.posts.first() == self:
+        #                 session.delete(tag)
+        #                 #db.session.commit()
         try:
             session.commit()
         except InvalidRequestError:
@@ -353,13 +349,15 @@ class SubnetDetails(db.Model):
         return '<Subnet:{}>'.format(self.subnet_id)
 
 
-# Not really sure if this is the best place to put this...
-#@before_models_committed.connect_via(app)
-#@models_committed.connect
+## Seems before_models_committed doesn't actually do anything as of
+## Flask-SQLAlchemy 2.0
+# # Not really sure if this is the best place to put this...
+# #@before_models_committed.connect_via(app)
+# #@models_committed.connect
 def on_models_committed(sender, changes):
     for obj, change in changes:
         if change == 'delete' and hasattr(obj, '__before_delete__'):
             obj.__before_delete__()
 
 models_committed.connect(on_models_committed, sender=app)
-#before_models_committed.connect(before_model_commit, sender=app)
+# #before_models_committed.connect(before_model_commit, sender=app)
