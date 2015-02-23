@@ -4,6 +4,8 @@ from flask.ext.login import login_required, login_user, \
     logout_user, current_user
 from flask.ext.babel import gettext
 
+import logging
+
 from urllib.parse import urljoin
 from werkzeug.contrib.atom import AtomFeed
 
@@ -14,6 +16,8 @@ from mojibake.forms import LoginForm
 
 base = Blueprint('base', __name__,
     template_folder='templates')
+
+logger = logging.getLogger('mojibake')
 
 def make_external(url):
     return urljoin(request.url_root, url)
@@ -48,11 +52,11 @@ def login():
         if user:
             if user.verify_password(form.password.data):
                 login_user(user, remember=form.remember_me.data)
-                app.logger.info('Successful login attempt for user %s', user.username)
+                logger.info('Successful login attempt for user %s', user.username)
                 flash(gettext("Logged in successfully."), 'success')
                 return redirect(request.args.get("next") or url_for("base.home"))
         else:
-            app.logger.info('Invalid login attempt for user %s', user.username)
+            logger.info('Invalid login attempt for user %s', user.username)
             flash(gettext("Invalid Login"), 'error')
             redirect(url_for('base.login'))
     return render_template("login.html", form=form)
