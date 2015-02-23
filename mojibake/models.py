@@ -119,10 +119,10 @@ class Post(db.Model):
     def add_body(self, body, body_ja=None):
         if body:
             self.body = body
-            self.body_html = markdown.markdown(body, extensions=['codehilite'])
+            self.body_html = markdown.markdown(body, extensions=['markdown.extensions.codehilite'])
         if body_ja:
             self.body_ja = body_ja
-            self.body_ja_html = markdown.markdown(body_ja, extensions=['codehilite'])
+            self.body_ja_html = markdown.markdown(body_ja, extensions=['markdown.extensions.codehilite'])
 
 
     def get_tz_offset(self):
