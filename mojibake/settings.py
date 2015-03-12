@@ -7,7 +7,7 @@ PORT = 8000
 
 LOGGER_NAME = 'mojibake'
 
-DEBUG = True
+DEBUG = False
 
 POSTS_PER_PAGE = 3
 

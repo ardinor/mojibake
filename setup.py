@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import argparse
+from sqlalchemy.engine.reflection import Inspector
 
 from mojibake.app import db
 from mojibake.models import User
@@ -50,8 +51,14 @@ if __name__ == '__main__':
             print('User {} not found.'.format(response))
 
     else:
-        print('Initial Setup.')
-        print('This will create all the tables and create a new admin user.')
+        # inspector = Inspector.from_engine(db.engine)
+        # table_names = inspector.get_table_names()
+        # if 'User' not in table_names:
+        #     #db.engine.dialect.has_table(db.engine.connect(), 'User')
+        #     print('Initial Setup.')
+        #     print('This will create all the tables and create a new admin user.')
         db.create_all()
-        create_admin(args.username, args.password)
+        admin = get_admin(args.username)
+        if admin is None:
+            create_admin(args.username, args.password)
     print('Finished')

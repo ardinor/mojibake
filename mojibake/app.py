@@ -17,11 +17,10 @@ db = SQLAlchemy(app)
 babel = Babel(app)
 
 if app.config['DEBUG']:
-    #app.logger.addHandler(stream_handler)
-    pass
+    app.logger.addHandler(stream_handler)
 else:
     app.logger.addHandler(stream_handler)
-    app.logger.addHandler(file_handler)
+    #app.logger.addHandler(file_handler)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
