@@ -14,19 +14,19 @@ else:
     stream_handler.setLevel(logging.INFO)
 
 # Set the size limit to 5~mb
-file_handler = TimedRotatingFileHandler(os.path.join(LOG_DIR, 'mojibake.log'), when="D", backupCount=7)
-file_formatter = logging.Formatter("""
-Time: %(asctime)s
-Level: %(levelname)s
-Method: %(method)s
-Path: %(url)s
-IP: %(ip)s
-Message: %(message)s
--------------
-""")
+# file_handler = TimedRotatingFileHandler(os.path.join(LOG_DIR, 'mojibake.log'), when="D", backupCount=7)
+# file_formatter = logging.Formatter("""
+# Time: %(asctime)s
+# Level: %(levelname)s
+# Method: %(method)s
+# Path: %(url)s
+# IP: %(ip)s
+# Message: %(message)s
+# -------------
+# """)
 
-if DEBUG:
-    file_handler.setLevel(logging.DEBUG)
-else:
-    file_handler.setLevel(logging.WARNING)
-file_handler.setFormatter(file_formatter)
+# if DEBUG:
+#     file_handler.setLevel(logging.DEBUG)
+# else:
+#     file_handler.setLevel(logging.WARNING)
+# file_handler.setFormatter(file_formatter)

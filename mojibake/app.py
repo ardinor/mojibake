@@ -9,7 +9,7 @@ import jinja2_highlight
 
 from mojibake.moment_js import moment_js
 from mojibake.available_languages import available_languages
-from mojibake.logging import stream_handler, file_handler
+from mojibake.logging import stream_handler #, file_handler
 
 app = Flask(__name__)
 app.config.from_pyfile('settings.py')
