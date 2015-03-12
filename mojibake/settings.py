@@ -38,7 +38,7 @@ if DEBUG:
     LOG_DIR = APP_DIR
 else:
     import configparser
-    credentials_file = '/home/mojibake/.mojibake_settings'
+    credentials_file = '/mojibake/.mojibake_settings'
     config = configparser.ConfigParser()
     config.read(credentials_file)
     USERNAME = config.get("credentials", "USERNAME")
