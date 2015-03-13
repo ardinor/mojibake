@@ -28,7 +28,7 @@ def parent_dir(path):
 
 if DEBUG:
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(APP_DIR, 'app.db')
-    TEST_DATABASE = 'sqlite:///' + os.path.join(APP_DIR, 'test.db')
+    TEST_DATABASE_URI = 'sqlite:///' + os.path.join(APP_DIR, 'test.db')
     # To get a good secret key
     #   print(base64.b64encode(uuid.uuid4().bytes + uuid.uuid4().bytes))
     SECRET_KEY = 'SecretKeyGoesHere'
@@ -46,6 +46,7 @@ else:
     SECRET_KEY = config.get("credentials", "SECRET_KEY")
     #SQLALCHEMY_DATABASE_URI = "mysql:///" + username + ":" + password + "@localhost/mojibake"
     SQLALCHEMY_DATABASE_URI = "mysql+oursql://" + USERNAME + ":" + PASSWORD + "@localhost/mojibake"
+    TEST_DATABASE_URI = "mysql+oursql://" + USERNAME + ":" + PASSWORD + "@localhost/mojibake-test"
     # On the prod server the wait-timeout is currently set to 600
     SQLALCHEMY_POOL_RECYCLE = 500
     COMMON_IP_COUNT = 6

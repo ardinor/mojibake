@@ -6,7 +6,7 @@ from sqlalchemy.exc import IntegrityError
 
 from mojibake.app import app, db
 from mojibake.models import Post, Category, Tag, User
-from mojibake.settings import TEST_DATABASE
+from mojibake.settings import TEST_DATABASE_URI
 
 #TO DO: More work on this on testing!
 #http://flask.pocoo.org/docs/testing/
