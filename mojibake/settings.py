@@ -44,9 +44,10 @@ else:
     USERNAME = config.get("credentials", "USERNAME")
     PASSWORD = config.get("credentials", "PASSWORD")
     SECRET_KEY = config.get("credentials", "SECRET_KEY")
-    #SQLALCHEMY_DATABASE_URI = "mysql:///" + username + ":" + password + "@localhost/mojibake"
-    SQLALCHEMY_DATABASE_URI = "mysql+oursql://" + USERNAME + ":" + PASSWORD + "@localhost/mojibake"
-    TEST_DATABASE_URI = "mysql+oursql://" + USERNAME + ":" + PASSWORD + "@localhost/mojibake-test"
+
+    SQLALCHEMY_DATABASE_URI = "mysql+oursql://" + USERNAME + ":" + PASSWORD + "@mojibake-db/mojibake"
+    TEST_DATABASE_URI = "mysql+oursql://" + USERNAME + ":" + PASSWORD + "@mojibake-db/mojibake-test"
+
     # On the prod server the wait-timeout is currently set to 600
     SQLALCHEMY_POOL_RECYCLE = 500
     COMMON_IP_COUNT = 6
