@@ -17,7 +17,7 @@ class Tests(unittest.TestCase):
     def setUp(self):
         app.config['TESTING'] = True
         app.config['CSRF_ENABLED'] = False
-        app.config['SQLALCHEMY_DATABASE_URI'] = TEST_DATABASE
+        app.config['SQLALCHEMY_DATABASE_URI'] = TEST_DATABASE_URI
         self.app = app.test_client()
         db.create_all()
 
