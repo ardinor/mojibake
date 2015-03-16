@@ -55,10 +55,15 @@ def login():
                 logger.info('Successful login attempt for user %s', user.username)
                 flash(gettext("Logged in successfully."), 'success')
                 return redirect(request.args.get("next") or url_for("base.home"))
+            else:
+                logger.info('Invalid password for user %s', user.username)
+                flash(gettext("Invalid Login"), 'error')
+                redirect(url_for('base.login'))
         else:
             logger.info('Invalid login attempt for user %s', user.username)
             flash(gettext("Invalid Login"), 'error')
             redirect(url_for('base.login'))
+
     return render_template("login.html", form=form)
 
 
