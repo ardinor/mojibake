@@ -2,6 +2,7 @@
 
 '''Entry point to all things to avoid circular imports.'''
 from mojibake.app import app, db, models
+from mojibake.settings import DEBUG
 
 from mojibake.views import *
 
@@ -18,6 +19,7 @@ app.register_blueprint(archive, url_prefix='/archive')
 app.register_blueprint(tag, url_prefix='/tags')
 app.register_blueprint(category, url_prefix='/categories')
 app.register_blueprint(posts, url_prefix='/posts')
-app.register_blueprint(monitor, url_prefix='/monitoring')
 app.register_blueprint(projects, url_prefix='/projects')
+if DEBUG:
+    app.register_blueprint(monitor, url_prefix='/monitoring')
 

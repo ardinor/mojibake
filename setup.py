@@ -61,4 +61,6 @@ if __name__ == '__main__':
         admin = get_admin(args.username)
         if admin is None:
             create_admin(args.username, args.password)
+        else:
+            print("Admin already exists, doing nothing...")
     print('Finished')
