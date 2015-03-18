@@ -1,6 +1,10 @@
+import argparse
+
 from mojibake.main import app
 from mojibake.settings import DEBUG
 
-app.logger.debug('Begin Mojibake DEBUG={}'.format(DEBUG))
+if __name__ == '__main__':
 
-app.run(debug=DEBUG)
+    app.logger.debug('Begin Mojibake DEBUG={}'.format(DEBUG))
+
+    app.run(debug=DEBUG)

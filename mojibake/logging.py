@@ -1,9 +1,9 @@
 import logging
-from logging.handlers import TimedRotatingFileHandler
 import sys
-import os
+#import os
+from logging.handlers import TimedRotatingFileHandler
 
-from mojibake.settings import DEBUG, LOG_DIR
+from mojibake.settings import DEBUG #, LOG_DIR
 
 formatter = logging.Formatter('%(asctime)s [%(levelname)s] - %(message)s')
 stream_handler = logging.StreamHandler(stream=sys.stdout)
