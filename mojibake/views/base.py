@@ -56,6 +56,8 @@ def login():
                 flash(gettext("Logged in successfully."), 'success')
                 return redirect(request.args.get("next") or url_for("base.home"))
             else:
+                # Produces a warning like this
+                # '2015-03-18 17:25:11,859 [WARNING] - Invalid login attempt for user test from IP 127.0.0.1'
                 logger.warning('Invalid password for user %s from IP %s',
                                form.username.data, request.environ['REMOTE_ADDR'])
                 flash(gettext("Invalid Login"), 'error')
