@@ -10,6 +10,8 @@
         <!-- Fonts -->
         <link href='//fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu' rel='stylesheet' type='text/css'>
 
+        {% if config.DEBUG %}
+
         {% assets "ie8_shiv" %}
         <!--[if lte IE 8]><script src="{{ ASSET_URL }}"></script><![endif]-->
         {% endassets %}
@@ -35,6 +37,25 @@
         {% assets "ie8_css" %}
         <!--[if lte IE 8]><link rel="stylesheet" href="{{ ASSET_URL }}" /><![endif]-->
         {% endassets %}
+
+        {% else %}
+        <!--[if lte IE 8]><script src="static/js/html5shiv.js"></script><![endif]-->
+        <script type="text/javascript" src="static/js/moment.min.js"></script>
+        {% if session['language'] == 'ja' %}
+        <script type="text/javascript" src="static/js/moment-ja.js"></script>
+        {% endif %}
+
+        <link rel="stylesheet" href="static/css/skel-noscript.css" type="text/css">
+        <link rel="stylesheet" href="static/css/style.css" type="text/css">
+        <link rel="stylesheet" href="static/css/style-wide.css" type="text/css">
+        <link rel="stylesheet" href="static/css/jquery-ui-1.10.4.custom.css" type="text/css">
+        <link rel="stylesheet" href="static/css/darkly.css" type="text/css">
+
+        <!--[if lte IE 9]><link rel="stylesheet" href="static/css/ie8.css" /><![endif]-->
+        <!--[if lte IE 8]><link rel="stylesheet" href="static/css/ie9.css" /><![endif]-->
+
+        {% endif %}
+
 
         <!-- Set MomentJS to display Japanese when language is Japanese -->
         {% if session['language'] == 'ja' %}
@@ -149,9 +170,15 @@
 
             </div>
 
+    {% if config.DEBUG %}
+
     {% assets "js" %}
         <script type="text/javascript" src="{{ ASSET_URL }}"></script>
     {% endassets %}
+
+    {% else %}
+        <script type="text/javascript" src="static/packed.js"></script>
+    {% endif % }
 
     {% if not config.DEBUG %}
         <script>
