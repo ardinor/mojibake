@@ -172,13 +172,13 @@
 
     {% if config.DEBUG %}
 
-    {% assets "js" %}
-        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-    {% endassets %}
+        {% assets "js" %}
+            <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+        {% endassets %}
 
     {% else %}
         <script type="text/javascript" src="static/packed.js"></script>
-    {% endif % }
+    {% endif %}
 
     {% if not config.DEBUG %}
         <script>
