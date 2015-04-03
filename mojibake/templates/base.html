@@ -40,19 +40,19 @@
 
         {% else %}
         <!--[if lte IE 8]><script src="static/js/html5shiv.js"></script><![endif]-->
-        <script type="text/javascript" src="static/js/moment.min.js"></script>
+        <script type="text/javascript" src="/static/js/moment.min.js"></script>
         {% if session['language'] == 'ja' %}
-        <script type="text/javascript" src="static/js/moment-ja.js"></script>
+        <script type="text/javascript" src="/static/js/moment-ja.js"></script>
         {% endif %}
 
-        <link rel="stylesheet" href="static/css/skel-noscript.css" type="text/css">
-        <link rel="stylesheet" href="static/css/style.css" type="text/css">
-        <link rel="stylesheet" href="static/css/style-wide.css" type="text/css">
-        <link rel="stylesheet" href="static/css/jquery-ui-1.10.4.custom.css" type="text/css">
-        <link rel="stylesheet" href="static/css/darkly.css" type="text/css">
+        <link rel="stylesheet" href="/static/css/skel-noscript.css" type="text/css">
+        <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+        <link rel="stylesheet" href="/static/css/style-wide.css" type="text/css">
+        <link rel="stylesheet" href="/static/css/jquery-ui-1.10.4.custom.css" type="text/css">
+        <link rel="stylesheet" href="/static/css/darkly.css" type="text/css">
 
-        <!--[if lte IE 9]><link rel="stylesheet" href="static/css/ie8.css" /><![endif]-->
-        <!--[if lte IE 8]><link rel="stylesheet" href="static/css/ie9.css" /><![endif]-->
+        <!--[if lte IE 9]><link rel="stylesheet" href="/static/css/ie8.css" /><![endif]-->
+        <!--[if lte IE 8]><link rel="stylesheet" href="/static/css/ie9.css" /><![endif]-->
 
         {% endif %}
 
@@ -65,7 +65,7 @@
         {% endif %}
 
         <!-- Favicon -->
-        <link rel="shortcut icon" type="image/png" href="static/favicon.ico"/>
+        <link rel="shortcut icon" type="image/png" href="/static/favicon.ico"/>
 
         <!-- ATOM feed -->
         <link href="{{ url_for('base.recent_feed') }}"
@@ -177,7 +177,7 @@
         {% endassets %}
 
     {% else %}
-        <script type="text/javascript" src="static/js/packed.js"></script>
+        <script type="text/javascript" src="/static/js/packed.js"></script>
     {% endif %}
 
     {% if not config.DEBUG %}
