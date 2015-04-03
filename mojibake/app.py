@@ -45,7 +45,7 @@ app.config['ASSETS_DEBUG'] = app.config['DEBUG']
 # js = Bundle('js/jquery-2.0.3.min.js',
 #             'js/bootstrap.min.js',
 #             'js/mojibake.js',
-#             filters='rjsmin', output='gen/packed.js')
+#             filters='rjsmin', output='static/js/packed.js')
 # assets.register('js_all', js)
 
 js = Bundle('js/jquery.min.js',
