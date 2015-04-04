@@ -157,7 +157,8 @@ class Post(db.Model):
         #orphaned_tags = session.query(Tag).join(Post).group_by(Tag.posts). \
         #                    having(func.count(Tag.posts)==0).all()
 
-        tag_list = session.query(Tag).join(tags).group_by(tags.c.tag_id).having(func.count(tags.c.post_id)==0).all()
+        tag_list = session.query(Tag).join(tags).group_by(tags.c.tag_id). \
+                    having(func.count(tags.c.post_id)==0).all()
         #tags = session.query(Tag).all()
         ###orphaned_tags = []
         ###for tag in tags:

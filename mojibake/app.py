@@ -55,7 +55,7 @@ js = Bundle('js/jquery.min.js',
                 'js/init.js',
                 'js/mojibake.js',
                 filters='jsmin',
-                output='gen/packed.js')
+                output='static/js/packed.js')
 assets.register('js', js)
 
 ie8_shiv = Bundle('js/html5shiv.js')

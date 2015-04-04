@@ -1,10 +1,9 @@
 ﻿MØjibДĸe
 ================================
 
-The early stages of a blog engine!
+Blogging engine that my site runs on.
 Written in Python 3 and Flask.
 
-Currently in the process of re-writing this.
 
 TO DO
 -------------------------
@@ -16,9 +15,9 @@ TO DO
 - Do similar for category, except under the title?
 - Look at Disqus for comments?
 - Maybe make the links a little more visible?
-- Logging - send it to stdout so it shows up in docker logs
 - Remove all the logic out of monitoring/templates/views.py and into scrutiny (to be uploaded into the DB).
  - Look at paginating the results of monitoring, it's far too large to display on one page.
+
 
 REQUIREMENTS
 -------------------------
