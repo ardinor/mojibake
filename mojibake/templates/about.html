@@ -10,16 +10,23 @@
             <h2>{{ _('About') }}</h2>
         </header>
 
-        <p>{{ _('One day, same day, something will be here. But not today.') }}</p>
+        <p>
+        {{ _("My name's Jordan and I'm a Linux and networking enthusiast who recently attained both my Red Hat Certified System Administration (RHCSA) and Cisco Certified Entry Networking Technician (CCENT) certifications and I am currently hard at work preparing to sit the Red Hat Certified Engineer (RHCE) exam. I maintain my own home lab consisting of PCs both virtual and real, running CentOS, Debian, Fedora and Arch as well various pieces of Cisco gear found cheap on eBay. This lab has (and continues to) provide networking and Linux systems administration experience and provides me environment to test out (and break without resume generating events) systems and tools like Ansible, Puppet, Docker, Observium and Nagios/Icinga.") }}
+        </p>
+
+        <p>
+        {{ _("I enjoy studying languages in my free time and have recently attained a Japanese Language Proficiency Test (JLPT) level of N2 and am hard at work studying for N1 which I will sit at the end of the year. I spent an exchange semester abroad in Japan (2013), studying at Kochi University in Kochi.") }}
+        </p>
 
         <p>
         {% autoescape false %}
-        {{ _('My contact details are over %(contact)shere%(endc)s and my Github is located %(github)shere%(endg)s.', contact='<a href="{}">'.format(url_for('base.contact')), endc='</a>', github='<a href="https://github.com/ardinor">', endg='</a>')}}
+        {{ _('My contact details are over %(contact)shere%(endc)s, my Github is located %(github)shere%(endg)s and my LinkedIn is %(linkedin)shere%(endc)s.', contact='<a href="{}">'.format(url_for('base.contact')), endc='</a>', github='<a href="https://github.com/ardinor">', endg='</a>', linkedin='<a href="http://au.linkedin.com/in/jmoeser">')}}
         {% endautoescape %}
         </p>
 
         <h3>{{ _('This site') }}</h3>
-        <p>{% trans flask='Flask', mojibake='MØjibДĸe', html5='html5up.net' %}Built using <a href="http://flask.pocoo.org/">{{ flask }}</a> and <a href="https://github.com/ardinor/mojibake">{{ mojibake }}</a>. HTML5 template from the folks at <a href="http://html5up.net/prologue/">{{  html5 }}</a>{% endtrans %}</p>
+        <p>{% trans flask='Flask', mojibake='MØjibДĸe', html5='html5up.net' %}Built using <a href="http://flask.pocoo.org/">{{ flask }}</a> and <a href="https://github.com/ardinor/mojibake">{{ mojibake }}</a>. HTML5 template adapter from the one provided by the folks at <a href="http://html5up.net/prologue/">{{  html5 }}</a>{% endtrans %}</p>
+        <p>{% trans docker='Docker containers', ansible='Ansible playbooks' %}The site itself is housed on a VPS running CentOS 7.  The site uses MariaDB as the database backend. Both the Python application (mojibake) and the database are in separate Docker containers which I scripted myself and the entire server is provisioned via Ansible which not only deploys both Docker containers (and their respective data containers) but also installs and configures nginx to serve the site itself. The source code for not only the Python application but also for the <a href="https://github.com/ardinor/dockerfiles">{{ docker }}</a> and <a href="https://github.com/ardinor/ansible-playbooks">{{ ansible }}</a> are all available on my Github.{% endtrans %}</p>
 
     </div>
 </section>

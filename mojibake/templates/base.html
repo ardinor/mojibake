@@ -57,8 +57,8 @@
         {% endif %}
 
 
-        <!-- Set MomentJS to display Japanese when language is Japanese -->
         {% if session['language'] == 'ja' %}
+        <!-- Set MomentJS to display Japanese when language is Japanese -->
         <script type=text/javascript>
         moment.lang('ja');
         </script>
@@ -128,7 +128,7 @@
 
                             <li><a href="https://github.com/ardinor" class="fa fa-github solo"><span>{{ _('Github') }}</span></a></li>
 
-                            <!--<li><a href="http://www.linkedin.com/" class="fa fa-linkedin solo"><span>{{ _('LinkedIn') }}</span></a></li>-->
+                            <li><a href="http://au.linkedin.com/in/jmoeser" class="fa fa-linkedin solo"><span>{{ _('LinkedIn') }}</span></a></li>
 
                             <li id="contact_tab"><a href="{{ url_for('base.contact') }}" class="fa fa-envelope solo"><span>{{ _('Email') }}</span></a></li>
 

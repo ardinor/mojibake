@@ -11,20 +11,34 @@
         </header>
 
         <h3>{{ _('This site') }} <div class="small">Python</div></h3>
-        <p>{% trans flask='Flask', mojibake='MØjibДĸe', html5='html5up.net' %}Built using <a href="https://www.python.org/">Python</a>, <a href="http://flask.pocoo.org/">{{ flask }}</a> and my blogging engine <a href="https://github.com/ardinor/mojibake">{{ mojibake }}</a>. HTML5 template modified from the original located at <a href="http://html5up.net/prologue/">{{  html5 }}</a>{% endtrans %}</p>
-        <p>{% trans %}The site itself has been running since September 2013 on a Debian 7.6 (Wheezy) VPS. The website is served by nginx and tornado and is using MariaDB as the database backend.{% endtrans %}</p>
+        <p>
+        {% trans flask='Flask', mojibake='MØjibДĸe', html5='html5up.net' %}Built using <a href="https://www.python.org/">Python</a>, <a href="http://flask.pocoo.org/">{{ flask }}</a> and my blogging engine <a href="https://github.com/ardinor/mojibake">{{ mojibake }}</a>. HTML5 template modified from the original located at <a href="http://html5up.net/prologue/">{{  html5 }}</a>{% endtrans %}
+        </p>
+
+        <p>
+        {% trans docker='Docker containers', ansible='Ansible playbooks' %}The site itself is housed on a VPS running CentOS 7.  The site uses MariaDB as the database backend. Both the Python application (mojibake) and the database are in separate Docker containers which I scripted myself and the entire server is provisioned via Ansible which not only deploys both Docker containers (and their respective data containers) but also installs and configures nginx to serve the site itself. The source code for not only the Python application but also for the <a href="https://github.com/ardinor/dockerfiles">{{ docker }}</a> and <a href="https://github.com/ardinor/ansible-playbooks">{{ ansible }}</a> are all available on my Github.{% endtrans %}
+        </p>
 
         <h3><a href="https://github.com/ardinor/scrutiny">{{ _('Scrutiny') }}</a> <div class="small">Python</div></h3>
-        <p>Scrutiny is a log parser currently designed to parse auth.log (under Debian) and fail2ban.log and inserts details about malicious attempts to break into the server in a database for easy access. It also queries an external service to insert geographical information about suspicious IPs into the database as well. I also plan for Scrutiny to calculate commonly seen subnets of attackers and produce rules (iptables or FirewallD rich rules) that can be used to block the offending subnets at the firewall, another possibility is using ipset to ensure large lists of offending IPs to block do not slow the server down. I'm currently in the process of re-writing this somewhat and have taken down the live version that was available on this site.</p>
+        <p>
+        Scrutiny is a log parser currently designed to parse auth.log (under Debian) and fail2ban.log and inserts details about malicious attempts to break into the server in a database for easy access. It also queries an external service to insert geographical information about suspicious IPs into the database as well. I also plan for Scrutiny to calculate commonly seen subnets of attackers and produce rules (iptables or FirewallD rich rules) that can be used to block the offending subnets at the firewall, another possibility is using ipset to ensure large lists of offending IPs to block do not slow the server down. I'm currently in the process of re-writing this somewhat and have taken down the live version that was available on this site.
+        </p>
 
         <h3><a href="https://github.com/ardinor/consociate">{{ _('Consociate') }}</a> <div class="small">Python</div></h3>
-        <p>{% trans %}Consociate is a program which logs into Cisco routers and switches (via SSH or Telnet) and performs commands as directed. The project is still at a very early stage but I hope to create a tool useful for harvesting data or performing configuration changes on a large scale.{% endtrans %}</p>
+        <p>
+        {% trans %}Consociate is a program which logs into Cisco routers and switches (via SSH or Telnet) and performs commands as directed. The project is still at a very early stage but I hope to create a tool useful for harvesting data or performing configuration changes on a large scale.{% endtrans %}
+        </p>
 
         <h3><a href="https://github.com/ardinor/frisk">{{ _('Frisk') }}</a> <div class="small">Python</div></h3>
-        <p>{% trans %}Frisk is a simple duplicate file finder which stores the SHA-1 hashes of files it checks in an SQLite DB. This allows for easy checking of existing and/or new files against files that are already on the system.{% endtrans %}</p>
+        <p>
+        {% trans %}Frisk is a simple duplicate file finder which stores the SHA-1 hashes of files it checks in an SQLite DB. This allows for easy checking of existing and/or new files against files that are already on the system.{% endtrans %}
+        </p>
 
         <h3><a href="https://github.com/ardinor/PictureSorter">{{ _('Picture Sorter') }}</a> <div class="small">C#</div></h3>
-        <p>{% trans %}Picture Sorter is a simple C# application that can be used to easily sort a directory full of pictures into sub-directories. Once set up with the sub-directories you would like to sort to, pictures can easily be moved from their current directory to the new one with one press of the keyboard.{% endtrans %}</p>
+        <p>
+        {% trans %}Picture Sorter is a simple C# application that can be used to easily sort a directory full of pictures into sub-directories. Once set up with the sub-directories you would like to sort to, pictures can easily be moved from their current directory to the new one with one press of the keyboard.{% endtrans %}
+        </p>
+
     </div>
 </section>
 {% endblock %}
