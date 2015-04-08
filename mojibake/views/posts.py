@@ -104,6 +104,6 @@ def delete_post(slug):
         if i.posts.count() == 0:
             db.session.delete(i)
             db.session.commit()
-    flash(gettext("Deleted"), 'success')
+    flash(gettext("Deleted."), 'success')
 
     return redirect(url_for('posts.post_list'))

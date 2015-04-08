@@ -1,14 +1,14 @@
 # Translations template for PROJECT.
-# Copyright (C) 2014 ORGANIZATION
+# Copyright (C) 2015 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-07-15 15:03+1000\n"
+"POT-Creation-Date: 2015-04-08 18:42+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,6 +65,59 @@ msgstr ""
 msgid "Publish"
 msgstr ""
 
+#: mojibake/monitoring/templates/monitoring/common.html:3
+#: mojibake/monitoring/templates/monitoring/common.html:10
+msgid "Commonly seen IPs and Subnets"
+msgstr ""
+
+#: mojibake/monitoring/templates/monitoring/common.html:14
+msgid "Common IPs"
+msgstr ""
+
+#: mojibake/monitoring/templates/monitoring/common.html:18
+#: mojibake/monitoring/templates/monitoring/index.html:24
+#: mojibake/monitoring/templates/monitoring/index.html:49
+msgid "IP"
+msgstr ""
+
+#: mojibake/monitoring/templates/monitoring/common.html:19
+#: mojibake/monitoring/templates/monitoring/index.html:25
+#: mojibake/monitoring/templates/monitoring/index.html:50
+msgid "Location"
+msgstr ""
+
+#: mojibake/monitoring/templates/monitoring/common.html:20
+#: mojibake/monitoring/templates/monitoring/common.html:46
+msgid "Times seen"
+msgstr ""
+
+#: mojibake/monitoring/templates/monitoring/common.html:24
+#: mojibake/monitoring/templates/monitoring/common.html:50
+#: mojibake/monitoring/templates/monitoring/index.html:29
+#: mojibake/monitoring/templates/monitoring/index.html:54
+msgid "Total"
+msgstr ""
+
+#: mojibake/monitoring/templates/monitoring/common.html:38
+msgid "Common Subnets"
+msgstr ""
+
+#: mojibake/monitoring/templates/monitoring/common.html:42
+msgid "Subnet"
+msgstr ""
+
+#: mojibake/monitoring/templates/monitoring/common.html:43
+msgid "Net mask"
+msgstr ""
+
+#: mojibake/monitoring/templates/monitoring/common.html:44
+msgid "CIDR"
+msgstr ""
+
+#: mojibake/monitoring/templates/monitoring/common.html:45
+msgid "No. of hosts"
+msgstr ""
+
 #: mojibake/monitoring/templates/monitoring/index.html:3
 #: mojibake/monitoring/templates/monitoring/index.html:10
 msgid "Break-in attempts &amp; Bans"
@@ -75,77 +128,43 @@ msgstr ""
 msgid "For the month of %(last_month)s"
 msgstr ""
 
-#: mojibake/monitoring/templates/monitoring/index.html:17
+#: mojibake/monitoring/templates/monitoring/index.html:15
+#, python-format
+msgid ""
+"To see details about commonly seen IPs and their subnets, visit the <a "
+"href=\"%(common_ip_url)s\">Common IPs and Subnets</a> page."
+msgstr ""
+
+#: mojibake/monitoring/templates/monitoring/index.html:18
 msgid "Break-in attempts"
 msgstr ""
 
-#: mojibake/monitoring/templates/monitoring/index.html:21
-#: mojibake/monitoring/templates/monitoring/index.html:47
+#: mojibake/monitoring/templates/monitoring/index.html:22
+#: mojibake/monitoring/templates/monitoring/index.html:48
 msgid "When"
 msgstr ""
 
-#: mojibake/monitoring/templates/monitoring/index.html:22
+#: mojibake/monitoring/templates/monitoring/index.html:23
 #: mojibake/templates/login.html:15
 msgid "Username"
 msgstr ""
 
-#: mojibake/monitoring/templates/monitoring/index.html:23
-#: mojibake/monitoring/templates/monitoring/index.html:48
-#: mojibake/monitoring/templates/monitoring/ips.html:18
-msgid "IP"
-msgstr ""
-
-#: mojibake/monitoring/templates/monitoring/index.html:24
-#: mojibake/monitoring/templates/monitoring/index.html:49
-#: mojibake/monitoring/templates/monitoring/ips.html:19
-msgid "Location"
-msgstr ""
-
-#: mojibake/monitoring/templates/monitoring/index.html:28
-#: mojibake/monitoring/templates/monitoring/index.html:53
-#: mojibake/monitoring/templates/monitoring/ips.html:24
-#: mojibake/monitoring/templates/monitoring/ips.html:47
-msgid "Total"
-msgstr ""
-
-#: mojibake/monitoring/templates/monitoring/index.html:43
+#: mojibake/monitoring/templates/monitoring/index.html:44
 msgid "Bans"
-msgstr ""
-
-#: mojibake/monitoring/templates/monitoring/ips.html:3
-#: mojibake/monitoring/templates/monitoring/ips.html:10
-msgid "Commonly seen IPs and Subnets"
-msgstr ""
-
-#: mojibake/monitoring/templates/monitoring/ips.html:14
-msgid "Common IPs"
-msgstr ""
-
-#: mojibake/monitoring/templates/monitoring/ips.html:20
-#: mojibake/monitoring/templates/monitoring/ips.html:43
-msgid "Times seen"
-msgstr ""
-
-#: mojibake/monitoring/templates/monitoring/ips.html:38
-msgid "Subnets"
-msgstr ""
-
-#: mojibake/monitoring/templates/monitoring/ips.html:42
-msgid "Subnet"
 msgstr ""
 
 #: mojibake/projects/templates/projects/index.html:3
 #: mojibake/projects/templates/projects/index.html:10
-#: mojibake/templates/base.html:55
+#: mojibake/templates/base.html:93
 msgid "My Projects"
 msgstr ""
 
 #: mojibake/projects/templates/projects/index.html:13
-#: mojibake/templates/about.html:21
+#: mojibake/templates/about.html:27
 msgid "This site"
 msgstr ""
 
-#: mojibake/projects/templates/projects/index.html:14
+#: mojibake/projects/templates/projects/index.html:15
 #, python-format
 msgid ""
 "Built using <a href=\"https://www.python.org/\">Python</a>, <a "
@@ -155,32 +174,60 @@ msgid ""
 "href=\"http://html5up.net/prologue/\">%(html5)s</a>"
 msgstr ""
 
-#: mojibake/projects/templates/projects/index.html:15
+#: mojibake/projects/templates/projects/index.html:19
+#: mojibake/templates/about.html:29
+#, python-format
 msgid ""
-"The site itself has been running since September 2013 on a Debian 7.6 "
-"(Wheezy) VPS. The website is served by nginx and gunicorn and is using "
-"MariaDB as the database backend."
+"The site itself is housed on a VPS running CentOS 7.  The site uses "
+"MariaDB as the database backend. Both the Python application (mojibake) "
+"and the database are in separate Docker containers which I scripted "
+"myself and the entire server is provisioned via Ansible which not only "
+"deploys both Docker containers (and their respective data containers) but"
+" also installs and configures nginx to serve the site itself. The source "
+"code for not only the Python application but also for the <a "
+"href=\"https://github.com/ardinor/dockerfiles\">%(docker)s</a> and <a "
+"href=\"https://github.com/ardinor/ansible-playbooks\">%(ansible)s</a> are"
+" all available on my Github."
 msgstr ""
 
-#: mojibake/projects/templates/projects/index.html:17
+#: mojibake/projects/templates/projects/index.html:22
 msgid "Scrutiny"
 msgstr ""
 
-#: mojibake/projects/templates/projects/index.html:18
-msgid ""
-"Scrutiny is a log parser currently designed to parse /var/log/auth.log "
-"and /var/log/fail2ban.log and inserts details about malicious attempts to"
-" break into the server in a database for easy access. It also queries an "
-"external service to insert geographical information about suspicious IPs "
-"into the database as well."
+#: mojibake/projects/templates/projects/index.html:27
+msgid "Consociate"
 msgstr ""
 
-#: mojibake/projects/templates/projects/index.html:19
+#: mojibake/projects/templates/projects/index.html:29
+msgid ""
+"Consociate is a program which logs into Cisco routers and switches (via "
+"SSH or Telnet) and performs commands as directed. The project is still at"
+" a very early stage but I hope to create a tool useful for harvesting "
+"data or performing configuration changes on a large scale."
+msgstr ""
+
+#: mojibake/projects/templates/projects/index.html:32
 msgid "Frisk"
 msgstr ""
 
-#: mojibake/projects/templates/projects/index.html:21
+#: mojibake/projects/templates/projects/index.html:34
+msgid ""
+"Frisk is a simple duplicate file finder which stores the SHA-1 hashes of "
+"files it checks in an SQLite DB. This allows for easy checking of "
+"existing and/or new files against files that are already on the system."
+msgstr ""
+
+#: mojibake/projects/templates/projects/index.html:37
 msgid "Picture Sorter"
+msgstr ""
+
+#: mojibake/projects/templates/projects/index.html:39
+msgid ""
+"Picture Sorter is a simple C# application that can be used to easily sort"
+" a directory full of pictures into sub-directories. Once set up with the "
+"sub-directories you would like to sort to, pictures can easily be moved "
+"from their current directory to the new one with one press of the "
+"keyboard."
 msgstr ""
 
 #: mojibake/templates/404.html:12
@@ -215,32 +262,52 @@ msgid "Delete"
 msgstr ""
 
 #: mojibake/templates/about.html:3 mojibake/templates/about.html:10
-#: mojibake/templates/base.html:54
+#: mojibake/templates/base.html:91
 msgid "About"
 msgstr ""
 
-#: mojibake/templates/about.html:13
-msgid "One day, same day, something will be here. But not today."
+#: mojibake/templates/about.html:14
+msgid ""
+"My name's Jordan and I'm a Linux and networking enthusiast who recently "
+"attained both my Red Hat Certified System Administration (RHCSA) and "
+"Cisco Certified Entry Networking Technician (CCENT) certifications and I "
+"am currently hard at work preparing to sit the Red Hat Certified Engineer"
+" (RHCE) exam. I maintain my own home lab consisting of PCs both virtual "
+"and real, running CentOS, Debian, Fedora and Arch as well various pieces "
+"of Cisco gear found cheap on eBay. This lab has (and continues to) "
+"provide networking and Linux systems administration experience and "
+"provides me environment to test out (and break without resume generating "
+"events) systems and tools like Ansible, Puppet, Docker, Observium and "
+"Nagios/Icinga."
 msgstr ""
 
-#: mojibake/templates/about.html:17
+#: mojibake/templates/about.html:18
+msgid ""
+"I enjoy studying languages in my free time and have recently attained a "
+"Japanese Language Proficiency Test (JLPT) level of N2 and am hard at work"
+" studying for N1 which I will sit at the end of the year. I spent an "
+"exchange semester abroad in Japan (2013), studying at Kochi University in"
+" Kochi."
+msgstr ""
+
+#: mojibake/templates/about.html:23
 #, python-format
 msgid ""
-"My contact details are over %(contact)shere%(endc)s and my Github is "
-"located %(github)shere%(endg)s."
+"My contact details are over %(contact)shere%(endc)s, my Github is located"
+" %(github)shere%(endg)s and my LinkedIn is %(linkedin)shere%(endc)s."
 msgstr ""
 
-#: mojibake/templates/about.html:22
+#: mojibake/templates/about.html:28
 #, python-format
 msgid ""
 "Built using <a href=\"http://flask.pocoo.org/\">%(flask)s</a> and <a "
 "href=\"https://github.com/ardinor/mojibake\">%(mojibake)s</a>. HTML5 "
-"template from the folks at <a "
+"template adapter from the one provided by the folks at <a "
 "href=\"http://html5up.net/prologue/\">%(html5)s</a>"
 msgstr ""
 
 #: mojibake/templates/archive.html:3 mojibake/templates/archive.html:10
-#: mojibake/templates/base.html:59
+#: mojibake/templates/base.html:101
 msgid "Archive"
 msgstr ""
 
@@ -255,54 +322,54 @@ msgstr ""
 msgid "Archive for %(year)s"
 msgstr ""
 
-#: mojibake/templates/base.html:53
+#: mojibake/templates/base.html:89
 msgid "Home"
 msgstr ""
 
-#: mojibake/templates/base.html:56 mojibake/templates/posts.html:5
+#: mojibake/templates/base.html:95 mojibake/templates/posts.html:5
 msgid "Posts"
 msgstr ""
 
-#: mojibake/templates/base.html:57 mojibake/templates/categories.html:3
+#: mojibake/templates/base.html:97 mojibake/templates/categories.html:3
 #: mojibake/templates/categories.html:10
 msgid "Categories"
 msgstr ""
 
-#: mojibake/templates/base.html:58 mojibake/templates/tags.html:3
+#: mojibake/templates/base.html:99 mojibake/templates/tags.html:3
 #: mojibake/templates/tags.html:10 mojibake/templates/translate.html:3
 msgid "Tags"
 msgstr ""
 
-#: mojibake/templates/base.html:61 mojibake/templates/post_create.html:3
+#: mojibake/templates/base.html:107
+msgid "Monitoring"
+msgstr ""
+
+#: mojibake/templates/base.html:111 mojibake/templates/post_create.html:3
 #: mojibake/templates/post_create.html:9
 msgid "New Post"
 msgstr ""
 
-#: mojibake/templates/base.html:63 mojibake/templates/translate.html:10
+#: mojibake/templates/base.html:113 mojibake/templates/translate.html:10
 msgid "Translate"
 msgstr ""
 
-#: mojibake/templates/base.html:65
-msgid "Monitoring"
-msgstr ""
-
-#: mojibake/templates/base.html:67
+#: mojibake/templates/base.html:115
 msgid "Logout"
 msgstr ""
 
-#: mojibake/templates/base.html:78
+#: mojibake/templates/base.html:129
 msgid "Github"
 msgstr ""
 
-#: mojibake/templates/base.html:79
+#: mojibake/templates/base.html:131
 msgid "LinkedIn"
 msgstr ""
 
-#: mojibake/templates/base.html:80 mojibake/templates/contact.html:13
+#: mojibake/templates/base.html:133 mojibake/templates/contact.html:13
 msgid "Email"
 msgstr ""
 
-#: mojibake/templates/base.html:81
+#: mojibake/templates/base.html:135
 msgid "Atom"
 msgstr ""
 
@@ -395,6 +462,7 @@ msgid "Posts in need of translation"
 msgstr ""
 
 #: mojibake/templates/unauthorised.html:3
+#: mojibake/templates/unauthorised.html:10
 msgid "Unauthorised"
 msgstr ""
 
@@ -402,15 +470,15 @@ msgstr ""
 msgid "You shouldn't be here."
 msgstr ""
 
-#: mojibake/views/base.py:51
+#: mojibake/views/base.py:56
 msgid "Logged in successfully."
 msgstr ""
 
-#: mojibake/views/base.py:54
+#: mojibake/views/base.py:63 mojibake/views/base.py:68
 msgid "Invalid Login"
 msgstr ""
 
-#: mojibake/views/posts.py:96
+#: mojibake/views/posts.py:107
 msgid "Deleted."
 msgstr ""
 
