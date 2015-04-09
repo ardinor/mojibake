@@ -5,6 +5,7 @@ from flask.ext.assets import Environment, Bundle
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.babel import Babel
 from flask.ext.login import LoginManager
+from werkzeug.contrib.fixers import ProxyFix
 import jinja2_highlight
 
 from mojibake.moment_js import moment_js
@@ -13,6 +14,7 @@ from mojibake.logging import stream_handler #, file_handler
 
 app = Flask(__name__)
 app.config.from_pyfile('settings.py')
+app.wsgi_app = ProxyFix(app.wsgi_app)
 db = SQLAlchemy(app)
 babel = Babel(app)
 
@@ -53,9 +55,9 @@ js = Bundle('js/jquery.min.js',
                 'js/skel.min.js',
                 'js/skel-panels.min.js',
                 'js/init.js',
-                'js/mojibake.js',
-                filters='jsmin',
-                output='static/js/packed.js')
+                'js/mojibake.js')
+                #filters='jsmin',
+                #output='static/js/packed.js')
 assets.register('js', js)
 
 ie8_shiv = Bundle('js/html5shiv.js')
