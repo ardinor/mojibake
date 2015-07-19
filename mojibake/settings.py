@@ -7,7 +7,7 @@ PORT = 8000
 
 LOGGER_NAME = 'mojibake'
 
-DEBUG = False
+DEBUG = True
 
 POSTS_PER_PAGE = 3
 
@@ -27,8 +27,9 @@ def parent_dir(path):
     return os.path.abspath(os.path.join(path, os.pardir))
 
 if DEBUG:
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(APP_DIR, 'app.db')
-    TEST_DATABASE_URI = 'sqlite:///' + os.path.join(APP_DIR, 'test.db')
+    #SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(APP_DIR, 'app.db')
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://jordan@/mojibake?host=/var/run/postgresql/'
+    TEST_DATABASE_URI = 'postgresql+psycopg2://jordan@/mojibake_test?host=/var/run/postgresql/'
     # To get a good secret key
     #   print(base64.b64encode(uuid.uuid4().bytes + uuid.uuid4().bytes))
     SECRET_KEY = 'SecretKeyGoesHere'
@@ -41,13 +42,10 @@ else:
     credentials_file = '/var/lib/mojibake/.mojibake_settings'
     config = configparser.ConfigParser()
     config.read(credentials_file)
-    USERNAME = config.get("credentials", "USERNAME")
-    PASSWORD = config.get("credentials", "PASSWORD")
     SECRET_KEY = config.get("credentials", "SECRET_KEY")
 
-    SQLALCHEMY_DATABASE_URI = "mysql+oursql://" + USERNAME + ":" + PASSWORD + "@mojibakedb/mojibake"
-    TEST_DATABASE_URI = "mysql+oursql://" + USERNAME + ":" + PASSWORD + "@mojibakedb/mojibake_test"
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://mojibake@/mojibake?host=/var/run/postgresql/'
 
     # On the prod server the wait-timeout is currently set to 600
-    SQLALCHEMY_POOL_RECYCLE = 500
+    #SQLALCHEMY_POOL_RECYCLE = 500
     COMMON_IP_COUNT = 6
