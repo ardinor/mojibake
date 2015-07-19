@@ -8,6 +8,7 @@ Written in Python 3 and Flask.
 TO DO
 -------------------------
 - If a post is deleted and then a tag or category has no other posts, delete that tag or category
+- Maybe make a maintenance background task using Celery that can clean up our DB
 - Check adding translations from post edit
 - Add a Tag and Category slug? Okay with spaces in the url?
 - Add a preview view for writing posts?
@@ -17,6 +18,7 @@ TO DO
 - Maybe make the links a little more visible?
 - Remove all the logic out of monitoring/templates/views.py and into scrutiny (to be uploaded into the DB).
  - Look at paginating the results of monitoring, it's far too large to display on one page.
+ - Look at dropping [root priviledges](https://stackoverflow.com/questions/2699907/dropping-root-permissions-in-python) in here instead of doing it via the Bash script that starts this?
 
 
 REQUIREMENTS
