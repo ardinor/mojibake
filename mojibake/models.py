@@ -25,6 +25,7 @@ class ValidationError(Exception):
 
 
 class Category(db.Model):
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True)
     name_ja = db.Column(db.String(50), unique=True)
@@ -44,6 +45,7 @@ class Category(db.Model):
 
 
 class Post(db.Model):
+
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120), unique=True, index=True)
     # Having unique set here will cause issues if multiple posts
@@ -157,8 +159,8 @@ class Post(db.Model):
         #orphaned_tags = session.query(Tag).join(Post).group_by(Tag.posts). \
         #                    having(func.count(Tag.posts)==0).all()
 
-        tag_list = session.query(Tag).join(tags).group_by(tags.c.tag_id). \
-                    having(func.count(tags.c.post_id)==0).all()
+        #tag_list = session.query(Tag).join(tags).group_by(tags.c.tag_id). \
+        #            having(func.count(tags.c.post_id)==0).all()
         #tags = session.query(Tag).all()
         ###orphaned_tags = []
         ###for tag in tags:
@@ -184,6 +186,7 @@ class Post(db.Model):
 
 
 class Tag(db.Model):
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True)
     name_ja = db.Column(db.String(50), unique=True)
@@ -201,6 +204,7 @@ class Tag(db.Model):
 
 
 class User(db.Model):
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(255))
@@ -238,116 +242,116 @@ class User(db.Model):
         return '<User %r>' % (self.username)
 
 
-class IPAddr(db.Model):
+# class IPAddr(db.Model):
 
-    """
-    This IP address table, holds the actual address and the location as found
-    from the GeoIP service. Holds links to the other tables, BannedIPs, BreakinAttempts
-    and SubnetDetails.
-    """
+#     """
+#     This IP address table, holds the actual address and the location as found
+#     from the GeoIP service. Holds links to the other tables, BannedIPs, BreakinAttempts
+#     and SubnetDetails.
+#     """
 
-    __tablename__ = 'ipaddr'
-    id = db.Column(db.Integer, primary_key=True)
-    ip_addr = db.Column(db.String(45), unique=True)
-    city_name = db.Column(db.String(255))
-    region = db.Column(db.String(255))
-    country = db.Column(db.String(255))
-    bans = db.relationship('BannedIPs', backref='ip', lazy='dynamic')
-    breakins = db.relationship('BreakinAttempts', backref='ip', lazy='dynamic')
-    subnet = db.Column(db.Integer, db.ForeignKey('subnetdetails.id'))
+#     __tablename__ = 'ipaddr'
+#     id = db.Column(db.Integer, primary_key=True)
+#     ip_addr = db.Column(db.String(45), unique=True)
+#     city_name = db.Column(db.String(255))
+#     region = db.Column(db.String(255))
+#     country = db.Column(db.String(255))
+#     bans = db.relationship('BannedIPs', backref='ip', lazy='dynamic')
+#     breakins = db.relationship('BreakinAttempts', backref='ip', lazy='dynamic')
+#     subnet = db.Column(db.Integer, db.ForeignKey('subnetdetails.id'))
 
-    def __init__(self, ip_addr):
-        self.ip_addr = ip_addr
+#     def __init__(self, ip_addr):
+#         self.ip_addr = ip_addr
 
-    def __repr__(self):
-        return '<IP: {}>'.format(self.ip_addr)
+#     def __repr__(self):
+#         return '<IP: {}>'.format(self.ip_addr)
 
-    def print_location(self):
+#     def print_location(self):
 
-        """
-        Prints the (rough) location of this IP address. Our GeoIP service
-        does not return full details (such as city name) for all IP address,
-        this will return as much information as we've been given in a nice format.
-        """
+#         """
+#         Prints the (rough) location of this IP address. Our GeoIP service
+#         does not return full details (such as city name) for all IP address,
+#         this will return as much information as we've been given in a nice format.
+#         """
 
-        if self.city_name and self.region and self.country:
-            return '{}, {}, {}'.format(self.city_name, self.region, self.country)
-        elif self.region and self.country:
-            return '{}, {}'.format(self.region, self.country)
-        elif self.country:
-            return '{}'.format(self.country)
-        else:
-            return '-'
+#         if self.city_name and self.region and self.country:
+#             return '{}, {}, {}'.format(self.city_name, self.region, self.country)
+#         elif self.region and self.country:
+#             return '{}, {}'.format(self.region, self.country)
+#         elif self.country:
+#             return '{}'.format(self.country)
+#         else:
+#             return '-'
 
-    def get_ip_in_binary(self):
-        if self.ip_addr:
-            return ' '.join('{:08b}'.format(int(n)) for n in self.ip_addr.split('.'))
-
-
-class BannedIPs(db.Model):
-
-    """
-    The Banned IPs table, holds details about IP addresses that have been
-    banned by fail2ban. Details are the date it was banned and a link back
-    to the IP address table row for this IP address.
-    """
-
-    # Without setting table name we end up with a table named
-    # 'banned_i_ps'
-    __tablename__ = 'bannedips'
-    id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.DateTime)
-    ipaddr = db.Column(db.Integer, db.ForeignKey('ipaddr.id'))
-
-    def __repr__(self):
-        return '<BannedIP: {}>'.format(self.date.strftime('%d-%m-%Y %H:%M:%S'))
+#     def get_ip_in_binary(self):
+#         if self.ip_addr:
+#             return ' '.join('{:08b}'.format(int(n)) for n in self.ip_addr.split('.'))
 
 
-class BreakinAttempts(db.Model):
+# class BannedIPs(db.Model):
 
-    """
-    The Breakin Attempts table. This table holds details of login attempts
-    by an IP address, including the username they tried and the date/time.
-    Has a link to the IP address table row for the IP address.
-    """
+#     """
+#     The Banned IPs table, holds details about IP addresses that have been
+#     banned by fail2ban. Details are the date it was banned and a link back
+#     to the IP address table row for this IP address.
+#     """
 
-    __tablename__ = 'breakinattempts'
-    id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.DateTime)
-    # Some programs accept only 8 character user names
-    # The max for useradd seems to be 32 though, don't think
-    # we'll see attempts with usernames longer than that though
-    user = db.Column(db.String(32))
-    ipaddr = db.Column(db.Integer, db.ForeignKey('ipaddr.id'))
+#     # Without setting table name we end up with a table named
+#     # 'banned_i_ps'
+#     __tablename__ = 'bannedips'
+#     id = db.Column(db.Integer, primary_key=True)
+#     date = db.Column(db.DateTime)
+#     ipaddr = db.Column(db.Integer, db.ForeignKey('ipaddr.id'))
 
-    def __repr__(self):
-        return '<BreakinAttempt: {} on {}>'.format(self.user, self.date.strftime('%d-%m-%Y %H:%M:%S'))
+#     def __repr__(self):
+#         return '<BannedIP: {}>'.format(self.date.strftime('%d-%m-%Y %H:%M:%S'))
 
 
-class SubnetDetails(db.Model):
+# class BreakinAttempts(db.Model):
 
-    """
-    The Subnet Details table. This table holds details about common subnets
-    as calculated by Scrutiny. The details included are the subnet id, the
-    CIDR, the netmask and the number of hosts in the subnet. It also includes
-    links back to the IP address table rows that hold IP addresses that are
-    members of this subnet.
-    """
+#     """
+#     The Breakin Attempts table. This table holds details of login attempts
+#     by an IP address, including the username they tried and the date/time.
+#     Has a link to the IP address table row for the IP address.
+#     """
 
-    __tablename__ = 'subnetdetails'
-    id = db.Column(db.Integer, primary_key=True)
-    subnet_id = db.Column(db.String(15))
-    cidr = db.Column(db.String(3))
-    netmask = db.Column(db.String(15))
-    number_hosts = db.Column(db.Integer)
-    date_added = db.Column(db.DateTime)
-    ip_addr = db.relationship('IPAddr', backref=db.backref('subnetdetails'))
+#     __tablename__ = 'breakinattempts'
+#     id = db.Column(db.Integer, primary_key=True)
+#     date = db.Column(db.DateTime)
+#     # Some programs accept only 8 character user names
+#     # The max for useradd seems to be 32 though, don't think
+#     # we'll see attempts with usernames longer than that though
+#     user = db.Column(db.String(32))
+#     ipaddr = db.Column(db.Integer, db.ForeignKey('ipaddr.id'))
 
-    def __init__(self, subnet_id):
-        self.subnet_id = subnet_id
+#     def __repr__(self):
+#         return '<BreakinAttempt: {} on {}>'.format(self.user, self.date.strftime('%d-%m-%Y %H:%M:%S'))
 
-    def __repr__(self):
-        return '<Subnet:{}>'.format(self.subnet_id)
+
+# class SubnetDetails(db.Model):
+
+#     """
+#     The Subnet Details table. This table holds details about common subnets
+#     as calculated by Scrutiny. The details included are the subnet id, the
+#     CIDR, the netmask and the number of hosts in the subnet. It also includes
+#     links back to the IP address table rows that hold IP addresses that are
+#     members of this subnet.
+#     """
+
+#     __tablename__ = 'subnetdetails'
+#     id = db.Column(db.Integer, primary_key=True)
+#     subnet_id = db.Column(db.String(15))
+#     cidr = db.Column(db.String(3))
+#     netmask = db.Column(db.String(15))
+#     number_hosts = db.Column(db.Integer)
+#     date_added = db.Column(db.DateTime)
+#     ip_addr = db.relationship('IPAddr', backref=db.backref('subnetdetails'))
+
+#     def __init__(self, subnet_id):
+#         self.subnet_id = subnet_id
+
+#     def __repr__(self):
+#         return '<Subnet:{}>'.format(self.subnet_id)
 
 
 ## Seems before_models_committed doesn't actually do anything as of
