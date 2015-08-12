@@ -1,3 +1,8 @@
+#!/opt/mojibake/venv/bin/python
+
+# The below doesn't seem to work from a systemd unit file?
+#!/usr/bin/env python
+
 import tornado.web
 import tornado.wsgi
 import tornado.httpserver
@@ -5,7 +10,7 @@ import tornado.ioloop
 import os
 
 from mojibake.main import app
-from mojibake.settings import PORT, DEBUG, LOG_DIR
+from mojibake.settings import PORT
 
 
 if __name__ == "__main__":

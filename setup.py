@@ -48,7 +48,7 @@ if __name__ == '__main__':
             db.session.add(admin)
             db.session.commit()
         else:
-            print('User {} not found.'.format(response))
+            print('User {} not found.'.format(args.username))
 
     else:
         # inspector = Inspector.from_engine(db.engine)

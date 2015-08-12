@@ -1,4 +1,4 @@
-import argparse
+#!/usr/bin/env python
 
 from mojibake.main import app
 from mojibake.settings import DEBUG

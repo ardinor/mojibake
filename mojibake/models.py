@@ -32,13 +32,11 @@ class Category(db.Model):
     #posts = db.relationship('Post', backref='category',
     #                            lazy='dynamic')
 
-
     def __init__(self, name, name_ja=None):
         if name:
             self.name = name
         if name_ja:
             self.name_ja = name_ja
-
 
     def __repr__(self):
         return '<Category: {}>'.format(self.name)
@@ -59,16 +57,15 @@ class Post(db.Model):
     date = db.Column(db.DateTime)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
     published = db.Column(db.Boolean)
-    category = db.relationship('Category', backref=db.backref('posts', lazy='dynamic'))
+    category = db.relationship('Category', backref=db.backref('posts',
+                               lazy='dynamic'))
     tags = db.relationship('Tag', secondary=tags,
-                                 backref=db.backref('posts',
-                                                    lazy='dynamic'))
-
+                           backref=db.backref('posts',
+                                              lazy='dynamic'))
 
     def __init__(self, title, slug):
         self.title = title
         self.slug = slug
-
 
     def add_category(self, form_cat, form_cat_ja=None):
         cat = Category.query.filter_by(name=form_cat).first()
@@ -83,7 +80,6 @@ class Post(db.Model):
             db.session.add(cat)
             db.session.commit()
         self.category = cat
-
 
     def add_tags(self, form_tags, form_tags_ja=None):
         tags = []
@@ -106,7 +102,7 @@ class Post(db.Model):
                     if tag:
                         tags.append(tag)
                     else:
-                        #this is a bit ugly. maybe do something better with this in the future?
+                        # this is a bit ugly. maybe do something better with this in the future?
                         if len(tags_ja) >= index+1 and tags_ja != ['']:
                             tag = Tag(i, tags_ja[index])
                         else:
@@ -117,15 +113,15 @@ class Post(db.Model):
                         tags.append(tag)
             self.tags = tags
 
-
     def add_body(self, body, body_ja=None):
         if body:
             self.body = body
-            self.body_html = markdown.markdown(body, extensions=['markdown.extensions.codehilite'])
+            self.body_html = markdown.markdown(body,
+                                               extensions=['markdown.extensions.codehilite'])
         if body_ja:
             self.body_ja = body_ja
-            self.body_ja_html = markdown.markdown(body_ja, extensions=['markdown.extensions.codehilite'])
-
+            self.body_ja_html = markdown.markdown(body_ja,
+                                                  extensions=['markdown.extensions.codehilite'])
 
     def get_tz_offset(self):
         # Returns the timezone offset in hours
@@ -134,7 +130,6 @@ class Post(db.Model):
             return (time.altzone * -1) / 3600
         else:
             return (time.timezone * -1) / 3600
-
 
     def __before_delete__(self):
         # In here, check to see if the category and/or tags will be orphaned
@@ -147,13 +142,14 @@ class Post(db.Model):
         session = Session()
 
         if self.category_id:
-            category = session.query(Category).filter(Category.id==self.category_id).first()
-            #category = Category.query.filter_by(id=self.category_id).first()
+            category = session.query(Category). \
+                filter(Category.id == self.category_id).first()
+            # category = Category.query.filter_by(id=self.category_id).first()
             if category:
                 if category.posts.count() == 0:
-                    #db.session.begin()
+                    # db.session.begin()
                     session.delete(category)
-                    #db.session.commit()
+                    # db.session.commit()
 
 
         #orphaned_tags = session.query(Tag).join(Post).group_by(Tag.posts). \
@@ -180,7 +176,6 @@ class Post(db.Model):
             pass
         session.close()
 
-
     def __repr__(self):
         return '<Post: {}>'.format(self.title)
 
@@ -191,13 +186,11 @@ class Tag(db.Model):
     name = db.Column(db.String(50), unique=True)
     name_ja = db.Column(db.String(50), unique=True)
 
-
     def __init__(self, name, name_ja=None):
         if name:
             self.name = name
         if name_ja:
             self.name_ja = name_ja
-
 
     def __repr__(self):
         return '<Tag: {}>'.format(self.name)
@@ -209,34 +202,26 @@ class User(db.Model):
     username = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(255))
 
-
     def __init__(self, username):
         self.username = username
-
 
     def set_password(self, password):
         self.password = pbkdf2_sha256.encrypt(password)
 
-
     def verify_password(self, password):
         return pbkdf2_sha256.verify(password, self.password)
-
 
     def is_authenticated(self):
         return True
 
-
     def is_active(self):
         return True
-
 
     def is_anonymous(self):
         return False
 
-
     def get_id(self):
         return str(self.id)
-
 
     def __repr__(self):
         return '<User %r>' % (self.username)

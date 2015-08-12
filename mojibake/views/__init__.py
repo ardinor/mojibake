@@ -8,19 +8,20 @@ from mojibake.models import User, Tag, Category, Post
 
 import datetime
 
-#Adapted from http://flask.pocoo.org/snippets/108/
+
+# Adapted from http://flask.pocoo.org/snippets/108/
 @app.route('/sitemap.xml', methods=['GET'])
 def sitemap():
     hide_views = ['/posts/create', '/post/<slug>/edit', '/post/<slug>/delete',
-                    '/translate', '/login', '/logout', '/sitemap.xml']
+                  '/translate', '/login', '/logout', '/sitemap.xml']
 
     map_pages = []
-    ten_days_ago=(datetime.datetime.now() - datetime.timedelta(days=10)).date().isoformat()
+    ten_days_ago = (datetime.datetime.now() - datetime.timedelta(days=10)).date().isoformat()
     for rule in app.url_map.iter_rules():
         if "GET" in rule.methods and len(rule.arguments) == 0:
-            #kind of a temporary hack, I'd like to find a better way to do this
+            # kind of a temporary hack, I'd like to find a better way to do this
             if (rule.rule in hide_views) == False:
-                map_pages.append([rule.rule,ten_days_ago])
+                map_pages.append([rule.rule, ten_days_ago])
 
     tags = Tag.query.all()
     for tag in tags:
@@ -52,6 +53,7 @@ def sitemap():
 #     response.headers["Content-Type"] = "text/plain"
 #     return response
 
+
 @app.errorhandler(404)
 def internal_error400(error):
     return render_template('404.html'), 404
@@ -80,6 +82,7 @@ def get_locale():
 @login_manager.user_loader
 def load_user(userid):
     return User.query.filter_by(id=userid).first()
+
 
 @login_manager.unauthorized_handler
 def unauthorised():

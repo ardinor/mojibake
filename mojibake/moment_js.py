@@ -1,7 +1,8 @@
-#Credit to
-#http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xiii-dates-and-times
+# Credit to
+# http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xiii-dates-and-times
 
 from jinja2 import Markup
+
 
 class moment_js:
 

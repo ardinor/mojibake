@@ -5,14 +5,21 @@ from mojibake.models import Post
 from mojibake.settings import DEBUG
 
 archive = Blueprint('archive', __name__,
-    template_folder='templates')
+                    template_folder='templates')
+
 
 @archive.route('/')
 def archive_list():
+
     if g.user is not None and g.user.is_authenticated():
+
         posts = Post.query.filter(Post.date != None).all()
+
     else:
-        posts = Post.query.filter_by(published=True).filter(Post.date != None).all()
+
+        posts = Post.query.filter_by(published=True). \
+            filter(Post.date != None).all()
+
     years = list(set([post.date.year for post in posts]))
 
     return render_template('archive.html', years=years)
@@ -41,6 +48,6 @@ def archive_year(year):
 
     if year_posts:
         return render_template('archive_year.html', year=year,
-            posts=year_posts)
+                               posts=year_posts)
     else:
         abort(404)

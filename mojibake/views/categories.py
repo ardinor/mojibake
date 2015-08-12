@@ -3,7 +3,8 @@ from flask import Blueprint, abort, g, render_template
 from mojibake.models import Category
 
 category = Blueprint('category', __name__,
-    template_folder='templates')
+                     template_folder='templates')
+
 
 @category.route('/')
 def category_list():

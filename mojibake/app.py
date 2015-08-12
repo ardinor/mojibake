@@ -51,13 +51,13 @@ app.config['ASSETS_DEBUG'] = app.config['DEBUG']
 # assets.register('js_all', js)
 
 js = Bundle('js/jquery.min.js',
-                'js/jquery-ui.custom.js',
-                'js/skel.min.js',
-                'js/skel-panels.min.js',
-                'js/init.js',
-                'js/mojibake.js')
-                #filters='jsmin',
-                #output='static/js/packed.js')
+            'js/jquery-ui.custom.js',
+            'js/skel.min.js',
+            'js/skel-panels.min.js',
+            'js/init.js',
+            'js/mojibake.js')
+            #filters='jsmin',
+            #output='static/js/packed.js')
 assets.register('js', js)
 
 ie8_shiv = Bundle('js/html5shiv.js')
@@ -78,7 +78,7 @@ assets.register('ie8_css', ie8_css)
 ie9_css = Bundle('css/ie9.css')
 assets.register('ie9_css', ie9_css)
 
-#Moment needs to be in the document head apparently
+# Moment needs to be in the document head apparently
 moment = Bundle('js/moment.min.js')
 assets.register('js_moment', moment)
 

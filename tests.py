@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import unittest
@@ -76,14 +77,12 @@ class Tests(unittest.TestCase):
         db.session.commit()
 
         # Ensure orphaned categories and tags are deleted
-        cat = Category.query.filter(id==db_cat).first()
+        cat = Category.query.filter(id == db_cat).first()
         self.assertIsNone(cat)
 
         for tag_id in db_tags:
-            tag = Tag.query.filter(id==tag_id).first()
+            tag = Tag.query.filter(id == tag_id).first()
             self.assertIsNone(tag)
-
-
 
 
 if __name__ == '__main__':

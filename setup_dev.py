@@ -5,6 +5,7 @@ from mojibake.app import db
 from mojibake.models import Category, Post, Tag, User, \
     IPAddr, BannedIPs, BreakinAttempts
 
+
 def create_test_monitoring():
 
     # Since we changed the date monitoring looks for (see monitoring/views.py)

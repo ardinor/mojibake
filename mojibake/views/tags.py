@@ -3,7 +3,8 @@ from flask import Blueprint, abort, g, render_template
 from mojibake.models import Tag
 
 tag = Blueprint('tag', __name__,
-    template_folder='templates')
+                template_folder='templates')
+
 
 @tag.route('/')
 def tag_list():

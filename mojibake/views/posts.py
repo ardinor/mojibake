@@ -10,15 +10,22 @@ from mojibake.settings import POSTS_PER_PAGE
 from flask.ext.login import login_required
 
 posts = Blueprint('posts', __name__,
-    template_folder='templates')
+                  template_folder='templates')
+
 
 @posts.route('/')
 @posts.route('/<int:page>/')
 def post_list(page=1):
     if g.user is not None and g.user.is_authenticated():
-        posts = Post.query.order_by(Post.date.desc()).paginate(int(page), POSTS_PER_PAGE, False)
+
+        posts = Post.query.order_by(Post.date.desc()). \
+            paginate(int(page), POSTS_PER_PAGE, False)
+
     else:
-        posts = Post.query.filter_by(published=True).order_by(Post.date.desc()).paginate(int(page), POSTS_PER_PAGE, False)
+
+        posts = Post.query.filter_by(published=True). \
+            order_by(Post.date.desc()). \
+            paginate(int(page), POSTS_PER_PAGE, False)
 
     if posts:
         return render_template('posts.html', posts=posts)
@@ -39,7 +46,7 @@ def post_item(slug):
 @login_required
 def create_post():
 
-    #can't make a post without a published date?
+    # can't make a post without a published date?
 
     form = PostForm()
     if form.validate_on_submit():
@@ -61,6 +68,7 @@ def create_post():
         return redirect(url_for('posts.post_item', slug=form.slug.data))
     return render_template('post_create.html',
                            form=form)
+
 
 @posts.route('/<slug>/edit', methods=['GET', 'POST'])
 @login_required
@@ -86,7 +94,7 @@ def edit_post(slug):
         return redirect(url_for('posts.post_item', slug=form.slug.data))
 
     return render_template('post_create.html',
-                       form=form)
+                           form=form)
 
 
 @posts.route('/<slug>/delete')

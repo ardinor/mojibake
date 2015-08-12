@@ -11,23 +11,27 @@ from werkzeug.contrib.atom import AtomFeed
 
 from mojibake.models import Post, Tag, Category, User
 from mojibake.settings import POSTS_PER_PAGE, LANGUAGES
-from mojibake.app import babel, login_manager
+from mojibake.main import babel, login_manager, db
 from mojibake.forms import LoginForm
 
 base = Blueprint('base', __name__,
-    template_folder='templates')
+                 template_folder='templates')
 
 logger = logging.getLogger('mojibake')
+
 
 def make_external(url):
     return urljoin(request.url_root, url)
 
+
 @base.route('/')
 def home():
     if g.user is not None and g.user.is_authenticated():
-        posts = Post.query.order_by(Post.date.desc()).paginate(1, POSTS_PER_PAGE, False)
+        posts = Post.query.order_by(Post.date.desc()). \
+            paginate(1, POSTS_PER_PAGE, False)
     else:
-        posts = Post.query.filter_by(published=True).order_by(Post.date.desc()).paginate(1, POSTS_PER_PAGE, False)
+        posts = Post.query.filter_by(published=True). \
+            order_by(Post.date.desc()).paginate(1, POSTS_PER_PAGE, False)
 
     return render_template('index.html', posts=posts)
 
@@ -88,9 +92,13 @@ def change_language(language):
 
 @base.route('/recent.atom')
 def recent_feed():
+
     feed = AtomFeed('Recent Articles',
                     feed_url=request.url, url=request.url_root)
-    posts = Post.query.filter_by(published=True).order_by(Post.date.desc()).all()
+
+    posts = Post.query.filter_by(published=True). \
+        order_by(Post.date.desc()).all()
+
     for post in posts:
         feed.add(post.title, post.body[:500] + '\n\n....',
                  content_type='html',
@@ -126,4 +134,4 @@ def translate():
     posts = Post.query.filter_by(body_ja=None).all()
 
     return render_template('translate.html', tags=tags, cats=cats,
-        posts=posts)
+                           posts=posts)

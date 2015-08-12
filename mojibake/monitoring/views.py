@@ -7,7 +7,7 @@ from mojibake.models import BreakinAttempts, BannedIPs, IPAddr, SubnetDetails
 from mojibake.settings import DEBUG
 
 monitor = Blueprint('monitor', __name__,
-    template_folder='templates')
+                    template_folder='templates')
 
 
 @monitor.route('/')
@@ -33,8 +33,8 @@ def bans_list():
             filter(func.MONTH(BannedIPs.date) == month).order_by('-date').all()
 
     return render_template('monitoring/index.html', last_month=last_month,
-        breakin_attempts=breakin_attempts,
-        bans=bans)
+                           breakin_attempts=breakin_attempts,
+                           bans=bans)
 
 
 @monitor.route('/common')
@@ -56,4 +56,4 @@ def common_ips():
                                                     order_by('-date').all()
 
     return render_template('monitoring/common.html', common_ips=common_ips,
-        subnet_details=subnet_details)
+                           subnet_details=subnet_details)
